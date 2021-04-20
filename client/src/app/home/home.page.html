@@ -1,20 +1,58 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content>
+  <div class="container" [style.height.px]="windowHeight">
+    <!-- <div class="calendar__title-wrap">
+      <div id="month">2021.03</div>
+      <button id="btn-shortcut-setting">
+        <img src="/assets/image/button/btn-setting.png" alt="setting">
+      </button>
+    </div> -->
+    <ion-content class="calendar">
+      <div class="calendar__title-wrap">
+        <ion-row class="calendar__title">
+          <ion-col width-45 class="year-month"> {{currentYear }}.{{ currentMonth }} </ion-col>
+          <ion-col width-55 class="btn-wrap">
+            <button class="btn-shortcut-setting">
+              <img src="/assets/image/button/btn-setting.png" alt="setting">
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div class="calendar__content-wrap">
+        <ion-grid>
+          <ion-row class="calendar__content__week">
+            <ion-col> 일 </ion-col>
+            <ion-col> 월 </ion-col>
+            <ion-col> 화 </ion-col>
+            <ion-col> 수 </ion-col>
+            <ion-col> 목 </ion-col>
+            <ion-col> 금 </ion-col>
+            <ion-col> 토 </ion-col>
+          </ion-row>
+          <ion-row class="calendar__content__date">
+            <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month"> </ion-col>
+            <ion-col col-1 *ngFor="let day of daysInThisMonth" class="this-month">
+              <div class="today" *ngIf="day === currentDate"> 
+                <div class="day"> {{ day }} </div>
+                <div class="day-munzzi">
+                  <img src="/assets/image/basic/basic_today_1.png">
+                </div> 
+              </div>
+              <div class="otherday" *ngIf="day !== currentDate"> 
+                <div class="day"> {{ day }} </div>
+                <div class="day-munzzi">
+                  <img src="/assets/image/basic/basic_2.png">
+                </div> 
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <!-- <ion-calendar class="calendar" [(ngModel)]="calendar"
+        [options]="optionsRange"
+        (onchange)="onchange($event)"
+        type = "type"
+        [format]="'YYYY-MM-DD'">
+      </ion-calendar> -->
+    </ion-content>
   </div>
 </ion-content>

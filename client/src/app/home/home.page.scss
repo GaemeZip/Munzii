@@ -1,27 +1,105 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
+.container {
+  [col-1] {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 8.33333%;
+    -ms-flex: 0 0 8.33333%;
+    flex: 0 0 14.285714285714286%;
+    width: 14.285714285714286%;
+    max-width: 14.285714285714286%;
+  }
+  overflow-y: hidden;
+  width: 90%;
+  margin: auto;
+  padding-top: 15%;
+  padding-bottom: 15%;
+  .calendar {
+    .calendar__title-wrap {
+      .calendar__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .year-month {
+          height: 6%;
+          background-color: var(--ion-color-point);
+          text-align: center;
+          font-size: 36px;
+          font-family: var(--ion-font-munzzi);
+        }
+        .btn-wrap {
+          display: flex;
+          justify-content: flex-end;
+          .btn-shortcut-setting {
+            background: none;
+            img {
+              width: auto;
+              height: 60%;
+            }
+          }
+        }
+      }
+    }
+    .calendar__content-wrap {
+      margin-top: 5%;
+      ion-grid {
+        .calendar__content__week {
+          margin-bottom: 3%;
+          text-align: center;
+          font-weight: bold;
+          font-family: var(--ion-font-korean-poor);
+        }
+        .calendar__content__date {
+          .this-month {
+            .day {
+              width: 80%;
+              margin: auto;
+              text-align: center;
+              font-family: var(--ion-font-munzzi);
+            }
+            .today {
+              .day {
+                font-weight: bold;
+                box-shadow: inset 0 -7px var(--ion-color-point);
+                color: var(--ion-color-black);
+              }
+              .day-munzzi {
+                width: auto;
+                height: 3%;
+                margin: 9px auto 15px auto;
+              }
+            }
+            .otherday {
+              .day {
+                color: var(--ion-color-gray);
+              }
+              .day-munzzi {
+                width: auto;
+                height: 3%;
+                margin: 15px auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // .calendar__title-wrap {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   #month {
+  //     width: 45%;
+  //     height: 50px;
+  //     background-color: var(--ion-color-point);
+  //     text-align: center;
+  //     font-size: 38px;
+  //     font-family: var(--ion-font-munzzi);
+  //   }
+  //   #btn-shortcut-setting {
+  //     background: none;
+  //     img {
+  //       width: 30px;
+  //       height: 30px;
+  //     }
+  //   }
+  // }
+  }
