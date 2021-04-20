@@ -1,6 +1,6 @@
 # Munzii
 
-###client start
+### client start
 ```
 npm install
 ionic serve
