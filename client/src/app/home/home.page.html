@@ -9,8 +9,16 @@
     <ion-content class="calendar">
       <div class="calendar__title-wrap">
         <ion-row class="calendar__title">
-          <ion-col width-45 class="year-month"> {{currentYear }}.{{ currentMonth }} </ion-col>
-          <ion-col width-55 class="btn-wrap">
+          <ion-col width-50> 
+            <ion-datetime class="year-month"
+            placeholder="Custom Options"  
+            displayFormat="YYYY.MM"
+            min="1900-01"
+            max="2200-12"
+            [(ngModel)]="currentCalendar"
+            (ionChange)="selectMonth($event)"></ion-datetime>
+          </ion-col>
+          <ion-col class="btn-wrap">
             <button class="btn-shortcut-setting">
               <img src="/assets/image/button/btn-setting.png" alt="setting">
             </button>

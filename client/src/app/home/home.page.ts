@@ -8,7 +8,8 @@ import { Calendar } from '@ionic-native/calendar';
 })
 export class HomePage {
   windowHeight: number = window.screen.height;
-
+  
+  currentCalendar: any;
   date: any;
   daysInThisMonth: any;
   daysInLastMonth: any;
@@ -17,10 +18,9 @@ export class HomePage {
   currentMonth: any;
   currentYear: any;
   currentDate: any;
-  
+
   //level1 ,2, 3, 4
   dayMunzzi: string;
-
 
 
   constructor(
@@ -29,6 +29,8 @@ export class HomePage {
     this.date = new Date();
     this.monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
     this.getDaysOfMonth();
+    this.currentCalendar = new Date(this.currentYear, this.currentMonth, 0).toISOString();
+    console.log(this.currentCalendar)
     }
 
   getDaysOfMonth() {
@@ -37,8 +39,14 @@ export class HomePage {
     this.daysInNextMonth = new Array();
     this.currentMonth = this.monthNames[this.date.getMonth()];
     this.currentYear = this.date.getFullYear();
-    if(this.date.getMonth() === new Date().getMonth()) {
-      this.currentDate = new Date().getDate();
+    if(this.date.getFullYear() === new Date().getFullYear()) {
+      if(this.date.getMonth() === new Date().getMonth()) {
+        this.currentDate = new Date().getDate();
+       // console.log("@@@@@@"+this.currentDate+"@@@@@@@@@"+new Date().getDate());
+      }
+      else { 
+        this.currentDate = 999;
+      }
     } else { 
       this.currentDate = 999;
     }
@@ -64,5 +72,11 @@ export class HomePage {
         this.daysInNextMonth.push(i);
       }
     }
+  }
+  selectMonth() {
+    this.date = new Date (this.currentCalendar);
+    console.log(this.currentCalendar);
+    console.log(this.date);
+    this.getDaysOfMonth();
   }
 }
