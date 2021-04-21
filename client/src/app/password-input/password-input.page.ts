@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-password-input',
@@ -8,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class PasswordInputPage implements OnInit {
   windowHeight: number = window.screen.height;
 
-  constructor() { }
+  
+  constructor(private router:Router) { 
+  }
 
   ngOnInit() {
   }
 
+  prev(){
+    this.router.navigate(['/password']);
+  }
 }
