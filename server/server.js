@@ -9,10 +9,12 @@ app.use(bodyParser.json());
 const joinRouter = require('./router/users/join');
 const loginRouter = require('./router/users/login');
 const memoRouter = require('./router/memos/memo');
+const insertTimelineRouter = require('./router/timelines/insertTimeline');
 
 app.use('/join', joinRouter);
 app.use('/login', loginRouter);
 app.use('/memo', memoRouter);
+app.use('/timeline', insertTimelineRouter);
 
 
 app.set('port', process.env.PORT || 3000);
