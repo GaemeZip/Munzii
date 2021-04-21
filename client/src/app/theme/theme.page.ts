@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 })
 export class ThemePage implements OnInit {
   windowHeight: number = window.screen.height;
-  constructor(private route: Router) { }
+  constructor(private router: Router) { }
 
   prev(){
-    this.route.navigate(['/settings']);
+    this.router.navigate(['/settings']);
   }
   ngOnInit() {
   }

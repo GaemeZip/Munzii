@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-start-day',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartDayPage implements OnInit {
   windowHeight: number = window.screen.height;
-  constructor() { }
+  
+  constructor(private router:Router) { 
+  }
 
   ngOnInit() {
   }
 
+  prev(){
+    this.router.navigate(['/settings']);
+  }
 }
