@@ -14,8 +14,8 @@ router.post('/', (req, res) => {
 
   var username = req.body.username;
   var password = req.body.password;
-  
-  console.log(username+password);
+
+  console.log(username + password);
 
   var loginQuery = 'SELECT * FROM users WHERE username = ?';
   connection.query(loginQuery, [username], async function (error, results, fields) {
@@ -23,18 +23,22 @@ router.post('/', (req, res) => {
     if (error) {
       res.send('에러 발생');
     } else {
-        if(results.length > 0){
-            if(password == results[0].password){
-                res.send("로그인 성공");
-            } else{
-                res.send("아이디와 비밀번호 불일치");
-            }
+      if (results.length > 0) {
+        if (password == results[0].password) {
+          res.send("로그인 성공");
+        } else {
+          res.send("아이디와 비밀번호 불일치");
         }
-        else{
-            res.send('존재하지 않는 아이디');
-        }
+      }
+      else {
+        res.send('존재하지 않는 아이디');
+      }
     }
-  });
+    console.log(results);
+    console.log(results[0]);
+  }
+  
+  );
 });
 
 module.exports = router;
