@@ -1,9 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>font</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div class="container" [style.height.px]="windowHeight">
+    <div class="header">
+      <button>
+        <img src="/assets/button/prev.png" alt="">
+      </button>
+      Font
+    </div>
+    <div class="list">
+      <div class="item selected">
+        <div>기본체</div>
+        <img src="/assets/image/basic/basic_4.png" alt="">
+      </div>
+      <div class="item" id="prettynight">고운밤체</div>
+      <div class="item" id="dohyeon">배달의민족도현체</div>
+      <div class="item" id="poorstory">PoorStory체</div>
+      <div class="item" id="nexonfootball">넥슨풋볼체</div>
+    </div>
+    <div class="footer">
+      <img src="/assets/image/basic/basic_2.png" alt="">
+      <img src="/assets/image/basic/basic_1.png" alt="">
+      <img src="/assets/image/basic/basic_4.png" alt="">
+    </div>
+  </div>
 </ion-content>

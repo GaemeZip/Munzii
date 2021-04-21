@@ -79,11 +79,10 @@
 @media (prefers-color-scheme: dark) {
   body {
     --ion-font-munzii: 'Margarine';
-    --ion-font-family: 'NotoSans';
+    --ion-font-family: var(--ion-font-korean-gothic);
     --ion-font-korean-gothic: 'NexonGothic';
     --ion-font-korean-prettynight: 'PrettyNight';
     --ion-font-korean-nexonfootball: 'NexonFootball';
-    --ion-font-korean-notosans: 'NotoSans';
     --ion-font-korean-poorstory: 'PoorStory';
     --ion-font-korean-dohyeon: 'DoHyeon';
     --ion-color-point: #fff3a9;

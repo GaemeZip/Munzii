@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./start-day.page.scss'],
 })
 export class StartDayPage implements OnInit {
-
+  windowHeight: number = window.screen.height;
   constructor() { }
 
   ngOnInit() {
