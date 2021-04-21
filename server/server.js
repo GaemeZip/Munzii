@@ -1,16 +1,16 @@
 const express = require('express');
-const joinRouter = require('./router/join');
 const bodyParser = require('body-parser');
-// const path = require('path');
-
 const app = express();
+
+// npm install body-parser 후 사용
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const joinRouter = require('./router/join');
+const loginRouter = require('./router/login');
+
 app.use('/join', joinRouter);
-
-
-// npm install body-parser 후 사용
+app.use('/login', loginRouter);
 
 
 app.set('port', process.env.PORT || 3000);
