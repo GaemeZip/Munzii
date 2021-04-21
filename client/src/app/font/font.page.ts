@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./font.page.scss'],
 })
 export class FontPage implements OnInit {
-
+  windowHeight: number = window.screen.height;
   constructor() { }
 
   ngOnInit() {

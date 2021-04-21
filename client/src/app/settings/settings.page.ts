@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
-
+  windowHeight: number = window.screen.height;
   constructor() { }
 
   ngOnInit() {

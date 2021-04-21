@@ -1,9 +1,30 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>settings</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div class="container" [style.height.px]="windowHeight">
+    <div class="header">
+      <button>
+        <img src="/assets/button/prev.png" alt="">
+      </button>
+      Theme
+    </div>
+    <div class="list">
+        <div class="item selected">
+          <div>기본 먼지</div>
+          <img src="/assets/image/basic/basic_4.png" alt="">
+        </div>
+        <div>
+          <div class="item">분홍 먼지</div>
+        </div>
+        <div>
+          <div class="item">파랑 먼지</div>
+        </div>
+        <div>
+          <div class="item">초록 먼지</div>
+        </div>
+    </div>
+    <div class="footer">
+      <img src="/assets/image/basic/basic_2.png" alt="">
+      <img src="/assets/image/basic/basic_1.png" alt="">
+      <img src="/assets/image/basic/basic_4.png" alt="">
+    </div>
+  </div>
 </ion-content>

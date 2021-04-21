@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./theme.page.scss'],
 })
 export class ThemePage implements OnInit {
-
+  windowHeight: number = window.screen.height;
   constructor() { }
 
   ngOnInit() {

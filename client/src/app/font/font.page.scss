@@ -1,0 +1,72 @@
+.container {
+    position: relative;
+    height: 100%;
+
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin: 0 15px 25px 15px;
+        padding: 25px;
+        border-bottom: 1px solid #dddddd;
+        font-size: 38px;
+        font-family: var(--ion-font-munzii);
+        button {
+            position: absolute;
+            width: 25px;
+            height: auto;
+            left: 0;
+            outline: none;
+        }
+    }
+    .list {
+        margin: 0 15px;
+        color: #999999;
+        font-size: 25px;
+        font-family: var(--ion-font-family);
+        .item {
+            display: flex;
+            align-items: center;
+            height: 60px;
+            padding: 0 15px;
+        }
+        .item:hover {
+            background: #f9f9f9;
+        }
+        .selected {
+            justify-content: space-between;
+            color: #000;
+            img {
+                width: 45px;
+                height: 45px;
+            }
+        }
+        #prettynight{
+            font-family: var(--ion-font-korean-prettynight);
+        }
+        #dohyeon{
+            font-family: var(--ion-font-korean-dohyeon);
+        }
+        #poorstory{
+            font-family: var(--ion-font-korean-poorstory);
+        }
+        #nexonfootball{
+            font-family: var(--ion-font-korean-nexonfootball);
+        }
+    }
+
+    .footer {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: absolute;
+        margin-bottom: 80px;
+        text-align: center;
+        bottom: 0;
+        img {
+            width: 75px;
+            height: 75px;
+        }
+    }
+}
