@@ -7,10 +7,6 @@
     width: 14.285714285714286%;
     max-width: 14.285714285714286%;
   }
-  width: 90%;
-  margin: auto;
-  padding-top: 15%;
-  padding-bottom: 15%;
   .calendar {
     .calendar__title-wrap {
       .calendar__title {
@@ -24,10 +20,10 @@
           text-align: center;
           font-size: 36px;
           font-family: var(--ion-font-munzii);
-          .picker-below-highlight .sc-ion-picker-ios{
-            background: none !important;
-            z-index: 15;
-          }
+          // .picker-below-highlight .sc-ion-picker-ios{
+          //   background: none !important;
+          //   z-index: 15;
+          // }
         }
         .btn-wrap {
           display: flex;
@@ -52,7 +48,7 @@
           margin-bottom: 3%;
           text-align: center;
           font-weight: bold;
-          font-family: var(--ion-font-korean-poor);
+          font-family: var(--ion-font-family);
         }
         .calendar__content__date {
           .this-month {
