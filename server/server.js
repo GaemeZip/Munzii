@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 const joinRouter = require('./router/users/join');
 const loginRouter = require('./router/users/login');
-const memoRouter = require('./router/records/memo');
+const memoRouter = require('./router/memos/memo');
 
 app.use('/join', joinRouter);
 app.use('/login', loginRouter);
@@ -24,4 +24,3 @@ app.get('/', (req, res) => {
 app.listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
 });
-

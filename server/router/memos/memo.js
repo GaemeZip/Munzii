@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
   console.log(username+password);
 
   var memoQuery = 'SELECT * FROM users WHERE username = ?';
-  connection.query(loginQuery, [username], async function (error, results, fields) {
+  connection.query(memoQuery, [username], function (error, results, fields) {
 
     if (error) {
       res.send('에러 발생');
