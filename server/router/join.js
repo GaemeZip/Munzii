@@ -10,14 +10,14 @@ router.use(function (req, res, next) {
   next();
 });
 
-//test 용
-router.get('/', (req, res) => {
-  connection.query('SELECT * from Users', (error, rows) => {
-    if (error) throw error;
-    console.log('User info is: ', rows);
-    res.send(rows);
-  });
-});
+// server 확인용
+// router.get('/', (req, res) => {
+//   connection.query('SELECT * from Users', (error, rows) => {
+//     if (error) throw error;
+//     console.log('User info is: ', rows);
+//     res.send(rows);
+//   });
+// });
 
 router.post('/', (req, res) => {
 
@@ -26,18 +26,15 @@ router.post('/', (req, res) => {
   
   console.log(username+password);
   var joinQuery = 'INSERT INTO users (u_id, username, password, optional_password, theme_id, font_id, start_day_id) VALUES(NULL,?,?,NULL,1,1,1)';
+  var params = [username, password];
+  connection.query(joinQuery, params, function (error, results, fields) {
 
-  connection.query(joinQuery, users, function (error, results, fields) {
+    //if 아이디 중복일 경우 처리
+    //if else 비밀번호 불일치일 경우 처리
     if (error) {
-      res.send({
-        "code": 400,
-        "failed": "error ocurred"
-      })
+      res.send('이미 존재하는 아이디 입니다');
     } else {
-      res.send({
-        "code": 200,
-        "success": "회원가입 완료"
-      });
+      res.send('회원가입 성공');
     }
   });
 });
