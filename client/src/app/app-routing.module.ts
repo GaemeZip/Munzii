@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'theme',
     pathMatch: 'full'
   },
   {
@@ -19,8 +19,26 @@ const routes: Routes = [
     path: 'sign-up',
     loadChildren: () => import('./sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
-
-
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'theme',
+    loadChildren: () => import('./theme/theme.module').then( m => m.ThemePageModule)
+  },
+  {
+    path: 'font',
+    loadChildren: () => import('./font/font.module').then( m => m.FontPageModule)
+  },
+  {
+    path: 'start-day',
+    loadChildren: () => import('./start-day/start-day.module').then( m => m.StartDayPageModule)
+  },
+  {
+    path: 'password',
+    loadChildren: () => import('./password/password.module').then( m => m.PasswordPageModule)
+  },
 ];
 
 @NgModule({
