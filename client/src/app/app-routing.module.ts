@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'settings',
     pathMatch: 'full'
   },
   {
@@ -38,6 +38,14 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule)
+  },
+  {
+    path: 'password-input',
+    loadChildren: () => import('./password-input/password-input.module').then( m => m.PasswordInputPageModule)
+  },
+  {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
   },
 ];
 

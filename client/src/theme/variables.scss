@@ -85,7 +85,7 @@
     --ion-font-korean-nexonfootball: 'NexonFootball';
     --ion-font-korean-poorstory: 'PoorStory';
     --ion-font-korean-dohyeon: 'DoHyeon';
-    --ion-color-point: #fff3a9;
+    --ion-color-point: var(--ion-color-yellow);
     --ion-color-title: #564747;
     --ion-color-button: #fcecb6;
     --ion-color-black: #000;
@@ -93,12 +93,8 @@
     --ion-color-gray: #999999;
     --ion-color-light-gray: #c4c4c4;
     --ion-color-white: #ffffff;
-    --ion-color-level1: #dddddd;
-    --ion-color-level2: #fcecb6;
-    --ion-color-level3: #97c1e8;
-    --ion-color-level4: #dd8b8b;
-
-    --ion-color-primary: #fff3a9;
+    --ion-color-yellow: #fff3a9;
+    --ion-color-primary: var(--ion-color-yellow);
     // --ion-color-primary-rgb: 66,140,255;
     // --ion-color-primary-contrast: #ffffff;
     // --ion-color-primary-contrast-rgb: 255,255,255;
