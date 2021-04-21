@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-password',
-  templateUrl: './password.page.html',
-  styleUrls: ['./password.page.scss'],
+  selector: 'app-account',
+  templateUrl: './account.page.html',
+  styleUrls: ['./account.page.scss'],
 })
-export class PasswordPage implements OnInit {
+export class AccountPage implements OnInit {
   windowHeight: number = window.screen.height;
 
   constructor() { }
