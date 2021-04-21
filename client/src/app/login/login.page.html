@@ -11,15 +11,15 @@
   <ion-list>
     <ion-item>
       <ion-label><ion-icon name="person"></ion-icon></ion-label>
-      <ion-input placeholder="Username" [(ngModel)]="user" type="text"></ion-input>
+      <ion-input placeholder="Username" [(ngModel)]="id" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label><ion-icon name="lock"></ion-icon></ion-label>
-      <ion-input placeholder="Password" [(ngModel)]="pass" type="Password"></ion-input>
+      <ion-input placeholder="Password" [(ngModel)]="password" type="Password"></ion-input>
     </ion-item>
     <div class="btn-center-align">
       <ion-button color="primary" shape="round" (click)="signIn()"></ion-button> <br>
-      <a routerLink="/sign-in">Sign in✔</a>
+      <a routerLink="/sign-up">Sign up✔</a>
     </div>
   </ion-list>
 </ion-content>
