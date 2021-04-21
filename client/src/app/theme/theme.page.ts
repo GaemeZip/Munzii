@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-theme',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThemePage implements OnInit {
   windowHeight: number = window.screen.height;
-  constructor() { }
+  constructor(private route: Router) { }
 
+  prev(){
+    this.route.navigate(['/settings']);
+  }
   ngOnInit() {
   }
 

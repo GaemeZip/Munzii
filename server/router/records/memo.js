@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
   
   console.log(username+password);
 
-  var loginQuery = 'SELECT * FROM users WHERE username = ?';
+  var memoQuery = 'SELECT * FROM users WHERE username = ?';
   connection.query(loginQuery, [username], async function (error, results, fields) {
 
     if (error) {
