@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Calendar } from '@ionic-native/calendar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +8,7 @@ import { Calendar } from '@ionic-native/calendar';
 })
 export class HomePage {
   windowHeight: number = window.screen.height;
-  
+
   currentCalendar: any;
   date: any;
   daysInThisMonth: any;
@@ -24,6 +24,7 @@ export class HomePage {
 
 
   constructor(
+    private router:Router
   ) { 
     console.log(this.windowHeight)
     this.date = new Date();
@@ -78,5 +79,10 @@ export class HomePage {
     console.log(this.currentCalendar);
     console.log(this.date);
     this.getDaysOfMonth();
+  }
+  openTodo(day) {
+    //post 로 day 값 보내기 this.day
+    console.log(day)
+    this.router.navigateByUrl('todo')
   }
 }

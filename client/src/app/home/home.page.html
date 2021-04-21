@@ -39,13 +39,13 @@
           <ion-row class="calendar__content__date">
             <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month"> </ion-col>
             <ion-col col-1 *ngFor="let day of daysInThisMonth" class="this-month">
-              <div class="today" *ngIf="day === currentDate"> 
+              <div class="today" *ngIf="day === currentDate" (click)="openTodo(day)"> 
                 <div class="day"> {{ day }} </div>
                 <div class="day-munzzi">
                   <img src="/assets/image/basic/basic_today_1.png">
                 </div> 
               </div>
-              <div class="otherday" *ngIf="day !== currentDate"> 
+              <div class="otherday" *ngIf="day !== currentDate" (click)="openTodo(day)"> 
                 <div class="day"> {{ day }} </div>
                 <div class="day-munzzi">
                   <img src="/assets/image/basic/basic_2.png">

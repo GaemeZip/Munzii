@@ -1,0 +1,39 @@
+<ion-content>
+  <div class="container" [style.height.px]="windowHeight">
+    <div class="todo__title-wrap">
+        <div class="todo__title-info">
+          <div class="year-month" (click)="openCalendar()">2021.03</div>
+          <div class="btn-wrap">
+            <button class="btn-shortcut-setting">
+              <img src="/assets/image/button/btn-setting.png" alt="setting">
+            </button>
+          </div>
+        </div>
+      <ion-grid>
+        <ion-row class="todo__content__week">
+          <ion-col *ngFor="let day of weekday" [ngStyle]="{'text-align': 'center'}"> {{day}} </ion-col>
+        </ion-row>
+        <ion-row class="todo__content__week-date">
+          <ion-col *ngFor="let date of week" [ngStyle]="{'text-align': 'center'}"> 
+            <div class="select" *ngIf="date == selectDate"> {{date}}  </div>
+            <div *ngIf="date !== selectDate"> {{date}}  </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="todo__content-wrap">
+      <div class="menu-name">
+        todolist
+      </div>
+      <div class="todo-wrap" *ngFor="let todo of selectDayTodoList">
+        <div class="todo-icon">
+          <img src="../../assets/image/basic/basic_1.png" *ngIf="progress == 100">
+          <img src="../../assets/image/basic/basic_2.png" *ngIf="progress !== 100 && todo.isDone == 1">
+          <img src="../../assets/image/basic/basic_4.png" *ngIf="progress !== 100 && todo.isDone == 0">
+        </div>
+        <div class="todo-content" *ngIf="todo.isDone == 0">{{ todo.title }}</div>
+        <div class="todo-content-done" *ngIf="todo.isDone == 1">{{ todo.title }}</div>
+      </div>
+    </div>
+  </div>
+</ion-content>
