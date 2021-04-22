@@ -13,22 +13,22 @@ export class JoinPage implements OnInit {
   username: string;
   password: string;
 
-  join(){
+  join() {
     console.log(this.username);
-    axios.post('http://localhost:3000/join',{
-        username: this.username,
-        password: this.password
+    axios.post('http://localhost:3000/join', {
+      username: this.username,
+      password: this.password
     })
-        .then((res) => {
-            console.log(res.data);
-            if(res.data == "회원가입 성공"){
-              alert("회원가입 성공");
-              this.router.navigate(['/login']);
-            }
-            console.log(res);
-        })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data == "회원가입 성공") {
+          alert("회원가입 성공");
+          this.router.navigate(['/login']);
+        }
+        console.log(res);
+      })
   }
-  
+
   ngOnInit() {
 
   }
