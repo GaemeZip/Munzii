@@ -2,7 +2,7 @@
   <div class="container" [style.height.px]="windowHeight">
     <div class="todo__title-wrap">
         <div class="todo__title-info">
-          <div class="year-month" (click)="openCalendar()"> {{ selectYear }}.{{ selectMonthFull }}</div>
+          <div class="year-month" (click)="openCalendar()"> {{ selectYear }}.{{ selectMonth }}</div>
           <div class="btn-wrap">
             <button class="btn-shortcut-setting">
               <img src="/assets/image/button/btn-setting.png" alt="setting">
@@ -14,10 +14,14 @@
           <ion-col *ngFor="let day of weekday" [ngStyle]="{'text-align': 'center'}"> {{day}} </ion-col>
         </ion-row>
         <ion-row class="todo__content__week-date">
-          <ion-col *ngFor="let date of week" [ngStyle]="{'text-align': 'center'}"> 
-            <div class="select" *ngIf="date == selectDate"> {{date}}  </div>
-            <div *ngIf="date !== selectDate"> {{date}}  </div>
-          </ion-col>
+            <ion-slides [options]="weekSlideOption" (ionSlideReachEnd)="endSlide()" (ionSlideReachStart)="firstSlide()">
+              <ion-slide *ngFor="let aWeek of slideWeek">
+                <ion-col *ngFor="let date of aWeek" [ngStyle]="{'text-align': 'center'}"> 
+                  <div class="select" *ngIf="date == selectDay"> {{date.getDate()}}  </div>
+                  <div *ngIf="date !== selectDay" (click)="changeDay(date)"> {{date.getDate()}}  </div>
+                </ion-col>
+              </ion-slide>
+            </ion-slides>
         </ion-row>
       </ion-grid>
     </div>
