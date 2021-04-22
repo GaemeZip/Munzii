@@ -85,4 +85,8 @@ export class HomePage {
     console.log(day)
     this.router.navigateByUrl('todo')
   }
+  moveToSettings(){
+    this.router.navigate(['/settings']);
+
+  }
 }
