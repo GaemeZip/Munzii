@@ -13,7 +13,7 @@ export class HomePage {
   date: any;
   daysInThisMonth: any;
   daysInLastMonth: any;
-  daysInNextMonth: any;
+  // daysInNextMonth: any;
   monthNames: string[];
   currentMonth: any;
   currentYear: any;
@@ -37,7 +37,7 @@ export class HomePage {
   getDaysOfMonth() {
     this.daysInThisMonth = new Array();
     this.daysInLastMonth = new Array();
-    this.daysInNextMonth = new Array();
+    // this.daysInNextMonth = new Array();
     this.currentMonth = this.monthNames[this.date.getMonth()];
     this.currentYear = this.date.getFullYear();
     if(this.date.getFullYear() === new Date().getFullYear()) {
@@ -51,10 +51,11 @@ export class HomePage {
     } else { 
       this.currentDate = 999;
     }
-    var firstDayThisMonth = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
-    var prevNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth(), 0).getDate();
+    var firstDayThisMonth = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay(); //첫 날 요일 
+    var prevNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth(), 0).getDate(); //전 달 일 수
+    
     for(var i = prevNumOfDays-(firstDayThisMonth-1); i <= prevNumOfDays; i++) {
-      this.daysInLastMonth.push(i);
+      this.daysInLastMonth.push(i); 
     }
   
     var thisNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDate();
@@ -62,17 +63,17 @@ export class HomePage {
       this.daysInThisMonth.push(i+1);
     }
   
-    var lastDayThisMonth = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDay();
-    var nextNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+2, 0).getDate();
-    for (var i = 0; i < (6-lastDayThisMonth); i++) {
-      this.daysInNextMonth.push(i+1);
-    }
-    var totalDays = this.daysInLastMonth.length+this.daysInThisMonth.length+this.daysInNextMonth.length;
-    if(totalDays<36) {
-      for(var i = (7-lastDayThisMonth); i < ((7-lastDayThisMonth)+7); i++) {
-        this.daysInNextMonth.push(i);
-      }
-    }
+    // var lastDayThisMonth = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDay();
+    // var nextNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+2, 0).getDate();
+    // for (var i = 0; i < (6-lastDayThisMonth); i++) {
+    //   this.daysInNextMonth.push(i+1);
+    // }
+    // var totalDays = this.daysInLastMonth.length+this.daysInThisMonth.length+this.daysInNextMonth.length;
+    // if(totalDays<36) {
+    //   for(var i = (7-lastDayThisMonth); i < ((7-lastDayThisMonth)+7); i++) {
+    //     this.daysInNextMonth.push(i);
+    //   }
+    // }
   }
   selectMonth() {
     this.date = new Date (this.currentCalendar);
