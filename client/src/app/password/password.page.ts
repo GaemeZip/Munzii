@@ -19,5 +19,8 @@ export class PasswordPage implements OnInit {
   prev(){
     this.router.navigate(['/settings']);
   }
+  moveToPasswordInput(){
+    this.router.navigate(['/password-input'])
+  }
 
 }
