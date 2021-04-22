@@ -2,7 +2,7 @@
   <div class="container" [style.height.px]="windowHeight">
     <div class="todo__title-wrap">
         <div class="todo__title-info">
-          <div class="year-month" (click)="openCalendar()">2021.03</div>
+          <div class="year-month" (click)="openCalendar()"> {{ selectYear }}.{{ selectMonthFull }}</div>
           <div class="btn-wrap">
             <button class="btn-shortcut-setting">
               <img src="/assets/image/button/btn-setting.png" alt="setting">

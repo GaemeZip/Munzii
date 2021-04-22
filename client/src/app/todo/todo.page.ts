@@ -13,6 +13,9 @@ export class TodoPage implements OnInit {
   leftDay: number;
   selectDay: Date;
   selectDate: number;
+  selectYear: number;
+  selectMonth: number;
+  selectMonthFull: string = "";
   selectWeekday: number;
   doneTodo: number;
   progress: number;
@@ -42,10 +45,18 @@ export class TodoPage implements OnInit {
   ngOnInit() {
     this.startWeekDay = 0;
 
-    this.selectDay = new Date('2021-04-21');
+    this.selectDay = new Date('2020-2-15');
+    this.selectYear = this.selectDay.getFullYear();
+    this.selectMonth = this.selectDay.getMonth() + 1;
+    if (this.selectMonth >= 10) {
+      this.selectMonthFull = this.selectMonth + "";
+    }
+    else if(this.selectMonth < 10) {
+      this.selectMonthFull += "0";
+      this.selectMonthFull += this.selectMonth + "";
+    }
     this.selectDate = this.selectDay.getDate();
     this.selectWeekday = this.selectDay.getDay();
-    console.log(this.selectWeekday); //3
 
     switch(this.startWeekDay) {
       case 0: {
@@ -77,9 +88,9 @@ export class TodoPage implements OnInit {
         break;
       }
     }
+
     this.calculateViewDay();
 
-    console.log(this.week);
 
     // get으로 날짜랑 정보 가져오기 날짜는 셀렉트 데이 정보는 셀렉트 데ㅣㅇ투두
     this.selectDayTodo.date = new Date('2021-04-21');
