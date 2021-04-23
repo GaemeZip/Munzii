@@ -11,13 +11,13 @@ router.use(function (req, res, next) {
 });
 
 // server 확인용
-// router.get('/', (req, res) => {
-//   connection.query('SELECT * from Users', (error, rows) => {
-//     if (error) throw error;
-//     console.log('User info is: ', rows);
-//     res.send(rows);
-//   });
-// });
+router.get('/', (req, res) => {
+  connection.query('SELECT * from Users', (error, rows) => {
+    if (error) throw error;
+    console.log('User info is: ', rows);
+    res.send(rows);
+  });
+});
 
 router.post('/', (req, res) => {
     var id = req.body.id;
@@ -38,6 +38,7 @@ router.post('/', (req, res) => {
         } else {
             res.send(rows);
         }
+        console.log(rows)
     });
 });
 
