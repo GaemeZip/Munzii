@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const mysql = require('mysql');
-var router = express.Router();
+const router = express.Router();
 const dbconfig = require('../db.js');
 const connection = mysql.createConnection(dbconfig);
 
@@ -12,12 +12,12 @@ router.use(function (req, res, next) {
 
 router.post('/', (req, res) => {
 
-  var username = req.body.username;
-  var password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
 
   console.log(username + password);
 
-  var selectQuery = 'SELECT * FROM users WHERE username = ?';
+  const selectQuery = 'SELECT * FROM users WHERE username = ?';
   connection.query(selectQuery, [username], async function (error, rows, fields) {
 
     if (error) {
@@ -34,8 +34,7 @@ router.post('/', (req, res) => {
         res.send('존재하지 않는 아이디');
       }
     }
-    console.log(rows);
-    console.log(rows[0]);
+    console.log(rows[0].password);
   }
   
   );

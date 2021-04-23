@@ -11,36 +11,37 @@ router.use(function (req, res, next) {
 });
 
 router.post('/', (req, res) => {
-    const dayID = req.body.dayID;
-    const userID = req.body.userID;
+
+    const s_id = req.body.s_id;
+    const u_id = req.body.u_id;
+
+    let params = [s_id, u_id];
 
     const updateQuery = 'UPDATE users SET s_id=? WHERE user_id=?';
-    let params = [dayID, userID];
-
     connection.query(updateQuery, params, (error, rows, data) => {
         if (error) {
             res.send('error');
         } else {
             if(rows.length>0){
-                if (dayID == 1){
+                if (s_id == 1){
                     res.send("월");
                 }
-                else if (dayID == 2){
+                else if (s_id == 2){
                     res.send("화");
                 }
-                else if (dayID == 3){
+                else if (s_id == 3){
                     res.send("수");
                 }
-                else if (dayID == 4){
+                else if (s_id == 4){
                     res.send("목");
                 }
-                else if (dayID == 5){
+                else if (s_id == 5){
                     res.send("금");
                 }
-                else if (dayID == 6){
+                else if (s_id == 6){
                     res.send("토");
                 }
-                else if (dayID == 7){
+                else if (s_id == 7){
                     res.send("일");
                 }
             }
