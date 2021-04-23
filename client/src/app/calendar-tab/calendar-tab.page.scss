@@ -1,0 +1,81 @@
+.container {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 150px;
+    [col-1] {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 8.33333%;
+        -ms-flex: 0 0 8.33333%;
+        flex: 0 0 14.285714285714286%;
+        width: 14.285714285714286%;
+        max-width: 14.285714285714286%;
+      }
+    .todo__title-wrap {
+        width: 100%;
+        padding-bottom: 5%;
+        border-bottom: solid 1px var(--ion-color-light-gray);
+        .todo__title-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 6%;
+            margin-bottom: 6%;
+            .year-month {
+                width: 180px;
+                height: 6%;
+                background-color: var(--ion-color-point);
+                text-align: center;
+                font-size: 36px;
+                font-family: var(--ion-font-munzii);
+                color: var(--ion-color-black);
+            }
+            .shortcut-btn-wrap {
+                display: flex;
+                justify-content: flex-end;
+                width: 40%;
+                height: 50px;
+                .btn-shortcut-setting {
+                    img {
+                        width: auto;
+                        height: 70%;
+                    }
+                }
+            }
+        }
+        position: relative;
+        .menu-name {
+            width: 100%;
+            text-align: center;
+            font-size: 24px;
+            font-family: var(--ion-font-munzii);
+            color: var(--ion-color-title);
+        }
+        .btn-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            margin-bottom: 20px;
+            .btn-prev-tab {
+                width: 30px;
+                img {
+                    width: 30px;
+                    height: auto;
+                }
+            }
+            .space {
+                width: 30px;
+            }
+            .btn-next-tab {
+                width: 30px;
+                img {
+                    width: 30px;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
