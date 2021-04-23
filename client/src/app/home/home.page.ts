@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -77,14 +77,20 @@ export class HomePage {
   }
   selectMonth() {
     this.date = new Date (this.currentCalendar);
-    console.log(this.currentCalendar);
-    console.log(this.date);
+    // console.log(this.currentCalendar);
+    // console.log(this.date);
     this.getDaysOfMonth();
   }
   openTodo(day) {
-    //post 로 day 값 보내기 this.day
-    console.log(day)
-    this.router.navigateByUrl('todo')
+    var selectDay = new Date(this.currentCalendar);
+    selectDay.setDate(day);
+    console.log(selectDay);
+    let NavigationExtras: NavigationExtras = {
+      state: {
+        selectDay: selectDay
+      }
+    };
+    this.router.navigateByUrl('todo', NavigationExtras);
   }
   moveToSettings(){
     this.router.navigate(['/settings']);

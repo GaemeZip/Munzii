@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'memo',
+    redirectTo: 'calendar-tab',
     pathMatch: 'full'
   },
   {
@@ -52,8 +52,8 @@ const routes: Routes = [
     loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule)
   },
   {
-    path: 'memo',
-    loadChildren: () => import('./memo/memo.module').then( m => m.MemoPageModule)
+    path: 'calendar-tab',
+    loadChildren: () => import('./calendar-tab/calendar-tab.module').then( m => m.CalendarTabPageModule)
   },
 ];
 
