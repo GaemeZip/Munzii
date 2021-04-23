@@ -17,8 +17,8 @@ router.post('/', (req, res) => {
 
   console.log(username + password);
 
-  var loginQuery = 'SELECT * FROM users WHERE username = ?';
-  connection.query(loginQuery, [username], async function (error, rows, fields) {
+  var selectQuery = 'SELECT * FROM users WHERE username = ?';
+  connection.query(selectQuery, [username], async function (error, rows, fields) {
 
     if (error) {
       res.send('에러 발생');
