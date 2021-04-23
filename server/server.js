@@ -17,8 +17,13 @@ const updateTodoRouter = require('./router/todos/updateTodo');
 const deleteTodoRouter = require('./router/todos/deleteTodo');
 
 const updateFontRouter = require('./router/settings/updateFont');
+const readFontRouter = require('./router/settings/readFont');
+
 const updateThemeRouter = require('./router/settings/updateTheme');
+const readThemeRouter = require('./router/settings/readTheme');
+
 const updateStartDayRouter = require('./router/settings/updateStartDay');
+const readStartDayRouter = require('./router/settings/readStartDay');
 
 app.use('/join', joinRouter);
 app.use('/login', loginRouter);
@@ -31,8 +36,14 @@ app.use('/updateTodo', updateTodoRouter);
 app.use('/deleteTodo', deleteTodoRouter);
 
 app.use('/updateFont', updateFontRouter);
+app.use('/readFont', readFontRouter);
+
 app.use('/updateTheme', updateThemeRouter);
+app.use('/readTheme', readThemeRouter);
+
 app.use('/updateStartDay', updateStartDayRouter);
+app.use('/readStartDay', readStartDayRouter);
+
 
 app.set('port', process.env.PORT || 3000);
 

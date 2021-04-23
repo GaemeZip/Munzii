@@ -18,13 +18,13 @@ router.post('/', (req, res) => {
   console.log(username + password);
 
   var loginQuery = 'SELECT * FROM users WHERE username = ?';
-  connection.query(loginQuery, [username], async function (error, results, fields) {
+  connection.query(loginQuery, [username], async function (error, rows, fields) {
 
     if (error) {
       res.send('에러 발생');
     } else {
-      if (results.length > 0) {
-        if (password == results[0].password) {
+      if (rows.length > 0) {
+        if (password == rows[0].password) {
           res.send("로그인 성공");
         } else {
           res.send("아이디와 비밀번호 불일치");
@@ -34,8 +34,8 @@ router.post('/', (req, res) => {
         res.send('존재하지 않는 아이디');
       }
     }
-    console.log(results);
-    console.log(results[0]);
+    console.log(rows);
+    console.log(rows[0]);
   }
   
   );

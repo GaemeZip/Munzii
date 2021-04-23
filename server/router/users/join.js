@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const mysql = require('mysql');
-var router = express.Router();
+const router = express.Router();
 const dbconfig = require('../db.js');
 const connection = mysql.createConnection(dbconfig);
 
@@ -21,13 +21,13 @@ router.use(function (req, res, next) {
 
 router.post('/', (req, res) => {
 
-  var username = req.body.username;
-  var password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
   
   console.log(username+password);
-  var joinQuery = 'INSERT INTO users (u_id, username, password, optional_password, theme_id, font_id, start_day_id) VALUES(NULL,?,?,NULL,1,1,1)';
-  var params = [username, password];
-  connection.query(joinQuery, params, function (error, results, fields) {
+  const joinQuery = 'INSERT INTO users (u_id, username, password, optional_password, theme_id, font_id, start_day_id) VALUES(NULL,?,?,NULL,1,1,1)';
+  let params = [username, password];
+  connection.query(joinQuery, params, function (error, rows, fields) {
 
     //if 아이디 중복일 경우 처리
     //if else 비밀번호 불일치일 경우 처리

@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const mysql = require('mysql');
-var router = express.Router();
+const router = express.Router();
 const dbconfig = require('../db.js');
 const connection = mysql.createConnection(dbconfig);
 
@@ -11,17 +11,17 @@ router.use(function (req, res, next) {
 });
 
 router.post('/', (req, res) => {
-    var fontID = req.body.fontID;
-    var userID = req.body.userID;
+    const fontID = req.body.fontID;
+    const userID = req.body.userID;
 
-    var updateFontQuery = 'UPDATE users SET f_id=? WHERE user_id=?';
-    var params = [fontID, userID];
+    const updateFontQuery = 'UPDATE users SET f_id=? WHERE user_id=?';
+    const params = [fontID, userID];
 
-    connection.query(updateFontQuery, params, (error, results, data) => {
+    connection.query(updateFontQuery, params, (error, rows, data) => {
         if (error) {
             res.send('error');
         } else {
-            if(results.length>0){
+            if(rows.length>0){
                 if (fontID == 1){
                     res.send("기본");
                 }
