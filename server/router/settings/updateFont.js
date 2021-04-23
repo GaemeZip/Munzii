@@ -10,26 +10,23 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.post('/', (req, res) => {
-    const f_id = req.body.f_id;
-    const u_id = req.body.u_id;
 
-    let params = [f_id, u_id];
-    
-    const updateQuery = 'UPDATE users SET f_id=? WHERE user_id=?';
+router.post('/', (req, res) => {
+    var font_id = req.body.font_id;
+    var u_id = req.body.u_id;
+
+    var updateQuery = 'UPDATE users SET font_id=? WHERE u_id=?';
+    var params = [font_id, u_id];
+
     connection.query(updateQuery, params, (error, rows, data) => {
         if (error) {
             res.send('error');
-        } else {
-            if(rows.length>0){
-                if (f_id == 1){
-                    res.send("기본");
-                }
-                else if (f_id == 2){
-                    res.send("맑은 고딕");
-                }
-            }
         }
+        //기존 값과 같을 경우는 그냥 두기 
+        else {
+            res.send(rows);
+        }
+        console.log(rows);
     });
 });
 
