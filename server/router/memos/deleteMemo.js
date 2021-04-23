@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
     var id = req.body.id;
     var userID = req.body.userID;
 
-    var deleteQuery = 'DELETE FROM todos WHERE id=? AND user_id=?';
+    var deleteQuery = 'DELETE FROM memos WHERE id=? AND user_id=?';
     var params = [id, userID];
 
     connection.query(deleteQuery, params, (error, rows, data) => {

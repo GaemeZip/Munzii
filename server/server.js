@@ -9,8 +9,10 @@ app.use(bodyParser.json());
 const joinRouter = require('./router/users/join');
 const loginRouter = require('./router/users/login');
 
-const memoRouter = require('./router/memos/memo');
-
+const readMemoRouter = require('./router/memos/readMemo');
+const createMemoRouter = require('./router/memos/createMemo.js');
+const updateMemoRouter = require('./router/memos/updateMemo');
+const deleteMemoRouter = require('./router/memos/deleteMemo');
 const readTodoRouter = require('./router/todos/readTodo');
 const createTodoRouter = require('./router/todos/createTodo');
 const updateTodoRouter = require('./router/todos/updateTodo');
@@ -28,7 +30,10 @@ const readStartDayRouter = require('./router/settings/readStartDay');
 app.use('/join', joinRouter);
 app.use('/login', loginRouter);
 
-app.use('/memo', memoRouter);
+app.use('/readMemo', readMemoRouter);
+app.use('/createMemo', createMemoRouter);
+app.use('/updateMemo', updateMemoRouter);
+app.use('/deleteMemo', deleteMemoRouter);
 
 app.use('/readTodo', readTodoRouter);
 app.use('/createTodo', createTodoRouter);
