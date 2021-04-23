@@ -6,12 +6,16 @@
       </button>
       Font
     </div>
-    <div class="list" *ngFor="let data of f_name">
-      <div class="item" (click)="updateFont()" >{{data}}</div>
+    <div class="list" *ngFor="let data of fontList">
+      <div class="item selected {{data.f_id}}" (click)="updateFont()">{{data.f_name}}
+        <img src="/assets/image/basic/basic_4.png" (click)="updateFont()" alt="">
+      </div>
+      
       </div>
      <!-- <div class="list">
     <div class="item selected">
         기본체
+        *ngIf="data == selectFont" 
         <img src="/assets/image/basic/basic_4.png" (click)="updateFont()"  alt="">
       </div>
       <div class="item"  id="prettynight">고운밤체</div>

@@ -9,19 +9,34 @@ import axios from 'axios';
 })
 export class FontPage implements OnInit {
   windowHeight: number = window.screen.height;
-  f_name: string[] = [];
+  font:{
+    f_id: number,
+    f_name: string,
+    f_family: string
+  } = {
+    f_id: 0,
+    f_name: "",
+    f_family: ""
+  }
+  fontList: any[] =[];
+  
   
   constructor(private router: Router) {
   }
 
   ngOnInit() {
+    
      axios.get('http://localhost:3000/readFont')
-      .then(res => {
-        console.log(res.data);
-        var someElement= document.getElementsByClassName("item");
-        for (var i = 0; res.data.length; i++) {
-          this.f_name[i] = res.data[i].f_name;
+      .then(res => {        
+        for (var i = 0; i < res.data.length ; i++) {
+          console.log(res.data[i].f_name);
+          this.font.f_id = res.data[i].f_id;
+          this.font.f_name = res.data[i].f_name;
+          this.font.f_family = res.data[i].f_family;
+          console.log(this.font);
+          this.fontList.push(this.font);
         }
+        console.log(this.fontList);
       });
   }
 
