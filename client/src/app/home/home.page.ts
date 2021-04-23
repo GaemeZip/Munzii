@@ -90,7 +90,7 @@ export class HomePage {
         selectDay: selectDay
       }
     };
-    this.router.navigateByUrl('todo', NavigationExtras);
+    this.router.navigateByUrl('calendar-tab', NavigationExtras);
   }
   moveToSettings(){
     this.router.navigate(['/settings']);
