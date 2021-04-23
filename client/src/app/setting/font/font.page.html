@@ -7,7 +7,7 @@
       Font
     </div>
     <div class="list" *ngFor="let data of fontList">
-      <div class="item selected {{data.f_id}}" (click)="updateFont()">{{data.f_name}}
+      <div class="item selected {{data[0]}}" (click)="updateFont()">{{data[1]}}
         <img src="/assets/image/basic/basic_4.png" (click)="updateFont()" alt="">
       </div>
       
