@@ -51,13 +51,7 @@ export class TodoPage implements OnInit {
     initialSlide: 1
   }
 
-<<<<<<< Updated upstream
   tempSelectDay: Date;
-=======
-  ngOnInit() {
-    
-    this.startWeekDay = 0;
->>>>>>> Stashed changes
 
   constructor(private router:Router) { 
     this.monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
