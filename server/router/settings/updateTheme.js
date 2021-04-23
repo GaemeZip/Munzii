@@ -14,10 +14,10 @@ router.post('/', (req, res) => {
     const themeID = req.body.themeID;
     const userID = req.body.userID;
 
-    const updateFontQuery = 'UPDATE users SET t_id=? WHERE user_id=?';
+    const updateFoupdateQueryntQuery = 'UPDATE users SET t_id=? WHERE user_id=?';
     let params = [themeID, userID];
 
-    connection.query(updateFontQuery, params, (error, rows, data) => {
+    connection.query(updateQuery, params, (error, rows, data) => {
         if (error) {
             res.send('error');
         } else {

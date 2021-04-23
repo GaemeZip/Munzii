@@ -14,10 +14,10 @@ router.post('/', (req, res) => {
     const fontID = req.body.fontID;
     const userID = req.body.userID;
 
-    const updateFontQuery = 'UPDATE users SET f_id=? WHERE user_id=?';
+    const updateQuery = 'UPDATE users SET f_id=? WHERE user_id=?';
     const params = [fontID, userID];
 
-    connection.query(updateFontQuery, params, (error, rows, data) => {
+    connection.query(updateQuery, params, (error, rows, data) => {
         if (error) {
             res.send('error');
         } else {

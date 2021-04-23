@@ -12,10 +12,10 @@ router.use(function (req, res, next) {
 
 router.get('/', (req, res) => {
 
-    const readThemeQuery = 'SELECT * FROM start_days';
+    const readQuery = 'SELECT * FROM start_days';
     
 
-    connection.query(readThemeQuery, (err, rows, data) => {
+    connection.query(readQuery, (err, rows, data) => {
       if(err){
         res.send('error');
       }else{

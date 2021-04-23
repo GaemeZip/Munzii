@@ -25,9 +25,9 @@ router.post('/', (req, res) => {
   const password = req.body.password;
   
   console.log(username+password);
-  const joinQuery = 'INSERT INTO users (u_id, username, password, optional_password, theme_id, font_id, start_day_id) VALUES(NULL,?,?,NULL,1,1,1)';
+  const createQuery = 'INSERT INTO users (u_id, username, password, optional_password, theme_id, font_id, start_day_id) VALUES(NULL,?,?,NULL,1,1,1)';
   let params = [username, password];
-  connection.query(joinQuery, params, function (error, rows, fields) {
+  connection.query(createQuery, params, function (error, rows, fields) {
 
     //if 아이디 중복일 경우 처리
     //if else 비밀번호 불일치일 경우 처리

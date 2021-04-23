@@ -12,10 +12,10 @@ router.use(function (req, res, next) {
 
 router.get('/', (req, res) => {
 
-    const readThemeQuery = 'SELECT * FROM fonts';
+    const readQuery = 'SELECT * FROM fonts';
     
 
-    connection.query(readThemeQuery, (err, rows, data) => {
+    connection.query(readQuery, (err, rows, data) => {
       if(err){
         res.send('error');
       }else{
