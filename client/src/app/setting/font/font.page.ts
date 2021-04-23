@@ -34,7 +34,8 @@ export class FontPage implements OnInit {
           this.font.f_name = res.data[i].f_name;
           this.font.f_family = res.data[i].f_family;
           console.log(this.font);
-          this.fontList.push(this.font);
+          this.fontList.push([this.font.f_id, this.font.f_name, this.font.f_family]);
+
         }
         console.log(this.fontList);
       });
