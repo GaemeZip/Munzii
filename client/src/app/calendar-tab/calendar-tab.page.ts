@@ -41,7 +41,7 @@ export class CalendarTabPage implements OnInit {
   ngOnInit() {
     this.currentTab = 'todo';
 
-    this.selected = new Date('2020-04-02');
+    this.selected = new Date();
 
     //get date from calendar
     this.route.queryParams.subscribe(params => {
@@ -49,10 +49,6 @@ export class CalendarTabPage implements OnInit {
         this.selected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
       }
     })
-    this.selectYear = this.selected.getFullYear();
-    this.selectMonth = this.monthNames[this.selected.getMonth()];
-    this.selectDate = this.selected.getDate();
-    this.selectDay = this.selected.getDay();
 
     // ** need ** get start week Day
     this.startWeekday = 0;
@@ -86,8 +82,9 @@ export class CalendarTabPage implements OnInit {
         break;
       }
     }
-
-    this.calculateCalendar();
+    // console.log(this.selected)
+    this.getDate(this.selected)
+    this.calculateCalendar(this.selected);
   }
   clickPrevTab() {
     if(this.currentTab == 'timeline') {
@@ -112,8 +109,17 @@ export class CalendarTabPage implements OnInit {
   openCalendar() {
     this.router.navigateByUrl('home')
   }
+  getDate(tempDay) {
+    this.selected = new Date(tempDay);
 
-  calculateCalendar() {
+    this.selectYear = this.selected.getFullYear();
+    this.selectMonth = this.monthNames[this.selected.getMonth()];
+    this.selectDate = this.selected.getDate();
+    this.selectDay = this.selected.getDay();
+  }
+
+  calculateCalendar(tempDay) {
+    this.selected = new Date(tempDay)
     console.log(this.selected);
     var prevDay;
 
@@ -137,21 +143,32 @@ export class CalendarTabPage implements OnInit {
       // console.log(this.weekForSlide[1][i]);
     }
     for (let i = 7; i < 14; i ++) {
-      this.weekForSlide[2][i] = new Date();
-      this.weekForSlide[2][i].setDate(this.selected.getDate()-(prevDay-i));
-      this.weekDateForSlide[2][i] = this.weekForSlide[2][i].getDate();
+      this.weekForSlide[2][i-7] = new Date();
+      this.weekForSlide[2][i-7].setDate(this.selected.getDate()-(prevDay-i));
+      this.weekDateForSlide[2][i-7] = this.weekForSlide[2][i-7].getDate();
       // console.log(this.weekForSlide[2][i].getDate());
     }
   }
 
 
   endSlide() {
-    // console.log("마지막 슬라이든이")
-    // this.slides.slideTo(1);
+    console.log("마지막 슬라이든이")
+    let tempDay = new Date();
+    tempDay.setDate(this.selected.getDate() + 7);
+    console.log(this.selected);
+    this.getDate(tempDay);
+    this.calculateCalendar(tempDay);
+    this.slides.slideTo(1);
   }
   firstSlide() {
-    // console.log("첫 슬라이드")
-    // this.slides.slideTo(1);
+    console.log("첫 슬라이드")
+    let tempDay = new Date();
+    tempDay.setDate(this.selected.getDate() - 7);
+    console.log(this.selected);
+    console.log(tempDay);
+    this.getDate(tempDay);
+    this.calculateCalendar(tempDay);
+    this.slides.slideTo(1);
   }
 
   changeDay(date) {

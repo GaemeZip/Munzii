@@ -204,7 +204,6 @@ export class TodoPage implements OnInit {
   firstSlide() {
     // console.log("첫 슬라이드")
     this.tempSelectDay.setDate(this.selectDay.getDate() -7);
-    console.log
     this.calculateSelectDate(this.tempSelectDay);
     this.readTodo(this.selectDay);
     this.calculateViewDay();
