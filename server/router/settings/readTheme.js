@@ -12,10 +12,14 @@ router.use(function (req, res, next) {
 
 router.get('/', (req, res) => {
 
+    const t_id = req.body.t_id;
+    const t_name = req.body.t_name;
+
+    let params = [t_id, t_name];
     const readQuery = 'SELECT * FROM themes';
     
 
-    connection.query(readQuery, (err, rows, data) => {
+    connection.query(readQuery, params, function(err, rows, data){
       if(err){
         res.send('error');
       }else{

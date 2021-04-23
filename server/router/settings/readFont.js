@@ -12,15 +12,20 @@ router.use(function (req, res, next) {
 
 router.get('/', (req, res) => {
 
+    const f_id = req.body.f_id;
+    const f_name = req.body.f_name;
+
+    let params = [f_id, f_name];
+    
     const readQuery = 'SELECT * FROM fonts';
     
-
-    connection.query(readQuery, (err, rows, data) => {
+    connection.query(readQuery, params, function(err, rows, data){
       if(err){
         res.send('error');
       }else{
         res.send(rows);
       }
+      console.log(rows[0].f_id); // id 가져오기 for 문 돌리기
     })
   });
   

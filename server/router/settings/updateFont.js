@@ -11,21 +11,21 @@ router.use(function (req, res, next) {
 });
 
 router.post('/', (req, res) => {
-    const fontID = req.body.fontID;
-    const userID = req.body.userID;
+    const f_id = req.body.f_id;
+    const u_id = req.body.u_id;
 
+    let params = [f_id, u_id];
+    
     const updateQuery = 'UPDATE users SET f_id=? WHERE user_id=?';
-    const params = [fontID, userID];
-
     connection.query(updateQuery, params, (error, rows, data) => {
         if (error) {
             res.send('error');
         } else {
             if(rows.length>0){
-                if (fontID == 1){
+                if (f_id == 1){
                     res.send("기본");
                 }
-                else if (fontID == 2){
+                else if (f_id == 2){
                     res.send("맑은 고딕");
                 }
             }
