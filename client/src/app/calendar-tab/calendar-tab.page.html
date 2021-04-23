@@ -1,10 +1,9 @@
-<ion-tabs #myTabs (ionChange)="ionChange(myTabs)">
+<ion-tabs>
 
   <ion-tab-bar slot="top" class="container">
     <div class="todo__title-wrap">
       <div class="todo__title-info">
-        <!-- <div class="year-month" (click)="openCalendar()"> {{ selectYear }}.{{ selectMonth }}</div> -->
-        <div class="year-month"> 2020.02 </div>
+        <div class="year-month" (click)="openCalendar()"> {{ selectYear }}.{{ selectMonth }}</div>
         <div class="shortcut-btn-wrap">
           <button class="btn-shortcut-setting">
             <img src="/assets/image/button/btn-setting.png" alt="setting">
@@ -12,10 +11,22 @@
         </div>
       </div>
 
-      <!-- <ion-grid>
-        <ion-row class="todo__content__week">
+      <ion-grid>
+        <ion-row class="todo__content__week-day">
           <ion-col *ngFor="let day of weekday" [ngStyle]="{'text-align': 'center'}"> {{day}} </ion-col>
         </ion-row>
+        <ion-row class="todo__content__week-date">
+          <ion-slides class="slides" [options]="weekSlideOption" (ionSlideReachEnd)="endSlide()" (ionSlideReachStart)="firstSlide()">
+            <ion-slide *ngFor="let week of weekDateForSlide">
+              <ion-col class="view-slide" *ngFor="let day of week" [ngStyle]="{'text-align': 'center'}">
+                <div class="select" *ngIf="day == selectDate"> {{ day }}  </div>
+                <div *ngIf="day !== selectDate" (click)="changeDay(day)"> {{ day }}  </div>
+              </ion-col>
+            </ion-slide>
+          </ion-slides>
+        </ion-row>
+      </ion-grid>
+      <!-- <ion-grid>
         <ion-row class="todo__content__week-date">
             <ion-slides [options]="weekSlideOption" (ionSlideReachEnd)="endSlide()" (ionSlideReachStart)="firstSlide()">
               <ion-slide *ngFor="let aWeek of slideWeek">
