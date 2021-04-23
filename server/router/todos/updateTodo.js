@@ -29,10 +29,10 @@ router.post('/', (req, res) => {
     var isDone = req.body.isDone;
     var userID = req.body.userID;
 
-    var createQuery = 'UPDATE todos SET date=?, title=?, time=?, start_time=?, end_time=?, is_done=? WHERE id=? AND user_id=?';
+    var updateQuery = 'UPDATE todos SET date=?, title=?, time=?, start_time=?, end_time=?, is_done=? WHERE id=? AND user_id=?';
     var params = [date, title, time, startTime, endTime, isDone, id, userID];
 
-    connection.query(createQuery, params, (error, rows, data) => {
+    connection.query(updateQuery, params, (error, rows, data) => {
         if (error) {
             res.send('error');
         } else {

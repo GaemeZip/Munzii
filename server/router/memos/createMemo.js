@@ -1,6 +1,5 @@
 var express = require('express');
 const mysql = require('mysql');
-const { user } = require('../db.js');
 var router = express.Router();
 const dbconfig = require('../db.js');
 const connection = mysql.createConnection(dbconfig);
@@ -20,18 +19,24 @@ router.use(function (req, res, next) {
 //   });
 // });
 
-router.get('/', (req, res) => {
-  let selectedDate = req.query.date;
-  var userID = req.query.userID;
-  var readQuery = 'SELECT * FROM todos where date=? AND user_id=?';
-  var params =[selectedDate, userID];
-  connection.query(readQuery, params, (error, rows, data) => {
-    if(error){
+router.post('/', (req, res) => {
+
+  var date = req.body.date;
+  var content = req.body.content;
+  var userID = req.body.userID;
+
+  var updateQuery = 'INSERT INTO memos VALUES(NULL,?,DEFAULT,?,?)';
+
+  var params = [date, content, userID];
+
+  connection.query(updateQuery, params, (error, rows, data) => {
+    if (error) {
       res.send('error');
-    }else{
+    } else {
       res.send(rows);
     }
-  })
+  });
 });
 
 module.exports = router;
+

@@ -21,12 +21,13 @@ router.use(function (req, res, next) {
 
 router.post('/', (req, res) => {
     var id = req.body.id;
+    var content = req.body.content;
     var userID = req.body.userID;
 
-    var deleteQuery = 'DELETE FROM todos WHERE id=? AND user_id=?';
-    var params = [id, userID];
+    var updateQuery = 'UPDATE memos SET content=?, created_at=NOW() WHERE id=? AND user_id=?';
+    var params = [content, id, userID];
 
-    connection.query(deleteQuery, params, (error, rows, data) => {
+    connection.query(updateQuery, params, (error, rows, data) => {
         if (error) {
             res.send('error');
         } else {

@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'memo',
     pathMatch: 'full'
   },
   {
@@ -50,6 +50,10 @@ const routes: Routes = [
   {
     path: 'todo',
     loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule)
+  },
+  {
+    path: 'memo',
+    loadChildren: () => import('./memo/memo.module').then( m => m.MemoPageModule)
   },
 ];
 
