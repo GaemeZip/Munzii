@@ -27,6 +27,9 @@ const readThemeRouter = require('./router/settings/readTheme');
 const updateStartDayRouter = require('./router/settings/updateStartDay');
 const readStartDayRouter = require('./router/settings/readStartDay');
 
+const updateStartDayRouter = require('./router/settings/updateStartDay');
+const readStartDayRouter = require('./router/settings/readStartDay');
+
 app.use('/join', joinRouter);
 app.use('/login', loginRouter);
 
