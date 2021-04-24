@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 
 @Component({
@@ -7,11 +7,14 @@ import { IonSlides } from '@ionic/angular';
   templateUrl: './calendar-tab.page.html',
   styleUrls: ['./calendar-tab.page.scss'],
 })
+@Injectable({
+  providedIn: 'root'
+})
 export class CalendarTabPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
   currentTab: string;
 
-  selected: any;
+  public selected: any;
   selectYear: any;
   selectMonth: any;
   selectDate: any;
@@ -46,9 +49,11 @@ export class CalendarTabPage implements OnInit {
     //get date from calendar
     this.route.queryParams.subscribe(params => {
       if(this.router.getCurrentNavigation().extras.state) {
+        console.log(this.router.getCurrentNavigation().extras.state.selectDay);
         this.selected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
       }
     })
+    console.log(this.selected)
 
     // ** need ** get start week Day
     this.startWeekday = 0;
@@ -87,23 +92,33 @@ export class CalendarTabPage implements OnInit {
     this.calculateCalendar(this.selected);
   }
   clickPrevTab() {
+    let NavigationExtras: NavigationExtras = {
+      state: {
+        selected: this.selected
+      }
+    };
     if(this.currentTab == 'timeline') {
       this.currentTab = 'todo';
-      this.router.navigateByUrl('/calendar-tab/todo')
+      this.router.navigateByUrl('/calendar-tab/todo', NavigationExtras);
     }
     else if(this.currentTab == 'memo') {
       this.currentTab = 'timeline';
-      this.router.navigateByUrl('/calendar-tab/timeline')
+      this.router.navigateByUrl('/calendar-tab/timeline', NavigationExtras);
     }
   }
   clickNextTab() {
+    let NavigationExtras: NavigationExtras = {
+      state: {
+        selected: this.selected
+      }
+    };
     if(this.currentTab == 'timeline') {
       this.currentTab = 'memo';
-      this.router.navigateByUrl('/calendar-tab/memo')
+      this.router.navigateByUrl('/calendar-tab/memo', NavigationExtras);
     }
     else if(this.currentTab == 'todo') {
       this.currentTab = 'timeline';
-      this.router.navigateByUrl('/calendar-tab/timeline')
+      this.router.navigateByUrl('/calendar-tab/timeline', NavigationExtras);
     }
   }
   openCalendar() {
