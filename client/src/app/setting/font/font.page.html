@@ -1,5 +1,7 @@
 <ion-content>
   <div class="container" [style.height.px]="windowHeight">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
     <div class="header">
       <button (click) = "prev()">
         <img src="/assets/button/prev.png" alt="">
@@ -7,9 +9,10 @@
       Font
     </div>
     <div class="list" *ngFor="let data of fontList">
-      <div class="item selected {{data[0]}}" (click)="updateFont()">{{data[1]}}
-        <img src="/assets/image/basic/basic_4.png" (click)="updateFont()" alt="">
+      <div class="item" id="{{data[0]}}"  (click)="select(data[0])">{{data[1]}}
+        <img src="/assets/image/basic/basic_4.png" alt="">
       </div>
+      
       
       </div>
      <!-- <div class="list">

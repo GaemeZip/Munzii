@@ -30,6 +30,12 @@
             align-items: center;
             height: 60px;
             padding: 0 15px;
+            color: #999999;
+            img {
+                visibility: hidden;
+                width: 45px;
+                height: 45px;
+            }
         }
         .item:hover {
             background: #f9f9f9;
@@ -38,7 +44,7 @@
             justify-content: space-between;
             color: #000;
             img {
-                visibility: hidden;
+                visibility: visible;
                 width: 45px;
                 height: 45px;
             }

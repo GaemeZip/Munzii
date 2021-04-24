@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-font',
@@ -19,45 +20,51 @@ export class FontPage implements OnInit {
     f_family: ""
   }
   fontList: any[] =[];
-  
+  selectedFont: number;
   
   constructor(private router: Router) {
   }
 
   ngOnInit() {
-    
+    this.initFont();
      axios.get('http://localhost:3000/readFont')
       .then(res => {        
         for (var i = 0; i < res.data.length ; i++) {
-          console.log(res.data[i].f_name);
           this.font.f_id = res.data[i].f_id;
           this.font.f_name = res.data[i].f_name;
           this.font.f_family = res.data[i].f_family;
-          console.log(this.font);
           this.fontList.push([this.font.f_id, this.font.f_name, this.font.f_family]);
-
         }
-        console.log(this.fontList);
+
       });
   }
 
-  updateFont() {
+  initFont(){
+    axios.get('http://localhost:3000/currentFont')
+      .then(res => {        
+         this.selectedFont = res.data[0].font_id;
+      });
+  }
+
+  updateFont(f_id) {
     axios.post('http://localhost:3000/updateFont', {
-      font_id: 3,
+      font_id: f_id,
       u_id: 1
     }).then((res) => {
       console.log(res)
       if (res.data != 'error') {
         console.log("폰트 업데이트");
+        console.log(res)
       } else {
         console.log("에러 발생")
       }
     })
   }
 
-  select(){
+  select(id){
     console.log("클릭되었습니다");
-    const content = document.getElementsByClassName
+    console.log(id);
+    this.updateFont(id);    
   }
 
   prev() {
