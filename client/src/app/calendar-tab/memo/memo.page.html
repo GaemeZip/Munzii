@@ -1,6 +1,6 @@
-<ion-content>
+<ion-content forceOverscroll=false>
   <div class="container">
-    <ion-textarea [(ngModel)]="input" auto-grow=true id="memoTextArea" (change)="inputMemo()"></ion-textarea>
+    <textarea [(ngModel)]="input" id="memoTextArea" (change)="inputMemo()"></textarea>
     <button (click)="deleteMemo()">
       <ion-icon id="trash" src="/assets/button/trash.svg" alt=""></ion-icon>
     </button>
