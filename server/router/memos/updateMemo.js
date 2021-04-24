@@ -20,12 +20,12 @@ router.use(function (req, res, next) {
 // });
 
 router.post('/', (req, res) => {
-    var id = req.body.id;
+    var date = req.body.date;
     var content = req.body.content;
     var userID = req.body.userID;
 
-    var updateQuery = 'UPDATE memos SET content=?, created_at=NOW() WHERE id=? AND user_id=?';
-    var params = [content, id, userID];
+    var updateQuery = 'UPDATE memos SET content=?, created_at=NOW() WHERE date=? AND user_id=?';
+    var params = [content, date, userID];
 
     connection.query(updateQuery, params, (error, rows, data) => {
         if (error) {

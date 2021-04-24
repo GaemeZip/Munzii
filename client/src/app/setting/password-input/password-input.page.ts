@@ -16,7 +16,7 @@ export class PasswordInputPage implements OnInit {
 
   ngOnInit() {
     this.input = '암호를 입력하세요.';
-
+    
     
 
     if (this.password[4] != null) {
@@ -31,5 +31,9 @@ export class PasswordInputPage implements OnInit {
   checkPassword() {
     this.input = '암호를 다시 입력하세요.';
 
+  }
+
+  getNumber(n){
+    return n;
   }
 }
