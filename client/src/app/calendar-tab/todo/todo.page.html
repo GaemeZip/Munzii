@@ -1,17 +1,22 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
+<!-- <ion-content [fullscreen]="true"> -->
+    <!-- <div class="todo-wrap" *ngFor="let todo of selectDayTodoList">
+      <div class="todo-icon">
+        <img src="../../assets/image/basic/basic_1.png" *ngIf="progress == 100">
+        <img src="../../assets/image/basic/basic_2.png" *ngIf="progress !== 100 && todo.isDone == 1">
+        <img src="../../assets/image/basic/basic_4.png" *ngIf="progress !== 100 && todo.isDone == 0">
+      </div>
+      <div class="todo-content" *ngIf="todo.isDone == 0">{{ todo.title }}</div>
+      <div class="todo-content-done" *ngIf="todo.isDone == 1">{{ todo.title }}</div>
+    </div> -->
+  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
+<!-- </ion-content> -->
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <button (click)="getTodo()"> 누르면 투두가 쫘라라라라락 나와야 해 </button>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>

@@ -26,18 +26,6 @@
           </ion-slides>
         </ion-row>
       </ion-grid>
-      <!-- <ion-grid>
-        <ion-row class="todo__content__week-date">
-            <ion-slides [options]="weekSlideOption" (ionSlideReachEnd)="endSlide()" (ionSlideReachStart)="firstSlide()">
-              <ion-slide *ngFor="let aWeek of slideWeek">
-                <ion-col *ngFor="let date of aWeek" [ngStyle]="{'text-align': 'center'}"> 
-                  <div class="select" *ngIf="date == selectDay"> {{date.getDate()}}  </div>
-                  <div *ngIf="date !== selectDay" (click)="changeDay(date)"> {{date.getDate()}}  </div>
-                </ion-col>
-              </ion-slide>
-            </ion-slides>
-        </ion-row>
-      </ion-grid> -->
 
       <div class="menu-name" >{{ currentTab }}</div>
       <div class="btn-wrap" >
@@ -51,5 +39,6 @@
       </div>
     </div>
   </ion-tab-bar>
-
+<!-- <app-calendar-tab [selected]="selected"></app-calendar-tab> -->
 </ion-tabs>
+<!-- <app-child [selected]="selected"></app-child> -->
