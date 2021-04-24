@@ -20,12 +20,10 @@ const deleteTodoRouter = require('./router/todos/deleteTodo');
 
 const updateFontRouter = require('./router/settings/updateFont');
 const readFontRouter = require('./router/settings/readFont');
+const currentFontRouter = require('./router/settings/currentFont');
 
 const updateThemeRouter = require('./router/settings/updateTheme');
 const readThemeRouter = require('./router/settings/readTheme');
-
-const updateStartDayRouter = require('./router/settings/updateStartDay');
-const readStartDayRouter = require('./router/settings/readStartDay');
 
 const updateStartDayRouter = require('./router/settings/updateStartDay');
 const readStartDayRouter = require('./router/settings/readStartDay');
@@ -45,6 +43,7 @@ app.use('/deleteTodo', deleteTodoRouter);
 
 app.use('/updateFont', updateFontRouter);
 app.use('/readFont', readFontRouter);
+app.use('/currentFont', currentFontRouter);
 
 app.use('/updateTheme', updateThemeRouter);
 app.use('/readTheme', readThemeRouter);
