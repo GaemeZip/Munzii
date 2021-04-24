@@ -20,11 +20,11 @@ router.use(function (req, res, next) {
 // });
 
 router.post('/', (req, res) => {
-    var id = req.body.id;
+    var date = req.body.date;
     var userID = req.body.userID;
 
-    var deleteQuery = 'DELETE FROM memos WHERE id=? AND user_id=?';
-    var params = [id, userID];
+    var deleteQuery = 'DELETE FROM memos WHERE date=? AND user_id=?';
+    var params = [date, userID];
 
     connection.query(deleteQuery, params, (error, rows, data) => {
         if (error) {
