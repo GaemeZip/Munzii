@@ -46,7 +46,6 @@ export class FontPage implements OnInit {
          this.selectedFont = res.data[0].font_id;
          this.selectIcon(this.selectedFont);
       });
-      console.log("받아온 font id 값 : "+this.selectedFont);
       
   }
 
@@ -59,6 +58,8 @@ export class FontPage implements OnInit {
     }
     var elementSelected = document.getElementById(id);
     elementSelected.classList.add("selected");
+    const changeFont = document.querySelector('body');
+    changeFont.style.setProperty('--ion-font-family', this.fontList[id-1][2]);
   }
 
   updateFont(f_id) {
@@ -69,7 +70,8 @@ export class FontPage implements OnInit {
       //console.log(res)
       if (res.data != 'error') {
         console.log("폰트 업데이트");
-        //console.log(res)
+        console.log(res)
+        console.log(f_id+this.fontList[f_id-1][2]);
       } else {
         console.log("에러 발생")
       }
