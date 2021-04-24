@@ -20,13 +20,13 @@ export class FontPage implements OnInit {
     f_family: ""
   }
   fontList: any[] =[];
-  selectedFont: number;
+  selectedFont: any;
+  
   
   constructor(private router: Router) {
   }
 
   ngOnInit() {
-    this.initFont();
      axios.get('http://localhost:3000/readFont')
       .then(res => {        
         for (var i = 0; i < res.data.length ; i++) {
@@ -35,15 +35,30 @@ export class FontPage implements OnInit {
           this.font.f_family = res.data[i].f_family;
           this.fontList.push([this.font.f_id, this.font.f_name, this.font.f_family]);
         }
-
       });
+      this.initFont();
   }
 
   initFont(){
     axios.get('http://localhost:3000/currentFont')
       .then(res => {        
+        //console.log("받아온 font id 값 : "+res.data[0].font_id);
          this.selectedFont = res.data[0].font_id;
+         this.selectIcon(this.selectedFont);
       });
+      console.log("받아온 font id 값 : "+this.selectedFont);
+      
+  }
+
+  selectIcon(id){
+    console.log(id+"가 선택되었습니다")
+    for (let index = 1; index <= this.fontList.length; index++) {
+      var numToString = index.toString();
+      var elementSelected = document.getElementById(numToString);
+      elementSelected.classList.remove("selected");
+    }
+    var elementSelected = document.getElementById(id);
+    elementSelected.classList.add("selected");
   }
 
   updateFont(f_id) {
@@ -51,10 +66,10 @@ export class FontPage implements OnInit {
       font_id: f_id,
       u_id: 1
     }).then((res) => {
-      console.log(res)
+      //console.log(res)
       if (res.data != 'error') {
         console.log("폰트 업데이트");
-        console.log(res)
+        //console.log(res)
       } else {
         console.log("에러 발생")
       }
@@ -62,9 +77,11 @@ export class FontPage implements OnInit {
   }
 
   select(id){
-    console.log("클릭되었습니다");
-    console.log(id);
-    this.updateFont(id);    
+    console.log("클릭되었습니다 : " + id);
+    this.updateFont(id); // update db
+    this.selectIcon(id); // display munzii
+    this.selectedFont = id;
+    //this.initFont();
   }
 
   prev() {
