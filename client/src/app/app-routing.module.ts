@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'calendar-tab/memo',
+    redirectTo: 'password',
     pathMatch: 'full'
   },
   {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import axios from 'axios';
 
 @Component({
   selector: 'app-password',
@@ -15,6 +16,26 @@ export class PasswordPage implements OnInit {
   }
 
   ngOnInit() {
+    axios.get('http://localhost:3000/readPassword', {
+      params: {
+        userID: 1
+      }
+    })
+      .then(res => {
+        if (res.data != 'error') {
+          if(res.data[0].optional_password!=null){
+            this.isOn=true;
+            this.isOff=false;
+          console.log(res.data[0].optional_password);
+
+          }else{
+            this.isOn = false;
+            this.isOff = true;
+          }
+        } else {
+          console.log("에러 발생")
+        }
+      })
   }
 
   prev() {
@@ -29,19 +50,25 @@ export class PasswordPage implements OnInit {
     if(this.isOn == false){
       this.isOn=true;
       this.isOff=false;
-
       this.router.navigate(['/password-input']);
-
-      //TODO:: 암호 입력 받고 한 번 더 입력 받아서 같은지 비교하고 같으면 암호 저장
-
-      
     }
-
+    
   }
   toggleOffPassword(){
     if(this.isOff == false){
       this.isOn=false;
       this.isOff=true;
     }
+    axios.post('http://localhost:3000/updatePassword', {
+      password: null,
+      userID: 1
+    }).then((res) => {
+      if (res.data != 'error') {
+        console.log("비번 null");
+      } else {
+        console.log("에러 발생")
+      }
+    })
   }
+
 }
