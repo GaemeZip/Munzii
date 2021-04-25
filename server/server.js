@@ -21,8 +21,8 @@ const readTodoRouter = require('./router/todos/readTodo');
 const createTodoRouter = require('./router/todos/createTodo');
 const updateTodoRouter = require('./router/todos/updateTodo');
 const deleteTodoRouter = require('./router/todos/deleteTodo');
-const readPasswordRouter = require('./router/settings/readPassword');
 
+const readPasswordRouter = require('./router/settings/readPassword');
 const createPasswordRouter = require('./router/settings/createPassword');
 const updatePasswordRouter = require('./router/settings/updatePassword');
 
@@ -67,7 +67,7 @@ app.use('/readStartDay', readStartDayRouter);
 app.set('port', process.env.PORT || 3000);
 
 app.get('/', (req, res) => {
-  res.send('Root');
+  res.send('Root입니다.');
 });
 
 app.listen(app.get('port'), () => {
