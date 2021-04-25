@@ -1,6 +1,6 @@
 <ion-tabs>
 
-  <ion-tab-bar slot="top" class="container">
+  <ion-tab-bar slot="top" class="container" [ngStyle]="{'--background': 'var(--ion-color-white)', '--color' : 'var(--ion-color-white)'}">
     <div class="todo__title-wrap">
       <div class="todo__title-info">
         <div class="year-month" (click)="openCalendar()"> {{ selectYear }}.{{ selectMonth }}</div>
