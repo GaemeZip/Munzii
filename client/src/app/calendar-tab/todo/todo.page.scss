@@ -1,3 +1,42 @@
 button {
     color: black;
 }
+.container {
+    padding: 0;
+    overflow-y: scroll;
+.todo-wrap {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    margin: 15px auto;
+    .todo-icon {
+        img {
+            width: auto;
+            height: 45px;
+        }
+    }
+    .todo-content {
+        margin-left: 15px;
+        font-size: 24px;
+        font-family: var(--ion-font-family);
+    }
+    .todo-content-done {
+        margin-left: 15px;
+        text-decoration: line-through;
+        font-size: 24px;
+        font-family: var(--ion-font-family);
+        color: var(--ion-color-light-gray);
+    }
+}
+}
+.add-icon {
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    background: var(--ion-color-primary);
+    color: var(--ion-color-white);
+    z-index: 2;
+}
