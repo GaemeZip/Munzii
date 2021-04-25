@@ -1,7 +1,8 @@
+import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
 import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
-
+import { kMaxLength } from 'node:buffer';
 @Component({
   selector: 'app-calendar-tab',
   templateUrl: './calendar-tab.page.html',
@@ -90,8 +91,11 @@ export class CalendarTabPage implements OnInit {
     // console.log(this.selected)
     this.getDate(this.selected)
     this.calculateCalendar(this.selected);
+    console.log(123);
+
   }
   clickPrevTab() {
+    console.log(123);
     let NavigationExtras: NavigationExtras = {
       state: {
         selected: this.selected
@@ -107,6 +111,8 @@ export class CalendarTabPage implements OnInit {
     }
   }
   clickNextTab() {
+    console.log(123);
+
     let NavigationExtras: NavigationExtras = {
       state: {
         selected: this.selected
@@ -122,20 +128,22 @@ export class CalendarTabPage implements OnInit {
     }
   }
   openCalendar() {
+    console.log(123);
+
     this.router.navigateByUrl('home')
   }
   getDate(tempDay) {
-    this.selected = new Date(tempDay);
 
+    this.selected = new Date(tempDay);
     this.selectYear = this.selected.getFullYear();
     this.selectMonth = this.monthNames[this.selected.getMonth()];
     this.selectDate = this.selected.getDate();
     this.selectDay = this.selected.getDay();
+    console.log(this.selected,this.selectYear,this.selectMonth,this.selectDate,this.selectDay);
   }
 
   calculateCalendar(tempDay) {
-    this.selected = new Date(tempDay)
-    console.log(this.selected);
+    // this.selected = new Date(tempDay)
     var prevDay;
 
     if ( this.startWeekday > this.selectDay) {
@@ -144,7 +152,6 @@ export class CalendarTabPage implements OnInit {
     else {
       prevDay = (this.selectDay - this.startWeekday);
     }
-
     for (let i = 7; i > 0; i --) {
       this.weekForSlide[0][7-i] = new Date();
       this.weekForSlide[0][7-i].setDate(this.selected.getDate()-(prevDay+i));
@@ -165,22 +172,18 @@ export class CalendarTabPage implements OnInit {
     }
   }
 
-
   endSlide() {
-    console.log("마지막 슬라이든이")
-    let tempDay = new Date();
-    tempDay.setDate(this.selected.getDate() + 7);
-    console.log(this.selected);
+    // console.log("마지막 슬라이든이")
+    let tempDay = new Date(this.selected);                               
+    tempDay.setDate(this.selected.getDate() + 7);            
     this.getDate(tempDay);
     this.calculateCalendar(tempDay);
     this.slides.slideTo(1);
   }
   firstSlide() {
-    console.log("첫 슬라이드")
-    let tempDay = new Date();
+    // console.log("첫 슬라이드")
+    let tempDay = new Date(this.selected);                               
     tempDay.setDate(this.selected.getDate() - 7);
-    console.log(this.selected);
-    console.log(tempDay);
     this.getDate(tempDay);
     this.calculateCalendar(tempDay);
     this.slides.slideTo(1);
