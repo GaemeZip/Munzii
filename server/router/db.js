@@ -1,6 +1,6 @@
 module.exports = {
     host: 'localhost',
     user: 'root',
-    password: 'ant123',
+    password: 'Ant123!!!',
     database: 'munzii'
 };
