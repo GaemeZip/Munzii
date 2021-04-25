@@ -25,7 +25,7 @@ export class PasswordInputPage implements OnInit {
 
   ngOnInit() {
     this.input = '암호를 입력하세요.';
-    axios.get('http://localhost:3000/readPassword', {
+    axios.get('http://3.139.244.188:3000/readPassword', {
       params: {
         userID: 1
       }

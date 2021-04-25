@@ -9,9 +9,9 @@
     <div class="list">
       <div id="account-info">
         사용자 정보
-      <div class="username">슬구</div>
+      <div class="username" [(ngModel)]="userID"></div>
       </div>
-      <div class="item">로그아웃</div>
+      <div class="item" (click)="logout()">로그아웃</div>
     </div>
     <div class="footer">
       <img src="/assets/image/basic/basic_2.png" alt="">
