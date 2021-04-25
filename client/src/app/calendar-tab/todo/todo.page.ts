@@ -49,6 +49,19 @@ export class TodoPage implements OnInit {
   }
 
   createTodo() {
-    console.log("만들깅")
+    // axios.post('http://3.139.244.188:3000/createTodo', {
+    //   date: '2021-04-22',
+    //   title: '예시 투두입니다.',
+    //   time: false,
+    //   startTime: null,
+    //   endTime: null,
+    //   userID: 1
+    // }).then((res) => {
+    //   if (res.data != 'error') {
+    //     console.log("테이블 생성");
+    //   } else {
+    //     console.log("에러 발생")
+    //   }
+    // })
   }
 }
