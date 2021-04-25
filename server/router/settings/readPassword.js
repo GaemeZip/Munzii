@@ -11,6 +11,7 @@ router.use(function (req, res, next) {
   next();
 });
 
+
 router.get('/', (req, res) => {
   console.log("11111111");
   let userID = req.query.userID;
@@ -18,6 +19,7 @@ router.get('/', (req, res) => {
   var params = [userID]
   connection.query(readQuery, params, (err, rows, data) => {
     console.log("dkdkdkdkdkdkddkdkdkdkdk");
+    console.log(rows);
     if (err) {
       res.send('error');
     } else {

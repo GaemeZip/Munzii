@@ -12,7 +12,7 @@ export class PasswordInputPage implements OnInit {
   input = '';
   msg = null;
   password = [null, null, null, null];
-  passwordStr:String ='';
+  passwordStr: String = '';
   passwordNum;
   tempPassword = [];
   keypad = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [null, 0, '<']];
@@ -31,6 +31,10 @@ export class PasswordInputPage implements OnInit {
       }
     })
       .then(res => {
+        console.log(123);
+        console.log(res);
+        console.log(123);
+
         if (res.data != 'error') {
           console.log("패스워드 읽기");
         } else {
@@ -48,7 +52,7 @@ export class PasswordInputPage implements OnInit {
 
   updatePassword() {
     this.makeString();
-    axios.post('http://localhost:3000/updatePassword', {
+    axios.post('http://3.139.244.188:3000/updatePassword', {
       password: this.passwordStr,
       userID: 1
     }).then((res) => {
@@ -61,8 +65,20 @@ export class PasswordInputPage implements OnInit {
   }
 
   pressed(k) {
-    this.password[this.n] = k;
-    this.n += 1;
+    if (k == null) {
+      return;
+    } else if (k == '<') {
+      if (this.n == 0) {
+        return;
+      } else {
+        this.password[this.n - 1] = null;
+        this.n -= 1;
+      }
+    } else {
+      this.password[this.n] = k;
+      this.n += 1;
+    }
+
     this.msg = "";
     if (this.n == 4) {
       if (this.isChecked) {
@@ -92,11 +108,11 @@ export class PasswordInputPage implements OnInit {
       }
     }
   }
-  makeString(){
-    for(var p in this.password ){
+  makeString() {
+    for (var p in this.password) {
       this.passwordStr += this.password[p];
     }
-    this.passwordNum=Number(this.passwordStr);
+    this.passwordNum = Number(this.passwordStr);
   }
 
 }
