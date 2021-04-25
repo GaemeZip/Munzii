@@ -48,10 +48,6 @@ const routes: Routes = [
     loadChildren: () => import('./setting/account/account.module').then( m => m.AccountPageModule)
   },
   {
-    path: 'todo',
-    loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule)
-  },
-  {
     path: 'calendar-tab',
     loadChildren: () => import('./calendar-tab/calendar-tab.module').then( m => m.CalendarTabPageModule)
   },
