@@ -6,13 +6,15 @@ import { Router } from '@angular/router';
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
 })
+
 export class AccountPage implements OnInit {
   windowHeight: number = window.screen.height;
-
+  userID;
   constructor(private router:Router) { 
   }
 
   ngOnInit() {
+
   }
 
   prev(){
