@@ -27,6 +27,14 @@ button {
         font-family: var(--ion-font-family);
         color: var(--ion-color-light-gray);
     }
+    .option {
+        border: none !important;
+        .btn-edit {
+        }
+        .btn-delete {
+            --background: var(--ion-color-light-gray);
+        }
+    }
 }
 }
 .add-icon {
