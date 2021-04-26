@@ -42,7 +42,8 @@ export class FontPage implements OnInit {
   initFont(){
     axios.get('http://localhost:3000/currentFont')
       .then(res => {        
-        //console.log("받아온 font id 값 : "+res.data[0].font_id);
+        console.log("받아온 font id 값 : "+res.data[0].font_id);
+        
          this.selectedFont = res.data[0].font_id;
          this.selectIcon(this.selectedFont);
       });
