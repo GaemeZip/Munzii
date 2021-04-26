@@ -197,6 +197,7 @@
   margin: auto;
   padding-top: 15%;
   padding-bottom: 15%;
+  overflow: hidden;
 }
 
 
@@ -215,16 +216,17 @@ input{
 }
 
 .modal-custom {
-  padding: 130px 5% 0 5%;
-  background: rgba(255, 255, 255, 0);
+  padding: 90px 5% 0 5%;
+  background: rgba(255, 255, 255, 0); 
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 .sc-ion-modal-md-h {
   --background: none;
   --border-radius: 10px;
-  --height: 420px;
+  --height: 350px;
 }
 .sc-ion-modal-ios-h {
   --background: none;
   --border-radius: 10px;
-  --height: 420px;
+  --height: 350px;
 }
