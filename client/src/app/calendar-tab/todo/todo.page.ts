@@ -63,21 +63,32 @@ export class TodoPage implements OnInit {
       }
     })
   }
+  ionViewWillEnter() {
+    this.getTodoList();
+  }
+  editTodo(todo) {
+    let index = this.selectDayTodoList.indexOf(todo);
+    console.log(index);
+    this.ionViewWillEnter();
+  }
+  deleteTodo(todo) {
+    let index = this.selectDayTodoList.indexOf(todo);
+    let id = this.selectDayTodoList[index].id;
+    axios.post('http://3.139.244.188:3000/deleteTodo', {
+      id: id,
+      userID: 1
+    }).then((res) => {
+      if (res.data != 'error') {
+        console.log("테이블 삭제");
+        this.ionViewWillEnter();
+        this.ngOnInit();
+      } else {
+        console.log("에러 발생")
+      }
+    })
 
-  createTodo() {
-    // axios.post('http://3.139.244.188:3000/createTodo', {
-    //   date: '2021-04-22',
-    //   title: '예시 투두입니다.',
-    //   time: false,
-    //   startTime: null,
-    //   endTime: null,
-    //   userID: 1
-    // }).then((res) => {
-    //   if (res.data != 'error') {
-    //     console.log("테이블 생성");
-    //   } else {
-    //     console.log("에러 발생")
-    //   }
-    // })
+  }
+  calculateDone() {
+// 누르면 투두 단계 변경 & ㅠㅡ로그레스 계싼하깅
   }
 }
