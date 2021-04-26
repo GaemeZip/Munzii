@@ -24,6 +24,7 @@ const currentFontRouter = require('./router/settings/currentFont');
 
 const updateThemeRouter = require('./router/settings/updateTheme');
 const readThemeRouter = require('./router/settings/readTheme');
+const currentThemeRouter = require('./router/settings/currentTheme');
 
 const updateStartDayRouter = require('./router/settings/updateStartDay');
 const readStartDayRouter = require('./router/settings/readStartDay');
@@ -48,6 +49,7 @@ app.use('/currentFont', currentFontRouter);
 
 app.use('/updateTheme', updateThemeRouter);
 app.use('/readTheme', readThemeRouter);
+app.use('/currentTheme', currentThemeRouter);
 
 app.use('/updateStartDay', updateStartDayRouter);
 app.use('/readStartDay', readStartDayRouter);

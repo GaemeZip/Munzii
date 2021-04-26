@@ -1,7 +1,12 @@
 import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
+<<<<<<< HEAD
+import axios from 'axios';
+import { kMaxLength } from 'node:buffer';
+=======
 
+>>>>>>> 43bf714f38d9d1a0fe756203581b6edc2b3e0a55
 @Component({
   selector: 'app-calendar-tab',
   templateUrl: './calendar-tab.page.html',
@@ -56,6 +61,12 @@ export class CalendarTabPage implements OnInit {
     console.log(this.selected)
 
     // ** need ** get start week Day
+    axios.get('http://localhost:3000/currentStartDay')
+      .then(res => {
+        console.log("받아온 start id 값 : " + res.data[0].start_day_id);
+        this.startWeekday = res.data[0].start_day_id;
+      });
+    
     this.startWeekday = 0;
     switch(this.startWeekday) {
       case 0: {
@@ -93,6 +104,7 @@ export class CalendarTabPage implements OnInit {
     console.log(123);
 
   }
+
   clickPrevTab() {
     console.log(123);
     let NavigationExtras: NavigationExtras = {
