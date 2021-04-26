@@ -1,19 +1,15 @@
 <ion-content>
   <div class="container" [style.height.px]="windowHeight">
     <div class="header">
-      <button (click) = "prev()">
+      <button (click)="prev()">
         <img src="/assets/button/prev.png" alt="">
       </button>
       Theme
     </div>
-    <div class="list">
-      <div class="item selected">
-        기본 먼지
+    <div class="list" *ngFor="let data of themeList">
+      <div class="item" id="{{data[0]}}" (click)="select(data[0])">{{data[1]}}
         <img src="/assets/image/basic/basic_4.png" alt="">
       </div>
-      <div class="item">분홍 먼지</div>
-      <div class="item">파랑 먼지</div>
-      <div class="item">초록 먼지</div>
     </div>
     <div class="footer">
       <img src="/assets/image/basic/basic_2.png" alt="">

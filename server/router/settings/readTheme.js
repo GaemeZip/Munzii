@@ -14,8 +14,9 @@ router.get('/', (req, res) => {
 
     const t_id = req.body.t_id;
     const t_name = req.body.t_name;
+    const t_primary = req.body.t_primary;
 
-    let params = [t_id, t_name];
+    let params = [t_id, t_name, t_primary];
     const readQuery = 'SELECT * FROM themes';
     
 
@@ -25,6 +26,7 @@ router.get('/', (req, res) => {
       }else{
         res.send(rows);
       }
+      console.log(rows);
     })
   });
   
