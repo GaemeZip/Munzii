@@ -27,6 +27,7 @@ const readThemeRouter = require('./router/settings/readTheme');
 
 const updateStartDayRouter = require('./router/settings/updateStartDay');
 const readStartDayRouter = require('./router/settings/readStartDay');
+const currentStartDayRouter = require('./router/settings/currentStartDay');
 
 app.use('/join', joinRouter);
 app.use('/login', loginRouter);
@@ -50,6 +51,7 @@ app.use('/readTheme', readThemeRouter);
 
 app.use('/updateStartDay', updateStartDayRouter);
 app.use('/readStartDay', readStartDayRouter);
+app.use('/currentStartDay', currentStartDayRouter);
 
 
 app.set('port', process.env.PORT || 3000);
