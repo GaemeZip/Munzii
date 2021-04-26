@@ -1,14 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const cors = require('cors');
-
 
 // npm install body-parser 후 사용
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
-
 
 const joinRouter = require('./router/users/join');
 const loginRouter = require('./router/users/login');
@@ -21,10 +17,6 @@ const readTodoRouter = require('./router/todos/readTodo');
 const createTodoRouter = require('./router/todos/createTodo');
 const updateTodoRouter = require('./router/todos/updateTodo');
 const deleteTodoRouter = require('./router/todos/deleteTodo');
-
-const readPasswordRouter = require('./router/settings/readPassword');
-const createPasswordRouter = require('./router/settings/createPassword');
-const updatePasswordRouter = require('./router/settings/updatePassword');
 
 const updateFontRouter = require('./router/settings/updateFont');
 const readFontRouter = require('./router/settings/readFont');
@@ -43,10 +35,6 @@ app.use('/readMemo', readMemoRouter);
 app.use('/createMemo', createMemoRouter);
 app.use('/updateMemo', updateMemoRouter);
 app.use('/deleteMemo', deleteMemoRouter);
-
-app.use('/readPassword', readPasswordRouter);
-app.use('/createPassword', createPasswordRouter);
-app.use('/updatePassword', updatePasswordRouter);
 
 app.use('/readTodo', readTodoRouter);
 app.use('/createTodo', createTodoRouter);
@@ -67,7 +55,7 @@ app.use('/readStartDay', readStartDayRouter);
 app.set('port', process.env.PORT || 3000);
 
 app.get('/', (req, res) => {
-  res.send('Root입니다.');
+  res.send('Root');
 });
 
 app.listen(app.get('port'), () => {

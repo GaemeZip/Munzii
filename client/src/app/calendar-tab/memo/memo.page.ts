@@ -18,7 +18,7 @@ export class MemoPage implements OnInit {
   }
 
   readMemo() {
-    axios.get('http://localhost:3000/readMemo', {
+    axios.get('http://3.139.244.188:3000/readMemo', {
       params: {
         date: this.selectedDate,
         userID: 1
@@ -40,7 +40,7 @@ export class MemoPage implements OnInit {
   }
 
   createMemo() {
-    axios.post('http://localhost:3000/createMemo', {
+    axios.post('http://3.139.244.188:3000/createMemo', {
       date: this.selectedDate,
       content: this.input,
       userID: 1
@@ -55,7 +55,7 @@ export class MemoPage implements OnInit {
   }
 
   updateMemo() {
-    axios.post('http://localhost:3000/updateMemo', {
+    axios.post('http://3.139.244.188:3000/updateMemo', {
       date: this.selectedDate,
       content: this.input,
       userID: 1
@@ -70,7 +70,7 @@ export class MemoPage implements OnInit {
   }
 
   deleteMemo() {
-    axios.post('http://localhost:3000/deleteMemo', {
+    axios.post('http://3.139.244.188:3000/deleteMemo', {
       date: this.selectedDate,
       userID: 1
     }).then((res) => {
