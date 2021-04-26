@@ -51,7 +51,7 @@ app.use('/readTheme', readThemeRouter);
 
 app.use('/updateStartDay', updateStartDayRouter);
 app.use('/readStartDay', readStartDayRouter);
-app.use('currentStartDay', currentStartDayRouter);
+app.use('/currentStartDay', currentStartDayRouter);
 
 
 app.set('port', process.env.PORT || 3000);
