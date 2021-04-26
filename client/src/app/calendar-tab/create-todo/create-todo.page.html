@@ -1,0 +1,18 @@
+<ion-content class="main-view">
+  <div class="overlay" (click)="dismiss()"></div>
+  <div class="modal-content-wrap">
+    <ion-item>
+      <ion-label>title</ion-label>
+      <ion-input placeholder="일정을 입력하세요" [(ngModel)]="title" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>time</ion-label>
+      <ion-input [(ngModel)]="startTime" type="text"></ion-input>
+      <ion-input [(ngModel)]="endTime" type="password"></ion-input>
+    </ion-item>
+    <div class="btn-center-align">
+      <ion-button color="primary" (click)="createTodo()"></ion-button>
+    </div>
+  </div>
+
+</ion-content>
