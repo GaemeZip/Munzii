@@ -13,12 +13,10 @@ router.use(function (req, res, next) {
 
 
 router.get('/', (req, res) => {
-  console.log("11111111");
   let userID = req.query.userID;
   var readQuery = 'SELECT optional_password FROM users where u_id=?';
   var params = [userID]
   connection.query(readQuery, params, (err, rows, data) => {
-    console.log("dkdkdkdkdkdkddkdkdkdkdk");
     console.log(rows);
     if (err) {
       res.send('error');

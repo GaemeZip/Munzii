@@ -12,11 +12,10 @@ router.use(function (req, res, next) {
 
 
 router.get('/', (req, res) => {
-    var font_id = req.body.font_id;
     var u_id = req.body.u_id;
 
     //임의로 1이라고 넣어둠!
-    var selectQuery = 'SELECT font_id FROM users WHERE u_id=1';
+    var selectQuery = 'SELECT font_id FROM users WHERE u_id=?';
     var params = [u_id];
 
     connection.query(selectQuery, params, (error, rows, data) => {
@@ -25,9 +24,9 @@ router.get('/', (req, res) => {
         }
         else {
             //id값 보내주기
-            res.send(rows[0].font_id);
+            res.send(rows);
         }
-        console.log(rows[0].font_id);
+        console.log(rows);
     });
 });
 

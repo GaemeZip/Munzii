@@ -78,12 +78,11 @@ export class PasswordInputPage implements OnInit {
       this.password[this.n] = k;
       this.n += 1;
     }
-
     this.msg = "";
+
+
     if (this.n == 4) {
       if (this.isChecked) {
-        console.log("temp:", this.tempPassword);
-        console.log("재입력값:", this.password);
         this.isChecked = false;
 
         if (this.tempPassword[0] == this.password[0] && this.tempPassword[1] == this.password[1] && this.tempPassword[2] == this.password[2] && this.tempPassword[3] == this.password[3]) {
@@ -92,14 +91,14 @@ export class PasswordInputPage implements OnInit {
 
         } else {
 
-          this.input = "암호가 일치하지 않습니다.";
+          this.input = "암호 불일치!";
           this.msg = "처음부터 다시 입력해주세요";
           this.tempPassword = [];
           this.password = [null, null, null, null];
           this.n = 0;
         }
+        
       } else {
-        console.log(this.password);
         this.tempPassword = this.password;
         this.password = [null, null, null, null];
         this.input = '다시 한 번 입력하세요';
@@ -108,6 +107,8 @@ export class PasswordInputPage implements OnInit {
       }
     }
   }
+
+
   makeString() {
     for (var p in this.password) {
       this.passwordStr += this.password[p];

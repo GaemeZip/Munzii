@@ -16,7 +16,7 @@ export class PasswordPage implements OnInit {
   }
 
   ngOnInit() {
-    axios.get('http://localhost:3000/readPassword', {
+    axios.get('http://3.139.244.188:3000/readPassword', {
       params: {
         userID: 1
       }
@@ -26,8 +26,6 @@ export class PasswordPage implements OnInit {
           if(res.data[0].optional_password!=null){
             this.isOn=true;
             this.isOff=false;
-          console.log(res.data[0].optional_password);
-
           }else{
             this.isOn = false;
             this.isOff = true;
@@ -59,7 +57,7 @@ export class PasswordPage implements OnInit {
       this.isOn=false;
       this.isOff=true;
     }
-    axios.post('http://localhost:3000/updatePassword', {
+    axios.post('http://3.139.244.188:3000/updatePassword', {
       password: null,
       userID: 1
     }).then((res) => {
