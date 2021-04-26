@@ -43,7 +43,6 @@ export class TodoPage implements OnInit {
     this.getTodoList();
     console.log(this.selectDayTodoList);
   }
-
   getTodoList() {
     let date: string;
     // date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
