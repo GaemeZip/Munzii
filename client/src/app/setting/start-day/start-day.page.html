@@ -6,8 +6,11 @@
       </button>
       Start day
     </div>
-    <div class="list">
-        <div class="item selected">
+    <div class="list" *ngFor="let data of dayList">
+      <div class="item" id="{{data[0]}}"  (click)="select(data[0])">{{data[1]}}
+        <img src="/assets/image/basic/basic_4.png" alt="">
+      </div>
+        <!-- <div class="item selected">
           <div>월요일</div>
           <img src="/assets/image/basic/basic_4.png" alt="">
         </div>
@@ -16,7 +19,7 @@
           <div class="item">목요일</div>
           <div class="item">금요일</div>
           <div class="item">토요일</div>
-          <div class="item">일요일</div>
+          <div class="item">일요일</div> -->
     </div>
     <div class="footer">
       <img src="/assets/image/basic/basic_2.png" alt="">
