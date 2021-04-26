@@ -1,8 +1,7 @@
-import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
 import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
-import { kMaxLength } from 'node:buffer';
+
 @Component({
   selector: 'app-calendar-tab',
   templateUrl: './calendar-tab.page.html',
