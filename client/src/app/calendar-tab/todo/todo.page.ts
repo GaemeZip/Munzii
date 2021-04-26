@@ -35,7 +35,7 @@ export class TodoPage implements OnInit {
     let date: string;
     // date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
     date = '2021-04-17';
-    console.log(date);
+
     axios.get('http://3.139.244.188:3000/readTodo',{
       params:{
         date: date,
