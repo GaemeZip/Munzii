@@ -29,13 +29,16 @@ export class TodoPage implements OnInit {
 
     async presentModal() {
       const modal = await this.modalController.create({
-      component: CreateTodoPage,
-      animated: true,
-      cssClass: 'modal-custom'
-  
-    });
-    return await modal.present();
-  }
+        component: CreateTodoPage,
+        animated: true,
+        componentProps: { 
+          selected: this.selected,
+          selectMonth: this.selectMonth
+        },
+        cssClass: 'modal-custom'
+      });
+      return await modal.present();
+    }
 
   ngOnInit() {
     this.progress = 50;
