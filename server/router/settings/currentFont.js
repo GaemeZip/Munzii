@@ -13,9 +13,9 @@ router.use(function (req, res, next) {
 
 router.get('/', (req, res) => {
     var u_id = req.body.u_id;
-
+    //var font_id = req.body.font_id;
     //임의로 1이라고 넣어둠!
-    var selectQuery = 'SELECT font_id FROM users WHERE u_id=?';
+    var selectQuery = 'SELECT font_id FROM users WHERE u_id=1';
     var params = [u_id];
 
     connection.query(selectQuery, params, (error, rows, data) => {
