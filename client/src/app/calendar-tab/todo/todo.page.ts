@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { CalendarTabPage} from '../calendar-tab.page';
+import { CreateTodoPage } from '../create-todo/create-todo.page';
 
 import axios from 'axios';
 @Component({
@@ -19,10 +21,21 @@ export class TodoPage implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    public modalController: ModalController,
     private CalendarTabPage: CalendarTabPage) { 
       this.selected = this.CalendarTabPage.selected;
       this.selectMonth = this.CalendarTabPage.selectMonth;
     }
+
+    async presentModal() {
+      const modal = await this.modalController.create({
+      component: CreateTodoPage,
+      animated: true,
+      cssClass: 'modal-custom'
+  
+    });
+    return await modal.present();
+  }
 
   ngOnInit() {
     this.progress = 50;
@@ -35,7 +48,7 @@ export class TodoPage implements OnInit {
     let date: string;
     // date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
     date = '2021-04-17';
-    console.log(date);
+
     axios.get('http://3.139.244.188:3000/readTodo',{
       params:{
         date: date,

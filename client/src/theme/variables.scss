@@ -209,3 +209,22 @@ input{
   background: transparent;
   
 }
+
+.modal-wrapper, .inner-scroll {
+  background: transparent !important;
+}
+
+.modal-custom {
+  padding: 130px 5% 0 5%;
+  background: rgba(255, 255, 255, 0);
+}
+.sc-ion-modal-md-h {
+  --background: none;
+  --border-radius: 10px;
+  --height: 420px;
+}
+.sc-ion-modal-ios-h {
+  --background: none;
+  --border-radius: 10px;
+  --height: 420px;
+}
