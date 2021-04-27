@@ -1,8 +1,9 @@
 .container {
-    padding: 0;
-    margin-bottom: 30px;
     display: flex;
     justify-content: flex-start;
+    height: 90%;
+    padding: 0;
+    margin-bottom: 30px;
     overflow-y: scroll;
     .time-wrap {
         width: 30px;
@@ -20,7 +21,7 @@
             justify-content: center;
             align-items: center;
             width: 30px;
-            height: 40px;
+            height: 60px;
             border-bottom: 1px solid var(--ion-color-gray);
             background: #ffffff;
             font-size: 15px;
