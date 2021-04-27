@@ -9,31 +9,22 @@ import axios from 'axios';
 })
 export class PasswordPage implements OnInit {
   windowHeight: number = window.screen.height;
-  isOn = false;
-  isOff = true;
+  isOn;
+  isOff;
+
   constructor(private router: Router) {
 
   }
 
   ngOnInit() {
-    axios.get('http://3.139.244.188:3000/readPassword', {
-      params: {
-        userID: 1
-      }
-    })
-      .then(res => {
-        if (res.data != 'error') {
-          if(res.data[0].optional_password!=null){
-            this.isOn=true;
-            this.isOff=false;
-          }else{
-            this.isOn = false;
-            this.isOff = true;
-          }
-        } else {
-          console.log("에러 발생")
-        }
-      })
+    if (localStorage.passwordState == false) {
+      this.isOn = false;
+      this.isOff = true;
+    } else {
+      this.isOn = true;
+      this.isOff = false;
+    }
+    console.log(localStorage.passwordState);
   }
 
   prev() {
@@ -45,28 +36,34 @@ export class PasswordPage implements OnInit {
   }
 
   toggleOnPassword() {
-    if(this.isOn == false){
-      this.isOn=true;
-      this.isOff=false;
+    if (this.isOn == false) {
+      this.isOn = true;
+      this.isOff = false;
+      localStorage.passwordState = this.isOn;
+      console.log(localStorage.passwordState);
+
       this.router.navigate(['/password-input']);
     }
-    
+
   }
-  toggleOffPassword(){
-    if(this.isOff == false){
-      this.isOn=false;
-      this.isOff=true;
+  toggleOffPassword() {
+    if (this.isOff == false) {
+      this.isOn = false;
+      this.isOff = true;
+      localStorage.passwordState = this.isOn;
+      console.log(localStorage.passwordState, "오프 누름")
     }
-    axios.post('http://3.139.244.188:3000/updatePassword', {
-      password: null,
-      userID: 1
-    }).then((res) => {
-      if (res.data != 'error') {
-        console.log("비번 null");
-      } else {
-        console.log("에러 발생")
-      }
-    })
+
+    //   axios.post('http://3.139.244.188:3000/updatePassword', {
+    //     password: null,
+    //     userID: 1
+    //   }).then((res) => {
+    //     if (res.data != 'error') {
+    //       console.log("비번 null");
+    //     } else {
+    //       console.log("에러 발생")
+    //     }
+    //   })
   }
 
 }
