@@ -56,7 +56,7 @@ export class ThemePage implements OnInit {
     var elementSelected = document.getElementById(id);
     elementSelected.classList.add("selected");
     const changeTheme = document.querySelector('body');
-    changeTheme.style.setProperty('--ion-color-yellow', this.themeList[id-1][2]);
+    changeTheme.style.setProperty('--ion-color-primary', this.themeList[id-1][2]);
   }
 
   updateTheme(t_id) {
