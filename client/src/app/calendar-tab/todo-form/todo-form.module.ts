@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreateTodoPageRoutingModule } from './create-todo-routing.module';
+import { TodoFormPageRoutingModule } from './todo-form-routing.module';
 
-import { CreateTodoPage } from './create-todo.page';
+import { TodoFormPage } from './todo-form.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CreateTodoPageRoutingModule
+    TodoFormPageRoutingModule
   ],
-  declarations: [CreateTodoPage]
+  declarations: [TodoFormPage]
 })
-export class CreateTodoPageModule {}
+export class TodoFormPageModule {}

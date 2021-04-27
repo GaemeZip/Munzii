@@ -108,7 +108,7 @@ export class PasswordInputPage implements OnInit {
         if (this.password[0] == this.tempPassword[0] && this.password[1] == this.tempPassword[1] && this.password[2] == this.tempPassword[2] && this.password[3] == this.tempPassword[3]) {//인증 성공
           localStorage.password = this.password;
           console.log(localStorage.password);
-          // this.router.navigate(['/password']);
+          this.router.navigate(['/password']);
 
         } else {
           this.input = "암호 불일치!";

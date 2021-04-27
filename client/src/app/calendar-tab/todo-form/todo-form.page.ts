@@ -1,27 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { ModalController, NavParams, NavController } from '@ionic/angular';
 import axios from 'axios';
 
 @Component({
-  selector: 'app-create-todo',
-  templateUrl: './create-todo.page.html',
-  styleUrls: ['./create-todo.page.scss'],
+  selector: 'app-todo-form',
+  templateUrl: './todo-form.page.html',
+  styleUrls: ['./todo-form.page.scss'],
 })
-export class CreateTodoPage implements OnInit {
+export class TodoFormPage implements OnInit {
   selectedString: string = "";
   selected: Date;
   selectMonth: string;
   title: string;
   startTime: any;
   endTime: any;
+  startTimeString: string;
+  endTimeString: string;
   isTimeline: any;
 
   constructor(
     private router: Router,
     private navParams: NavParams, 
     public navCtrl: NavController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    public datepipe: DatePipe
   ) { 
     this.selected = navParams.get('selected');
     this.selectMonth = navParams.get('selectMonth');
@@ -42,6 +46,7 @@ export class CreateTodoPage implements OnInit {
   }
 
   createTodo() {
+    console.log(typeof this.startTimeString, this.startTimeString)
     this.selectedString='2021-04-17';
     // console.log(this.selectedString)
     // console.log(this.startTime, this.endTime)
@@ -58,8 +63,8 @@ export class CreateTodoPage implements OnInit {
             date: this.selectedString,
             title: this.title,
             time: this.isTimeline,
-            startTime: this.startTime,
-            endTime: this.endTime,
+            startTime: this.startTimeString,
+            endTime: this.endTimeString,
             userID: 1
           }).then((res) => {
             if (res.data != 'error') {
@@ -79,8 +84,8 @@ export class CreateTodoPage implements OnInit {
           date: this.selectedString,
           title: this.title,
           time: this.isTimeline,
-          startTime: this.startTime,
-          endTime: this.endTime,
+          startTime: this.startTimeString,
+          endTime: this.endTimeString,
           userID: 1
         }).then((res) => {
           if (res.data != 'error') {
@@ -94,6 +99,17 @@ export class CreateTodoPage implements OnInit {
         'dismissed': true
       });
     }
+  }
+  calculateStartTime() {
+    console.log(this.startTime, typeof this.startTime)
+    let temp = new Date(this.startTime);
+    this.startTimeString = this.datepipe.transform(temp, 'HH:mm:ss');
+    console.log(this.startTimeString, typeof this.startTimeString)
+  }
+  calculateEndTime() {
+
+    let temp = new Date(this.endTime);
+    this.endTimeString = this.datepipe.transform(temp, 'HH:mm:ss');
   }
   timeActive() {
     if (this.isTimeline == 0) {

@@ -33,8 +33,12 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'create-todo',
-    loadChildren: () => import('./create-todo/create-todo.module').then( m => m.CreateTodoPageModule)
+    path: 'todo-form',
+    loadChildren: () => import('./todo-form/todo-form.module').then( m => m.TodoFormPageModule)
+  },
+  {
+    path: 'todo-edit-form',
+    loadChildren: () => import('./todo-edit-form/todo-edit-form.module').then( m => m.TodoEditFormPageModule)
   }
 ];
 
