@@ -114,10 +114,28 @@ export class TodoPage implements OnInit {
     else {
       todo.is_done = 0;
     }
+    console.log(todo)
     var tempProgress = 0;
+    let date= "2021-04-17"
     for (var i=0; i < this.selectDayTodoList.length; i ++) {
       tempProgress += this.selectDayTodoList[i].is_done;
     }
     this.progress = tempProgress / this.selectDayTodoList.length * 100;
+    axios.post('http://3.139.244.188:3000/updateTodo', {
+      id: todo.id,
+      date: date,
+      title: todo.title,
+      time: todo.time,
+      startTime: todo.start_time,
+      endTime: todo.end_time,
+      isDone: todo.is_done,
+      userID: 1
+    }).then((res) => {
+      if (res.data != 'error') {
+        console.log("테이블 업데이트");
+      } else {
+        console.log("에러 발생")
+      }
+    })
   }
 }

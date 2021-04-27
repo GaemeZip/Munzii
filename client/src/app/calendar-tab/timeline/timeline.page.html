@@ -1,11 +1,12 @@
-<ion-content>
-  <div class="container" [style.height.px]="windowHeight">
+<ion-content [style.height.px]="windowHeight">
+  <div class="container">
     <div class="time-wrap">
       <div class="time" *ngFor="let time of timeList">{{ time }}</div> 
     </div>
     <div class="content-wrap">
-      <div class="todo" [style.height.px]="duration * 40">아침 운동</div>
-      <div class="todo" [style.height.px]="duration * 40">점심 운동</div>
+      <div class="todo" [style.height.px]="duration * 10">아침 운동</div>
+      <div class="todo" [style.height.px]="12 * 10"></div>
+      <div class="todo" [style.height.px]="10 * 10">점심 운동</div>
     </div>
   </div>
   <!-- <ion-icon class="add-icon" name="add" (click)="createTodo()"></ion-icon> -->

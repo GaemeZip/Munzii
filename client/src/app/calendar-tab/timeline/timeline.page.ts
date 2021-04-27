@@ -31,7 +31,7 @@ export class TimelinePage implements OnInit {
 
   ngOnInit() {
     this.timeList = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
-    this.duration=3;
+    this.duration= 7;
     // this.date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
     this.date = '2021-04-17';
     console.log(this.selected)

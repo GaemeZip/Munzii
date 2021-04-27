@@ -57,12 +57,13 @@ export class CalendarTabPage implements OnInit {
     console.log(this.selected)
 
     // ** need ** get start week Day
-    axios.get('http://localhost:3000/currentStartDay')
+    axios.get('http://3.139.244.188:3000/currentStartDay')
       .then(res => {
         console.log("받아온 start id 값 : " + res.data[0].start_day_id);
+        console.log(typeof res.data[0].start_day_id)
         this.startWeekday = res.data[0].start_day_id;
-      });
-    
+        console.log(this.startWeekday);
+        console.log(this.startWeekday, 'hkjhkjhoiuh');
     this.startWeekday = 0;
     switch(this.startWeekday) {
       case 0: {
@@ -98,8 +99,9 @@ export class CalendarTabPage implements OnInit {
     this.getDate(this.selected)
     this.calculateCalendar(this.selected);
 
+    });
+    
   }
-
   clickPrevTab() {
     let NavigationExtras: NavigationExtras = {
       state: {
