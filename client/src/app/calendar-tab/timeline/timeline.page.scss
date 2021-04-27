@@ -1,0 +1,41 @@
+.container {
+    padding: 0;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    .time-wrap {
+        width: 30px;
+        .complete {
+            background: var(--ion-color-complete) !important;
+        }
+        .check {
+            background: var(--ion-color-check) !important;
+        }
+        .no-check {
+            background: #dddddd98 !important;
+        }
+        .time {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 40px;
+            border-bottom: 1px solid var(--ion-color-gray);
+            background: #ffffff;
+            font-size: 15px;
+            font-family: var(--ion-font-munzii); 
+            color: var(--ion-color-gray);
+        }
+    }
+    .content-wrap {
+        width: 100%;
+        padding-left: 20px;
+        .todo {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            font-family: var(--ion-font-family);
+        }
+    }
+}

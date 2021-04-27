@@ -93,11 +93,16 @@
     --ion-color-light-black: #1b1d1e;
     --ion-color-gray: #999999;
     --ion-color-light-gray: #c4c4c4;
+    --ion-color-very-light-gray: #d6d6d6;
     --ion-color-white: #ffffff;
     --ion-color-yellow: #fff3a9;
     //--ion-color-primary: var(--ion-color-yellow);
     --ion-color-primary: #fff3a9;
-
+    --ion-color-dark-yellow: #ffee85;
+    --ion-color-complete: #fde2e2;
+    --ion-color-check: #97c1e87e;
+    --ion-color-primary: var(--ion-color-yellow);
+    
     .ion-page {
       background: var(--ion-color-white);
     }

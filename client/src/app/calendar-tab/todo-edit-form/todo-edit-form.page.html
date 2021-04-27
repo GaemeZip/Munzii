@@ -1,5 +1,4 @@
 <ion-content class="container">
-  <!-- <div class="overlay" (click)="dismiss()"></div> -->
   <div class="modal-content-wrap">
     <div class="input-title-wrap ion-no-padding">
       <div class="label-input">title</div>
@@ -8,7 +7,7 @@
     <div class="input-time-wrap ion-no-padding">
       <div class="toggle-wrap">
         <ion-label class="label-input">time</ion-label>
-        <ion-toggle class="time-toggle" (ionChange)="timeActive()"></ion-toggle>
+        <ion-toggle class="time-toggle" [checked]="isTimeline==1" (ionChange)="timeActive()"></ion-toggle>
       </div>
       <div class="input-time-picker-wrap ion-no-padding">
         <div class="input-time-picker">
@@ -19,6 +18,7 @@
           placeholder = "00:00"
           displayFormat="HH:mm"
           [(ngModel)]="startTime"
+          (ionChange) = "calculateStartTime()"
         ></ion-datetime>
         </div>
         <div class="input-time-picker">
@@ -29,12 +29,14 @@
           placeholder = "00:00"
           displayFormat="HH:mm"
           [(ngModel)]="endTime"
+          (ionChange) = "calculateEndTime()"
         ></ion-datetime>
         </div>
       </div>
       
     </div>
-    <button ion-button class="btn-done" (click)="createTodo()">done</button>
+    <button (click)="gogo()">눌러보세용</button>
+    <button ion-button class="btn-done" (click)="updateTodo()">done</button>
   </div>
 
 </ion-content>

@@ -3,7 +3,7 @@
       <!-- <button (click)="getTodoList()"> 누르면 투두가 쫘라라라라락 나와야 해 </button> -->
       <ion-item-sliding class="todo-wrap" *ngFor="let todo of selectDayTodoList">
         <ion-item lines="none">
-        <div class="todo-icon" (click)="calculateDone()">
+        <div class="todo-icon" (click)="calculateDone(todo)">
           <img src="../../assets/image/basic/basic_1.png" *ngIf="progress == 100">
           <img src="../../assets/image/basic/basic_2.png" *ngIf="progress !== 100 && todo.is_done == 1">
           <img src="../../assets/image/basic/basic_4.png" *ngIf="progress !== 100 && todo.is_done == 0">
@@ -12,11 +12,11 @@
         <div class="todo-content-done" *ngIf="todo.is_done == 1">{{ todo.title }}</div>
         </ion-item>
         <ion-item-options side="end" lines="none" class="option">
-          <ion-item-option class="btn-edit" (click)="editTodo(todo)"><ion-icon name="create-outline"></ion-icon></ion-item-option>
-          <ion-item-option class="btn-delete" (click)="deleteTodo(todo)"><ion-icon name="trash-outline"></ion-icon></ion-item-option>
+          <ion-item-option class="btn-edit" (click)="editTodo(todo)"><ion-icon class="icon" name="create-outline"></ion-icon></ion-item-option>
+          <ion-item-option class="btn-delete" (click)="deleteTodo(todo)"><ion-icon class="icon" name="trash-outline"></ion-icon></ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
   </div>
-  <ion-icon class="add-icon" name="add" (click)="presentModal()"></ion-icon>
+  <ion-icon class="add-icon" name="add" (click)="createTodo()"></ion-icon>
   <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>

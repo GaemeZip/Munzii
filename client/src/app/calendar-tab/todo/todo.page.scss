@@ -30,9 +30,13 @@ button {
     .option {
         border: none !important;
         .btn-edit {
+            --background: var(--ion-color-dark-yellow);
         }
         .btn-delete {
-            --background: var(--ion-color-light-gray);
+            --background: var(--ion-color-very-light-gray);
+        }
+        .icon {
+            font-size: 24px;
         }
     }
 }

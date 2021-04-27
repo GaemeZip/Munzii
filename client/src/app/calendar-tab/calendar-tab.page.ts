@@ -97,12 +97,10 @@ export class CalendarTabPage implements OnInit {
     // console.log(this.selected)
     this.getDate(this.selected)
     this.calculateCalendar(this.selected);
-    console.log(123);
 
   }
 
   clickPrevTab() {
-    console.log(123);
     let NavigationExtras: NavigationExtras = {
       state: {
         selected: this.selected
@@ -118,8 +116,6 @@ export class CalendarTabPage implements OnInit {
     }
   }
   clickNextTab() {
-    console.log(123);
-
     let NavigationExtras: NavigationExtras = {
       state: {
         selected: this.selected
@@ -135,7 +131,6 @@ export class CalendarTabPage implements OnInit {
     }
   }
   openCalendar() {
-    console.log(123);
 
     this.router.navigateByUrl('home')
   }

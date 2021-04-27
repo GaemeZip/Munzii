@@ -26,6 +26,10 @@ router.get('/', (req, res) => {
   var readQuery = 'SELECT * FROM todos where date=? AND user_id=?';
   var params =[selectedDate, userID];
   connection.query(readQuery, params, (error, rows, data) => {
+    console.log(params)
+    console.log(error)
+    console.log(rows)
+    console.log(data)
     if(error){
       res.send('error');
     }else{

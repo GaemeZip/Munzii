@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { CreateTodoPage } from './create-todo.page';
+import { TodoFormPage } from './todo-form.page';
 
-describe('CreateTodoPage', () => {
-  let component: CreateTodoPage;
-  let fixture: ComponentFixture<CreateTodoPage>;
+describe('TodoFormPage', () => {
+  let component: TodoFormPage;
+  let fixture: ComponentFixture<TodoFormPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateTodoPage ],
+      declarations: [ TodoFormPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateTodoPage);
+    fixture = TestBed.createComponent(TodoFormPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

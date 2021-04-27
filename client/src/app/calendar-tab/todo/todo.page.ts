@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CalendarTabPage} from '../calendar-tab.page';
-import { CreateTodoPage } from '../create-todo/create-todo.page';
+import { TodoFormPage } from '../todo-form/todo-form.page';
+import { TodoEditFormPage } from '../todo-edit-form/todo-edit-form.page';
 
 import axios from 'axios';
 @Component({
@@ -14,6 +15,12 @@ export class TodoPage implements OnInit {
   selected: Date;
   selectMonth: string;
   selectDayTodoList: any [] = [];
+
+  todoTitle: string;
+  todoIsTimeline: number;
+  todoStartTime: Date;
+  todoEndTime: Date;
+
 
   doneTodo: number;
   progress: number;
@@ -27,13 +34,13 @@ export class TodoPage implements OnInit {
       this.selectMonth = this.CalendarTabPage.selectMonth;
     }
 
-    async presentModal() {
+    async createTodo() {
       const modal = await this.modalController.create({
-        component: CreateTodoPage,
+        component: TodoFormPage,
         animated: true,
         componentProps: { 
           selected: this.selected,
-          selectMonth: this.selectMonth
+          selectMonth: this.selectMonth,
         },
         cssClass: 'modal-custom'
       });
@@ -63,13 +70,26 @@ export class TodoPage implements OnInit {
       }
     })
   }
-  ionViewWillEnter() {
-    this.getTodoList();
-  }
-  editTodo(todo) {
+  async editTodo(todo) {
     let index = this.selectDayTodoList.indexOf(todo);
+    let id = this.selectDayTodoList[index].id;
     console.log(index);
-    this.ionViewWillEnter();
+    const modal = await this.modalController.create({
+      component: TodoEditFormPage,
+      animated: true,
+      componentProps: { 
+        id: id,
+        selected: this.selected,
+        selectMonth: this.selectMonth,
+        todoTitle: this.selectDayTodoList[index].title,
+        todoIsTimeline: this.selectDayTodoList[index].time,
+        todoIsDone: this.selectDayTodoList[index].is_done,
+        todoStartTime: this.selectDayTodoList[index].start_time,
+        todoEndTime: this.selectDayTodoList[index].end_time,
+      },
+      cssClass: 'modal-custom'
+    });
+    return await modal.present();
   }
   deleteTodo(todo) {
     let index = this.selectDayTodoList.indexOf(todo);
@@ -80,7 +100,6 @@ export class TodoPage implements OnInit {
     }).then((res) => {
       if (res.data != 'error') {
         console.log("테이블 삭제");
-        this.ionViewWillEnter();
         this.ngOnInit();
       } else {
         console.log("에러 발생")
@@ -88,7 +107,17 @@ export class TodoPage implements OnInit {
     })
 
   }
-  calculateDone() {
-// 누르면 투두 단계 변경 & ㅠㅡ로그레스 계싼하깅
+  calculateDone(todo) {
+    if (todo.is_done == 0) {
+      todo.is_done = 1;
+    }
+    else {
+      todo.is_done = 0;
+    }
+    var tempProgress = 0;
+    for (var i=0; i < this.selectDayTodoList.length; i ++) {
+      tempProgress += this.selectDayTodoList[i].is_done;
+    }
+    this.progress = tempProgress / this.selectDayTodoList.length * 100;
   }
 }
