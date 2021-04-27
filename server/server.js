@@ -8,6 +8,7 @@ app.use(bodyParser.json());
 
 const joinRouter = require('./router/users/join');
 const loginRouter = require('./router/users/login');
+const checkUserRouter = require('./router/users/checkUser');
 
 const readMemoRouter = require('./router/memos/readMemo');
 const createMemoRouter = require('./router/memos/createMemo.js');
@@ -32,6 +33,7 @@ const currentStartDayRouter = require('./router/settings/currentStartDay');
 
 app.use('/join', joinRouter);
 app.use('/login', loginRouter);
+app.use('/checkUser', checkUserRouter);
 
 app.use('/readMemo', readMemoRouter);
 app.use('/createMemo', createMemoRouter);
