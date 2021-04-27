@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 import axios from 'axios';
-import { kMaxLength } from 'node:buffer';
 
 @Component({
   selector: 'app-calendar-tab',
