@@ -197,7 +197,8 @@ export class CalendarTabPage implements OnInit {
   }
 
   changeDay(date) {
-    console.log("     요기     "+date )
-    // this.calculateSlideWeek(); //슬라이드 위한 날짜 계산 (3주짜리 배열)
+    this.selected.setDate(date);
+    console.log(this.selected);
+    this.calculateCalendar(this.selected);
   }
 }

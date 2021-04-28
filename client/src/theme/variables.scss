@@ -86,7 +86,7 @@
     --ion-font-korean-nexonfootball: 'NexonFootball';
     --ion-font-korean-poorstory: 'PoorStory';
     --ion-font-korean-dohyeon: 'DoHyeon';
-    --ion-color-point: var(--ion-color-yellow);
+    --ion-color-point: var(--ion-color-primary);
     --ion-color-title: #564747;
     --ion-color-button: #fcecb6;
     --ion-color-black: #000;
@@ -95,14 +95,16 @@
     --ion-color-light-gray: #c4c4c4;
     --ion-color-very-light-gray: #d6d6d6;
     --ion-color-white: #ffffff;
-    --ion-color-yellow: #fff3a9;
-    //--ion-color-primary: var(--ion-color-yellow);
+
     --ion-color-primary: #fff3a9;
-    --ion-color-dark-yellow: #ffee85;
+    // 타임라인, 투두 수정 버튼
+    --ion-color-dark-yellow: #ffee85; 
+    //timeline
     --ion-color-complete: #fde2e2;
     --ion-color-check: #97c1e87e;
-    --ion-color-primary: var(--ion-color-yellow);
-    --ion-theme-background: #fcecb6;  //테마 변경시 변경
+    //로그인 시 뒷 배경
+    --ion-theme-background: #fcecb6;  
+    // +++ 로그인 버튼
     
     .ion-page {
       background: var(--ion-color-white);

@@ -21,6 +21,7 @@ export class TodoPage implements OnInit {
   todoStartTime: Date;
   todoEndTime: Date;
 
+  themeId: number;
 
   doneTodo: number;
   progress: number;
@@ -51,6 +52,11 @@ export class TodoPage implements OnInit {
   ngOnInit() {
     this.progress = 50;
     // console.log(this.selected);
+
+    axios.get('http://3.139.244.188:3000/currentTheme')
+      .then(res => {        
+        this.themeId = res.data[0].theme_id
+      });
     this.getTodoList();
     console.log(this.selectDayTodoList);
   }
