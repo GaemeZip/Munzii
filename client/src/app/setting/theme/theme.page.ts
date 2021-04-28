@@ -55,10 +55,10 @@ export class ThemePage implements OnInit {
 
   initTheme(){
     axios.get('http://3.139.244.188:3000/currentTheme')
-      .then(res => {        
+      .then(async res => {        
         console.log("받아온 theme id 값 : "+res.data[0].theme_id);
          this.selectedTheme = res.data[0].theme_id;
-         this.selectIcon(this.selectedTheme);
+         await this.selectIcon(this.selectedTheme);
       });
   }
 
