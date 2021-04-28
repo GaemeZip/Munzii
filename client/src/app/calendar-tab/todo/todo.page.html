@@ -8,8 +8,8 @@
           <img src="../../assets/image/basic/basic_2.png" *ngIf="progress !== 100 && todo.is_done == 1">
           <img src="../../assets/image/basic/basic_4.png" *ngIf="progress !== 100 && todo.is_done == 0">
         </div>
-        <div class="todo-content" *ngIf="todo.is_done == 0">{{ todo.title }}</div>
-        <div class="todo-content-done" *ngIf="todo.is_done == 1">{{ todo.title }}</div>
+        <div class="todo-content" *ngIf="todo.is_done == 0" (click)="calculateDone(todo)">{{ todo.title }}</div>
+        <div class="todo-content-done" *ngIf="todo.is_done == 1" (click)="calculateDone(todo)">{{ todo.title }}</div>
         </ion-item>
         <ion-item-options side="end" lines="none" class="option">
           <ion-item-option class="btn-edit" (click)="editTodo(todo)"><ion-icon class="icon" name="create-outline"></ion-icon></ion-item-option>

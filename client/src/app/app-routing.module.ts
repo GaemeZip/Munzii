@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'phaser',
+    redirectTo: 'calendar-tab',
     pathMatch: 'full'
   },
   {
