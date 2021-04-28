@@ -15,13 +15,11 @@
           <div id="comparePassword">
             <p *ngIf="password !== passwordConfirmation">비밀번호가 불일치 합니다.</p>
           </div>
-          <div id="beforeJoin">
-            <!-- <p *ngIf="password == null && passwordConfirmation == null && id==null">*모든 양식을 채워주세요</p> -->
-          </div>
+          <div id="beforeJoin"> </div>
         </div>
       </div>
       <button type="submit" (click)="join()" name="submit">Join</button>
-      <button type="submit" id="toLogin" (click)="login()" name="submit">로그인</button>
+      <a routerLink="/login">로그인</a>
     </div>
     <div class="footer">
       <img src="/assets/image/basic/basic_2.png" alt="">

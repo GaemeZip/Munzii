@@ -1,21 +1,22 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header> -->
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label><ion-icon name="person"></ion-icon></ion-label>
-      <ion-input placeholder="id" [(ngModel)]="username" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label><ion-icon name="lock"></ion-icon></ion-label>
-      <ion-input placeholder="password" [(ngModel)]="password" type="password"></ion-input>
-    </ion-item>
-    <div class="btn-center-align">
-      <ion-button color="primary" shape="round" (click)="login()"></ion-button> <br>
-      <a routerLink="/join">Sign up✔</a>
+  <div class="container" [style.height.px]="windowHeight">
+    <div class="logo">MUNZII?</div>
+    <div class="form">
+      <div class="form-login">
+        <div class="input-login">
+          <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="id">
+          <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="password">
+        </div>
+        <button type="submit" (click)="login()">Login</button>
+      </div>
+      <div id="checkLogin"> </div>
+      <a routerLink="/join">회원가입</a>
     </div>
-  </ion-list>
+
+    <div class="footer">
+      <img src="/assets/image/basic/basic_2.png" alt="">
+      <img src="/assets/image/basic/basic_1.png" alt="">
+      <img src="/assets/image/basic/basic_4.png" alt="">
+    </div>
+  </div>
 </ion-content>
