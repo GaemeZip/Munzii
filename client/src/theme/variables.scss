@@ -96,15 +96,17 @@
     --ion-color-very-light-gray: #d6d6d6;
     --ion-color-white: #ffffff;
 
-    --ion-color-primary: #fff3a9;
+    //총 테마
+    --ion-color-primary: #fff3a9; // 핑 DD8B8B 파 9DBBD8 초 A1CB8D
     // 타임라인, 투두 수정 버튼
     --ion-color-dark-yellow: #ffee85; 
     //timeline
-    --ion-color-complete: #fde2e2;
-    --ion-color-check: #97c1e87e;
+    --ion-color-complete: #fde2e2; // 초 B3D9A1
+    --ion-color-check: #97c1e87e; // 초 E3F1DC
     //로그인 시 뒷 배경
-    --ion-theme-background: #fcecb6;  
+    --ion-theme-background: #fcecb6;  // 핑 FFD6D6 / 파 DBE8F3 / 초 CEEDC0
     // +++ 로그인 버튼
+    --ion-color-button: #f9d667; // 핑 F1B0B0 파 ACCBE5 초 90D371
     
     .ion-page {
       background: var(--ion-color-white);
