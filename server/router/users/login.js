@@ -34,7 +34,6 @@ router.post('/', (req, res) => {
         res.send('존재하지 않는 아이디');
       }
     }
-    console.log(rows[0].password);
   }
   
   );
