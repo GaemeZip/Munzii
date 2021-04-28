@@ -39,6 +39,7 @@ export class TodoPage implements OnInit {
         component: TodoFormPage,
         animated: true,
         componentProps: { 
+          time: 0,
           selected: this.selected,
           selectMonth: this.selectMonth,
         },

@@ -19,6 +19,7 @@ export class TodoFormPage implements OnInit {
   startTimeString: string;
   endTimeString: string;
   isTimeline: any;
+  isTime: any;
 
   constructor(
     private router: Router,
@@ -27,12 +28,14 @@ export class TodoFormPage implements OnInit {
     private modalController: ModalController,
     public datepipe: DatePipe
   ) { 
+    this.isTime = navParams.get('time');
     this.selected = navParams.get('selected');
     this.selectMonth = navParams.get('selectMonth');
   }
 
   ngOnInit() {
-    this.isTimeline = 0;
+    this.isTimeline = this.isTime;
+    console.log(this.isTime, this.isTimeline)
     this.title = null;
     this.startTime=null;
     this.endTime=null;
