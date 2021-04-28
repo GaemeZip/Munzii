@@ -1,31 +1,43 @@
-
 <ion-content [style.height.px]="windowHeight">
   <div class="container">
     <div class="time-wrap">
       <div class="time-background-wrap" *ngFor="let todo of timelineList">
         <div class="time-background" style="position: relative;">
-          <!-- <div class="space" *ngIf="timelineList.indexOf(todo) === 0" [style.height.px]="calculateSpaceHeight(todo.start_time, initialToday)"></div> -->
-          <div class="space" *ngIf="timelineList.indexOf(todo) === 0" [style.height.px]="spaceHeight[timelineList.indexOf(todo)]"></div> 
+          <div class="space" *ngIf="timelineList.indexOf(todo) === 0" [style.height.px]="spaceHeight[timelineList.indexOf(todo)]"></div>
           <div class="space" *ngIf="timelineList.indexOf(todo) !== 0" [style.height.px]="spaceHeight[timelineList.indexOf(todo)]"></div>
-          <div class="complete" [style.height.px]="height[timelineList.indexOf(todo)]" *ngIf="progress == 100"></div>
+          <div class="complete" [style.height.px]="height[timelineList.indexOf(todo)]" *ngIf="progress == 100" (click)="calculateDone(todo)"></div>
           <div class="check" [style.height.px]="height[timelineList.indexOf(todo)]" *ngIf="progress !== 100 && todo.is_done == 1"></div>
           <div class="no-check" [style.height.px]="height[timelineList.indexOf(todo)]" *ngIf="progress !== 100 && todo.is_done == 0"></div>
         </div>
       </div>
-      <div class="space" [style.height.px]="spaceHeight[timelineList.indexOf(timelineList.length-1)]"></div>
-      <div class="time" *ngFor="let time of timeList" style="position: relative; left: 0px;  bottom: 1410px; background: none;">{{ time }}</div> 
+      <div class="time" *ngFor="let time of timeList" style="position: relative; left: 0px; background: none;" [style.bottom.px]="locationTime">{{ time }}</div>
     </div>
     <div class="content-wrap">
-      <div class="timeline-wrap" *ngFor="let todo of timelineList" >
-        <div class="space" *ngIf="timelineList.indexOf(todo) === 0" [style.height.px]="spaceHeight[timelineList.indexOf(todo)]"></div>
-        <div class="space" *ngIf="timelineList.indexOf(todo) !== 0" [style.height.px]="spaceHeight[timelineList.indexOf(todo)]"></div>
-        <div class="todo" [style.height.px]="height[timelineList.indexOf(todo)]">
-          <div class="todo__title todo-done" *ngIf="todo.is_done == 1"> {{ todo.title }}</div>
-          <div class="todo__title" *ngIf="todo.is_done == 0"> {{ todo.title }}</div>
-          <div class="todo__time"> {{ todo.start_time.substr(0,5) }} ~ {{ todo.end_time.substr(0,5) }}  </div>
-        </div>
+      <div class="timeline-wrap" *ngFor="let todo of timelineList">
+            <div class="space" *ngIf="timelineList.indexOf(todo) === 0" [style.height.px]="spaceHeight[timelineList.indexOf(todo)]"></div>
+            <div class="space" *ngIf="timelineList.indexOf(todo) !== 0" [style.height.px]="spaceHeight[timelineList.indexOf(todo)]"></div>
+            <ion-item-sliding>
+              
+            <ion-item lines="none">
+            <div class="todo" [style.height.px]="height[timelineList.indexOf(todo)]" (click)="calculateDone(todo)">
+              <div class="todo__title todo-done" *ngIf="todo.is_done == 1" > {{ todo.title }}</div>
+              <div class="todo__title" *ngIf="todo.is_done == 0"> {{ todo.title }}</div>
+              <div class="todo__time"> {{ todo.start_time.substr(0,5) }} ~ {{ todo.end_time.substr(0,5) }} </div>
+            </div>
+            </ion-item>
+
+          <ion-item-options side="end" lines="none" class="option"
+            [style.height.px]="height[timelineList.indexOf(todo)]">
+            <ion-item-option class="btn-edit" (click)="editTodo(todo)">
+              <ion-icon class="icon" name="create-outline"></ion-icon>
+            </ion-item-option>
+            <ion-item-option class="btn-delete" (click)="deleteTodo(todo)">
+              <ion-icon class="icon" name="trash-outline"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
       </div>
-      <div class="space" [style.height.px]="spaceHeight[timelineList.indexOf(timelineList.length-1)]"></div>
+
     </div>
   </div>
   <ion-icon class="add-icon" name="add" (click)="createTodo()"></ion-icon>

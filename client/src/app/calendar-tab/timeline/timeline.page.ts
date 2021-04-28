@@ -19,6 +19,7 @@ export class TimelinePage implements OnInit {
   initialToday: string;
   finalToday: string;
   progress: number;
+  locationTime: any;
 
   duration: number;
 
@@ -94,6 +95,8 @@ export class TimelinePage implements OnInit {
     this.spaceHeight.push(this.calculateSpaceHeight(this.finalToday, this.timelineList[this.timelineList.length-1].end_time));
 
     console.log(this.spaceHeight, this.height)
+    this.locationTime = (1439-this.spaceHeight[this.spaceHeight.length-1]);
+    console.log(this.locationTime)
   }
   calculateSpaceHeight(startTime, previousEndTime) {
     let previous = Number(previousEndTime.substr(0,2)) * 60 + Number(previousEndTime.substr(3,2));
@@ -119,5 +122,71 @@ export class TimelinePage implements OnInit {
       cssClass: 'modal-custom'
     });
     return await modal.present();
+  }
+  async editTodo(todo) {
+    let index = this.timelineList.indexOf(todo);
+    let id = this.timelineList[index].id;
+    console.log(index);
+    const modal = await this.modalController.create({
+      component: TodoEditFormPage,
+      animated: true,
+      componentProps: { 
+        id: id,
+        selected: this.selected,
+        selectMonth: this.selectMonth,
+        todoTitle: this.timelineList[index].title,
+        todoIsTimeline: this.timelineList[index].time,
+        todoIsDone: this.timelineList[index].is_done,
+        todoStartTime: this.timelineList[index].start_time,
+        todoEndTime: this.timelineList[index].end_time,
+      },
+      cssClass: 'modal-custom'
+    });
+    return await modal.present();
+  }
+  deleteTodo(todo) {
+    let index = this.timelineList.indexOf(todo);
+    let id = this.timelineList[index].id;
+    axios.post('http://3.139.244.188:3000/deleteTodo', {
+      id: id,
+      userID: 1
+    }).then((res) => {
+      if (res.data != 'error') {
+        console.log("테이블 삭제");
+        this.ngOnInit();
+      } else {
+        console.log("에러 발생")
+      }
+    })
+  }
+  calculateDone(todo) {
+    if (todo.is_done == 0) {
+      todo.is_done = 1;
+    }
+    else {
+      todo.is_done = 0;
+    }
+    var tempProgress = 0;
+    let date= "2021-04-17"
+    for (var i=0; i < this.timelineList.length; i ++) {
+      tempProgress += this.timelineList[i].is_done;
+    }
+    this.progress = tempProgress / this.timelineList.length * 100;
+    axios.post('http://3.139.244.188:3000/updateTodo', {
+      id: todo.id,
+      date: date,
+      title: todo.title,
+      time: todo.time,
+      startTime: todo.start_time,
+      endTime: todo.end_time,
+      isDone: todo.is_done,
+      userID: 1
+    }).then((res) => {
+      if (res.data != 'error') {
+        console.log("테이블 업데이트");
+      } else {
+        console.log("에러 발생")
+      }
+    })
   }
 }

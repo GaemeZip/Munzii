@@ -5,47 +5,52 @@
     margin-top: 0;
     margin-bottom: 30px;
     overflow-y: scroll;
-    .time-wrap { 
+
+    .time-wrap {
         width: 15%;
         height: 90%;
         padding-left: 5%;
         margin-bottom: 30px;
+
         .complete {
             background: var(--ion-color-complete) !important;
         }
+
         .check {
             background: var(--ion-color-check) !important;
         }
+
         .no-check {
             background: #dddddd98 !important;
         }
+
         .time {
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
             width: 30px;
             height: 60px;
             border-bottom: 1.5px solid var(--ion-color-gray);
             font-size: 15px;
-            font-family: var(--ion-font-munzii); 
+            font-family: var(--ion-font-munzii);
             color: var(--ion-color-gray);
         }
+
         .time-background-wrap {
             width: 30px;
         }
     }
+
     .content-wrap {
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: column;
         width: 80%;
-        padding-left: 5%;
+        // padding-left: 5%;
         z-index: 5;
+
         .timeline-wrap {
             .space {
                 width: 100%;
             }
+
             .todo {
                 display: flex;
                 justify-content: space-between;
@@ -54,14 +59,17 @@
                 padding-left: 10px;
                 border-top: 1px solid var(--ion-color-very-light-gray);
                 border-bottom: 1px solid var(--ion-color-very-light-gray);
+
                 .todo__title {
                     font-size: 16px;
                     font-family: var(--ion-font-family);
                     color: var(--ion-color-black);
                 }
+
                 .todo-done {
                     color: var(--ion-color-gray);
                 }
+
                 .todo__time {
                     width: 35%;
                     font-size: 12px;
@@ -69,9 +77,28 @@
                     color: var(--ion-color-light-gray);
                 }
             }
+
+            .option {
+                border: none !important;
+
+                .btn-edit {
+                    --background: var(--ion-color-dark-yellow);
+                }
+
+                .btn-delete {
+                    --background: var(--ion-color-very-light-gray);
+                }
+
+                .icon {
+                    font-size: 24px;
+                }
+            }
         }
+
     }
+
 }
+
 .add-icon {
     position: fixed;
     right: 20px;
@@ -83,5 +110,3 @@
     color: var(--ion-color-white);
     z-index: 2;
 }
-
-
