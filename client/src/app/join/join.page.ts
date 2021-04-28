@@ -26,11 +26,15 @@ export class JoinPage implements OnInit {
     const beforeJoin = document.getElementById('beforeJoin');
     if (this.idCheck == false && this.username != null && this.password != null && this.passwordConfirmation != null) {
       beforeJoin.innerHTML="아이디 중복 체크를 해주세요";
+      beforeJoin.style.visibility = "visible";
+      beforeJoin.style.color = "#db1414";
       return
     }
 
     else if (this.idCheck == true && this.password != this.passwordConfirmation) {
       beforeJoin.innerHTML="입력하신 비밀번호가 불일치 합니다";
+      beforeJoin.style.visibility = "visible"
+      beforeJoin.style.color = "#db1414";
       this.router.navigate(['/join']);
       return
     }
@@ -48,6 +52,8 @@ export class JoinPage implements OnInit {
         }
         else if (res.data == "양식을 모두 채워주세요") {
           beforeJoin.innerHTML="양식을 모두 채워주세요";
+          beforeJoin.style.visibility = "visible"
+          beforeJoin.style.color = "#db1414";
           this.router.navigate(['/join']);
         }
         console.log(res);
@@ -68,19 +74,27 @@ export class JoinPage implements OnInit {
         if (res.data.length == 0) {
           if (inputname != null) {
             checkIdText.innerHTML="사용 가능한 아이디 입니다.";
+            checkIdText.style.visibility = "visible";
+            checkIdText.style.color = "#1649CD";
             this.canJoin = true;
             this.idCheck = true;
           }
           else if(inputname == null){
             checkIdText.innerHTML="사용하실 아이디를 입력해주세요";
+            checkIdText.style.visibility = "visible";
+            checkIdText.style.color = "#db1414";
           }
         }
         else {
           checkIdText.innerHTML="사용 중인 아이디 입니다.";
+          checkIdText.style.visibility = "visible"
+          checkIdText.style.color = "#db1414";
         }
       })
   }
-
+  login(){
+    this.router.navigate(['/login']);
+  }
   ngOnInit() {
 
   }
