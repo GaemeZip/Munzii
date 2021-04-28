@@ -1,12 +1,15 @@
 .container {
     display: flex;
-    justify-content: flex-start;
     height: 90%;
     padding: 0;
+    margin-top: 0;
     margin-bottom: 30px;
     overflow-y: scroll;
-    .time-wrap {
-        width: 30px;
+    .time-wrap { 
+        width: 15%;
+        height: 90%;
+        padding-left: 5%;
+        margin-bottom: 30px;
         .complete {
             background: var(--ion-color-complete) !important;
         }
@@ -20,23 +23,57 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
             width: 30px;
             height: 60px;
-            border-bottom: 1px solid var(--ion-color-gray);
-            background: #ffffff;
+            background: none;
+            // background: #f7f7f7;
+            border-bottom: 1.5px solid var(--ion-color-gray);
             font-size: 15px;
             font-family: var(--ion-font-munzii); 
             color: var(--ion-color-gray);
         }
+        .time-background-wrap {
+            width: 30px;
+            .time-background {
+                // position: relative;
+            }
+        }
     }
     .content-wrap {
-        width: 100%;
-        padding-left: 20px;
-        .todo {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            font-family: var(--ion-font-family);
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        width: 80%;
+        padding-left: 5%;
+        z-index: 5;
+        .timeline-wrap {
+            .space {
+                width: 100%;
+            }
+            .todo {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                padding-left: 10px;
+                // background-color: var(--ion-color-check);
+                border-top: 1px solid var(--ion-color-very-light-gray);
+                border-bottom: 1px solid var(--ion-color-very-light-gray);
+                font-family: var(--ion-font-family);
+            }
         }
     }
 }
+.add-icon {
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    background: var(--ion-color-primary);
+    color: var(--ion-color-white);
+    z-index: 2;
+}
+
+
