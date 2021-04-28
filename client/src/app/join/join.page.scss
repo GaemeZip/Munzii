@@ -41,6 +41,7 @@ ion-content{
                 border-radius: 6px;
                 border: var(--ion-color-white);
                 font-family: var(--ion-font-korean-gothic);
+                padding-left: 10px;
             }
             button{
                 margin: 0px;
@@ -71,6 +72,7 @@ ion-content{
                 border-radius: 6px;
                 border: var(--ion-color-white);
                 font-family: var(--ion-font-korean-gothic);
+                padding-left: 10px;
             }
             #beforeJoin{
                 width: 100%;
@@ -127,5 +129,10 @@ ion-content{
             width: 75px;
             height: 75px;
         }
+    }
+    input:focus { 
+        outline: none !important;
+        border-color: #c4c4c4;
+        box-shadow: 0 0 5px #c4c4c4;
     }
 }
