@@ -1,1 +1,6 @@
-{}
+{
+  "dependencies": {
+    "@ionic-native/splash-screen": "^5.32.1",
+    "cordova-plugin-splashscreen": "^6.0.0"
+  }
+}
