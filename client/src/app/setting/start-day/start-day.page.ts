@@ -23,7 +23,7 @@ export class StartDayPage implements OnInit {
   }
 
   ngOnInit() {
-    axios.get('http://localhost:3000/readStartDay')
+    axios.get('http://3.139.244.188:3000/readStartDay')
       .then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.day.s_id = res.data[i].s_id;
@@ -35,7 +35,7 @@ export class StartDayPage implements OnInit {
   }
 
   initDay() {
-    axios.get('http://localhost:3000/currentStartDay')
+    axios.get('http://3.139.244.188:3000/currentStartDay')
       .then(res => {
         console.log("받아온 font id 값 : " + res.data[0].start_day_id);
         this.selectedDay = res.data[0].start_day_id;
@@ -57,7 +57,7 @@ export class StartDayPage implements OnInit {
   }
 
   updateStartDay(s_id) {
-    axios.post('http://localhost:3000/updateStartDay', {
+    axios.post('http://3.139.244.188:3000/updateStartDay', {
       start_day_id: s_id,
       u_id: 1
     }).then((res) => {
