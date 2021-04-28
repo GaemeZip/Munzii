@@ -8,7 +8,7 @@
     <div class="input-time-wrap ion-no-padding">
       <div class="toggle-wrap">
         <ion-label class="label-input">time</ion-label>
-        <ion-toggle class="time-toggle" (ionChange)="timeActive()"></ion-toggle>
+        <ion-toggle class="time-toggle" [checked]="isTimeline === 1" (ionChange)="timeActive()"></ion-toggle>
       </div>
       <div class="input-time-picker-wrap ion-no-padding">
         <div class="input-time-picker">

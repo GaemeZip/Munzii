@@ -26,8 +26,6 @@
             position: relative;
             width: 30px;
             height: 60px;
-            background: none;
-            // background: #f7f7f7;
             border-bottom: 1.5px solid var(--ion-color-gray);
             font-size: 15px;
             font-family: var(--ion-font-munzii); 
@@ -35,9 +33,6 @@
         }
         .time-background-wrap {
             width: 30px;
-            .time-background {
-                // position: relative;
-            }
         }
     }
     .content-wrap {
@@ -53,13 +48,27 @@
             }
             .todo {
                 display: flex;
+                justify-content: space-between;
                 align-items: center;
                 width: 100%;
                 padding-left: 10px;
+                padding-right: 10px;
                 // background-color: var(--ion-color-check);
                 border-top: 1px solid var(--ion-color-very-light-gray);
                 border-bottom: 1px solid var(--ion-color-very-light-gray);
-                font-family: var(--ion-font-family);
+                .todo__title {
+                    font-size: 18px;
+                    font-family: var(--ion-font-family);
+                    color: var(--ion-color-black);
+                }
+                .todo-done {
+                    color: var(--ion-color-gray);
+                }
+                .todo__time {
+                    font-size: 12px;
+                    font-family: var(--ion-font-munzii);
+                    color: var(--ion-color-light-gray);
+                }
             }
         }
     }
