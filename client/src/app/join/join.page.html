@@ -1,32 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>signUp</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div class="container">
-    <div class="form-id">
-      <div class="form">
-        <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="id">
-        <button type="submit" class="btn btn-primary" (click)="checkId(username)">중복확인</button>
+  <div class="container" [style.height.px]="windowHeight">
+    <div class="logo">MUNZII?</div>
+    <div class="form-login">
+      <div class="form-id">
+        <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="  id">
+        <button type="submit" class="btn btn-primary" (click)="checkId(username)">중복 확인</button>
         <div id="checkIdText"></div>
       </div>
-    </div>
-    <div class="form-password">
-      <div class="form">
-        <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="password">
-        <input type="password" id="passwordConfirmation" [(ngModel)]="passwordConfirmation" name="passwordConfirmation"
-          placeholder="check password">
-        <div id="comparePassword">
-          <p *ngIf="password !== passwordConfirmation">비밀번호가 불일치 합니다.</p>
-        </div>
-        <div id="beforeJoin">
-          <!-- <p *ngIf="password == null && passwordConfirmation == null && id==null">*모든 양식을 채워주세요</p> -->
+      <div class="form-password">
+        <div class="form">
+          <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="  password">
+          <input type="password" id="passwordConfirmation" [(ngModel)]="passwordConfirmation"
+            name="passwordConfirmation" placeholder="  check password">
+          <div id="comparePassword">
+            <p *ngIf="password !== passwordConfirmation">비밀번호가 불일치 합니다.</p>
+          </div>
+          <div id="beforeJoin">
+            <!-- <p *ngIf="password == null && passwordConfirmation == null && id==null">*모든 양식을 채워주세요</p> -->
+          </div>
         </div>
       </div>
+      <button type="submit" class="btn btn-primary" (click)="join()" name="submit">Join</button>
     </div>
-    <button type="submit" class="btn btn-primary" (click)="join()" name="submit">join</button>
+    <div class="footer">
+      <img src="/assets/image/basic/basic_2.png" alt="">
+      <img src="/assets/image/basic/basic_1.png" alt="">
+      <img src="/assets/image/basic/basic_4.png" alt="">
+    </div>
   </div>
 
 </ion-content>
