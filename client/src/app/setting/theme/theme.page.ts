@@ -12,11 +12,21 @@ export class ThemePage implements OnInit {
   theme:{
     t_id: number,
     t_name: string,
-    t_primary: string
+    t_primary: string,
+    t_check: string,
+    t_complete: string,
+    t_button: string,
+    t_modify: string,
+    t_background: string
   } = {
     t_id: 0,
     t_name: "",
-    t_primary: ""
+    t_primary: "",
+    t_check: "",
+    t_complete: "",
+    t_button: "",
+    t_modify: "",
+    t_background: ""
   }
   themeList: any[] =[];
   selectedTheme: any;
@@ -24,13 +34,19 @@ export class ThemePage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    axios.get('http://3.139.244.188:3000/readTheme')
+    axios.get('http://localhost:3000/readTheme')
       .then(res => {        
         for (var i = 0; i < res.data.length ; i++) {
           this.theme.t_id = res.data[i].t_id;
           this.theme.t_name = res.data[i].t_name;
           this.theme.t_primary = res.data[i].t_primary;
-          this.themeList.push([this.theme.t_id, this.theme.t_name, this.theme.t_primary]);
+          this.theme.t_check = res.data[i].t_check;
+          this.theme.t_complete = res.data[i].t_complete;
+          this.theme.t_button = res.data[i].t_button;
+          this.theme.t_modify = res.data[i].t_modify;
+          this.theme.t_background = res.data[i].t_background;
+
+          this.themeList.push([this.theme.t_id, this.theme.t_name, this.theme.t_primary, this.theme.t_check,this.theme.t_complete, this.theme.t_button, this.theme.t_modify, this.theme.t_background]);
         }
         console.log(this.themeList);
       });
@@ -38,7 +54,7 @@ export class ThemePage implements OnInit {
   }
 
   initTheme(){
-    axios.get('http://3.139.244.188:3000/currentTheme')
+    axios.get('http://localhost:3000/currentTheme')
       .then(res => {        
         console.log("받아온 theme id 값 : "+res.data[0].theme_id);
          this.selectedTheme = res.data[0].theme_id;
@@ -57,10 +73,15 @@ export class ThemePage implements OnInit {
     elementSelected.classList.add("selected");
     const changeTheme = document.querySelector('body');
     changeTheme.style.setProperty('--ion-color-primary', this.themeList[id-1][2]);
+    changeTheme.style.setProperty('--ion-color-check', this.themeList[id-1][3]);
+    changeTheme.style.setProperty('--ion-color-complete', this.themeList[id-1][4]);
+    changeTheme.style.setProperty('--ion-color-button', this.themeList[id-1][5]);
+    changeTheme.style.setProperty('--ion-color-dark-yellow', this.themeList[id-1][6]);
+    changeTheme.style.setProperty('--ion-theme-background', this.themeList[id-1][7]);
   }
 
   updateTheme(t_id) {
-    axios.post('http://3.139.244.188:3000/updateTheme', {
+    axios.post('http://localhost:3000/updateTheme', {
       theme_id: t_id,
       u_id: 1
     }).then((res) => {
