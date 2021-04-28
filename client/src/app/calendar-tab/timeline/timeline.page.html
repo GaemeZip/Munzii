@@ -1,14 +1,27 @@
 <ion-content [style.height.px]="windowHeight">
   <div class="container">
     <div class="time-wrap">
-      <div class="time" *ngFor="let time of timeList">{{ time }}</div> 
+      <div class="time-background-wrap" *ngFor="let todo of timelineList">
+        <div class="time-background" style="position: relative;">
+          <div class="space" *ngIf="timelineList.indexOf(todo) === 0" [style.height.px]="caculateSpaceHeight(todo.start_time, initialTime)"></div>
+          <div class="space" *ngIf="timelineList.indexOf(todo) !== 0" [style.height.px]="caculateSpaceHeight(todo.start_time, timelineList[timelineList.indexOf(todo)-1].end_time)"></div>
+          <div class="check" [style.height.px]="calculateHeight(todo.start_time, todo.end_time)"></div>
+        </div>
+      </div>
+      <div class="time" *ngFor="let time of timeList" style="position: relative; left: 0px;  bottom: 820px; background: none;">{{ time }}</div> 
     </div>
     <div class="content-wrap">
-      <div class="todo" [style.height.px]="duration * 10">아침 운동</div>
+      <div class="timeline-wrap" *ngFor="let todo of timelineList" >
+        <div class="space" *ngIf="timelineList.indexOf(todo) === 0" [style.height.px]="caculateSpaceHeight(todo.start_time, initialTime)"></div>
+        <div class="space" *ngIf="timelineList.indexOf(todo) !== 0" [style.height.px]="caculateSpaceHeight(todo.start_time, timelineList[timelineList.indexOf(todo)-1].end_time)"></div>
+        <div class="todo" [style.height.px]="calculateHeight(todo.start_time, todo.end_time)">{{todo.title}}</div>
+      </div>
+      <!-- <div class="todo" [style.height.px]="duration * 10">아침 운동</div>
       <div class="todo" [style.height.px]="12 * 10"></div>
-      <div class="todo" [style.height.px]="10 * 10">점심 운동</div>
+      <div class="todo" [style.height.px]="10 * 10">점심 운동</div> -->
     </div>
   </div>
+  <ion-icon class="add-icon" name="add" (click)="createTodo()"></ion-icon>
   <!-- <ion-icon class="add-icon" name="add" (click)="createTodo()"></ion-icon> -->
   <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>

@@ -114,7 +114,6 @@ export class TodoPage implements OnInit {
     else {
       todo.is_done = 0;
     }
-    console.log(todo)
     var tempProgress = 0;
     let date= "2021-04-17"
     for (var i=0; i < this.selectDayTodoList.length; i ++) {

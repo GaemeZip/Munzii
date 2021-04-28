@@ -15,6 +15,7 @@ export class CalendarTabPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
   currentTab: string;
 
+  initialSelected: Date;
   public selected: any;
   selectYear: any;
   selectMonth: any;
@@ -43,7 +44,7 @@ export class CalendarTabPage implements OnInit {
      }
 
   ngOnInit() {
-    this.currentTab = 'todo';
+    this.currentTab = 'timeline';
 
     this.selected = new Date();
 
@@ -52,21 +53,18 @@ export class CalendarTabPage implements OnInit {
       if(this.router.getCurrentNavigation().extras.state) {
         console.log(this.router.getCurrentNavigation().extras.state.selectDay);
         this.selected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
+        this.initialSelected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
       }
     })
-    console.log(this.selected)
+    console.log(this.initialSelected)
 
     // ** need ** get start week Day
     axios.get('http://3.139.244.188:3000/currentStartDay')
       .then(res => {
-        console.log("받아온 start id 값 : " + res.data[0].start_day_id);
-        console.log(typeof res.data[0].start_day_id)
         this.startWeekday = res.data[0].start_day_id;
-        console.log(this.startWeekday);
-        console.log(this.startWeekday, 'hkjhkjhoiuh');
-    this.startWeekday = 0;
-    switch(this.startWeekday) {
-      case 0: {
+        this.startWeekday = 0;
+        switch(this.startWeekday) {
+          case 0: {
         this.weekday = ['일', '월', '화', '수', '목', '금', '토'];
         break;
       }
@@ -120,6 +118,7 @@ export class CalendarTabPage implements OnInit {
   clickNextTab() {
     let NavigationExtras: NavigationExtras = {
       state: {
+
         selected: this.selected
       }
     };
@@ -137,7 +136,6 @@ export class CalendarTabPage implements OnInit {
     this.router.navigateByUrl('home')
   }
   getDate(tempDay) {
-
     this.selected = new Date(tempDay);
     this.selectYear = this.selected.getFullYear();
     this.selectMonth = this.monthNames[this.selected.getMonth()];
@@ -185,12 +183,17 @@ export class CalendarTabPage implements OnInit {
     this.slides.slideTo(1);
   }
   firstSlide() {
-    // console.log("첫 슬라이드")
-    let tempDay = new Date(this.selected);                               
-    tempDay.setDate(this.selected.getDate() - 7);
-    this.getDate(tempDay);
-    this.calculateCalendar(tempDay);
-    this.slides.slideTo(1);
+    let tempDay = new Date(this.selected); 
+    if(this.initialSelected) {
+      if(this.initialSelected.getDate() == tempDay.getDate() && this.initialSelected.getMonth() == tempDay.getMonth() && this.initialSelected.getFullYear() == tempDay.getFullYear()) {
+      }
+    }
+    else {
+      tempDay.setDate(this.selected.getDate() - 7);
+      this.getDate(tempDay);
+      this.calculateCalendar(tempDay);
+      this.slides.slideTo(1);
+    }
   }
 
   changeDay(date) {

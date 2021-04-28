@@ -15,6 +15,7 @@ export class TimelinePage implements OnInit {
   selected: Date;
   selectMonth: string;
   date: string;
+  initialTime: string;
 
   duration: number;
 
@@ -30,6 +31,7 @@ export class TimelinePage implements OnInit {
    }
 
   ngOnInit() {
+    this.initialTime = "00:00:00"
     this.timeList = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
     this.duration= 7;
     // this.date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
@@ -53,6 +55,7 @@ export class TimelinePage implements OnInit {
           this.timelineList.push(res.data[i]);
         }
       }
+        this.sortTimeline();
     })
   }
 
@@ -68,4 +71,26 @@ export class TimelinePage implements OnInit {
     });
     return await modal.present();
   }
+
+  sortTimeline() {
+    this.timelineList.sort((a: any, b: any): number => {
+      return ( Number(a.start_time.substr(0,2)) * 60 + Number(a.start_time.substr(3,2)) ) - ( Number(b.start_time.substr(0,2)) * 60 + Number(b.start_time.substr(3,2)) );
+    });
+    console.log(this.timelineList)
+  }
+  caculateSpaceHeight(startTime, previousEndTime) {
+    let previous = Number(previousEndTime.substr(0,2)) * 60 + Number(previousEndTime.substr(3,2));
+    let start = Number(startTime.substr(0,2)) * 60 + Number(startTime.substr(3,2));
+    // console.log(start, end)
+    console.log(start-previous)
+    return (start - previous);
+  }
+  calculateHeight(startTime, endTime) {
+    // console.log(startTime, endTime)
+    let start = Number(startTime.substr(0,2)) * 60 + Number(startTime.substr(3,2));
+    let end = Number(endTime.substr(0,2)) * 60 + Number(endTime.substr(3,2));
+    // console.log(start, end)
+    return (end - start);
+  }
+
 }

@@ -22,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'todo',
+        redirectTo: 'timeline',
         pathMatch: 'full'
       }
     ]
