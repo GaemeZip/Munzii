@@ -40,7 +40,7 @@ export class JoinPage implements OnInit {
     }
 
 
-    axios.post('http://localhost:3000/join', {
+    axios.post('http://3.139.244.188:3000/join', {
       username: this.username,
       password: this.password
     })
@@ -49,6 +49,7 @@ export class JoinPage implements OnInit {
         console.log(res.data);
         if (res.data == "회원가입 성공") {
           alert("회원가입 성공! 로그인 후 이용해주세요");
+          this.router.navigate(['/login']);
         }
         else if (res.data == "양식을 모두 채워주세요") {
           beforeJoin.innerHTML="양식을 모두 채워주세요";
@@ -65,7 +66,7 @@ export class JoinPage implements OnInit {
   }
 
   checkUser(inputname) {
-    axios.post('http://localhost:3000/checkUser', {
+    axios.post('http://3.139.244.188:3000/checkUser', {
       username: inputname
     })
       .then((res) => {

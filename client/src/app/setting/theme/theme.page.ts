@@ -24,7 +24,7 @@ export class ThemePage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    axios.get('http://localhost:3000/readTheme')
+    axios.get('http://3.139.244.188:3000/readTheme')
       .then(res => {        
         for (var i = 0; i < res.data.length ; i++) {
           this.theme.t_id = res.data[i].t_id;
@@ -38,7 +38,7 @@ export class ThemePage implements OnInit {
   }
 
   initTheme(){
-    axios.get('http://localhost:3000/currentTheme')
+    axios.get('http://3.139.244.188:3000/currentTheme')
       .then(res => {        
         console.log("받아온 theme id 값 : "+res.data[0].theme_id);
          this.selectedTheme = res.data[0].theme_id;
@@ -60,7 +60,7 @@ export class ThemePage implements OnInit {
   }
 
   updateTheme(t_id) {
-    axios.post('http://localhost:3000/updateTheme', {
+    axios.post('http://3.139.244.188:3000/updateTheme', {
       theme_id: t_id,
       u_id: 1
     }).then((res) => {

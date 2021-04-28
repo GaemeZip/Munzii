@@ -19,29 +19,32 @@ export class LoginPage implements OnInit {
 
   login() {
     const checkLogin = document.getElementById('checkLogin');
-    axios.post('http://localhost:3000/login', {
+    axios.post('http://3.139.244.188:3000//login', {
       username: this.username,
       password: this.password
     })
       .then((res) => {
-        console.log(res.data);
-        if (res.data == "로그인 성공") {
-          alert("로그인 되었습니다");
-          this.router.navigate(['/home']);
+        if (res.data == "에러 발생") {
+          console.log("에러 발생");
         }else if (res.data == "아이디와 비밀번호 불일치"){
-          //checkLogin.innerHTML="비밀번호가 틀렸습니다.";
           checkLogin.innerHTML="아이디 또는 비밀번호가 일치하지 않습니다."
           checkLogin.style.visibility = "visible";
           checkLogin.style.color = "#db1414";
           this.router.navigate(['/login']);
+          return;
         }
         else if (res.data == "존재하지 않는 아이디"){
-          //checkLogin.innerHTML="계정 정보가 없습니다. 회원가입 해주세요";
           checkLogin.innerHTML="아이디 또는 비밀번호가 일치하지 않습니다."
           checkLogin.style.visibility = "visible";
           checkLogin.style.color = "#db1414";
+          return;
         }
-        console.log(res);
+
+        localStorage.user = true;
+        localStorage.username = res.data[0].username;
+        localStorage.userID = res.data[0].u_id;
+        console.log(localStorage.userID);
+        this.router.navigate(['/home']);
       })
   }
 }
