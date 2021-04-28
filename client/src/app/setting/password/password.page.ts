@@ -9,7 +9,7 @@ import axios from 'axios';
 })
 export class PasswordPage implements OnInit {
   windowHeight: number = window.screen.height;
-  isOn=false;
+  isOn = false;
   isOff = true;
 
   constructor(private router: Router) {
@@ -17,12 +17,12 @@ export class PasswordPage implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.passwordState == false) {
-      this.isOn = false;
-      this.isOff = true;
-    } else {
+    if (localStorage.passwordState == true) {
       this.isOn = true;
       this.isOff = false;
+    } else {
+      this.isOn = false;
+      this.isOff = true;
     }
     console.log(localStorage.passwordState);
   }

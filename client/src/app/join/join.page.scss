@@ -1,22 +1,21 @@
-button{
+button {
     background-color: black;
 }
-ion-content{
+ion-content {
     --background: var(--ion-theme-background);
 }
 .container {
     position: relative;
     height: 100%;
     text-align: center;
-    
 
-    .logo{
+    .logo {
         font-family: var(--ion-font-munzii);
         font-size: 65px;
         margin-top: 80px;
         color: #343229;
     }
-    .form-login{
+    .form-login {
         width: 70%;
         height: 60%;
         display: flex;
@@ -25,7 +24,7 @@ ion-content{
         flex-direction: column;
         margin: auto;
 
-        .form-id{
+        .form-id {
             display: flex;
             align-content: space-between;
             justify-content: space-between;
@@ -33,17 +32,16 @@ ion-content{
             width: 100%;
             margin-bottom: 8px;
 
-            #username{
+            #username {
                 width: 55%;
                 height: 40px;
                 background-color: var(--ion-color-white);
-                color: var(--ion-color-light-gray);
                 border-radius: 6px;
                 border: var(--ion-color-white);
                 font-family: var(--ion-font-korean-gothic);
                 padding-left: 10px;
             }
-            button{
+            button {
                 margin: 0px;
                 width: 40%;
                 height: 40px;
@@ -54,48 +52,45 @@ ion-content{
                 font-size: 16px;
             }
         }
-        #checkIdText{
+        #checkIdText {
             width: 100%;
             text-align: left;
-            color:  #db1414;
+            color: #db1414;
             font-size: 13px;
             visibility: hidden;
-            
         }
-        .form-password{
-            input{
+        .form-password {
+            input {
                 width: 100%;
                 height: 40px;
                 margin: 8px 0;
                 background-color: var(--ion-color-white);
-                color: var(--ion-color-light-gray);
                 border-radius: 6px;
                 border: var(--ion-color-white);
                 font-family: var(--ion-font-korean-gothic);
                 padding-left: 10px;
             }
-            #beforeJoin{
+            #beforeJoin {
                 width: 100%;
                 text-align: left;
-                color:  #db1414;
+                color: #db1414;
                 font-size: 13px;
             }
-            #comparePassword{
+            #comparePassword {
                 width: 100%;
                 margin: 0px;
                 text-align: left;
-                color:  #db1414;
+                color: #db1414;
                 font-size: 13px;
             }
-            p{
+            p {
                 margin: 0px;
                 font-size: 13px;
-                color:  #db1414;
+                color: #db1414;
             }
-            
-        }      
+        }
     }
-    button{
+    button {
         margin-top: 20px;
         width: 100%;
         height: 40px;
@@ -106,7 +101,7 @@ ion-content{
         font-size: 16px;
     }
 
-    a{
+    a {
         margin: 10px 0px 0px 0px;
         width: 40%;
         height: 20px;
@@ -130,7 +125,7 @@ ion-content{
             height: 75px;
         }
     }
-    input:focus { 
+    input:focus {
         outline: none !important;
         border-color: #c4c4c4;
         box-shadow: 0 0 5px #c4c4c4;

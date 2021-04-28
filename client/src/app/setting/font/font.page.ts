@@ -27,7 +27,7 @@ export class FontPage implements OnInit {
   }
 
   ngOnInit() {
-     axios.get('http://localhost:3000/readFont')
+     axios.get('http://3.139.244.188:3000/readFont')
       .then(res => {        
         for (var i = 0; i < res.data.length ; i++) {
           this.font.f_id = res.data[i].f_id;
@@ -40,7 +40,7 @@ export class FontPage implements OnInit {
   }
 
   initFont(){
-    axios.get('http://localhost:3000/currentFont')
+    axios.get('http://3.139.244.188:3000/currentFont')
       .then(res => {        
         console.log("받아온 font id 값 : "+res.data[0].font_id);
         
@@ -64,7 +64,7 @@ export class FontPage implements OnInit {
   }
 
   updateFont(f_id) {
-    axios.post('http://localhost:3000/updateFont', {
+    axios.post('http://3.139.244.188:3000/updateFont', {
       font_id: f_id,
       u_id: 1
     }).then((res) => {

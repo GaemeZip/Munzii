@@ -15,11 +15,17 @@ export class AccountPage implements OnInit {
   }
 
   ngOnInit() {
-  
-this.username='지형';
+   this.username = localStorage.username;
+   
   }
 
   prev(){
     this.router.navigate(['/settings']);
+  }
+
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/phaser']);
+
   }
 }
