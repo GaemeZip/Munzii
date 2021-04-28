@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import axios from 'axios';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   windowHeight: number = window.screen.height;
 
+  today: any;
   currentCalendar: any;
   date: any;
   daysInThisMonth: any;
@@ -18,10 +20,11 @@ export class HomePage {
   currentMonth: any;
   currentYear: any;
   currentDate: any;
-
+  dayProgress: any;
   //level1 ,2, 3, 4
   dayMunzzi: string;
 
+  themeId: number;
 
   constructor(
     private router:Router
@@ -29,10 +32,20 @@ export class HomePage {
     console.log(this.windowHeight)
     this.date = new Date();
     this.monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
+    
+    // console.log(this.currentMonth)
+  }
+
+  ngOnInit() {
+    this.today = new Date();
+    axios.get('http://3.139.244.188:3000/currentTheme')
+    .then(res => {        
+      this.themeId = res.data[0].theme_id
+    });
     this.getDaysOfMonth();
+    // this.getProgress();
     this.currentCalendar = new Date(this.currentYear, this.currentMonth, 0).toISOString();
-    // console.log(this.currentCalendar)
-    }
+  }
 
   getDaysOfMonth() {
     this.daysInThisMonth = new Array();
@@ -58,22 +71,41 @@ export class HomePage {
       this.daysInLastMonth.push(i); 
     }
   
+    this.dayProgress = new Array();
     var thisNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDate();
+    // console.log(this.date.getFullYear(), this.date.getMonth()+1)
+    // console.log(this.today.getFullYear(), this.today.getMonth()+1)
     for (var i = 0; i < thisNumOfDays; i++) {
       this.daysInThisMonth.push(i+1);
+      if(i < this.date.getDate() && this.date.getMonth() == this.today.getMonth() && this.date.getFullYear() == this.today.getFullYear()) {
+        this.dayProgress.push(0);
+      }
+      else if(this.date.getMonth() < this.today.getMonth() && this.currentYear <= this.today.getFullYear()) {
+        console.log("@@@@@@@@@")
+        this.dayProgress.push(0);
+      }
+      else {
+        this.dayProgress.push(-1);
+      }
     }
-  
-    // var lastDayThisMonth = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDay();
-    // var nextNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+2, 0).getDate();
-    // for (var i = 0; i < (6-lastDayThisMonth); i++) {
-    //   this.daysInNextMonth.push(i+1);
-    // }
-    // var totalDays = this.daysInLastMonth.length+this.daysInThisMonth.length+this.daysInNextMonth.length;
-    // if(totalDays<36) {
-    //   for(var i = (7-lastDayThisMonth); i < ((7-lastDayThisMonth)+7); i++) {
-    //     this.daysInNextMonth.push(i);
-    //   }
-    // }
+
+    this.getProgress();
+  }
+  async getProgress() {
+    await axios.get('http://3.139.244.188:3000/readProgress', {
+      params: {
+      year: this.currentYear,
+      month: this.currentMonth,
+      userID: 1
+    }
+    }).then(res => {
+      console.log(res.data)
+      for(var i =0; i < res.data.length; i++) {
+        let tempDate = new Date(res.data[i].date);
+        this.dayProgress[tempDate.getDate()-1] = res.data[i].progress;
+      }
+      // console.log(this.dayProgress)
+    })
   }
   selectMonth() {
     this.date = new Date (this.currentCalendar);

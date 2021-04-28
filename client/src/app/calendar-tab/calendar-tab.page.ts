@@ -56,7 +56,6 @@ export class CalendarTabPage implements OnInit {
         this.initialSelected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
       }
     })
-    console.log(this.initialSelected)
 
     // ** need ** get start week Day
     axios.get('http://3.139.244.188:3000/currentStartDay')
