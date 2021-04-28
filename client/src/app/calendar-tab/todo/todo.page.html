@@ -4,9 +4,26 @@
       <ion-item-sliding class="todo-wrap" *ngFor="let todo of selectDayTodoList">
         <ion-item lines="none">
         <div class="todo-icon" (click)="calculateDone(todo)">
-          <img src="../../assets/image/basic/basic_1.png" *ngIf="progress == 100">
-          <img src="../../assets/image/basic/basic_2.png" *ngIf="progress !== 100 && todo.is_done == 1">
-          <img src="../../assets/image/basic/basic_4.png" *ngIf="progress !== 100 && todo.is_done == 0">
+          <div *ngIf="themeId==1">
+            <img src="../../assets/image/basic/basic_1.png" *ngIf="progress == 100">
+            <img src="../../assets/image/basic/basic_2.png" *ngIf="progress !== 100 && todo.is_done == 1">
+            <img src="../../assets/image/basic/basic_4.png" *ngIf="progress !== 100 && todo.is_done == 0">
+          </div>
+          <div *ngIf="themeId==2">
+            <img src="../../assets/image/pink/pink_1.png" *ngIf="progress == 100">
+            <img src="../../assets/image/pink/pink_2.png" *ngIf="progress !== 100 && todo.is_done == 1">
+            <img src="../../assets/image/pink/pink_4.png" *ngIf="progress !== 100 && todo.is_done == 0">
+          </div>
+          <div *ngIf="themeId==3">
+            <img src="../../assets/image/blue/blue_1.png" *ngIf="progress == 100">
+            <img src="../../assets/image/blue/blue_2.png" *ngIf="progress !== 100 && todo.is_done == 1">
+            <img src="../../assets/image/blue/blue_4.png" *ngIf="progress !== 100 && todo.is_done == 0">
+          </div>
+          <div *ngIf="themeId==4">
+            <img src="../../assets/image/green/green_2.png" *ngIf="progress == 100">
+            <img src="../../assets/image/green/green_3.png" *ngIf="progress !== 100 && todo.is_done == 1">
+            <img src="../../assets/image/green/green_4.png" *ngIf="progress !== 100 && todo.is_done == 0">
+          </div>
         </div>
         <div class="todo-content" *ngIf="todo.is_done == 0" (click)="calculateDone(todo)">{{ todo.title }}</div>
         <div class="todo-content-done" *ngIf="todo.is_done == 1" (click)="calculateDone(todo)">{{ todo.title }}</div>
@@ -19,4 +36,5 @@
   </div>
   <ion-icon class="add-icon" name="add" (click)="createTodo()"></ion-icon>
   <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
+
 </ion-content>

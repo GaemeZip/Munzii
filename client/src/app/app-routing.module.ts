@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'calendar-tab',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
