@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import { PhaserComponent } from './phaser/phaser.component';
+import { AuthGuard } from  './auth/auth.guard';
 const routes: Routes = [
   {
     path: 'home',
@@ -8,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'calendar-tab',
+    redirectTo: 'phaser',
     pathMatch: 'full'
   },
   {
@@ -51,7 +52,11 @@ const routes: Routes = [
     path: 'calendar-tab',
     loadChildren: () => import('./calendar-tab/calendar-tab.module').then( m => m.CalendarTabPageModule)
   },
+  {
+    path: 'phaser', component: PhaserComponent, canActivate: [AuthGuard] 
+  },
 ];
+
 
 @NgModule({
   imports: [
@@ -59,4 +64,6 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+  
+}

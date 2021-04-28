@@ -9,8 +9,8 @@ import axios from 'axios';
 })
 export class PasswordPage implements OnInit {
   windowHeight: number = window.screen.height;
-  isOn;
-  isOff;
+  isOn=false;
+  isOff = true;
 
   constructor(private router: Router) {
 
@@ -32,6 +32,7 @@ export class PasswordPage implements OnInit {
   }
 
   moveToPasswordInput() {
+    localStorage.passwordMode = 'set';
     this.router.navigate(['/password-input']);
   }
 
@@ -41,7 +42,7 @@ export class PasswordPage implements OnInit {
       this.isOff = false;
       localStorage.passwordState = this.isOn;
       console.log(localStorage.passwordState);
-
+      localStorage.passwordMode = 'set';
       this.router.navigate(['/password-input']);
     }
 
