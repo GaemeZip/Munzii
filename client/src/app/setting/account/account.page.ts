@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import axios from 'axios';
 
 @Component({
   selector: 'app-account',
@@ -9,12 +10,13 @@ import { Router } from '@angular/router';
 
 export class AccountPage implements OnInit {
   windowHeight: number = window.screen.height;
-  userID;
+  username;
   constructor(private router:Router) { 
   }
 
   ngOnInit() {
-
+  
+this.username='지형';
   }
 
   prev(){

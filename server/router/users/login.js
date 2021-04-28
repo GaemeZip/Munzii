@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
     } else {
       if (rows.length > 0) {
         if (password == rows[0].password) {
-          res.send("로그인 성공");
+          res.send(rows);
         } else {
           res.send("아이디와 비밀번호 불일치");
         }
