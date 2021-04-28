@@ -32,6 +32,9 @@ export class PasswordPage implements OnInit {
   }
 
   moveToPasswordInput() {
+    if (this.isOff == true) {
+      return;
+    }
     localStorage.passwordMode = 'set';
     this.router.navigate(['/password-input']);
   }
@@ -41,9 +44,11 @@ export class PasswordPage implements OnInit {
       this.isOn = true;
       this.isOff = false;
       localStorage.passwordState = this.isOn;
-      console.log(localStorage.passwordState);
       localStorage.passwordMode = 'set';
+      console.log(localStorage.passwordMode);
       this.router.navigate(['/password-input']);
+    } else {
+      return;
     }
 
   }
@@ -53,6 +58,8 @@ export class PasswordPage implements OnInit {
       this.isOff = true;
       localStorage.passwordState = this.isOn;
       console.log(localStorage.passwordState, "오프 누름")
+    } else {
+      return;
     }
 
     //   axios.post('http://3.139.244.188:3000/updatePassword', {

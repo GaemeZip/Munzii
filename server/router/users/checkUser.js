@@ -14,17 +14,12 @@ router.post('/', (req, res) => {
 
   const username = req.body.username;
 
-  console.log(username);
-
   const selectQuery = 'SELECT * FROM users WHERE username = ?';
   connection.query(selectQuery, [username], async function (error, rows, fields) {
-
     if (error) {
       res.send('에러 발생');
-    } else {
-      
+    } else { 
         res.send(rows);
-      
     }
     console.log(rows[0]);
   }

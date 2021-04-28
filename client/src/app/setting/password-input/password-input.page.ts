@@ -17,13 +17,15 @@ export class PasswordInputPage implements OnInit {
   n = 0;
   isChecked = false;
   isWrong = false;
-  passwordMode = localStorage.passwordMode;
+  passwordMode;
   isFirstTry = true;
 
   constructor(private router: Router) {
   }
 
   ngOnInit() {
+    this.passwordMode = localStorage.passwordMode;
+
   }
 
   prev() {
@@ -67,6 +69,8 @@ export class PasswordInputPage implements OnInit {
 
         if (this.password[0] == this.tempPassword[0] && this.password[1] == this.tempPassword[1] && this.password[2] == this.tempPassword[2] && this.password[3] == this.tempPassword[3]) {//인증 성공
           localStorage.password = this.password;
+          this.n=0;
+          this.password = [null,null,null,null];
           localStorage.passwordMode = 'enter';
           this.router.navigate(['/password']);
 
@@ -110,9 +114,9 @@ export class PasswordInputPage implements OnInit {
         this.router.navigate(['/home']);
 
 
-      }else{
+      } else {
         this.input = '다시 시도해주세요';
-        this.password = [null,null,null,null];
+        this.password = [null, null, null, null];
         this.n = 0;
 
       }

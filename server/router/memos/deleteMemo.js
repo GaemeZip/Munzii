@@ -10,15 +10,6 @@ router.use(function (req, res, next) {
     next();
 });
 
-// server 확인용
-// router.get('/', (req, res) => {
-//   connection.query('SELECT * from Users', (error, rows) => {
-//     if (error) throw error;
-//     console.log('User info is: ', rows);
-//     res.send(rows);
-//   });
-// });
-
 router.post('/', (req, res) => {
     var date = req.body.date;
     var userID = req.body.userID;

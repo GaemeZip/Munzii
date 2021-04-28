@@ -13,15 +13,11 @@ router.use(function (req, res, next) {
 router.post('/', (req, res) => {
 
   var date = req.body.date;
-  var title = req.body.title;
-  var time = req.body.time;
-  var startTime = req.body.startTime;
-  var endTime = req.body.endTime;
   var userID = req.body.userID;
 
-  var createQuery = 'INSERT INTO todos VALUES(NULL,?,DEFAULT,?,?,?,?,false,?)';
+  var createQuery = 'INSERT INTO progresses VALUES(0,?,0,?)';
 
-  var params = [date, title, time, startTime, endTime, userID];
+  var params = [date, userID];
 
   connection.query(createQuery, params, (error, rows, data) => {
     if (error) {

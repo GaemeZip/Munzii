@@ -11,13 +11,18 @@ const loginRouter = require('./router/users/login');
 const checkUserRouter = require('./router/users/checkUser');
 
 const readMemoRouter = require('./router/memos/readMemo');
-const createMemoRouter = require('./router/memos/createMemo.js');
+const createMemoRouter = require('./router/memos/createMemo');
 const updateMemoRouter = require('./router/memos/updateMemo');
 const deleteMemoRouter = require('./router/memos/deleteMemo');
+
 const readTodoRouter = require('./router/todos/readTodo');
 const createTodoRouter = require('./router/todos/createTodo');
 const updateTodoRouter = require('./router/todos/updateTodo');
 const deleteTodoRouter = require('./router/todos/deleteTodo');
+
+const readProgressRouter = require('./router/todos/readProgress');
+const createProgressRouter = require('./router/todos/createProgress');
+const updateProgressRouter = require('./router/todos/updateProgress');
 
 const updateFontRouter = require('./router/settings/updateFont');
 const readFontRouter = require('./router/settings/readFont');
@@ -44,6 +49,10 @@ app.use('/readTodo', readTodoRouter);
 app.use('/createTodo', createTodoRouter);
 app.use('/updateTodo', updateTodoRouter);
 app.use('/deleteTodo', deleteTodoRouter);
+
+app.use('/readProgress', readProgressRouter);
+app.use('/createProgress', createProgressRouter);
+app.use('/updateProgress', updateProgressRouter);
 
 app.use('/updateFont', updateFontRouter);
 app.use('/readFont', readFontRouter);
