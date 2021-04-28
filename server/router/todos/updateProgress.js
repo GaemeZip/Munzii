@@ -12,11 +12,11 @@ router.use(function (req, res, next) {
 
 router.post('/', (req, res) => {
     var date = req.body.date;
-    var content = req.body.content;
+    var progress = req.body.progress;
     var userID = req.body.userID;
 
-    var updateQuery = 'UPDATE memos SET content=?, created_at=NOW() WHERE date=? AND user_id=?';
-    var params = [content, date, userID];
+    var updateQuery = 'UPDATE progresses SET progress=? WHERE date=? AND user_id=?';
+    var params = [progress, date, userID];
 
     connection.query(updateQuery, params, (error, rows, data) => {
         if (error) {

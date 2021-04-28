@@ -15,8 +15,6 @@ router.post('/', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  console.log(username + password);
-
   const selectQuery = 'SELECT * FROM users WHERE username = ?';
   connection.query(selectQuery, [username], async function (error, rows, fields) {
 
