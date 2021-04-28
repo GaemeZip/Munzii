@@ -85,4 +85,9 @@ ion-content{
             height: 75px;
         }
     }
+    input:focus { 
+        outline: none !important;
+        border-color: #c4c4c4;
+        box-shadow: 0 0 5px #c4c4c4;
+    }
 }
