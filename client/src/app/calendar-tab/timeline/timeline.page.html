@@ -7,7 +7,9 @@
           <!-- <div class="space" *ngIf="timelineList.indexOf(todo) === 0" [style.height.px]="calculateSpaceHeight(todo.start_time, initialToday)"></div> -->
           <div class="space" *ngIf="timelineList.indexOf(todo) === 0" [style.height.px]="spaceHeight[timelineList.indexOf(todo)]"></div> 
           <div class="space" *ngIf="timelineList.indexOf(todo) !== 0" [style.height.px]="spaceHeight[timelineList.indexOf(todo)]"></div>
-          <div class="check" [style.height.px]="height[timelineList.indexOf(todo)]"></div>
+          <div class="complete" [style.height.px]="height[timelineList.indexOf(todo)]" *ngIf="progress == 100"></div>
+          <div class="check" [style.height.px]="height[timelineList.indexOf(todo)]" *ngIf="progress !== 100 && todo.is_done == 1"></div>
+          <div class="no-check" [style.height.px]="height[timelineList.indexOf(todo)]" *ngIf="progress !== 100 && todo.is_done == 0"></div>
         </div>
       </div>
       <div class="space" [style.height.px]="spaceHeight[timelineList.indexOf(timelineList.length-1)]"></div>
@@ -17,12 +19,15 @@
       <div class="timeline-wrap" *ngFor="let todo of timelineList" >
         <div class="space" *ngIf="timelineList.indexOf(todo) === 0" [style.height.px]="spaceHeight[timelineList.indexOf(todo)]"></div>
         <div class="space" *ngIf="timelineList.indexOf(todo) !== 0" [style.height.px]="spaceHeight[timelineList.indexOf(todo)]"></div>
-        <div class="todo" [style.height.px]="height[timelineList.indexOf(todo)]">{{todo.title}}</div>
+        <div class="todo" [style.height.px]="height[timelineList.indexOf(todo)]">
+          <div class="todo__title todo-done" *ngIf="todo.is_done == 1"> {{ todo.title }}</div>
+          <div class="todo__title" *ngIf="todo.is_done == 0"> {{ todo.title }}</div>
+          <div class="todo__time"> {{ todo.start_time.substr(0,5) }} ~ {{ todo.end_time.substr(0,5) }}  </div>
+        </div>
       </div>
       <div class="space" [style.height.px]="spaceHeight[timelineList.indexOf(timelineList.length-1)]"></div>
     </div>
   </div>
   <ion-icon class="add-icon" name="add" (click)="createTodo()"></ion-icon>
-  <!-- <ion-icon class="add-icon" name="add" (click)="createTodo()"></ion-icon> -->
   <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>
