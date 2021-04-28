@@ -65,6 +65,10 @@ export class JoinPage implements OnInit {
     this.checkUser(inputname);
   }
 
+  initcheck(){
+    this.idCheck = false;
+  }
+
   checkUser(inputname) {
     axios.post('http://3.139.244.188:3000/checkUser', {
       username: inputname

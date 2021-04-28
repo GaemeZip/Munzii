@@ -3,7 +3,7 @@
     <div class="logo">MUNZII?</div>
     <div class="form-login">
       <div class="form-id">
-        <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="id">
+        <input type="text" id="username" [(ngModel)]="username" (change)="initcheck()" name="username" placeholder="id">
         <button type="submit" (click)="checkId(username)">중복 확인</button>
       </div>
       <div id="checkIdText"></div>
