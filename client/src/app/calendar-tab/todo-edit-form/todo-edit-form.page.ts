@@ -28,7 +28,7 @@ export class TodoEditFormPage implements OnInit {
     private navParams: NavParams, 
     public navCtrl: NavController,
     private modalController: ModalController,
-    public datepipe: DatePipe
+    public datePipe: DatePipe
     ) {
       this.todoId = navParams.get('id');
       this.selected = navParams.get('selected');
@@ -68,23 +68,97 @@ export class TodoEditFormPage implements OnInit {
       this.startTimeString ="00:00:00"
       this.endTimeString ="00:00:00"
     }
-    console.log(this.todoId, this.selectedString, this.title, this.isTimeline, this.startTimeString, this.endTimeString)
-    axios.post('http://3.139.244.188:3000/updateTodo', {
-      id: this.todoId,
-      date: this.selectedString,
-      title: this.title, 
-      time: this.isTimeline,
-      startTime: this.startTimeString,
-      endTime: this.endTimeString,
-      isDone: this.isDone,
-      userID: 1
-    }).then((res) => {
-      if (res.data != 'error') {
-        console.log("테이블 업데이트");
-      } else {
-        console.log("에러 발생")
+    if(this.title == "" || this.title == null) {
+      alert("일정을 입력하세요")
+    }
+    else {
+      if (this.isTimeline == 1) {
+        if(this.startTime == null || this.endTime == null) {
+          alert("시간을 입력하세요")
+        }
+        else if(this.startTime.length < 10) {
+          if (Number(this.startTime.substr(0,2)) > Number(this.endTime.substr(0,2))) {
+            alert("시작 시간은 종료 시간 이전이어야 합니다");
+          }
+          else if (Number(this.startTime.substr(0,2)) === Number(this.endTime.substr(0,2))) {
+            if(Number(this.startTime.substr(3,2)) < Number(this.endTime.substr(3,2))) {
+              alert("시작 시간은 종료 시간 이전이어야 합니다");
+            }
+          }
+          else {
+            axios.post('http://3.139.244.188:3000/updateTodo', {
+              id: this.todoId,
+              date: this.selectedString,
+              title: this.title, 
+              time: this.isTimeline,
+              startTime: this.startTimeString,
+              endTime: this.endTimeString,
+              isDone: this.isDone,
+              userID: 1
+            }).then((res) => {
+              if (res.data != 'error') {
+                console.log("테이블 업데이트");
+              } else {
+                console.log("에러 발생")
+              }
+            })
+            this.modalController.dismiss({
+              'dismissed': true
+            });
+          }
+        }
+        else if(new Date(this.startTime).getHours() > new Date(this.endTime).getHours()) {
+          alert("시작 시간은 종료 시간 이전이어야 합니다");
+        }
+        else if (new Date(this.startTime).getHours() === new Date(this.endTime).getHours()) {
+          if(new Date(this.startTime).getMinutes() > new Date(this.endTime).getMinutes()) {
+            alert("시작 시간은 종료 시간 이전이어야 합니다");
+          }
+        }
+        else {
+          axios.post('http://3.139.244.188:3000/updateTodo', {
+            id: this.todoId,
+            date: this.selectedString,
+            title: this.title, 
+            time: this.isTimeline,
+            startTime: this.startTimeString,
+            endTime: this.endTimeString,
+            isDone: this.isDone,
+            userID: 1
+          }).then((res) => {
+            if (res.data != 'error') {
+              console.log("테이블 업데이트");
+            } else {
+              console.log("에러 발생")
+            }
+          })
+          this.modalController.dismiss({
+            'dismissed': true
+          });
+        }
       }
-    })
+      else {
+        axios.post('http://3.139.244.188:3000/updateTodo', {
+          id: this.todoId,
+          date: this.selectedString,
+          title: this.title, 
+          time: this.isTimeline,
+          startTime: this.startTimeString,
+          endTime: this.endTimeString,
+          isDone: this.isDone,
+          userID: 1
+        }).then((res) => {
+          if (res.data != 'error') {
+            console.log("테이블 업데이트");
+          } else {
+            console.log("에러 발생")
+          }
+        })
+      this.modalController.dismiss({
+        'dismissed': true
+      });
+      }
+    }
   }
   calculateStartTime() {
     console.log(this.startTime, typeof this.startTime)
@@ -94,7 +168,7 @@ export class TodoEditFormPage implements OnInit {
     else {
       let temp = new Date(this.startTime);
       console.log(temp, typeof temp);
-      this.startTimeString = this.datepipe.transform(temp, 'HH:mm:ss');
+      this.startTimeString = this.datePipe.transform(temp, 'HH:mm:ss');
     }
     console.log(this.startTimeString, typeof this.startTimeString);
   }
@@ -104,7 +178,7 @@ export class TodoEditFormPage implements OnInit {
       }
       else {
         let temp = new Date(this.endTime);
-        this.endTimeString = this.datepipe.transform(temp, 'HH:mm:ss');
+        this.endTimeString = this.datePipe.transform(temp, 'HH:mm:ss');
       }
   }
 

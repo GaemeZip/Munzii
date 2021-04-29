@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ModalController, NavParams, NavController } from '@ionic/angular';
 import axios from 'axios';
+import { start } from 'node:repl';
 
 @Component({
   selector: 'app-todo-form',
@@ -20,13 +21,15 @@ export class TodoFormPage implements OnInit {
   endTimeString: string;
   isTimeline: any;
   isTime: any;
+  tempStartTime: any;
+  tempEndTime: any;
 
   constructor(
     private router: Router,
     private navParams: NavParams, 
     public navCtrl: NavController,
     private modalController: ModalController,
-    public datepipe: DatePipe
+    public datePipe: DatePipe
   ) { 
     this.isTime = navParams.get('time');
     this.selected = navParams.get('selected');
@@ -61,6 +64,14 @@ export class TodoFormPage implements OnInit {
         if(this.startTime == null || this.endTime == null) {
           alert("시간을 입력하세요")
         }
+        else if(new Date(this.startTime).getHours() > new Date(this.endTime).getHours()) {
+          alert("시작 시간은 종료 시간 이전이어야 합니다");
+        }
+        else if (new Date(this.startTime).getHours() === new Date(this.endTime).getHours()) {
+          if(new Date(this.startTime).getMinutes() > new Date(this.endTime).getMinutes()) {
+            alert("시작 시간은 종료 시간 이전이어야 합니다");
+          }
+        }
         else {
           axios.post('http://3.139.244.188:3000/createTodo', {
             date: this.selectedString,
@@ -77,10 +88,10 @@ export class TodoFormPage implements OnInit {
             }
           })
 
-        }
         this.modalController.dismiss({
           'dismissed': true
         });
+        }
       }
       else {
         axios.post('http://3.139.244.188:3000/createTodo', {
@@ -94,25 +105,24 @@ export class TodoFormPage implements OnInit {
           if (res.data != 'error') {
             console.log("테이블 생성");
           } else {
-            console.log("에러 발생")
+            console.log(res.data)
           }
         })
+
+        this.modalController.dismiss({
+          'dismissed': true
+        });
       }
-      this.modalController.dismiss({
-        'dismissed': true
-      });
     }
   }
   calculateStartTime() {
-    console.log(this.startTime, typeof this.startTime)
     let temp = new Date(this.startTime);
-    this.startTimeString = this.datepipe.transform(temp, 'HH:mm:ss');
-    console.log(this.startTimeString, typeof this.startTimeString)
+    this.startTimeString = this.datePipe.transform(temp, 'HH:mm:ss');
   }
   calculateEndTime() {
-
     let temp = new Date(this.endTime);
-    this.endTimeString = this.datepipe.transform(temp, 'HH:mm:ss');
+    this.endTimeString = this.datePipe.transform(temp, 'HH:mm:ss');
+
   }
   timeActive() {
     if (this.isTimeline == 0) {
