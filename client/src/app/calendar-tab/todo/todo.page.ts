@@ -21,6 +21,7 @@ export class TodoPage implements OnInit {
   todoStartTime: Date;
   todoEndTime: Date;
 
+  monthNames: any;
   themeId: number;
 
   doneTodo: number;
@@ -31,8 +32,13 @@ export class TodoPage implements OnInit {
     private route: ActivatedRoute,
     public modalController: ModalController,
     private CalendarTabPage: CalendarTabPage) { 
-      this.selected = this.CalendarTabPage.selected;
-      this.selectMonth = this.CalendarTabPage.selectMonth;
+      this.selected = this.CalendarTabPage.paramSelected;
+      if (!this.selected) {
+      this.selected = new Date();
+      }
+      this.monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
+
+      this.selectMonth = this.monthNames[this.selected.getMonth()];
     }
 
     async createTodo() {
@@ -50,24 +56,27 @@ export class TodoPage implements OnInit {
     }
 
   ngOnInit() {
+
+
     this.progress = 50;
     // console.log(this.selected);
     this.date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
 
+    console.log(this.date)
     axios.get('http://3.139.244.188:3000/currentTheme')
       .then(res => {        
         this.themeId = res.data[0].theme_id;
       });
     this.getTodoList();
     console.log(this.selectDayTodoList);
-  }
-  getTodoList() {
-    axios.get('http://3.139.244.188:3000/readTodo',{
-      params:{
-        date: this.date,
-	      userID: 1
-      }
-    })
+    }
+    getTodoList() {
+      axios.get('http://3.139.244.188:3000/readTodo',{
+        params:{
+          date: this.date,
+	        userID: 1
+        }
+      })
     .then(res => {
       console.log(res.data)
       console.log(res.data.length === 0, "AAAAAAAAA")

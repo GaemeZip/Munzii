@@ -15,7 +15,7 @@ export class CalendarTabPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
   currentTab: string;
 
-  initialSelected: Date;
+  public paramSelected: any;
   public selected: any;
   selectYear: any;
   selectMonth: any;
@@ -44,16 +44,16 @@ export class CalendarTabPage implements OnInit {
      }
 
   ngOnInit() {
-    this.currentTab = 'timeline';
+    this.currentTab = 'todo';
 
     this.selected = new Date();
     this.selected.setDate(this.selected.getDate()+7);
     //get date from calendar
     this.route.queryParams.subscribe(params => {
       if(this.router.getCurrentNavigation().extras.state) {
-        console.log(this.router.getCurrentNavigation().extras.state.selectDay);
+        // console.log(this.router.getCurrentNavigation().extras.state.selectDay);
         this.selected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
-        this.initialSelected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
+        this.paramSelected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
         this.selected.setDate(this.selected.getDate()+7);
         // this.selected.setDate(this.selected.getDate()-7);
       }
@@ -138,12 +138,13 @@ export class CalendarTabPage implements OnInit {
     this.router.navigateByUrl('home')
   }
   getDate(tempDay) {
+    this.paramSelected = new Date(tempDay);
     this.selected = new Date(tempDay);
     this.selectYear = this.selected.getFullYear();
     this.selectMonth = this.monthNames[this.selected.getMonth()];
     this.selectDate = this.selected.getDate();
     this.selectDay = this.selected.getDay();
-    console.log(this.selected,this.selectYear,this.selectMonth,this.selectDate,this.selectDay);
+    // console.log(this.selected,this.selectYear,this.selectMonth,this.selectDate,this.selectDay);
   }
 
   calculateCalendar(tempDay) {
@@ -185,7 +186,6 @@ export class CalendarTabPage implements OnInit {
     this.slides.slideTo(1);
   }
   firstSlide() {
-    console.log("첫")
     let tempDay = new Date(this.selected); 
 
     tempDay.setDate(this.selected.getDate() - 7);
@@ -195,8 +195,10 @@ export class CalendarTabPage implements OnInit {
   }
 
   changeDay(date) {
+    // console.log(date)
+    // console.log(this.selected);
     this.selected.setDate(date);
-    console.log(this.selected);
+    this.getDate(this.selected);
     this.calculateCalendar(this.selected);
   }
 }

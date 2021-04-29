@@ -23,6 +23,7 @@ export class TimelinePage implements OnInit {
 
   duration: number;
 
+  monthNames: any;
   timeList: number [] = [];
   timelineList: any[] = [];
   height: number[] =[];
@@ -32,8 +33,13 @@ export class TimelinePage implements OnInit {
     private CalendarTabPage: CalendarTabPage,
     public modalController: ModalController,
   ) {
-    this.selected = this.CalendarTabPage.selected;
-    this.selectMonth = this.CalendarTabPage.selectMonth;
+    this.selected = this.CalendarTabPage.paramSelected;
+    if (!this.selected) {
+    this.selected = new Date();
+    }
+    this.monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
+
+    this.selectMonth = this.monthNames[this.selected.getMonth()];
    }
 
   ngOnInit() {
@@ -43,7 +49,7 @@ export class TimelinePage implements OnInit {
     this.timeList = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
     this.duration= 7;
     // this.date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
-    this.date = '2021-04-17';
+    // this.date = '2021-04-17';
     this.getTimeLineList();
     // console.log(this.timelineList)
     // console.log(this.selected)
@@ -62,13 +68,13 @@ export class TimelinePage implements OnInit {
     })
     .then(res => {
       axios.post('http://3.139.244.188:3000/checkProgress', {
-        date: '2021-04-17',
+        date: this.date,
         userID: 1 
     }).then(res => {
       console.log(res.data)
       if(res.data.length === 0) {
         axios.post('http://3.139.244.188:3000/createProgress', {
-          date: '2021-04-17',
+          date: this.date,
           userID: 1,
         }).then((res) => {
         })
@@ -93,23 +99,24 @@ export class TimelinePage implements OnInit {
     console.log(this.timelineList)
   }
   getHeight() {
-    this.spaceHeight = new Array;
-    console.log(this.timelineList.length)
-    for(var i = 0; i < this.timelineList.length; i ++) {
-      if(i == 0){
-        this.spaceHeight.push(this.calculateSpaceHeight(this.timelineList[i].start_time, this.initialToday));
-        this.height.push(this.calculateHeight(this.timelineList[i].start_time, this.timelineList[i].end_time));
+    if(this.timelineList.length !== 0) {
+      this.spaceHeight = new Array;
+      console.log(this.timelineList.length)
+      for(var i = 0; i < this.timelineList.length; i ++) {
+        if(i == 0){
+          this.spaceHeight.push(this.calculateSpaceHeight(this.timelineList[i].start_time, this.initialToday));
+          this.height.push(this.calculateHeight(this.timelineList[i].start_time, this.timelineList[i].end_time));
+        }
+        else {
+          this.spaceHeight.push(this.calculateSpaceHeight(this.timelineList[i].start_time, this.timelineList[i-1].end_time));
+          this.height.push(this.calculateHeight(this.timelineList[i].start_time, this.timelineList[i].end_time));
+        }
       }
-      else {
-        this.spaceHeight.push(this.calculateSpaceHeight(this.timelineList[i].start_time, this.timelineList[i-1].end_time));
-        this.height.push(this.calculateHeight(this.timelineList[i].start_time, this.timelineList[i].end_time));
-      }
-    }
-    this.spaceHeight.push(this.calculateSpaceHeight(this.finalToday, this.timelineList[this.timelineList.length-1].end_time));
+      this.spaceHeight.push(this.calculateSpaceHeight(this.finalToday, this.timelineList[this.timelineList.length-1].end_time));
 
-    console.log(this.spaceHeight, this.height)
-    this.locationTime = (1439-this.spaceHeight[this.spaceHeight.length-1]);
-    console.log(this.locationTime)
+      console.log(this.spaceHeight, this.height)
+      this.locationTime = (1439-this.spaceHeight[this.spaceHeight.length-1]);
+    }
   }
   calculateSpaceHeight(startTime, previousEndTime) {
     let previous = Number(previousEndTime.substr(0,2)) * 60 + Number(previousEndTime.substr(3,2));
@@ -180,14 +187,13 @@ export class TimelinePage implements OnInit {
       todo.is_done = 0;
     }
     var tempProgress = 0;
-    let date= "2021-04-17"
     for (var i=0; i < this.timelineList.length; i ++) {
       tempProgress += this.timelineList[i].is_done;
     }
     this.progress = tempProgress / this.timelineList.length * 100;
     axios.post('http://3.139.244.188:3000/updateTodo', {
       id: todo.id,
-      date: date,
+      date: this.date,
       title: todo.title,
       time: todo.time,
       startTime: todo.start_time,
