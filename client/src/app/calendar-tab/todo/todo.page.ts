@@ -25,7 +25,7 @@ export class TodoPage implements OnInit {
 
   doneTodo: number;
   progress: number;
-  
+  date: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -52,51 +52,40 @@ export class TodoPage implements OnInit {
   ngOnInit() {
     this.progress = 50;
     // console.log(this.selected);
+    this.date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
 
     axios.get('http://3.139.244.188:3000/currentTheme')
       .then(res => {        
-        this.themeId = res.data[0].theme_id
+        this.themeId = res.data[0].theme_id;
       });
     this.getTodoList();
     console.log(this.selectDayTodoList);
   }
   getTodoList() {
-    let date: string;
-    // date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
-    date = '2021-04-17';
-
     axios.get('http://3.139.244.188:3000/readTodo',{
       params:{
-        date: date,
+        date: this.date,
 	      userID: 1
       }
     })
     .then(res => {
+      console.log(res.data)
       console.log(res.data.length === 0, "AAAAAAAAA")
-
       for(var i = 0; i < res.data.length; i++) {
         this.selectDayTodoList[i] = res.data[i];
       }
       axios.post('http://3.139.244.188:3000/checkProgress', {
-          date: '2021-04-17',
+          date: this.date,
           userID: 1 
       }).then(res => {
         if(res.data.length === 0) {
           axios.post('http://3.139.244.188:3000/createProgress', {
-            date: '2021-04-17',
+            date: this.date,
             userID: 1,
           }).then((res) => {
           })
       }
       })
-      // if(res.data.length === 0) {
-      //   axios.post('http://3.139.244.188:3000/createProgress', {
-      //     date: date,
-      //     userID: 1,
-      //   }).then((res) => {
-      //     console.log("완룡")
-      // })
-      // }
     })
   }
   async editTodo(todo) {
@@ -144,14 +133,13 @@ export class TodoPage implements OnInit {
       todo.is_done = 0;
     }
     var tempProgress = 0;
-    let date= "2021-04-17"
     for (var i=0; i < this.selectDayTodoList.length; i ++) {
       tempProgress += this.selectDayTodoList[i].is_done;
     }
     this.progress = tempProgress / this.selectDayTodoList.length * 100;
     axios.post('http://3.139.244.188:3000/updateTodo', {
       id: todo.id,
-      date: date,
+      date: this.date,
       title: todo.title,
       time: todo.time,
       startTime: todo.start_time,
@@ -166,7 +154,7 @@ export class TodoPage implements OnInit {
       }
     })
     axios.post('http://3.139.244.188:3000/updateProgress', {
-      date: date,
+      date: this.date,
       progress: this.progress,
       userID: 1
     }).then((res) => {
