@@ -36,10 +36,17 @@ export class StartDayPage implements OnInit {
 
   initDay() {
     axios.get('http://3.139.244.188:3000/currentStartDay')
-      .then(res => {
+      .then(async res => {
         console.log("받아온 font id 값 : " + res.data[0].start_day_id);
         this.selectedDay = res.data[0].start_day_id;
-        this.selectIcon(this.selectedDay);
+        //await this.selectIcon(this.selectedDay);
+        var elementSelected = document.getElementById(this.selectedDay);
+         console.log(elementSelected);
+         if(elementSelected == null){
+           this.initDay();
+           return
+         }
+         elementSelected.classList.add("selected");
       });
   }
 
