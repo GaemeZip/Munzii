@@ -13,9 +13,12 @@ router.use(function (req, res, next) {
 router.post('/', (req, res) => {
 
     var date = req.body.date;
+    var userID = req.body.userID;
 
-    const selectQuery = 'SELECT * FROM progresses WHERE date = ?';
-    connection.query(selectQuery, [date], async function (error, rows, fields) {
+    var params = [date, userID];
+
+    const selectQuery = 'SELECT * FROM progresses WHERE date = ? AND user_id=?';
+    connection.query(selectQuery, params, async function (error, rows, fields) {
         if (error) {
             res.send('에러 발생');
         } else {
