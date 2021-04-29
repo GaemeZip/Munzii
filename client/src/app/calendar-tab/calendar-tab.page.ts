@@ -47,14 +47,17 @@ export class CalendarTabPage implements OnInit {
     this.currentTab = 'timeline';
 
     this.selected = new Date();
-
+    this.selected.setDate(this.selected.getDate()+7);
     //get date from calendar
     this.route.queryParams.subscribe(params => {
       if(this.router.getCurrentNavigation().extras.state) {
         console.log(this.router.getCurrentNavigation().extras.state.selectDay);
         this.selected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
         this.initialSelected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
+        this.selected.setDate(this.selected.getDate()+7);
+        // this.selected.setDate(this.selected.getDate()-7);
       }
+      
     })
 
     // ** need ** get start week Day
@@ -182,17 +185,13 @@ export class CalendarTabPage implements OnInit {
     this.slides.slideTo(1);
   }
   firstSlide() {
+    console.log("첫")
     let tempDay = new Date(this.selected); 
-    if(this.initialSelected) {
-      if(this.initialSelected.getDate() == tempDay.getDate() && this.initialSelected.getMonth() == tempDay.getMonth() && this.initialSelected.getFullYear() == tempDay.getFullYear()) {
-      }
-    }
-    else {
-      tempDay.setDate(this.selected.getDate() - 7);
-      this.getDate(tempDay);
-      this.calculateCalendar(tempDay);
-      this.slides.slideTo(1);
-    }
+
+    tempDay.setDate(this.selected.getDate() - 7);
+    this.getDate(tempDay);
+    this.calculateCalendar(tempDay);
+    this.slides.slideTo(1);
   }
 
   changeDay(date) {
