@@ -61,6 +61,19 @@ export class TimelinePage implements OnInit {
       }
     })
     .then(res => {
+      axios.post('http://3.139.244.188:3000/checkProgress', {
+        date: '2021-04-17',
+        userID: 1 
+    }).then(res => {
+      console.log(res.data)
+      if(res.data.length === 0) {
+        axios.post('http://3.139.244.188:3000/createProgress', {
+          date: '2021-04-17',
+          userID: 1,
+        }).then((res) => {
+        })
+    }
+    })
       for(var i = 0; i < res.data.length; i++) {
         if(res.data[i].time == 1) {
           this.timelineList.push(res.data[i]);

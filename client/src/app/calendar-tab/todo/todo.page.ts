@@ -72,9 +72,31 @@ export class TodoPage implements OnInit {
       }
     })
     .then(res => {
+      console.log(res.data.length === 0, "AAAAAAAAA")
+
       for(var i = 0; i < res.data.length; i++) {
         this.selectDayTodoList[i] = res.data[i];
       }
+      axios.post('http://3.139.244.188:3000/checkProgress', {
+          date: '2021-04-17',
+          userID: 1 
+      }).then(res => {
+        if(res.data.length === 0) {
+          axios.post('http://3.139.244.188:3000/createProgress', {
+            date: '2021-04-17',
+            userID: 1,
+          }).then((res) => {
+          })
+      }
+      })
+      // if(res.data.length === 0) {
+      //   axios.post('http://3.139.244.188:3000/createProgress', {
+      //     date: date,
+      //     userID: 1,
+      //   }).then((res) => {
+      //     console.log("완룡")
+      // })
+      // }
     })
   }
   async editTodo(todo) {
@@ -143,5 +165,12 @@ export class TodoPage implements OnInit {
         console.log("에러 발생")
       }
     })
+    axios.post('http://3.139.244.188:3000/updateProgress', {
+      date: date,
+      progress: this.progress,
+      userID: 1
+    }).then((res) => {
+      console.log("update")
+  })
   }
 }
