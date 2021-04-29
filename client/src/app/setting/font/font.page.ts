@@ -44,7 +44,15 @@ export class FontPage implements OnInit {
       .then(async res => {
         console.log("받아온 font id 값 : " + res.data[0].font_id);
         this.selectedFont = res.data[0].font_id;
-        await this.selectIcon(this.selectedFont);
+        //await this.selectIcon(this.selectedFont);
+        var elementSelected = document.getElementById(this.selectedFont);
+         console.log(elementSelected);
+         if(elementSelected == null){
+           this.initFont();
+           return
+         }
+         elementSelected.classList.add("selected");
+        
       });
 
   }

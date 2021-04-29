@@ -39,7 +39,14 @@ export class StartDayPage implements OnInit {
       .then(async res => {
         console.log("받아온 font id 값 : " + res.data[0].start_day_id);
         this.selectedDay = res.data[0].start_day_id;
-        await this.selectIcon(this.selectedDay);
+        //await this.selectIcon(this.selectedDay);
+        var elementSelected = document.getElementById(this.selectedDay);
+         console.log(elementSelected);
+         if(elementSelected == null){
+           this.initDay();
+           return
+         }
+         elementSelected.classList.add("selected");
       });
   }
 
