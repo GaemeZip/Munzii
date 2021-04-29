@@ -23,6 +23,7 @@ const deleteTodoRouter = require('./router/todos/deleteTodo');
 const readProgressRouter = require('./router/todos/readProgress');
 const createProgressRouter = require('./router/todos/createProgress');
 const updateProgressRouter = require('./router/todos/updateProgress');
+const checkProgressRouter = require('./router/todos/checkProgress');
 
 const updateFontRouter = require('./router/settings/updateFont');
 const readFontRouter = require('./router/settings/readFont');
@@ -53,6 +54,7 @@ app.use('/deleteTodo', deleteTodoRouter);
 app.use('/readProgress', readProgressRouter);
 app.use('/createProgress', createProgressRouter);
 app.use('/updateProgress', updateProgressRouter);
+app.use('/checkProgress', checkProgressRouter);
 
 app.use('/updateFont', updateFontRouter);
 app.use('/readFont', readFontRouter);
