@@ -68,7 +68,10 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-calendar": {},
+      "cordova-plugin-calendar": {
+        "CALENDAR_USAGE_DESCRIPTION": " ",
+        "CONTACTS_USAGE_DESCRIPTION": " "
+      },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
@@ -79,8 +82,8 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
