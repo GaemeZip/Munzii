@@ -35,8 +35,9 @@ export class FontPage implements OnInit {
           this.font.f_family = res.data[i].f_family;
           this.fontList.push([this.font.f_id, this.font.f_name, this.font.f_family]);
         }
+        this.initFont();
       });
-    this.initFont();
+
   }
 
   initFont() {
@@ -44,19 +45,11 @@ export class FontPage implements OnInit {
       .then(async res => {
         console.log("받아온 font id 값 : " + res.data[0].font_id);
         this.selectedFont = res.data[0].font_id;
-        //await this.selectIcon(this.selectedFont);
         localStorage.fontId = res.data[0].font_id;
         localStorage.f_family = this.fontList[res.data[0].font_id - 1][2]
         var elementSelected = document.getElementById(this.selectedFont);
-         console.log(elementSelected);
-         if(elementSelected == null){
-           this.initFont();
-           return
-         }
-         elementSelected.classList.add("selected");
-        
+        elementSelected.classList.add("selected");
       });
-
   }
 
   selectIcon(id) {
@@ -67,9 +60,14 @@ export class FontPage implements OnInit {
       elementSelected.classList.remove("selected");
     }
     var elementSelected = document.getElementById(id);
+    if (elementSelected == null) {
+      this.initFont();
+      return
+    }
     elementSelected.classList.add("selected");
     const changeFont = document.querySelector('body');
     changeFont.style.setProperty('--ion-font-family', localStorage.f_family);
+    
   }
 
   updateFont(f_id) {
@@ -77,7 +75,6 @@ export class FontPage implements OnInit {
       font_id: f_id,
       u_id: 1
     }).then((res) => {
-      //console.log(res)
       if (res.data != 'error') {
         localStorage.fontId = f_id;
         this.initFont();
@@ -92,14 +89,13 @@ export class FontPage implements OnInit {
 
   select(id) {
     console.log("클릭되었습니다 : " + id);
-    this.updateFont(id); // update db
     this.selectIcon(id); // display munzii
+    this.updateFont(id); // update db
     this.selectedFont = id;
-    //this.initFont();
+    
   }
 
   prev() {
-    this.router.navigate(['/settings']);
     location.href = "/settings";
   }
 }
