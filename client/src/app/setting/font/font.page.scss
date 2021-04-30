@@ -49,16 +49,19 @@
                 height: 45px;
             }
         }
-        #prettynight{
+        .NexonGothic{
+            font-family: var(--ion-font-korean-gothic);
+        }
+        .PrettyNight{
             font-family: var(--ion-font-korean-prettynight);
         }
-        #dohyeon{
+        .DoHyeon{
             font-family: var(--ion-font-korean-dohyeon);
         }
-        #poorstory{
+        .PoorStory{
             font-family: var(--ion-font-korean-poorstory);
         }
-        #nexonfootball{
+        #NexonFootball{
             font-family: var(--ion-font-korean-nexonfootball);
         }
     }
