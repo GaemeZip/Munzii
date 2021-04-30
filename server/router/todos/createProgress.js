@@ -20,6 +20,8 @@ router.post('/', (req, res) => {
   var params = [date, userID];
 
   connection.query(createQuery, params, (error, rows, data) => {
+
+    
     if (error) {
       res.send('error');
     } else {
