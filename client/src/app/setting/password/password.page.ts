@@ -16,7 +16,6 @@ export class PasswordPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log(localStorage.passwordState,"하하");
     if (localStorage.passwordState == 'true') {
       this.isOn = true;
       this.isOff = false;
@@ -29,7 +28,6 @@ export class PasswordPage implements OnInit {
   }
 
   prev() {
-    localStorage.passwordState = 'false';
     this.router.navigate(['/settings']);
   }
 
