@@ -9,6 +9,7 @@ import { $ } from 'protractor';
   styleUrls: ['./join.page.scss'],
 })
 export class JoinPage implements OnInit {
+  windowHeight: number = window.screen.height;
 
   constructor(private router: Router) { }
   username: string;

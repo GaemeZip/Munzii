@@ -201,4 +201,8 @@ export class CalendarTabPage implements OnInit {
     this.getDate(this.selected);
     this.calculateCalendar(this.selected);
   }
+  moveToSettings(){
+    this.router.navigate(['/settings']);
+
+  }
 }
