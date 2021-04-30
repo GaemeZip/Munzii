@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import axios from 'axios';
 
 @Component({
   selector: 'app-password',
@@ -17,17 +16,20 @@ export class PasswordPage implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.passwordState == true) {
+    console.log(localStorage.passwordState,"하하");
+    if (localStorage.passwordState == 'true') {
       this.isOn = true;
       this.isOff = false;
     } else {
       this.isOn = false;
       this.isOff = true;
+      localStorage.password = null;
+
     }
-    console.log(localStorage.passwordState);
   }
 
   prev() {
+    localStorage.passwordState = 'false';
     this.router.navigate(['/settings']);
   }
 
@@ -35,7 +37,6 @@ export class PasswordPage implements OnInit {
     if (this.isOff == true) {
       return;
     }
-    localStorage.passwordMode = 'set';
     this.router.navigate(['/password-input']);
   }
 
@@ -44,8 +45,6 @@ export class PasswordPage implements OnInit {
       this.isOn = true;
       this.isOff = false;
       localStorage.passwordState = this.isOn;
-      localStorage.passwordMode = 'set';
-      console.log(localStorage.passwordMode);
       this.router.navigate(['/password-input']);
     } else {
       return;
@@ -57,21 +56,12 @@ export class PasswordPage implements OnInit {
       this.isOn = false;
       this.isOff = true;
       localStorage.passwordState = this.isOn;
-      console.log(localStorage.passwordState, "오프 누름")
+      localStorage.password = null;
+
     } else {
       return;
     }
 
-    //   axios.post('http://3.139.244.188:3000/updatePassword', {
-    //     password: null,
-    //     userID: 1
-    //   }).then((res) => {
-    //     if (res.data != 'error') {
-    //       console.log("비번 null");
-    //     } else {
-    //       console.log("에러 발생")
-    //     }
-    //   })
   }
 
 }
