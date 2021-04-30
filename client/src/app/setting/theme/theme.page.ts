@@ -7,7 +7,7 @@ import axios from 'axios';
   templateUrl: './theme.page.html',
   styleUrls: ['./theme.page.scss'],
 })
-export class ThemePage implements OnInit {
+export class ThemePage implements OnInit { 
   windowHeight: number = window.screen.height;
   theme:{
     t_id: number,
@@ -31,7 +31,9 @@ export class ThemePage implements OnInit {
   themeList: any[] =[];
   selectedTheme: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    
+  }
 
   ngOnInit() {
     axios.get('http://3.139.244.188:3000/readTheme')
@@ -49,8 +51,9 @@ export class ThemePage implements OnInit {
           this.themeList.push([this.theme.t_id, this.theme.t_name, this.theme.t_primary, this.theme.t_check,this.theme.t_complete, this.theme.t_button, this.theme.t_modify, this.theme.t_background]);
         }
         console.log(this.themeList);
+        this.initTheme();
       });
-      this.initTheme();
+      
   }
 
   initTheme(){
@@ -58,13 +61,17 @@ export class ThemePage implements OnInit {
       .then(async res => {        
         console.log("받아온 theme id 값 : "+res.data[0].theme_id);
          this.selectedTheme = res.data[0].theme_id;
+         localStorage.themeId = res.data[0].theme_id;
+         console.log(this.themeList[0][2]);
+         localStorage.t_primary = this.themeList[localStorage.themeId-1][2]
+         localStorage.t_check = this.themeList[localStorage.themeId-1][3]
+         localStorage.t_complete = this.themeList[localStorage.themeId-1][4]
+         localStorage.t_button = this.themeList[localStorage.themeId-1][5]
+         localStorage.t_darkYellow = this.themeList[localStorage.themeId-1][6]
+         localStorage.t_background = this.themeList[localStorage.themeId-1][7]
          //await this.selectIcon(this.selectedTheme);
          var elementSelected = document.getElementById(this.selectedTheme);
          console.log(elementSelected);
-         if(elementSelected == null){
-           this.initTheme();
-           return
-         }
          elementSelected.classList.add("selected");
       });
   }
@@ -77,14 +84,18 @@ export class ThemePage implements OnInit {
       elementSelected.classList.remove("selected");
     }
     var elementSelected = document.getElementById(id);
+    if(elementSelected == null){
+      this.selectIcon(id);
+      return
+    }
     elementSelected.classList.add("selected");
     const changeTheme = document.querySelector('body');
-    changeTheme.style.setProperty('--ion-color-primary', this.themeList[id-1][2]);
-    changeTheme.style.setProperty('--ion-color-check', this.themeList[id-1][3]);
-    changeTheme.style.setProperty('--ion-color-complete', this.themeList[id-1][4]);
-    changeTheme.style.setProperty('--ion-color-button', this.themeList[id-1][5]);
-    changeTheme.style.setProperty('--ion-color-dark-yellow', this.themeList[id-1][6]);
-    changeTheme.style.setProperty('--ion-theme-background', this.themeList[id-1][7]);
+    changeTheme.style.setProperty('--ion-color-primary', localStorage.t_primary);
+    changeTheme.style.setProperty('--ion-color-check', localStorage.t_check);
+    changeTheme.style.setProperty('--ion-color-complete', localStorage.t_complete);
+    changeTheme.style.setProperty('--ion-color-button', localStorage.t_button);
+    changeTheme.style.setProperty('--ion-color-dark-yellow', localStorage.t_darkYellow);
+    changeTheme.style.setProperty('--ion-theme-background', localStorage.t_background);
   }
 
   updateTheme(t_id) {
@@ -92,6 +103,8 @@ export class ThemePage implements OnInit {
       theme_id: t_id,
       u_id: 1
     }).then((res) => {
+      localStorage.themeId = t_id;
+      this.initTheme();
       console.log(res)
       if (res.data != 'error') {
         console.log("테마 업데이트");
@@ -112,7 +125,8 @@ export class ThemePage implements OnInit {
   }
 
   prev(){
-    this.router.navigate(['/settings']);
+    //this.router.navigate(['/settings']);
+    location.href = "/settings";
   }
 
 }

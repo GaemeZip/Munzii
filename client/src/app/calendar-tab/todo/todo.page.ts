@@ -44,6 +44,12 @@ export class TodoPage implements OnInit {
     this.selected = new Date(this.date);
     this.selectMonth = this.monthNames[this.selected.getMonth()]
 
+    this.initSetting();
+    this.progress = 50;
+    // console.log(this.selected);
+    this.date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
+
+    console.log(this.date)
     axios.get('http://3.139.244.188:3000/currentTheme')
       .then(res => {        
         this.themeId = res.data[0].theme_id;
@@ -194,5 +200,10 @@ export class TodoPage implements OnInit {
         console.log("에러 발생")
       }
     })
+  }
+  initSetting(){
+    const changeTheme = document.querySelector('body');
+    changeTheme.style.setProperty('--ion-color-primary', localStorage.t_primary);
+    changeTheme.style.setProperty('--ion-color-dark-yellow', localStorage.t_darkYellow);
   }
 }

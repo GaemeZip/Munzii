@@ -28,7 +28,9 @@ export class HomePage implements OnInit {
 
   constructor(
     private router:Router
-  ) { 
+  )
+  
+   { 
     console.log(this.windowHeight)
     this.date = new Date();
     this.monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
@@ -127,5 +129,10 @@ export class HomePage implements OnInit {
   moveToSettings(){
     this.router.navigate(['/settings']);
 
+  }
+  initSetting(){
+    const changeTheme = document.querySelector('body');
+    changeTheme.style.setProperty('--ion-color-primary', localStorage.t_primary);
+    
   }
 }
