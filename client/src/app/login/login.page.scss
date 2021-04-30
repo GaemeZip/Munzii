@@ -5,18 +5,21 @@ ion-content {
     --background: var(--ion-theme-background);
 }
 .container {
-    position: relative;
+    display: flex;
     height: 100%;
     text-align: center;
+    align-content: space-between;
+    justify-content: center;
+    flex-direction: column;
     .logo {
         font-family: var(--ion-font-munzii);
         font-size: 65px;
-        margin-top: 80px;
+        margin-top: 15%;
         color: #343229;
     }
     .form {
         display: flex;
-        height: 55%;
+        width: 100%;
         flex-direction: column;
         justify-content: center;
         align-content: center;
@@ -31,7 +34,7 @@ ion-content {
                 display: flex;
                 flex-direction: column;
                 input {
-                    width: 100%;
+                    width: 95%;
                     height: 40px;
                     margin: 5px 0;
                     background-color: var(--ion-color-white);
@@ -43,7 +46,7 @@ ion-content {
             }
             button {
                 margin: 0px;
-                width: 30%;
+                width: 35%;
                 height: 90px;
                 border-radius: 6px;
                 font-family: var(--ion-font-korean-gothic);
@@ -64,7 +67,6 @@ ion-content {
     }
     a {
         margin: 10px 0px 0px 0px;
-        width: 40%;
         height: 20px;
         font-family: var(--ion-font-korean-gothic);
         background-color: transparent;
@@ -73,13 +75,13 @@ ion-content {
     }
 
     .footer {
-        display: flex;
-        justify-content: center;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
         width: 100%;
-        position: fixed;
-        margin-bottom: 80px;
-        text-align: center;
-        bottom: 0;
+        //position: fixed;
+        margin-bottom: 15%;
+        //text-align: center;
         img {
             width: 75px;
             height: 75px;

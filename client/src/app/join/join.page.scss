@@ -5,14 +5,16 @@ ion-content {
     --background: var(--ion-theme-background);
 }
 .container {
-    position: relative;
+    display: flex;
     height: 100%;
     text-align: center;
-
+    align-content: space-between;
+    justify-content: center;
+    flex-direction: column;
     .logo {
         font-family: var(--ion-font-munzii);
         font-size: 65px;
-        margin-top: 80px;
+        margin-top: 15%;
         color: #343229;
     }
     .form-login {
@@ -113,13 +115,13 @@ ion-content {
     }
 
     .footer {
-        display: flex;
-        justify-content: center;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
         width: 100%;
-        position: fixed;
-        margin-bottom: 80px;
-        text-align: center;
-        bottom: 0;
+        //position: fixed;
+        margin-bottom: 15%;
+        //text-align: center;
         img {
             width: 75px;
             height: 75px;
