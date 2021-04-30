@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
 
     let params = [start_day_id, u_id];
 
-    const updateQuery = 'UPDATE users SET start_day_id=? WHERE u_id=1';
+    const updateQuery = 'UPDATE users SET start_day_id=? WHERE u_id=?';
     connection.query(updateQuery, params, (error, rows, data) => {
         if (error) {
             res.send('error');
