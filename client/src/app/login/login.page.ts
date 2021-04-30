@@ -8,6 +8,7 @@ import axios from 'axios';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  windowHeight: number = window.screen.height;
 
   constructor(private router: Router) { }
   username: string;
