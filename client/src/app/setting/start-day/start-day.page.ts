@@ -37,7 +37,7 @@ export class StartDayPage implements OnInit {
   initDay() {
     axios.get('http://3.139.244.188:3000/currentStartDay')
       .then(async res => {
-        console.log("받아온 font id 값 : " + res.data[0].start_day_id);
+        console.log("받아온 start-day id 값 : " + res.data[0].start_day_id);
         this.selectedDay = res.data[0].start_day_id;
         //await this.selectIcon(this.selectedDay);
         var elementSelected = document.getElementById(this.selectedDay);
@@ -59,8 +59,8 @@ export class StartDayPage implements OnInit {
     }
     var elementSelected = document.getElementById(id);
     elementSelected.classList.add("selected");
-    const changeFont = document.querySelector('body');
-    changeFont.style.setProperty('--ion-font-family', this.dayList[id - 1][1]);
+    //const changeFont = document.querySelector('body');
+    //changeFont.style.setProperty('--ion-font-family', this.dayList[id - 1][1]);
   }
 
   updateStartDay(s_id) {
