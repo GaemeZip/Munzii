@@ -55,6 +55,10 @@ const routes: Routes = [
   {
     path: 'phaser', component: PhaserComponent, canActivate: [AuthGuard] 
   },
+  {
+    path: 'password-enter',
+    loadChildren: () => import('./password-enter/password-enter.module').then( m => m.PasswordEnterPageModule)
+  },
 ];
 
 

@@ -12,13 +12,10 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    console.log('AuthGuard#canActivate called');
     if (localStorage.user == 'true') {
-      console.log(localStorage.passwordState, '비번 상태');
 
       if (localStorage.passwordState == 'true') {
-        localStorage.passwordMode = 'enter';
-        this.router.navigate(['/password-input']);
+        this.router.navigate(['/password-enter']);
         return false;
       }
       this.router.navigate(['/home']);

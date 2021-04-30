@@ -17,14 +17,11 @@ export class PasswordInputPage implements OnInit {
   n = 0;
   isChecked = false;
   isWrong = false;
-  passwordMode;
-  isFirstTry = true;
 
   constructor(private router: Router) {
   }
 
   ngOnInit() {
-    this.passwordMode = localStorage.passwordMode;
 
   }
 
@@ -32,9 +29,12 @@ export class PasswordInputPage implements OnInit {
     this.password = [null, null, null, null];
     this.tempPassword = [];
     this.n = 0;
-    this.router.navigate(['/password']);
+    
+    if (localStorage.password == 'null') {
+      localStorage.passwordState = false;
+    }
+    location.href = "/password";
   }
-
 
   setPassword(k) {
     this.msg = "";
@@ -59,19 +59,16 @@ export class PasswordInputPage implements OnInit {
         for (var i in this.password) {
           this.tempPassword[i] = this.password[i];
         }
-        console.log(this.tempPassword);
         this.input = '다시 한 번 입력해주세요';
         this.n = 0;
         this.password = [null, null, null, null];
         this.isChecked = true;
       } else {// 재입력
-        console.log("재입력");
 
         if (this.password[0] == this.tempPassword[0] && this.password[1] == this.tempPassword[1] && this.password[2] == this.tempPassword[2] && this.password[3] == this.tempPassword[3]) {//인증 성공
           localStorage.password = this.password;
-          this.n=0;
-          this.password = [null,null,null,null];
-          localStorage.passwordMode = 'enter';
+          this.n = 0;
+          this.password = [null, null, null, null];
           this.router.navigate(['/password']);
 
         } else {
@@ -81,43 +78,9 @@ export class PasswordInputPage implements OnInit {
           this.tempPassword = [];
           this.password = [null, null, null, null];
           this.isWrong = true;
-          console.log(this.password);
-          console.log(this.tempPassword);
 
         }
         this.isChecked = false;
-
-      }
-    }
-  }
-
-  enterPassword(k) {
-    if (k == null) { // 빈칸 눌렀을 때
-      return;
-    } else if (k == '<') { // 지우기
-      if (this.n == 0) {
-        return;
-      } else {
-        this.password[this.n - 1] = null;
-        this.n -= 1;
-      }
-    } else { // 숫자 눌렀을 때
-      this.password[this.n] = k;
-      this.n += 1;
-    }
-
-    if (this.n == 4) {
-
-
-      if (localStorage.password == this.password) {
-        this.n = 0;
-        this.router.navigate(['/home']);
-
-
-      } else {
-        this.input = '다시 시도해주세요';
-        this.password = [null, null, null, null];
-        this.n = 0;
 
       }
     }
