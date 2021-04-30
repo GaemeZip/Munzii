@@ -14,6 +14,7 @@ export class MemoPage implements OnInit {
 
   ngOnInit() {
     this.readMemo();
+    this.initSetting();
 
   }
 
@@ -90,5 +91,9 @@ export class MemoPage implements OnInit {
     } else {
       this.updateMemo();
     }
+  }
+  initSetting(){
+    const changeTheme = document.querySelector('body');
+    changeTheme.style.setProperty('--ion-color-primary', localStorage.t_primary);
   }
 }
