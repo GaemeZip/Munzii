@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { CalendarTabPage} from '../calendar-tab.page';
 import { TodoFormPage } from '../todo-form/todo-form.page';
 import { TodoEditFormPage } from '../todo-edit-form/todo-edit-form.page';
 
 import axios from 'axios';
+import { templateJitUrl } from '@angular/compiler';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.page.html',
@@ -23,25 +24,65 @@ export class TodoPage implements OnInit {
 
   monthNames: any;
   themeId: number;
-
+  // playAlert
   doneTodo: number;
   progress: number;
   date: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    public navCtrl: NavController,
     public modalController: ModalController,
     private CalendarTabPage: CalendarTabPage) { 
-      this.selected = this.CalendarTabPage.paramSelected;
-      if (!this.selected) {
-      this.selected = new Date();
-      }
       this.monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
-
-      this.selectMonth = this.monthNames[this.selected.getMonth()];
     }
 
+  ngOnInit() {
+    let temp = location.href.split("?");
+    temp = temp[1].split("=");
+    this.date = temp[1];
+    this.selected = new Date(this.date);
+    this.selectMonth = this.monthNames[this.selected.getMonth()]
+
+    axios.get('http://3.139.244.188:3000/currentTheme')
+      .then(res => {        
+        this.themeId = res.data[0].theme_id;
+      });
+    this.getTodoList();
+    }
+    getTodoList() {
+      console.log(this.date)
+      axios.get('http://3.139.244.188:3000/readTodo',{
+        params:{
+          date: this.date,
+          userID: 1
+        }
+      })
+      .then(res => {
+        for(var i = 0; i < res.data.length; i++) {
+          this.selectDayTodoList[i] = res.data[i];
+        }
+
+        axios.post('http://3.139.244.188:3000/checkProgress', {
+          date: this.date,
+          userID: 1 
+        }).then(res => {
+          if(res.data.length === 0) {
+            axios.post('http://3.139.244.188:3000/createProgress', {
+              date: this.date,
+              userID: 1,
+            }).then((res) => {
+
+            })
+          }
+          else {
+            this.calculateProgress();
+          }
+        })
+      })
+    }
     async createTodo() {
+      console.log(this.selectMonth)
       const modal = await this.modalController.create({
         component: TodoFormPage,
         animated: true,
@@ -52,52 +93,17 @@ export class TodoPage implements OnInit {
         },
         cssClass: 'modal-custom'
       });
+      modal.onDidDismiss().then((dataReturned) => {
+        if (dataReturned !== null) {
+          location.href="/calendar-tab/todo?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
+        }
+      });
+      // const modalClose = await this.modalController.onDidDismiss({})
       return await modal.present();
     }
 
-  ngOnInit() {
-
-
-    this.progress = 50;
-    // console.log(this.selected);
-    this.date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
-
-    console.log(this.date)
-    axios.get('http://3.139.244.188:3000/currentTheme')
-      .then(res => {        
-        this.themeId = res.data[0].theme_id;
-      });
-    this.getTodoList();
-    console.log(this.selectDayTodoList);
-    }
-    getTodoList() {
-      axios.get('http://3.139.244.188:3000/readTodo',{
-        params:{
-          date: this.date,
-	        userID: 1
-        }
-      })
-    .then(res => {
-      console.log(res.data)
-      console.log(res.data.length === 0, "AAAAAAAAA")
-      for(var i = 0; i < res.data.length; i++) {
-        this.selectDayTodoList[i] = res.data[i];
-      }
-      axios.post('http://3.139.244.188:3000/checkProgress', {
-          date: this.date,
-          userID: 1 
-      }).then(res => {
-        if(res.data.length === 0) {
-          axios.post('http://3.139.244.188:3000/createProgress', {
-            date: this.date,
-            userID: 1,
-          }).then((res) => {
-          })
-      }
-      })
-    })
-  }
-  async editTodo(todo) {
+    // await ModalController.onDidDismiss() {}
+    async editTodo(todo) {
     let index = this.selectDayTodoList.indexOf(todo);
     let id = this.selectDayTodoList[index].id;
     console.log(index);
@@ -114,8 +120,15 @@ export class TodoPage implements OnInit {
         todoStartTime: this.selectDayTodoList[index].start_time,
         todoEndTime: this.selectDayTodoList[index].end_time,
       },
+      
       cssClass: 'modal-custom'
     });
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        location.href="/calendar-tab/todo?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
+      }
+    });
+
     return await modal.present();
   }
   deleteTodo(todo) {
@@ -126,13 +139,36 @@ export class TodoPage implements OnInit {
       userID: 1
     }).then((res) => {
       if (res.data != 'error') {
-        console.log("테이블 삭제");
-        this.ngOnInit();
+        // console.log("테이블 삭제");
       } else {
-        console.log("에러 발생")
+        // console.log("에러 발생")
       }
-    })
+      location.href="/calendar-tab/todo?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
 
+      // this.navCtrl.setRoot(this.navCtrl.getActive().component);
+      // this.navCtrl.push(ProductDetailPage, {'product' : product});
+      // this.navCtrl.navigateRoot('Todo');
+    })
+  }
+  calculateProgress() {
+
+    var tempProgress = 0;
+    for (var i=0; i < this.selectDayTodoList.length; i ++) {
+      tempProgress += this.selectDayTodoList[i].is_done;
+    }
+    if(tempProgress === 0) {
+      this.progress = 0;
+    }
+    else {
+      this.progress = tempProgress / this.selectDayTodoList.length * 100;
+    }
+
+    axios.post('http://3.139.244.188:3000/updateProgress', {
+      date: this.date,
+      progress: this.progress,
+      userID: 1
+    }).then((res) => {
+    })
   }
   calculateDone(todo) {
     if (todo.is_done == 0) {
@@ -141,11 +177,7 @@ export class TodoPage implements OnInit {
     else {
       todo.is_done = 0;
     }
-    var tempProgress = 0;
-    for (var i=0; i < this.selectDayTodoList.length; i ++) {
-      tempProgress += this.selectDayTodoList[i].is_done;
-    }
-    this.progress = tempProgress / this.selectDayTodoList.length * 100;
+    this.calculateProgress();
     axios.post('http://3.139.244.188:3000/updateTodo', {
       id: todo.id,
       date: this.date,
@@ -162,12 +194,5 @@ export class TodoPage implements OnInit {
         console.log("에러 발생")
       }
     })
-    axios.post('http://3.139.244.188:3000/updateProgress', {
-      date: this.date,
-      progress: this.progress,
-      userID: 1
-    }).then((res) => {
-      console.log("update")
-  })
   }
 }

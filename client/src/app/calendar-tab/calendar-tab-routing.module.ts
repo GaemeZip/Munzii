@@ -20,18 +20,18 @@ const routes: Routes = [
         path: 'memo',
         loadChildren: () => import('../calendar-tab/memo/memo.module').then( m => m.MemoPageModule)
       },
-      {
-        path: '',
-        redirectTo: 'todo',
-        pathMatch: 'full'
-      }
+      // {
+      //   path: '',
+      //   redirectTo: 'todo',
+      //   pathMatch: 'full'
+      // }
     ]
   },
-  {
-    path: '',
-    redirectTo: 'todo',
-    pathMatch: 'full'
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'todo',
+  //   pathMatch: 'full'
+  // },
   {
     path: 'todo-form',
     loadChildren: () => import('./todo-form/todo-form.module').then( m => m.TodoFormPageModule)

@@ -33,32 +33,27 @@ export class TimelinePage implements OnInit {
     private CalendarTabPage: CalendarTabPage,
     public modalController: ModalController,
   ) {
-    this.selected = this.CalendarTabPage.paramSelected;
-    if (!this.selected) {
-    this.selected = new Date();
-    }
     this.monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
-
-    this.selectMonth = this.monthNames[this.selected.getMonth()];
    }
 
   ngOnInit() {
+    let temp = location.href.split("?");
+    temp = temp[1].split("=");
+    this.date = temp[1];
+    this.selected = new Date(this.date);
+    this.selectMonth = this.monthNames[this.selected.getMonth()]
+    console.log(this.selected)
+
     this.progress = 50;
     this.initialToday = "00:00:00";
     this.finalToday = "23:59:00";
     this.timeList = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
     this.duration= 7;
-    // this.date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
-    // this.date = '2021-04-17';
     this.getTimeLineList();
-    // console.log(this.timelineList)
-    // console.log(this.selected)
-
-
-
   }
 
   getTimeLineList() {
+    console.log(this.date)
     this.timelineList = new Array;
     axios.get('http://3.139.244.188:3000/readTodo',{
       params:{
@@ -141,6 +136,11 @@ export class TimelinePage implements OnInit {
       },
       cssClass: 'modal-custom'
     });
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        location.href="/calendar-tab/timeline?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
+      }
+    });
     return await modal.present();
   }
   async editTodo(todo) {
@@ -162,6 +162,11 @@ export class TimelinePage implements OnInit {
       },
       cssClass: 'modal-custom'
     });
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        location.href="/calendar-tab/timeline?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
+      }
+    });
     return await modal.present();
   }
   deleteTodo(todo) {
@@ -177,6 +182,7 @@ export class TimelinePage implements OnInit {
       } else {
         console.log("에러 발생")
       }
+    location.href="/calendar-tab/timeline?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
     })
   }
   calculateDone(todo) {

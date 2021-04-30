@@ -63,7 +63,7 @@ export class TodoEditFormPage implements OnInit {
     }
   }
   updateTodo() {
-    this.selectedString='2021-04-17';
+    // this.selectedString='2021-04-17';
     if(this.isTimeline == 0) {
       this.startTimeString ="00:00:00"
       this.endTimeString ="00:00:00"
@@ -181,5 +181,4 @@ export class TodoEditFormPage implements OnInit {
         this.endTimeString = this.datePipe.transform(temp, 'HH:mm:ss');
       }
   }
-
 }
