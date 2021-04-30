@@ -44,21 +44,18 @@ export class CalendarTabPage implements OnInit {
      }
 
   ngOnInit() {
-    this.currentTab = 'todo';
+    let temp = location.href.split("?");
+    let tempTab = temp[0].split("/");
+    this.currentTab = tempTab[4];
 
-    this.selected = new Date();
+    console.log(tempTab)
+    temp = temp[1].split("=");
+    let tempDate = temp[1];
+    this.selected = new Date(tempDate);
+    console.log(this.selected)
+
+    // this.selected = new Date();
     this.selected.setDate(this.selected.getDate()+7);
-    //get date from calendar
-    this.route.queryParams.subscribe(params => {
-      if(this.router.getCurrentNavigation().extras.state) {
-        // console.log(this.router.getCurrentNavigation().extras.state.selectDay);
-        this.selected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
-        this.paramSelected = new Date(this.router.getCurrentNavigation().extras.state.selectDay);
-        this.selected.setDate(this.selected.getDate()+7);
-        // this.selected.setDate(this.selected.getDate()-7);
-      }
-      
-    })
 
     // ** need ** get start week Day
     axios.get('http://3.139.244.188:3000/currentStartDay')
@@ -103,18 +100,13 @@ export class CalendarTabPage implements OnInit {
     
   }
   clickPrevTab() {
-    let NavigationExtras: NavigationExtras = {
-      state: {
-        selected: this.selected
-      }
-    };
     if(this.currentTab == 'timeline') {
       this.currentTab = 'todo';
-      this.router.navigateByUrl('/calendar-tab/todo', NavigationExtras);
+      location.href="/calendar-tab/todo?date=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
     }
     else if(this.currentTab == 'memo') {
       this.currentTab = 'timeline';
-      this.router.navigateByUrl('/calendar-tab/timeline', NavigationExtras);
+      location.href="/calendar-tab/timeline?date=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
     }
   }
   clickNextTab() {
@@ -125,17 +117,20 @@ export class CalendarTabPage implements OnInit {
       }
     };
     if(this.currentTab == 'timeline') {
+    console.log(11)
+
       this.currentTab = 'memo';
-      this.router.navigateByUrl('/calendar-tab/memo', NavigationExtras);
+      location.href="/calendar-tab/memo?date=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
     }
     else if(this.currentTab == 'todo') {
+    console.log(12317462876)
+
       this.currentTab = 'timeline';
-      this.router.navigateByUrl('/calendar-tab/timeline', NavigationExtras);
+      location.href="/calendar-tab/timeline?date=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
     }
   }
   openCalendar() {
-
-    this.router.navigateByUrl('home')
+    location.href="/home";
   }
   getDate(tempDay) {
     this.paramSelected = new Date(tempDay);
@@ -184,6 +179,7 @@ export class CalendarTabPage implements OnInit {
     this.getDate(tempDay);
     this.calculateCalendar(tempDay);
     this.slides.slideTo(1);
+    this.refreshPage();
   }
   firstSlide() {
     let tempDay = new Date(this.selected); 
@@ -192,14 +188,43 @@ export class CalendarTabPage implements OnInit {
     this.getDate(tempDay);
     this.calculateCalendar(tempDay);
     this.slides.slideTo(1);
+    // this.refreshPage();
   }
 
   changeDay(date) {
-    // console.log(date)
-    // console.log(this.selected);
-    this.selected.setDate(date);
-    this.getDate(this.selected);
-    this.calculateCalendar(this.selected);
+    let dateDifference = this.selected.getDate()-date;
+    let tempDay = new Date(this.selected);
+
+    //눌렀을때 다음달인 경우  -> 28 1 2 3 4 5 6   23 24 25 26 27 28 1 (22)  
+    if(dateDifference > 20) {
+      tempDay.setDate(date);
+      tempDay.setMonth(this.selected.getMonth()+1);    
+    }
+    //눌ㅇ렀을때 저번달 (-22) 
+    else if(dateDifference < -20) {
+      tempDay.setDate(date);
+      tempDay.setMonth(this.selected.getMonth()-1);    
+    }
+    else {
+      tempDay.setDate(date);    
+    }
+    this.getDate(tempDay);
+    this.calculateCalendar(tempDay);
+    this.refreshPage();
+  }
+  refreshPage() {
+    if(this.currentTab == 'todo') {
+      this.currentTab = 'todo';
+      location.href="/calendar-tab/todo?date=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
+    }
+    else if(this.currentTab == 'timeline') {
+      this.currentTab = 'timeline';
+      location.href="/calendar-tab/todo?timeline=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
+    }
+    // else {
+    //   this.currentTab = 'memo';
+    //   location.href="/calendar-tab/memo?date=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
+    // }
   }
   moveToSettings(){
     this.router.navigate(['/settings']);

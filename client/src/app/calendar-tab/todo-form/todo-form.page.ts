@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { ModalController, NavParams, NavController } from '@ionic/angular';
 import axios from 'axios';
 import { start } from 'node:repl';
+import { time } from 'node:console';
 
 @Component({
   selector: 'app-todo-form',
@@ -43,6 +44,7 @@ export class TodoFormPage implements OnInit {
     this.startTime=null;
     this.endTime=null;
     this.selectedString = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
+    console.log(this.selectedString)
   }
   refresh() {
     this.modalController.dismiss({
@@ -52,8 +54,8 @@ export class TodoFormPage implements OnInit {
   }
 
   createTodo() {
-    console.log(typeof this.startTimeString, this.startTimeString)
-    this.selectedString='2021-04-17';
+    // console.log(typeof this.startTimeString, this.startTimeString)
+    // this.selectedString='2021-04-17';
     // console.log(this.selectedString)
     // console.log(this.startTime, this.endTime)
     if(this.title==null) {
@@ -87,13 +89,14 @@ export class TodoFormPage implements OnInit {
               console.log(res.data)
             }
           })
-
+        // location.href="/calendar-tab/todo?date=" + this.selectedString;
         this.modalController.dismiss({
           'dismissed': true
         });
         }
       }
       else {
+        console.log(this.selectedString, this.title, this.isTimeline, this.startTimeString, this.endTimeString)
         axios.post('http://3.139.244.188:3000/createTodo', {
           date: this.selectedString,
           title: this.title,
@@ -109,6 +112,7 @@ export class TodoFormPage implements OnInit {
           }
         })
 
+        // location.href="/calendar-tab/todo?date=" + this.selectedString;
         this.modalController.dismiss({
           'dismissed': true
         });
@@ -122,7 +126,6 @@ export class TodoFormPage implements OnInit {
   calculateEndTime() {
     let temp = new Date(this.endTime);
     this.endTimeString = this.datePipe.transform(temp, 'HH:mm:ss');
-
   }
   timeActive() {
     if (this.isTimeline == 0) {

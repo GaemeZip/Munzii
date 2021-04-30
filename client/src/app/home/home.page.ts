@@ -117,12 +117,12 @@ export class HomePage implements OnInit {
     var selectDay = new Date(this.currentCalendar);
     selectDay.setDate(day);
     console.log(selectDay);
-    let NavigationExtras: NavigationExtras = {
-      state: {
-        selectDay: selectDay
-      }
-    };
-    this.router.navigateByUrl('calendar-tab', NavigationExtras);
+    // this.router.navigateByUrl('calendar-tab', NavigationExtras);
+    console.log( selectDay.getMonth() + "Aaaa")
+    location.href="/calendar-tab/todo?date=" + selectDay.getFullYear() + "-" + this.monthNames[selectDay.getMonth()] + "-" + selectDay.getDate();
+    // location.href="/calendar-tab?date=" + ;
+
+
   }
   moveToSettings(){
     this.router.navigate(['/settings']);
