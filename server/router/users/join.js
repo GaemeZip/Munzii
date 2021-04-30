@@ -15,16 +15,18 @@ router.post('/', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   
-  const createQuery = 'INSERT INTO users (u_id, username, password, optional_password, theme_id, font_id, start_day_id) VALUES(NULL,?,?,NULL,1,1,1)';
+  const createQuery = 'INSERT INTO users (u_id, username, password, theme_id, font_id, start_day_id) VALUES(NULL,?,?,1,1,1)';
   let params = [username, password];
   connection.query(createQuery, params, function (error, rows, fields) {
 
+    console.log(rows);
     //if 아이디 중복일 경우 처리
     if (error) {
       res.send('양식을 모두 채워주세요');
     } else {
       res.send('회원가입 성공');
     }
+    console.log(rows);
   });
 });
 
