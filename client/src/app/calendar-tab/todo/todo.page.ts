@@ -44,7 +44,6 @@ export class TodoPage implements OnInit {
     this.selected = new Date(this.date);
     this.selectMonth = this.monthNames[this.selected.getMonth()]
 
-    this.initSetting();
     this.progress = 50;
     // console.log(this.selected);
     this.date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
@@ -200,10 +199,5 @@ export class TodoPage implements OnInit {
         console.log("에러 발생")
       }
     })
-  }
-  initSetting(){
-    const changeTheme = document.querySelector('body');
-    changeTheme.style.setProperty('--ion-color-primary', localStorage.t_primary);
-    changeTheme.style.setProperty('--ion-color-dark-yellow', localStorage.t_darkYellow);
   }
 }

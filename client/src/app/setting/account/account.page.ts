@@ -25,7 +25,7 @@ export class AccountPage implements OnInit {
 
   logout(){
     localStorage.clear();
-    this.router.navigate(['/phaser']);
-
+    //this.router.navigate(['/phaser']);
+    location.href = ('/phaser');
   }
 }

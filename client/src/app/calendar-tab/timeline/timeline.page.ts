@@ -44,7 +44,6 @@ export class TimelinePage implements OnInit {
     this.selectMonth = this.monthNames[this.selected.getMonth()]
     console.log(this.selected)
 
-    this.initSetting();
     this.progress = 50;
     this.initialToday = "00:00:00";
     this.finalToday = "23:59:00";
@@ -214,11 +213,5 @@ export class TimelinePage implements OnInit {
         console.log("에러 발생")
       }
     })
-  }
-
-  initSetting(){
-    const changeTheme = document.querySelector('body');
-    changeTheme.style.setProperty('--ion-color-primary', localStorage.t_primary);
-    changeTheme.style.setProperty('--ion-color-dark-yellow', localStorage.t_darkYellow);
   }
 }

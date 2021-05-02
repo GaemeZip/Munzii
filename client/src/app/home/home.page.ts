@@ -43,6 +43,7 @@ export class HomePage implements OnInit {
     axios.get('http://3.139.244.188:3000/currentTheme')
     .then(res => {        
       this.themeId = res.data[0].theme_id
+      localStorage.themeId = res.data[0].theme_id;
     });
     this.getDaysOfMonth();
     // this.getProgress();
@@ -129,10 +130,5 @@ export class HomePage implements OnInit {
   moveToSettings(){
     this.router.navigate(['/settings']);
 
-  }
-  initSetting(){
-    const changeTheme = document.querySelector('body');
-    changeTheme.style.setProperty('--ion-color-primary', localStorage.t_primary);
-    
   }
 }
