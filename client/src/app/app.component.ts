@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +8,33 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() { }
+  constructor(
+    private platform: Platform,
+    private router: Router,
+  ) {
+    // this.initializeApp();
+    this.registerBackgroundModeObserver();
+  }
+
+  // initializeApp() {
+  //   this.platform.ready().then(() => {
+  //     console.log("안ㄴ용ㅇ")!!
+  //     if (localStorage.passwordState == 'true') {
+  //       this.router.navigate(['/password-enter'])
+  //     }
+  //   })
+  // }
+
+  public registerBackgroundModeObserver() {
+    this.platform.ready().then(() => {
+      this.platform.resume.subscribe(() => {
+        if (localStorage.passwordState == 'true') {
+          location.href='/password-enter';
+        }
+      })
+    })
+  }
+
   ngOnInit() {
     const change = document.querySelector('body');
 
@@ -17,7 +45,7 @@ export class AppComponent {
       localStorage.t_primary = '#FFF3A9';
       localStorage.t_check = '#97C1E87E';
       localStorage.t_complete = '#FDE2E2';
-      localStorage.t_button ='#F9D667';
+      localStorage.t_button = '#F9D667';
       localStorage.t_darkYellow = '#FDE2E2';
       localStorage.t_background = '#FCECB6';
     }

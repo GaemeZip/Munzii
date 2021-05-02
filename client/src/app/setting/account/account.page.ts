@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import axios from 'axios';
+
 
 @Component({
   selector: 'app-account',
@@ -25,7 +25,6 @@ export class AccountPage implements OnInit {
 
   logout(){
     localStorage.clear();
-    //this.router.navigate(['/phaser']);
-    location.href = ('/phaser');
+    location.href="/phaser";
   }
 }
