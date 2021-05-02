@@ -48,7 +48,6 @@ export class CalendarTabPage implements OnInit {
     let tempTab = temp[0].split("/");
     this.currentTab = tempTab[4];
 
-    this.initSetting();
     this.currentTab = 'todo';
 
     console.log(tempTab)
@@ -233,8 +232,5 @@ export class CalendarTabPage implements OnInit {
     this.router.navigate(['/settings']);
 
   }
-  initSetting(){
-    const changeTheme = document.querySelector('body');
-    changeTheme.style.setProperty('--ion-color-primary', localStorage.t_primary);
-  }
+  
 }

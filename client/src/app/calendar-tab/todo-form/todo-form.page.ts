@@ -38,7 +38,6 @@ export class TodoFormPage implements OnInit {
   }
 
   ngOnInit() {
-    this.initSetting();
     this.isTimeline = this.isTime;
     console.log(this.isTime, this.isTimeline)
     this.title = null;
@@ -137,9 +136,5 @@ export class TodoFormPage implements OnInit {
       this.endTime = null;
       this.isTimeline = 0;
     }
-  }
-  initSetting(){
-    const changeTheme = document.querySelector('body');
-    changeTheme.style.setProperty('--ion-color-primary', localStorage.t_primary);
   }
 }

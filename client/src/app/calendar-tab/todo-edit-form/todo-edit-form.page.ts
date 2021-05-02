@@ -43,7 +43,6 @@ export class TodoEditFormPage implements OnInit {
      }
 
   ngOnInit() {
-    this.initSetting();
     console.log(this.title, this.isTimeline, this.startTime, this.endTime)
     this.selectedString = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
   }
@@ -181,9 +180,5 @@ export class TodoEditFormPage implements OnInit {
         let temp = new Date(this.endTime);
         this.endTimeString = this.datePipe.transform(temp, 'HH:mm:ss');
       }
-  }
-  initSetting(){
-    const changeTheme = document.querySelector('body');
-    changeTheme.style.setProperty('--ion-color-primary', localStorage.t_primary);
   }
 }
