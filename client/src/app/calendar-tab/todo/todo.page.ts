@@ -6,7 +6,6 @@ import { TodoFormPage } from '../todo-form/todo-form.page';
 import { TodoEditFormPage } from '../todo-edit-form/todo-edit-form.page';
 
 import axios from 'axios';
-import { templateJitUrl } from '@angular/compiler';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.page.html',
@@ -44,11 +43,6 @@ export class TodoPage implements OnInit {
     this.selected = new Date(this.date);
     this.selectMonth = this.monthNames[this.selected.getMonth()]
 
-    this.progress = 50;
-    // console.log(this.selected);
-    this.date = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
-
-    console.log(this.date)
     axios.get('http://3.139.244.188:3000/currentTheme')
       .then(res => {        
         this.themeId = res.data[0].theme_id;
@@ -60,7 +54,7 @@ export class TodoPage implements OnInit {
       axios.get('http://3.139.244.188:3000/readTodo',{
         params:{
           date: this.date,
-          userID: localStorage.userID
+          userID: 1
         }
       })
       .then(res => {
@@ -70,12 +64,12 @@ export class TodoPage implements OnInit {
 
         axios.post('http://3.139.244.188:3000/checkProgress', {
           date: this.date,
-          userID: localStorage.userID
+          userID: 1 
         }).then(res => {
           if(res.data.length === 0) {
             axios.post('http://3.139.244.188:3000/createProgress', {
               date: this.date,
-              userID: localStorage.userID
+              userID: 1,
             }).then((res) => {
 
             })
@@ -141,7 +135,7 @@ export class TodoPage implements OnInit {
     let id = this.selectDayTodoList[index].id;
     axios.post('http://3.139.244.188:3000/deleteTodo', {
       id: id,
-      userID: localStorage.userID
+      userID: 1
     }).then((res) => {
       if (res.data != 'error') {
         // console.log("테이블 삭제");
@@ -171,7 +165,7 @@ export class TodoPage implements OnInit {
     axios.post('http://3.139.244.188:3000/updateProgress', {
       date: this.date,
       progress: this.progress,
-      userID: localStorage.userID
+      userID: 1
     }).then((res) => {
     })
   }
@@ -191,7 +185,7 @@ export class TodoPage implements OnInit {
       startTime: todo.start_time,
       endTime: todo.end_time,
       isDone: todo.is_done,
-      userID: localStorage.userID
+      userID: 1
     }).then((res) => {
       if (res.data != 'error') {
         console.log("테이블 업데이트");
