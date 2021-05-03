@@ -48,7 +48,6 @@ export class CalendarTabPage implements OnInit {
     let tempTab = temp[0].split("/");
     this.currentTab = tempTab[4];
 
-
     console.log(tempTab)
     temp = temp[1].split("=");
     let tempDate = temp[1];
@@ -111,12 +110,6 @@ export class CalendarTabPage implements OnInit {
     }
   }
   clickNextTab() {
-    let NavigationExtras: NavigationExtras = {
-      state: {
-
-        selected: this.selected
-      }
-    };
     if(this.currentTab == 'timeline') {
     console.log(11)
 
@@ -231,5 +224,4 @@ export class CalendarTabPage implements OnInit {
     this.router.navigate(['/settings']);
 
   }
-  
 }
