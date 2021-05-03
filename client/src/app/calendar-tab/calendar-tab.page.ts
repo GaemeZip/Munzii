@@ -48,7 +48,6 @@ export class CalendarTabPage implements OnInit {
     let tempTab = temp[0].split("/");
     this.currentTab = tempTab[4];
 
-    this.currentTab = 'todo';
 
     console.log(tempTab)
     temp = temp[1].split("=");
