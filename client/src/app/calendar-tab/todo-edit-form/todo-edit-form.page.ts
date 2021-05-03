@@ -94,7 +94,7 @@ export class TodoEditFormPage implements OnInit {
               startTime: this.startTimeString,
               endTime: this.endTimeString,
               isDone: this.isDone,
-              userID: 1
+              userID: localStorage.userID
             }).then((res) => {
               if (res.data != 'error') {
                 console.log("테이블 업데이트");
@@ -124,7 +124,7 @@ export class TodoEditFormPage implements OnInit {
             startTime: this.startTimeString,
             endTime: this.endTimeString,
             isDone: this.isDone,
-            userID: 1
+            userID: localStorage.userID
           }).then((res) => {
             if (res.data != 'error') {
               console.log("테이블 업데이트");
@@ -146,7 +146,7 @@ export class TodoEditFormPage implements OnInit {
           startTime: this.startTimeString,
           endTime: this.endTimeString,
           isDone: this.isDone,
-          userID: 1
+          userID: localStorage.userID
         }).then((res) => {
           if (res.data != 'error') {
             console.log("테이블 업데이트");

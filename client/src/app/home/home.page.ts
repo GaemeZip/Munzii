@@ -99,7 +99,7 @@ export class HomePage implements OnInit {
       params: {
       year: this.currentYear,
       month: this.currentMonth,
-      userID: 1
+      userID: localStorage.userID
     }
     }).then(res => {
       console.log(res.data)

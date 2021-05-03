@@ -81,7 +81,7 @@ export class TodoFormPage implements OnInit {
             time: this.isTimeline,
             startTime: this.startTimeString,
             endTime: this.endTimeString,
-            userID: 1
+            userID: localStorage.userID
           }).then((res) => {
             if (res.data != 'error') {
               console.log("테이블 생성");
@@ -103,7 +103,7 @@ export class TodoFormPage implements OnInit {
           time: this.isTimeline,
           startTime: this.startTimeString,
           endTime: this.endTimeString,
-          userID: 1
+          userID: localStorage.userID
         }).then((res) => {
           if (res.data != 'error') {
             console.log("테이블 생성");

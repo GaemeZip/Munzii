@@ -58,19 +58,19 @@ export class TimelinePage implements OnInit {
     axios.get('http://3.139.244.188:3000/readTodo',{
       params:{
         date: this.date,
-	      userID: 1
+	      userID: localStorage.userID
       }
     })
     .then(res => {
       axios.post('http://3.139.244.188:3000/checkProgress', {
         date: this.date,
-        userID: 1 
+        userID: localStorage.userID
     }).then(res => {
       console.log(res.data)
       if(res.data.length === 0) {
         axios.post('http://3.139.244.188:3000/createProgress', {
           date: this.date,
-          userID: 1,
+          userID: localStorage.userID
         }).then((res) => {
         })
     }
@@ -174,7 +174,7 @@ export class TimelinePage implements OnInit {
     let id = this.timelineList[index].id;
     axios.post('http://3.139.244.188:3000/deleteTodo', {
       id: id,
-      userID: 1
+      userID: localStorage.userID
     }).then((res) => {
       if (res.data != 'error') {
         console.log("테이블 삭제");
@@ -205,7 +205,7 @@ export class TimelinePage implements OnInit {
       startTime: todo.start_time,
       endTime: todo.end_time,
       isDone: todo.is_done,
-      userID: 1
+      userID: localStorage.userID
     }).then((res) => {
       if (res.data != 'error') {
         console.log("테이블 업데이트");
