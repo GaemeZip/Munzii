@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
   var date = req.body.date;
   var userID = req.body.userID;
 
-  var createQuery = 'INSERT INTO progresses VALUES(0,?,0,?)';
+  var createQuery = 'INSERT INTO progresses VALUES(0,?,-1,?)';
 
   var params = [date, userID];
 
