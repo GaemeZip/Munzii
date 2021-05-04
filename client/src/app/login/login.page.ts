@@ -45,12 +45,20 @@ export class LoginPage implements OnInit {
         localStorage.userID = res.data[0].u_id;
         console.log(localStorage.userID);
         this.getSetting();
-        location.href = ('/home');
+        // location.href = ('/home?1');
       })
 
   }
 
   async getSetting() {
+    console.log('Sett')
+    this.getFont();
+    this.initSetting();
+    
+  }
+
+  getFont(){
+    console.log('getfont')
     axios.get('http://3.139.244.188:3000/currentFont', {
       params: {
         userID: localStorage.userID
@@ -59,8 +67,11 @@ export class LoginPage implements OnInit {
       .then(res => {
         console.log("받아온 font id 값 : " + res.data[0].font_id);
         localStorage.fontId = res.data[0].font_id;
+        this.getTheme();
       });
-
+  }
+  getTheme(){
+    console.log('gettheme')
     axios.get('http://3.139.244.188:3000/currentTheme', {
       params: {
         userID: localStorage.userID
@@ -69,12 +80,12 @@ export class LoginPage implements OnInit {
       .then(res => {
         localStorage.themeId = res.data[0].theme_id;
         console.log("theme id 값 : " + localStorage.themeId);
+        this.moveTo();
       });
-
-    await this.initSetting();
   }
 
-  initSetting() {
+  async initSetting() {
+    console.log('init')
 
     const change = document.querySelector('body');
 
@@ -119,18 +130,23 @@ export class LoginPage implements OnInit {
     }
 
     if (localStorage.fontId == 1) {
+      localStorage.fontId = 1;
       localStorage.f_family = 'NexonGothic';
     }
     if (localStorage.fontId == 2) {
+      localStorage.fontId = 2;
       localStorage.f_family = 'PrettyNight';
     }
     if (localStorage.fontId == 3) {
+      localStorage.fontId = 3;
       localStorage.f_family = 'DoHyeon';
     }
     if (localStorage.fontId == 4) {
+      localStorage.fontId = 4;
       localStorage.f_family = 'PoorStory';
     }
     if (localStorage.fontId == 5) {
+      localStorage.fontId = 5;
       localStorage.f_family = 'NexonFootball';
     }
 
@@ -142,7 +158,12 @@ export class LoginPage implements OnInit {
     change.style.setProperty('--ion-color-button', localStorage.t_button);
     change.style.setProperty('--ion-color-dark-yellow', localStorage.t_darkYellow);
     change.style.setProperty('--ion-theme-background', localStorage.t_background);
+
+   
+  }
+  moveTo(){
+    console.log('fdfffffd');
+    location.href = ('/home');
   }
 }
-
 
