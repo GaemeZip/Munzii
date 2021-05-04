@@ -1,18 +1,13 @@
 <ion-content forceOverscroll=false>
   <div class="container" [style.height.px]="windowHeight">
-    <!-- <div class="calendar__title-wrap">
-      <div id="month">2021.03</div>
-      <button id="btn-shortcut-setting">
-        <img src="/assets/image/button/btn-setting.png" alt="setting">
-      </button>
-    </div> -->
     <ion-content forceOverscroll=false class="calendar">
       <div class="calendar__title-wrap">
         <ion-row class="calendar__title">
           <ion-col width-50> 
             <ion-datetime class="year-month"
-            placeholder="Custom Options"  
+            placeholder=" "  
             displayFormat="YYYY.MM"
+            pickerFormat="YYYY.MM.DD"
             min="1900-01"
             max="2200-12"
             [(ngModel)]="currentCalendar"

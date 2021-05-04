@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import axios from 'axios';
 
 @Component({
   selector: 'app-password-enter',
@@ -13,11 +14,20 @@ export class PasswordEnterPage implements OnInit {
   keypad = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [null, 0, '<']];
   n = 0;
   numOfWrong =0;
+  themeId: any;
 
   constructor(private router: Router) {
   }
 
   ngOnInit() {
+    axios.get('http://3.139.244.188:3000/currentTheme',{
+      params:{
+        userID: localStorage.userID
+      }
+    })
+    .then(res => {        
+      this.themeId = res.data[0].theme_id;
+    });
 
   }
 

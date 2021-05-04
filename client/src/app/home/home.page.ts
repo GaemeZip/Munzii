@@ -106,6 +106,7 @@ export class HomePage implements OnInit {
   }
 
   getDaysOfMonth(startWeekday) {
+    console.log(this.date+"@@@")
     this.startWeekday = startWeekday;
     this.daysInThisMonth = new Array();
     this.daysInLastMonth = new Array();
@@ -173,7 +174,13 @@ export class HomePage implements OnInit {
     })
   }
   selectMonth() {
+    // this.currentCalendar.setDate(this.currentCalendar.getDate()-10);
     this.date = new Date (this.currentCalendar);
+    this.date.setDate(this.date.getDate() - 10);
+    console.log(this.date)
+
+    // this.currentCalendar = this.date.toISOString();
+    console.log(this.currentCalendar, typeof this.currentCalendar)
     this.getDaysOfMonth(this.startWeekday);
   }
   openTodo(day) {
