@@ -58,7 +58,11 @@ export class CalendarTabPage implements OnInit {
     this.selected.setDate(this.selected.getDate()+7);
 
     // ** need ** get start week Day
-    axios.get('http://3.139.244.188:3000/currentStartDay')
+    axios.get('http://3.139.244.188:3000/currentStartDay',{
+      params:{
+        userID: localStorage.userID
+      }
+    })
       .then(res => {
         this.startWeekday = res.data[0].start_day_id;
         this.startWeekday = 0;

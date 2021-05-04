@@ -40,7 +40,11 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.today = new Date();
-    axios.get('http://3.139.244.188:3000/currentTheme')
+    axios.get('http://3.139.244.188:3000/currentTheme',{
+      params:{
+        userID: localStorage.userID
+      }
+    })
     .then(res => {        
       this.themeId = res.data[0].theme_id
       localStorage.themeId = res.data[0].theme_id;
