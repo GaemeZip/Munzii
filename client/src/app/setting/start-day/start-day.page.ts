@@ -35,7 +35,11 @@ export class StartDayPage implements OnInit {
   }
 
   initDay() {
-    axios.get('http://3.139.244.188:3000/currentStartDay')
+    axios.get('http://3.139.244.188:3000/currentStartDay',{
+      params:{
+        userID: localStorage.userID
+      }
+    })
       .then(async res => {
         console.log("받아온 start-day id 값 : " + res.data[0].start_day_id);
         this.selectedDay = res.data[0].start_day_id;
