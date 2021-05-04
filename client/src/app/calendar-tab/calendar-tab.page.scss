@@ -77,6 +77,9 @@
             }
         }
     }
+    .todo__content__week-day {
+        color: var(--ion-color-light-black) !important;
+    }
     .todo__content__week-date {
         .slides {
             ion-slide {
@@ -97,6 +100,7 @@
                         height: 30px;
                         border-radius: 50%;
                         background-color: var(--ion-color-primary);
+                        color: var(--ion-color-light-black);
                     }
                 }
             }
