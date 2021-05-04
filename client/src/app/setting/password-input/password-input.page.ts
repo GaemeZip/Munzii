@@ -17,11 +17,20 @@ export class PasswordInputPage implements OnInit {
   n = 0;
   isChecked = false;
   isWrong = false;
+  themeId: any;
 
   constructor(private router: Router) {
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+    axios.get('http://3.139.244.188:3000/currentTheme',{
+      params:{
+        userID: localStorage.userID
+      }
+    })
+    .then(res => {        
+      this.themeId = res.data[0].theme_id;
+    });
 
   }
 
