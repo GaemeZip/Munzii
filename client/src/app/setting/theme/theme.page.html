@@ -6,9 +6,11 @@
       </button>
       Theme
     </div>
-    <div class="list" *ngFor="let data of themeList">
-      <div class="item" id="{{data[0]}}" (click)="select(data[0])">{{data[1]}}
-        <img src="/assets/image/basic/basic_4.png" alt="">
+    <div class="list-wrap">
+      <div class="list" *ngFor="let data of themeList">
+        <div class="item" id="{{data[0]}}" (click)="select(data[0])">{{data[1]}}
+          <img src="/assets/image/basic/basic_4.png" alt="">
+        </div>
       </div>
     </div>
     <div class="footer">
