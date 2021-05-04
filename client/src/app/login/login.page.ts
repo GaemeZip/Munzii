@@ -54,7 +54,11 @@ export class LoginPage implements OnInit {
 
     const change = document.querySelector('body');
 
-    axios.get('http://3.139.244.188:3000/currentTheme')
+    axios.get('http://3.139.244.188:3000/currentTheme',{
+      params:{
+        userID: localStorage.userID
+      }
+    })
       .then(async res => {
         localStorage.themeId = res.data[0].theme_id;
         if (localStorage.themeId == null) { // default
@@ -98,7 +102,11 @@ export class LoginPage implements OnInit {
         }
       });
 
-    axios.get('http://3.139.244.188:3000/currentFont')
+    axios.get('http://3.139.244.188:3000/currentFont',{
+      params:{
+        userID: localStorage.userID
+      }
+    })
       .then(async res => {
         console.log("받아온 font id 값 : " + res.data[0].font_id);
         localStorage.fontId = res.data[0].font_id;
