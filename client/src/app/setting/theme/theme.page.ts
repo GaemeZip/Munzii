@@ -101,7 +101,7 @@ export class ThemePage implements OnInit {
   updateTheme(t_id) {
     axios.post('http://3.139.244.188:3000/updateTheme', {
       theme_id: t_id,
-      u_id: 1
+      userID: localStorage.userID
     }).then((res) => {
       localStorage.themeId = t_id;
       this.initTheme();
