@@ -25,7 +25,6 @@ export class CalendarTabPage implements OnInit {
 
   selectWeekday: any;
   leftDay: number;
-
   startWeekday: number;
   weekday: any;
 
@@ -151,7 +150,7 @@ export class CalendarTabPage implements OnInit {
   }
 
   calculateCalendar(tempDay) {
-    this.selected = new Date(tempDay)
+    // this.selected = new Date(tempDay)
     var prevDay;
 
     if ( this.startWeekday > this.selectDay) {
