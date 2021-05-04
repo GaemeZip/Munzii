@@ -21,6 +21,7 @@ export class CalendarTabPage implements OnInit {
   selectMonth: any;
   selectDate: any;
   selectDay: any;
+  temp: any;
   monthNames: any;
 
   selectWeekday: any;
@@ -43,13 +44,13 @@ export class CalendarTabPage implements OnInit {
      }
 
   ngOnInit() {
-    let temp = location.href.split("?");
-    let tempTab = temp[0].split("/");
+    this.temp = location.href.split("?");
+    let tempTab = this.temp[0].split("/");
     this.currentTab = tempTab[4];
 
-    console.log(tempTab)
-    temp = temp[1].split("=");
-    let tempDate = temp[1];
+    console.log(this.temp)
+    this.temp = this.temp[1].split("=");
+    let tempDate = this.temp[1];
     this.selected = new Date(tempDate);
     console.log(this.selected)
 

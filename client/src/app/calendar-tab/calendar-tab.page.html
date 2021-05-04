@@ -1,5 +1,4 @@
 <ion-tabs>
-
   <ion-tab-bar slot="top" class="container" [ngStyle]="{'--background': 'var(--ion-color-white)', '--color' : 'var(--ion-color-white)'}">
     <div class="todo__title-wrap">
       <div class="todo__title-info">
@@ -13,6 +12,7 @@
 
       <ion-grid>
         <ion-row class="todo__content__week-day">
+          {{ temp + selected }}
           <ion-col *ngFor="let day of weekday" [ngStyle]="{'text-align': 'center'}"> {{day}} </ion-col>
         </ion-row>
         <ion-row class="todo__content__week-date">
