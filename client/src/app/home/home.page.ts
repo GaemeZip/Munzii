@@ -149,9 +149,11 @@ export class HomePage implements OnInit {
 
       // console.log(i, this.date.getDate(), this.date.getMonth(), this.today.getMonth(), this.today.getFullYear())
       this.dayProgress.push(-1);
-      if(this.date.getMonth() < this.today.getMonth() && this.date.getFullYear() <= this.today.getFullYear()) {
+      if(this.date.getMonth() < this.today.getMonth() && this.date.getFullYear() == this.today.getFullYear()) {
         this.dayProgress[i] = 0;
-      console.log(this.dayProgress)
+      }
+      if(this.date.getFullYear() < this.today.getFullYear()) {
+        this.dayProgress[i] = 0;
       }
       if (this.date.getMonth() == this.today.getMonth() && i < this.today.getDate()) {
         this.dayProgress[i] = 0;
