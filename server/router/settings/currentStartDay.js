@@ -12,10 +12,8 @@ router.use(function (req, res, next) {
 
 
 router.get('/', (req, res) => {
-    var start_day_id = req.body.start_day_id;
-    var u_id = req.body.userID;
+    var u_id = req.query.userID;
 
-    //임의로 1이라고 넣어둠!
     var selectQuery = 'SELECT start_day_id FROM users WHERE u_id=?';
     var params = [u_id];
 
@@ -24,7 +22,6 @@ router.get('/', (req, res) => {
             res.send('error');
         }
         else {
-            //id값 보내주기
             res.send(rows);
         }
         console.log(rows);
