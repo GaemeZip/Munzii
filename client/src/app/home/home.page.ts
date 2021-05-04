@@ -24,6 +24,9 @@ export class HomePage implements OnInit {
   //level1 ,2, 3, 4
   dayMunzzi: string;
 
+  startWeekday: number;
+  weekday: any;
+
   themeId: number;
 
   constructor(
@@ -39,6 +42,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+
     this.today = new Date();
     axios.get('http://3.139.244.188:3000/currentTheme',{
       params:{
@@ -49,12 +53,60 @@ export class HomePage implements OnInit {
       this.themeId = res.data[0].theme_id
       localStorage.themeId = res.data[0].theme_id;
     });
-    this.getDaysOfMonth();
-    // this.getProgress();
+
+    axios.get('http://3.139.244.188:3000/currentStartDay',{
+      params:{
+        userID: localStorage.userID
+      }
+    })
+    .then(res => {
+      console.log(res.data[0].start_day_id)
+      if(res.data[0].start_day_id == 7) {
+        this.startWeekday = 0;
+      }
+      else {
+        this.startWeekday = res.data[0].start_day_id;
+      }
+      switch(this.startWeekday) {
+      case 0: {
+        this.weekday = ['일', '월', '화', '수', '목', '금', '토'];
+        break;
+      }
+      case 1: {
+        this.weekday = ['월', '화', '수', '목', '금', '토', '일'];
+        break;
+      }
+      case 2: {
+        this.weekday = ['화', '수', '목', '금', '토', '일', '월'];
+        break;
+      }
+      case 3: {
+        this.weekday = ['수', '목', '금', '토', '일', '월', '화'];
+        break;
+      }
+      case 4: {
+        this.weekday = ['목', '금', '토', '일', '월', '화', '수'];
+        break;
+      }
+      case 5: {
+        this.weekday = ['금', '토', '일', '월', '화', '수', '목'];
+        break;
+      }
+      case 6: {
+        this.weekday = ['토', '일', '월', '화', '수', '목', '금'];
+        break;
+      }
+    }
+
+    this.getDaysOfMonth(this.startWeekday);
     this.currentCalendar = new Date(this.currentYear, this.currentMonth, 0).toISOString();
+  })
+
+    // this.getProgress();
   }
 
-  getDaysOfMonth() {
+  getDaysOfMonth(startWeekday) {
+    this.startWeekday = startWeekday;
     this.daysInThisMonth = new Array();
     this.daysInLastMonth = new Array();
     // this.daysInNextMonth = new Array();
@@ -74,7 +126,12 @@ export class HomePage implements OnInit {
     var firstDayThisMonth = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay(); //첫 날 요일 
     var prevNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth(), 0).getDate(); //전 달 일 수
     
-    for(var i = prevNumOfDays-(firstDayThisMonth-1); i <= prevNumOfDays; i++) {
+    //startWeekDay = 1
+    //1일 요일 = firsrDayThisMonth
+    // console.log(prevNumOfDays +" @@ " + firstDayThisMonth + " !! " + this.startWeekday)
+
+
+    for(var i = prevNumOfDays-(firstDayThisMonth-1-startWeekday); i <= prevNumOfDays; i++) {
       this.daysInLastMonth.push(i); 
     }
   
@@ -82,23 +139,29 @@ export class HomePage implements OnInit {
     var thisNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDate();
     // console.log(this.date.getFullYear(), this.date.getMonth()+1)
     // console.log(this.today.getFullYear(), this.today.getMonth()+1)
+
+
+    this.getProgress(thisNumOfDays);
+  }
+  async getProgress(thisNumOfDays) {    
     for (var i = 0; i < thisNumOfDays; i++) {
       this.daysInThisMonth.push(i+1);
-      if(i < this.date.getDate() && this.date.getMonth() == this.today.getMonth() && this.date.getFullYear() == this.today.getFullYear()) {
-        this.dayProgress.push(0);
-      }
-      else if(this.date.getMonth() < this.today.getMonth() && this.currentYear <= this.today.getFullYear()) {
-        console.log("@@@@@@@@@")
-        this.dayProgress.push(0);
-      }
-      else {
-        this.dayProgress.push(-1);
+      // if(i < this.date.getDate() && this.date.getMonth() == this.today.getMonth() && this.date.getFullYear() == this.today.getFullYear()) {
+      //   this.dayProgress.push(0);
+      // }
+      // else if(this.date.getMonth() < this.today.getMonth() && this.currentYear <= this.today.getFullYear()) {
+      //   console.log("@@@@@@@@@")
+      //   this.dayProgress.push(0);
+      // }
+      // else {
+      //   this.dayProgress.push(-1);
+      // }
+      // console.log(i, this.date.getDate(), this.date.getMonth(), this.today.getMonth(), this.today.getFullYear())
+      this.dayProgress.push(-1);
+      if(this.date.getMonth() < this.today.getMonth() && this.date.getFullYear() <= this.today.getFullYear()) {
+        this.dayProgress[i] = 0;
       }
     }
-
-    this.getProgress();
-  }
-  async getProgress() {
     await axios.get('http://3.139.244.188:3000/readProgress', {
       params: {
       year: this.currentYear,
@@ -106,19 +169,15 @@ export class HomePage implements OnInit {
       userID: localStorage.userID
     }
     }).then(res => {
-      console.log(res.data)
       for(var i =0; i < res.data.length; i++) {
         let tempDate = new Date(res.data[i].date);
         this.dayProgress[tempDate.getDate()-1] = res.data[i].progress;
       }
-      // console.log(this.dayProgress)
     })
   }
   selectMonth() {
     this.date = new Date (this.currentCalendar);
-    // console.log(this.currentCalendar);
-    // console.log(this.date);
-    this.getDaysOfMonth();
+    this.getDaysOfMonth(this.startWeekday);
   }
   openTodo(day) {
     var selectDay = new Date(this.currentCalendar);

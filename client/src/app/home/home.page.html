@@ -28,13 +28,7 @@
       <div class="calendar__content-wrap">
         <ion-grid>
           <ion-row class="calendar__content__week">
-            <ion-col> 일 </ion-col>
-            <ion-col> 월 </ion-col>
-            <ion-col> 화 </ion-col>
-            <ion-col> 수 </ion-col>
-            <ion-col> 목 </ion-col>
-            <ion-col> 금 </ion-col>
-            <ion-col> 토 </ion-col>
+            <ion-col *ngFor="let day of weekday"> {{ day }} </ion-col>
           </ion-row>
           <ion-row class="calendar__content__date">
             <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month"> </ion-col>
