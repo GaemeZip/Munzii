@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     var u_id = req.body.userID;
 
     //임의로 1이라고 넣어둠!
-    var selectQuery = 'SELECT start_day_id FROM users WHERE u_id=1';
+    var selectQuery = 'SELECT start_day_id FROM users WHERE u_id=?';
     var params = [u_id];
 
     connection.query(selectQuery, params, (error, rows, data) => {
