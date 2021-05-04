@@ -41,7 +41,11 @@ export class FontPage implements OnInit {
   }
 
   initFont() {
-    axios.get('http://3.139.244.188:3000/currentFont')
+    axios.get('http://3.139.244.188:3000/currentFont',{
+      params:{
+        userID: localStorage.userID
+      }
+    })
       .then(async res => {
         console.log("받아온 font id 값 : " + res.data[0].font_id);
         this.selectedFont = res.data[0].font_id;
