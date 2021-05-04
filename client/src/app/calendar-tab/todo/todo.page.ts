@@ -65,12 +65,11 @@ export class TodoPage implements OnInit {
         for(var i = 0; i < res.data.length; i++) {
           this.selectDayTodoList[i] = res.data[i];
         }
-
         axios.post('http://3.139.244.188:3000/checkProgress', {
           date: this.date,
-          
           userID: localStorage.userID
         }).then(res => {
+          // console.log()
           if(res.data.length === 0) {
             axios.post('http://3.139.244.188:3000/createProgress', {
               date: this.date,      
@@ -156,25 +155,27 @@ export class TodoPage implements OnInit {
     })
   }
   calculateProgress() {
+    let today = new Date();
+    if(this.selectDayTodoList.length !== 0 || (this.selected <= today)) {
 
-    var tempProgress = 0;
-    for (var i=0; i < this.selectDayTodoList.length; i ++) {
-      tempProgress += this.selectDayTodoList[i].is_done;
-    }
-    if(tempProgress === 0) {
-      this.progress = 0;
-    }
-    else {
-      this.progress = tempProgress / this.selectDayTodoList.length * 100;
-    }
-
-    axios.post('http://3.139.244.188:3000/updateProgress', {
-      date: this.date,
-      progress: this.progress,
+      var tempProgress = 0;
+      for (var i=0; i < this.selectDayTodoList.length; i ++) {
+        tempProgress += this.selectDayTodoList[i].is_done;
+      }
+      if(tempProgress === 0) {
+        this.progress = 0;
+      }
+      else {
+        this.progress = tempProgress / this.selectDayTodoList.length * 100;
+      }
+      axios.post('http://3.139.244.188:3000/updateProgress', {
+        date: this.date,
+        progress: this.progress,
          
-      userID: localStorage.userID
-    }).then((res) => {
-    })
+        userID: localStorage.userID
+      }).then((res) => {
+      })
+    }
   }
   calculateDone(todo) {
     if (todo.is_done == 0) {

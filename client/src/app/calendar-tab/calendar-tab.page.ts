@@ -56,18 +56,23 @@ export class CalendarTabPage implements OnInit {
 
     // this.selected = new Date();
     this.selected.setDate(this.selected.getDate()+7);
+    console.log(this.selected)
 
-    // ** need ** get start week Day
     axios.get('http://3.139.244.188:3000/currentStartDay',{
       params:{
         userID: localStorage.userID
       }
     })
-      .then(res => {
-        this.startWeekday = res.data[0].start_day_id;
+    .then(res => {
+      console.log(res.data[0].start_day_id)
+      if(res.data[0].start_day_id == 7) {
         this.startWeekday = 0;
-        switch(this.startWeekday) {
-          case 0: {
+      }
+      else {
+        this.startWeekday = res.data[0].start_day_id;
+      }
+      switch(this.startWeekday) {
+      case 0: {
         this.weekday = ['일', '월', '화', '수', '목', '금', '토'];
         break;
       }
@@ -105,15 +110,20 @@ export class CalendarTabPage implements OnInit {
   }
   clickPrevTab() {
     if(this.currentTab == 'timeline') {
+      console.log(this.selectYear + "-" + this.selectMonth + "-" + this.selectDate, this.selected);
+      console.log("timeline - todo")
       this.currentTab = 'todo';
       location.href="/calendar-tab/todo?date=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
     }
     else if(this.currentTab == 'memo') {
+      console.log("memo - timeline")
       this.currentTab = 'timeline';
       location.href="/calendar-tab/timeline?date=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
     }
   }
   clickNextTab() {
+
+    console.log(this.selectYear + "-" + this.selectMonth + "-" + this.selectDate, this.selected);
     if(this.currentTab == 'timeline') {
     console.log(11)
 
@@ -137,11 +147,11 @@ export class CalendarTabPage implements OnInit {
     this.selectMonth = this.monthNames[this.selected.getMonth()];
     this.selectDate = this.selected.getDate();
     this.selectDay = this.selected.getDay();
-    // console.log(this.selected,this.selectYear,this.selectMonth,this.selectDate,this.selectDay);
+    console.log(this.selected,this.selectYear,this.selectMonth,this.selectDate,this.selectDay);
   }
 
   calculateCalendar(tempDay) {
-    // this.selected = new Date(tempDay)
+    this.selected = new Date(tempDay)
     var prevDay;
 
     if ( this.startWeekday > this.selectDay) {
@@ -151,22 +161,19 @@ export class CalendarTabPage implements OnInit {
       prevDay = (this.selectDay - this.startWeekday);
     }
     for (let i = 7; i > 0; i --) {
-      this.weekForSlide[0][7-i] = new Date();
+      this.weekForSlide[0][7-i] = new Date(this.selected);
       this.weekForSlide[0][7-i].setDate(this.selected.getDate()-(prevDay+i));
       this.weekDateForSlide[0][7-i] = this.weekForSlide[0][7-i].getDate();
-      // console.log(this.weekForSlide[0][i]);
     }
     for (let i = 0; i < 7; i ++) {
-      this.weekForSlide[1][i] = new Date();
+      this.weekForSlide[1][i] = new Date(this.selected);
       this.weekForSlide[1][i].setDate(this.selected.getDate()-(prevDay-i));
       this.weekDateForSlide[1][i] = this.weekForSlide[1][i].getDate();
-      // console.log(this.weekForSlide[1][i]);
     }
     for (let i = 7; i < 14; i ++) {
-      this.weekForSlide[2][i-7] = new Date();
+      this.weekForSlide[2][i-7] = new Date(this.selected);
       this.weekForSlide[2][i-7].setDate(this.selected.getDate()-(prevDay-i));
       this.weekDateForSlide[2][i-7] = this.weekForSlide[2][i-7].getDate();
-      // console.log(this.weekForSlide[2][i].getDate());
     }
   }
 
@@ -193,17 +200,23 @@ export class CalendarTabPage implements OnInit {
     let dateDifference = this.selected.getDate()-date;
     let tempDay = new Date(this.selected);
 
+    console.log(tempDay)
+    tempDay.setDate(tempDay.getDate())
     //눌렀을때 다음달인 경우  -> 28 1 2 3 4 5 6   23 24 25 26 27 28 1 (22)  
     if(dateDifference > 20) {
+      console.log(11, dateDifference)
       tempDay.setDate(date);
       tempDay.setMonth(this.selected.getMonth()+1);    
     }
     //눌ㅇ렀을때 저번달 (-22) 
     else if(dateDifference < -20) {
+      console.log(22, dateDifference)
       tempDay.setDate(date);
-      tempDay.setMonth(this.selected.getMonth()-1);    
+      tempDay.setMonth(this.selected.getMonth()-1);   
+      console.log(tempDay) 
     }
     else {
+      console.log(33)
       tempDay.setDate(date);    
     }
     this.getDate(tempDay);
