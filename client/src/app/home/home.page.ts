@@ -146,19 +146,14 @@ export class HomePage implements OnInit {
   async getProgress(thisNumOfDays) {    
     for (var i = 0; i < thisNumOfDays; i++) {
       this.daysInThisMonth.push(i+1);
-      // if(i < this.date.getDate() && this.date.getMonth() == this.today.getMonth() && this.date.getFullYear() == this.today.getFullYear()) {
-      //   this.dayProgress.push(0);
-      // }
-      // else if(this.date.getMonth() < this.today.getMonth() && this.currentYear <= this.today.getFullYear()) {
-      //   console.log("@@@@@@@@@")
-      //   this.dayProgress.push(0);
-      // }
-      // else {
-      //   this.dayProgress.push(-1);
-      // }
+
       // console.log(i, this.date.getDate(), this.date.getMonth(), this.today.getMonth(), this.today.getFullYear())
       this.dayProgress.push(-1);
       if(this.date.getMonth() < this.today.getMonth() && this.date.getFullYear() <= this.today.getFullYear()) {
+        this.dayProgress[i] = 0;
+      console.log(this.dayProgress)
+      }
+      if (this.date.getMonth() == this.today.getMonth() && i < this.today.getDate()) {
         this.dayProgress[i] = 0;
       }
     }
