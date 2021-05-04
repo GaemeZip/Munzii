@@ -1,21 +1,20 @@
 <ion-content forceOverscroll=false>
   <div class="container" [style.height.px]="windowHeight">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
+
     <div class="header">
-      <button (click) = "prev()">
+      <button (click)="prev()">
         <img src="/assets/button/prev.png" alt="">
       </button>
       Font
     </div>
-    <div class="list" *ngFor="let data of fontList">
-      <div class="item  {{data[2]}}" id="{{data[0]}}"  (click)="select(data[0])">{{data[1]}}
-        <img src="/assets/image/basic/basic_4.png" alt="">
+    <div class="list-wrap">
+      <div class="list" *ngFor="let data of fontList">
+        <div class="item  {{data[2]}}" id="{{data[0]}}" (click)="select(data[0])">{{data[1]}}
+          <img src="/assets/image/basic/basic_4.png" alt="">
+        </div>
       </div>
-      
-      
-      </div>
-
+    </div>
     <div class="footer">
       <img src="/assets/image/basic/basic_2.png" alt="">
       <img src="/assets/image/basic/basic_1.png" alt="">
