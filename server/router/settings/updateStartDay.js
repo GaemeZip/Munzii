@@ -13,7 +13,7 @@ router.use(function (req, res, next) {
 router.post('/', (req, res) => {
 
     const start_day_id = req.body.start_day_id;
-    const u_id = req.body.u_id;
+    const u_id = req.body.userID;
 
     let params = [start_day_id, u_id];
 

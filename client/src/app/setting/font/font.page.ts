@@ -73,7 +73,7 @@ export class FontPage implements OnInit {
   updateFont(f_id) {
     axios.post('http://3.139.244.188:3000/updateFont', {
       font_id: f_id,
-      u_id: 1
+      userID: localStorage.userID
     }).then((res) => {
       if (res.data != 'error') {
         localStorage.fontId = f_id;

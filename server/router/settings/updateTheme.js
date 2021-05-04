@@ -12,7 +12,7 @@ router.use(function (req, res, next) {
 
 router.post('/', (req, res) => {
     const theme_id = req.body.theme_id;
-    const u_id = req.body.u_id;
+    const u_id = req.body.userID;
 
     const updateQuery = 'UPDATE users SET theme_id=? WHERE u_id=?';
     let params = [theme_id, u_id];

@@ -66,7 +66,7 @@ export class StartDayPage implements OnInit {
   updateStartDay(s_id) {
     axios.post('http://3.139.244.188:3000/updateStartDay', {
       start_day_id: s_id,
-      u_id: 1
+      userID: localStorage.userID
     }).then((res) => {
       console.log(res)
       if (res.data != 'error') {

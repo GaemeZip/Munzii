@@ -13,7 +13,7 @@ router.use(function (req, res, next) {
 
 router.post('/', (req, res) => {
     var font_id = req.body.font_id;
-    var u_id = req.body.u_id;
+    var u_id = req.body.userID;
 
     var updateQuery = 'UPDATE users SET font_id=? WHERE u_id=?';
     var params = [font_id, u_id];

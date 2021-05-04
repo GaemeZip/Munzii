@@ -12,7 +12,7 @@ router.use(function (req, res, next) {
 
 
 router.get('/', (req, res) => {
-    var u_id = req.body.u_id;
+    var u_id = req.body.userID;
     //var theme_id = req.body.theme_id;
     //임의로 1이라고 넣어둠!
     var selectQuery = 'SELECT theme_id FROM users WHERE u_id=1';
