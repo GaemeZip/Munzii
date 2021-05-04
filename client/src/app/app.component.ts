@@ -62,10 +62,20 @@ export class AppComponent {
 
     const change = document.querySelector('body');
 
-    if (localStorage.themeId == null || localStorage.themeId == 1) { // default
+    if (localStorage.themeId == null) { // default
       console.log("기본!")
       localStorage.f_family = 'NexonGothic';
       localStorage.fontId = 1;
+      localStorage.themeId = 1;
+      localStorage.t_primary = '#FFF3A9';
+      localStorage.t_check = '#97C1E87E';
+      localStorage.t_complete = '#FDE2E2';
+      localStorage.t_button = '#F9D667';
+      localStorage.t_darkYellow = '#FDE2E2';
+      localStorage.t_background = '#FCECB6';
+    }
+    if (localStorage.themeId == 1) { // default
+      console.log("기본!")
       localStorage.themeId = 1;
       localStorage.t_primary = '#FFF3A9';
       localStorage.t_check = '#97C1E87E';
