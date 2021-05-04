@@ -1,4 +1,6 @@
-
+.container::-webkit-scrollbar { 
+    display: none !important; 
+}
 .container {
     padding: 0;
     overflow-y: scroll;

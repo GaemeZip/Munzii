@@ -21,6 +21,9 @@
             outline: none;
         }
     }
+    .list-wrap::-webkit-scrollbar { 
+        display: none !important; 
+    }
     .list-wrap {
         height: 67%;
         overflow-y: auto;

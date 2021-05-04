@@ -25,6 +25,9 @@
         height: 67%;
         overflow-y: auto;
     }
+    .list-wrap::-webkit-scrollbar { 
+        display: none !important; 
+    }
     .list {
         margin: 0 15px;
         color: #999999;
