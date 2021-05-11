@@ -34,7 +34,7 @@ export class HomePage implements OnInit {
   )
   
    { 
-    console.log(this.windowHeight)
+    // console.log(this.windowHeight)
     this.date = new Date();
     this.monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
     
@@ -60,7 +60,7 @@ export class HomePage implements OnInit {
       }
     })
     .then(res => {
-      console.log(res.data[0].start_day_id)
+      // console.log(res.data[0].start_day_id)
       if(res.data[0].start_day_id == 7) {
         this.startWeekday = 0;
       }
@@ -106,7 +106,7 @@ export class HomePage implements OnInit {
   }
 
   getDaysOfMonth(startWeekday) {
-    console.log(this.date+"@@@")
+    // console.log(this.date+"@@@")
     this.startWeekday = startWeekday;
     this.daysInThisMonth = new Array();
     this.daysInLastMonth = new Array();
@@ -143,6 +143,7 @@ export class HomePage implements OnInit {
 
 
     this.getProgress(thisNumOfDays);
+    console.log(this.dayProgress)
   }
   async getProgress(thisNumOfDays) {    
     for (var i = 0; i < thisNumOfDays; i++) {
@@ -177,18 +178,18 @@ export class HomePage implements OnInit {
     // this.currentCalendar.setDate(this.currentCalendar.getDate()-10);
     this.date = new Date (this.currentCalendar);
     this.date.setDate(this.date.getDate() - 10);
-    console.log(this.date)
+    // console.log(this.date)
 
     // this.currentCalendar = this.date.toISOString();
-    console.log(this.currentCalendar, typeof this.currentCalendar)
+    // console.log(this.currentCalendar, typeof this.currentCalendar)
     this.getDaysOfMonth(this.startWeekday);
   }
   openTodo(day) {
     var selectDay = new Date(this.currentCalendar);
     selectDay.setDate(day);
-    console.log(selectDay);
+    // console.log(selectDay);
     // this.router.navigateByUrl('calendar-tab', NavigationExtras);
-    console.log( selectDay.getMonth() + "Aaaa")
+    // console.log( selectDay.getMonth() + "Aaaa")
     location.href="/calendar-tab/todo?date=" + selectDay.getFullYear() + "-" + this.monthNames[selectDay.getMonth()] + "-" + selectDay.getDate();
     // location.href="/calendar-tab?date=" + ;
 
