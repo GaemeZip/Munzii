@@ -22,6 +22,7 @@ export class CalendarTabPage implements OnInit {
   selectDate: any;
   selectDay: any;
   temp: any;
+  tempDay: any;
   monthNames: any;
 
   selectWeekday: any;
@@ -48,11 +49,16 @@ export class CalendarTabPage implements OnInit {
     let tempTab = this.temp[0].split("/");
     this.currentTab = tempTab[4];
 
-    console.log(this.temp)
     this.temp = this.temp[1].split("=");
     let tempDate = this.temp[1];
-    this.selected = new Date(tempDate);
-    console.log(this.selected)
+    this.tempDay = tempDate.split("-");
+    if( Number(this.tempDay[2] < 10)) {
+      let tempString = "0" + this.tempDay[2];
+      this.tempDay[2] = tempString;
+    }
+    this.selected = new Date(this.tempDay[0], Number(this.tempDay[1]) - 1, this.tempDay[2]);
+    console.log(this.tempDay, this.selected)
+
 
     // this.selected = new Date();
     this.selected.setDate(this.selected.getDate()+7);
