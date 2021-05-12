@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 import axios from 'axios';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-calendar-tab',
@@ -29,6 +30,7 @@ export class CalendarTabPage implements OnInit {
   leftDay: number;
   startWeekday: number;
   weekday: any;
+  firstSelectDay: any[] =[];
 
   weekForSlide: Date[][] = [[],[],[]];
   weekDateForSlide: number[][] = [[],[],[]];
@@ -58,7 +60,11 @@ export class CalendarTabPage implements OnInit {
     }
     this.selected = new Date(this.tempDay[0], Number(this.tempDay[1]) - 1, this.tempDay[2]);
     console.log(this.tempDay, this.selected)
+    this.firstSelectDay[0] = Number(this.tempDay[0]);
+    this.firstSelectDay[1] = Number(this.tempDay[1]);
+    this.firstSelectDay[2] = Number(this.tempDay[2]);
 
+    console.log(this.firstSelectDay)
 
     // this.selected = new Date();
     this.selected.setDate(this.selected.getDate()+7);
@@ -193,13 +199,20 @@ export class CalendarTabPage implements OnInit {
     this.refreshPage();
   }
   firstSlide() {
-    let tempDay = new Date(this.selected); 
 
+    let tempDay = new Date(this.selected); 
+    console.log(this.selected)
     tempDay.setDate(this.selected.getDate() - 7);
     this.getDate(tempDay);
     this.calculateCalendar(tempDay);
     this.slides.slideTo(1);
-    // this.refreshPage();
+    console.log(tempDay.getMonth(), typeof tempDay.getMonth())
+    if(tempDay.getFullYear() == this.firstSelectDay[0] && tempDay.getMonth()+1 == this.firstSelectDay[1] && tempDay.getDate() == this.firstSelectDay[2]){
+      console.log("가틈")
+    }
+    else {
+      this.refreshPage();
+    }
   }
 
   changeDay(date) {
@@ -232,6 +245,7 @@ export class CalendarTabPage implements OnInit {
   refreshPage() {
     if(this.currentTab == 'todo') {
       this.currentTab = 'todo';
+      console.log(this.selectDate)
       location.href="/calendar-tab/todo?date=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
     }
     else if(this.currentTab == 'timeline') {
