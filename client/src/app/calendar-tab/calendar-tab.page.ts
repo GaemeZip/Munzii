@@ -67,7 +67,7 @@ export class CalendarTabPage implements OnInit {
     console.log(this.firstSelectDay)
 
     // this.selected = new Date();
-    this.selected.setDate(this.selected.getDate()+7);
+    this.selected.setDate(this.selected.getDate());
     console.log(this.selected)
 
     axios.get('http://3.139.244.188:3000/currentStartDay',{
