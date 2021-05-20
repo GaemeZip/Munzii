@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarTabPage} from '../calendar-tab.page';
 import axios from 'axios';
 
 @Component({
@@ -7,12 +8,25 @@ import axios from 'axios';
   styleUrls: ['./memo.page.scss'],
 })
 export class MemoPage implements OnInit {
+
+  selected: Date;
+  selectMonth: string;
+  monthNames: any;
+
   selectedDate = '2021-04-22';
   input = null;
   tempInput = null;
-  constructor() { }
-
+  date: any;
+  constructor(
+    private CalendarTabPage: CalendarTabPage) { 
+      this.monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
+    }
   ngOnInit() {
+    let temp = location.href.split("?");
+    temp = temp[1].split("=");
+    this.date = temp[1];
+    this.selected = new Date(this.date);
+    this.selectMonth = this.monthNames[this.selected.getMonth()]
     this.readMemo();
 
   }
@@ -20,7 +34,7 @@ export class MemoPage implements OnInit {
   readMemo() {
     axios.get('http://3.139.244.188:3000/readMemo', {
       params: {
-        date: this.selectedDate,
+        date: this.date,
         userID: localStorage.userID
       }
     })
@@ -41,7 +55,7 @@ export class MemoPage implements OnInit {
 
   createMemo() {
     axios.post('http://3.139.244.188:3000/createMemo', {
-      date: this.selectedDate,
+      date: this.date,
       content: this.input,
       userID: localStorage.userID
     }).then((res) => {
@@ -56,7 +70,7 @@ export class MemoPage implements OnInit {
 
   updateMemo() {
     axios.post('http://3.139.244.188:3000/updateMemo', {
-      date: this.selectedDate,
+      date: this.date,
       content: this.input,
       userID: localStorage.userID
     }).then((res) => {
@@ -71,7 +85,7 @@ export class MemoPage implements OnInit {
 
   deleteMemo() {
     axios.post('http://3.139.244.188:3000/deleteMemo', {
-      date: this.selectedDate,
+      date: this.date,
       userID: localStorage.userID
     }).then((res) => {
       if (res.data != 'error') {

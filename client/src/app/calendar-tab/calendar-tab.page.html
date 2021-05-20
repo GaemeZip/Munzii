@@ -16,7 +16,10 @@
           <ion-col *ngFor="let day of weekday" [ngStyle]="{'text-align': 'center'}"> {{day}} </ion-col>
         </ion-row>
         <ion-row class="todo__content__week-date">
-          <ion-slides class="slides" [options]="weekSlideOption" (ionSlideReachEnd)="endSlide()" (ionSlideReachStart)="firstSlide()">
+
+
+
+          <ion-slides class="slides" [options]="weekSlideOption" (ionSlideDidChange)="rotate()" (ionSlideDrag)="onSlideDrag()">
             <ion-slide *ngFor="let week of weekDateForSlide">
               <ion-col class="view-slide" *ngFor="let day of week" [ngStyle]="{'text-align': 'center'}">
                 <div class="select" *ngIf="day == selectDate"> {{ day }}  </div>
@@ -26,6 +29,7 @@
           </ion-slides>
         </ion-row>
       </ion-grid>
+
 
       <div class="menu-name" >{{ currentTab }}</div>
       <div class="btn-wrap" >

@@ -11,7 +11,7 @@
             min="1900-01"
             max="2200-12"
             [(ngModel)]="currentCalendar"
-            (ionChange)="selectMonth($event)"></ion-datetime>
+            (ionChange)="selectMonth()"></ion-datetime>
           </ion-col>
           <ion-col class="btn-wrap">
             <button class="btn-shortcut-setting" (click)="moveToSettings()">
@@ -32,24 +32,28 @@
                 <div class="day"> {{ day }} </div>
                 <div class="day-munzzi">
                   <div *ngIf="themeId == 1">
+                    <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] == -1" src="../../assets/image/Transparency.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] == 100" src="/assets/image/basic/basic_today_1.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] > 50 && dayProgress[daysInThisMonth.indexOf(day)] < 100" src="/assets/image/basic/basic_today_2.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] > 0 && dayProgress[daysInThisMonth.indexOf(day)] <= 50" src="/assets/image/basic/basic_today_3.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] == 0" src="/assets/image/basic/basic_today_4.png">
                   </div>
                   <div *ngIf="themeId == 2">
+                    <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] == -1" src="../../assets/image/Transparency.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] == 100" src="/assets/image/pink/pink_today_1.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] > 50 && dayProgress[daysInThisMonth.indexOf(day)] < 100" src="/assets/image/pink/pink_today_2.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] > 0 && dayProgress[daysInThisMonth.indexOf(day)] <= 50" src="/assets/image/pink/pink_today_3.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] == 0" src="/assets/image/pink/pink_today_4.png">
                   </div>
                   <div *ngIf="themeId == 3">
+                    <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] == -1" src="../../assets/image/Transparency.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] == 100" src="/assets/image/blue/blue_today_1.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] > 50 && dayProgress[daysInThisMonth.indexOf(day)] < 100" src="/assets/image/blue/blue_today_2.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] > 0 && dayProgress[daysInThisMonth.indexOf(day)] <= 50" src="/assets/image/blue/blue_today_3.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] == 0" src="/assets/image/blue/blue_today_4.png">
                   </div>
                   <div *ngIf="themeId == 4">
+                    <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] == -1" src="../../assets/image/Transparency.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] == 100" src="/assets/image/green/green_today_1.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] > 50 && dayProgress[daysInThisMonth.indexOf(day)] < 100" src="/assets/image/green/green_today_2.png">
                     <img *ngIf="dayProgress[daysInThisMonth.indexOf(day)] > 0 && dayProgress[daysInThisMonth.indexOf(day)] <= 50" src="/assets/image/green/green_today_3.png">
