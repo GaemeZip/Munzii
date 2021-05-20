@@ -168,10 +168,12 @@ export class HomePage implements OnInit {
       userID: localStorage.userID
     }
     }).then(res => {
+      console.log(res.data)
       for(var i =0; i < res.data.length; i++) {
         let tempDate = new Date(res.data[i].date);
         this.dayProgress[tempDate.getDate()-1] = res.data[i].progress;
       }
+      console.log(this.dayProgress)
     })
   }
   selectMonth() {

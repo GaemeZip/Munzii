@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { NavController, ModalController } from '@ionic/angular';
 import { CalendarTabPage} from '../calendar-tab.page';
 import { TodoFormPage } from '../todo-form/todo-form.page';
@@ -28,8 +27,6 @@ export class TodoPage implements OnInit {
   progress: number;
   date: any;
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
     public navCtrl: NavController,
     public modalController: ModalController,
     private CalendarTabPage: CalendarTabPage) { 
@@ -75,7 +72,33 @@ export class TodoPage implements OnInit {
               date: this.date,      
               userID: localStorage.userID
             }).then((res) => {
-
+              let today = new Date();
+              console.log(this.selected, today);
+              if(today.getFullYear() == this.selected.getFullYear() && today.getMonth() == this.selected.getMonth() && today.getDate() >= this.selected.getDate()) {
+                console.log("여기 들엉옴")
+                axios.post('http://3.139.244.188:3000/updateProgress', {
+                  date: this.date,
+                  progress: 0,
+                  userID: localStorage.userID
+                }).then((res) => {
+                })
+              }
+              else if(today.getFullYear() == this.selected.getFullYear() && today.getMonth() > this.selected.getMonth()) {
+                axios.post('http://3.139.244.188:3000/updateProgress', {
+                  date: this.date,
+                  progress: 0,
+                  userID: localStorage.userID
+                }).then((res) => {
+                })
+              }
+              else if(today.getFullYear() > this.selected.getFullYear()) {
+                axios.post('http://3.139.244.188:3000/updateProgress', {
+                  date: this.date,
+                  progress: 0,
+                  userID: localStorage.userID
+                }).then((res) => {
+                })
+              }
             })
           }
           else {

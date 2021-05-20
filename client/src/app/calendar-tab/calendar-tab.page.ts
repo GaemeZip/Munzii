@@ -14,6 +14,18 @@ import { combineLatest } from 'rxjs';
 })
 export class CalendarTabPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
+
+  appName = 'Swipe Me Fast!';
+  isFirstChange = false;
+  nums = [0,1,2];
+  
+  slidesOptions: object = {
+    initialSlide: 1,
+    speed : 300,
+    pager : false,
+    loop : true
+  };
+
   currentTab: string;
 
   public paramSelected: any;
@@ -167,12 +179,14 @@ export class CalendarTabPage implements OnInit {
     var prevDay;
 
     if ( this.startWeekday > this.selectDay) {
-      prevDay = (7 + this.startWeekday - this.selectDay);
+      prevDay = (this.selectDay +7 - this.startWeekday);
     }
     else {
       prevDay = (this.selectDay - this.startWeekday);
     }
+    console.log("prevday  " + this.selected.getDay())
     for (let i = 7; i > 0; i --) {
+      // console.log(this.selected+"*********")
       this.weekForSlide[0][7-i] = new Date(this.selected);
       this.weekForSlide[0][7-i].setDate(this.selected.getDate()-(prevDay+i));
       this.weekDateForSlide[0][7-i] = this.weekForSlide[0][7-i].getDate();
@@ -187,33 +201,34 @@ export class CalendarTabPage implements OnInit {
       this.weekForSlide[2][i-7].setDate(this.selected.getDate()-(prevDay-i));
       this.weekDateForSlide[2][i-7] = this.weekForSlide[2][i-7].getDate();
     }
+    console.log(this.weekDateForSlide);
   }
 
-  endSlide() {
-    // console.log("마지막 슬라이든이")
-    let tempDay = new Date(this.selected);                               
-    tempDay.setDate(this.selected.getDate() + 7);            
-    this.getDate(tempDay);
-    this.calculateCalendar(tempDay);
-    this.slides.slideTo(1);
-    this.refreshPage();
-  }
-  firstSlide() {
+  // endSlide() {
+  //   // console.log("마지막 슬라이든이")
+  //   let tempDay = new Date(this.selected);                               
+  //   tempDay.setDate(this.selected.getDate() + 7);            
+  //   this.getDate(tempDay);
+  //   this.calculateCalendar(tempDay);
+  //   this.slides.slideTo(1);
+  //   this.refreshPage();
+  // }
+  // firstSlide() {
 
-    let tempDay = new Date(this.selected); 
-    console.log(this.selected)
-    tempDay.setDate(this.selected.getDate() - 7);
-    this.getDate(tempDay);
-    this.calculateCalendar(tempDay);
-    this.slides.slideTo(1);
-    console.log(tempDay.getMonth(), typeof tempDay.getMonth())
-    if(tempDay.getFullYear() == this.firstSelectDay[0] && tempDay.getMonth()+1 == this.firstSelectDay[1] && tempDay.getDate() == this.firstSelectDay[2]){
-      console.log("가틈")
-    }
-    else {
-      this.refreshPage();
-    }
-  }
+  //   let tempDay = new Date(this.selected); 
+  //   console.log(this.selected)
+  //   tempDay.setDate(this.selected.getDate() - 7);
+  //   this.getDate(tempDay);
+  //   this.calculateCalendar(tempDay);
+  //   this.slides.slideTo(1);
+  //   console.log(tempDay.getMonth(), typeof tempDay.getMonth())
+  //   if(tempDay.getFullYear() == this.firstSelectDay[0] && tempDay.getMonth()+1 == this.firstSelectDay[1] && tempDay.getDate() == this.firstSelectDay[2]){
+  //     console.log("가틈")
+  //   }
+  //   else {
+  //     // this.refreshPage();
+  //   }
+  // }
 
   changeDay(date) {
     let dateDifference = this.selected.getDate()-date;
@@ -223,16 +238,13 @@ export class CalendarTabPage implements OnInit {
     tempDay.setDate(tempDay.getDate())
     //눌렀을때 다음달인 경우  -> 28 1 2 3 4 5 6   23 24 25 26 27 28 1 (22)  
     if(dateDifference > 20) {
-      console.log(11, dateDifference)
       tempDay.setDate(date);
       tempDay.setMonth(this.selected.getMonth()+1);    
     }
     //눌ㅇ렀을때 저번달 (-22) 
     else if(dateDifference < -20) {
-      console.log(22, dateDifference)
       tempDay.setDate(date);
       tempDay.setMonth(this.selected.getMonth()-1);   
-      console.log(tempDay) 
     }
     else {
       console.log(33)
@@ -252,13 +264,70 @@ export class CalendarTabPage implements OnInit {
       this.currentTab = 'timeline';
       location.href="/calendar-tab/todo?timeline=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
     }
-    // else {
-    //   this.currentTab = 'memo';
-    //   location.href="/calendar-tab/memo?date=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
-    // }
+    else {
+      this.currentTab = 'memo';
+      location.href="/calendar-tab/memo?date=" + this.selectYear + "-" + this.selectMonth + "-" + this.selectDate;
+    }
   }
   moveToSettings(){
     this.router.navigate(['/settings']);
 
   }
+  rotate() {
+    this.slides.getActiveIndex().then(sliderIndex =>{
+      var prevDay;
+      console.log(this.weekDateForSlide)
+      if (sliderIndex <= 0) {
+        this.selected.setDate(this.selected.getDate()-7);
+        this.getDate(this.selected);
+        this.refreshPage();
+        
+    } else if (sliderIndex >= 2) {
+        this.selected.setDate(this.selected.getDate()+7);
+        this.getDate(this.selected);
+        this.refreshPage();
+    }
+
+    console.log(sliderIndex + this.selected)
+      if ( this.startWeekday > this.selectDay) {
+        prevDay = (7 + this.startWeekday - this.selectDay);
+      }
+      else {
+        prevDay = (this.selectDay - this.startWeekday);
+      }
+      this.weekForSlide
+      for (let i = 7; i > 0; i --) {
+        this.weekForSlide[0][7-i] = new Date(this.selected);
+        this.weekForSlide[0][7-i].setDate(this.selected.getDate()-(prevDay+i));
+        console.log(this.weekForSlide[0][7-i])
+        this.weekDateForSlide[0][7-i] = this.weekForSlide[0][7-i].getDate();
+      }
+      for (let i = 0; i < 7; i ++) {
+        this.weekForSlide[1][i] = new Date(this.selected);
+        this.weekForSlide[1][i].setDate(this.selected.getDate()-(prevDay-i));
+        this.weekDateForSlide[1][i] = this.weekForSlide[1][i].getDate();
+      }
+      for (let i = 7; i < 14; i ++) {
+        this.weekForSlide[2][i-7] = new Date(this.selected);
+        this.weekForSlide[2][i-7].setDate(this.selected.getDate()-(prevDay-i));
+        this.weekDateForSlide[2][i-7] = this.weekForSlide[2][i-7].getDate();
+      }
+
+      // console.log(this.weekForSlide)
+      // console.log("인덳TN" + sliderIndex)
+      this.slides.slideTo(1, 0, false);
+    })
+  }
+
+onSlideDrag() {
+  if (this.isFirstChange) {
+    this.isFirstChange = false;
+    this.slides.slideTo(2, 0, false);
+    this.rotate();
+  }
+}
+
+// onMousedown() {
+//   this.isFirstChange = true;
+// }
 }
