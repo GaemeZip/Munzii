@@ -299,7 +299,6 @@ export class CalendarTabPage implements OnInit {
       for (let i = 7; i > 0; i --) {
         this.weekForSlide[0][7-i] = new Date(this.selected);
         this.weekForSlide[0][7-i].setDate(this.selected.getDate()-(prevDay+i));
-        console.log(this.weekForSlide[0][7-i])
         this.weekDateForSlide[0][7-i] = this.weekForSlide[0][7-i].getDate();
       }
       for (let i = 0; i < 7; i ++) {
