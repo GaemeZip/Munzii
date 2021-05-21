@@ -13,6 +13,6 @@ export class SettingsPage implements OnInit {
   ngOnInit() {
   }
   prev(){
-    this.router.navigate(['/home']);
+    location.href="/home";
   }
 }
