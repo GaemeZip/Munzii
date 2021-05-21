@@ -70,7 +70,7 @@ export class TodoFormPage implements OnInit {
           alert("시작 시간은 종료 시간 이전이어야 합니다");
         }
         else if (new Date(this.startTime).getHours() == new Date(this.endTime).getHours()) {
-          if(new Date(this.startTime).getMinutes() >= new Date(this.endTime).getMinutes()) {
+          if(new Date(this.startTime).getMinutes() > new Date(this.endTime).getMinutes()) {
             alert("시작 시간은 종료 시간 이전이어야 합니다");
           }
           else {
@@ -90,11 +90,11 @@ export class TodoFormPage implements OnInit {
                 console.log("bbbb")
                 let todoEnd = Number(res.data[i].end_time.substr(0,2))*60 + Number(res.data[i].end_time.substr(3,2));
                 let todoStart = Number(res.data[i].start_time.substr(0,2))*60 + Number(res.data[i].start_time.substr(3,2));
-                if(end <= todoEnd && end >= todoStart) {
+                if(end <= todoEnd && end > todoStart) {
                   alert("이미 일정이 있는 시간대입니다");
                   break;
                 }
-                else if(start <= todoEnd && start >= todoStart) {
+                else if(start < todoEnd && start >= todoStart) {
                   alert("이미 일정이 있는 시간대입니다");
                   break;
                 }
@@ -127,7 +127,7 @@ export class TodoFormPage implements OnInit {
               }
                 else {
                 if(i == res.data.length-1){
-                                    axios.post('http://3.139.244.188:3000/createTodo', {
+                  axios.post('http://3.139.244.188:3000/createTodo', {
                     date: this.selectedString,
                     title: this.title,
                     time: this.isTimeline,
@@ -196,11 +196,11 @@ export class TodoFormPage implements OnInit {
             if(res.data[i].time == 1) {
               let todoEnd = Number(res.data[i].end_time.substr(0,2))*60 + Number(res.data[i].end_time.substr(3,2));
               let todoStart = Number(res.data[i].start_time.substr(0,2))*60 + Number(res.data[i].start_time.substr(3,2));
-              if(end <= todoEnd && end >= todoStart) {
+              if(end <= todoEnd && end > todoStart) {
                 alert("이미 일정이 있는 시간대입니다");
                 break;
               }
-              else if(start <= todoEnd && start >= todoStart) {
+              else if(start < todoEnd && start >= todoStart) {
                 alert("이미 일정이 있는 시간대입니다");
                 break;
               }
