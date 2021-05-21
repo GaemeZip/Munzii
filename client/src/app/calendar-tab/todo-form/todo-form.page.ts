@@ -82,10 +82,11 @@ export class TodoFormPage implements OnInit {
           }
         })
         .then(res => {
-          console.log(this.endTime, this.endTimeString)
+          console.log(res.data.length)
           let end = Number(this.endTimeString.substr(0,2))*60 + Number(this.endTimeString.substr(3,2));
           let start = Number(this.startTimeString.substr(0,2))*60 + Number(this.startTimeString.substr(3,2));
           for(var i=0; i<res.data.length; i++) {
+            console.log("dadada")
             if(res.data[i].time == 1) {
               let todoEnd = Number(res.data[i].end_time.substr(0,2))*60 + Number(res.data[i].end_time.substr(3,2));
               let todoStart = Number(res.data[i].start_time.substr(0,2))*60 + Number(res.data[i].start_time.substr(3,2));
@@ -100,6 +101,26 @@ export class TodoFormPage implements OnInit {
               else if(start <= todoStart && end >= todoEnd) {
                 alert("이미 일정이 있는 시간대입니다");
                 break;
+              }
+              else {
+                axios.post('http://3.139.244.188:3000/createTodo', {
+                  date: this.selectedString,
+                  title: this.title,
+                  time: this.isTimeline,
+                  startTime: this.startTimeString,
+                  endTime: this.endTimeString,
+                  userID: localStorage.userID
+                }).then((res) => {
+                  if (res.data != 'error') {
+                    console.log("테이블 생성");
+                  } else {
+                    console.log(res.data)
+                  }
+                })
+              // location.href="/calendar-tab/todo?date=" + this.selectedString;
+              this.modalController.dismiss({
+                'dismissed': true
+              });
               }
             }
               else {
@@ -124,6 +145,27 @@ export class TodoFormPage implements OnInit {
               }
 
           }
+          if(res.data.length == 0) {
+            axios.post('http://3.139.244.188:3000/createTodo', {
+              date: this.selectedString,
+              title: this.title,
+              time: this.isTimeline,
+              startTime: this.startTimeString,
+              endTime: this.endTimeString,
+              userID: localStorage.userID
+            }).then((res) => {
+              if (res.data != 'error') {
+                console.log("테이블 생성");
+              } else {
+                console.log(res.data)
+              }
+            })
+          // location.href="/calendar-tab/todo?date=" + this.selectedString;
+          this.modalController.dismiss({
+            'dismissed': true
+          });
+          }
+
 
         })
 

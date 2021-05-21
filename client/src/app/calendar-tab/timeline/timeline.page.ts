@@ -62,19 +62,7 @@ export class TimelinePage implements OnInit {
       }
     })
     .then(res => {
-      axios.post('http://3.139.244.188:3000/checkProgress', {
-        date: this.date,
-        userID: localStorage.userID
-    }).then(res => {
-      console.log(res.data)
-      if(res.data.length === 0) {
-        axios.post('http://3.139.244.188:3000/createProgress', {
-          date: this.date,
-          userID: localStorage.userID
-        }).then((res) => {
-        })
-    }
-    })
+      let doneCnt = 0;
       for(var i = 0; i < res.data.length; i++) {
         if(res.data[i].time == 1) {
           this.timelineList.push(res.data[i]);
@@ -82,6 +70,12 @@ export class TimelinePage implements OnInit {
         if(i == res.data.length - 1) {
 
         }
+        if(res.data[i].is_done == 1) {
+          doneCnt ++;
+        }
+      }
+      if(doneCnt == res.data.length) {
+        this.progress = 100;
       }
         this.sortTimeline();    
         this.getHeight();
