@@ -81,6 +81,7 @@ export class TodoPage implements OnInit {
                   progress: 0,
                   userID: localStorage.userID
                 }).then((res) => {
+                  console.log(237462487152)
                 })
               }
               else if(today.getFullYear() == this.selected.getFullYear() && today.getMonth() > this.selected.getMonth()) {
