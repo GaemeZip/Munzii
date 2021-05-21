@@ -80,19 +80,144 @@ export class TodoEditFormPage implements OnInit {
           alert('시간을 입력하세요');
         } else if (this.startTime.length < 10) {
           if (
-            Number(this.startTime.substr(0, 2)) >
-            Number(this.endTime.substr(0, 2))
+            Number(this.startTime.substr(0, 2)) > Number(this.endTime.substr(0, 2))
           ) {
             alert('시작 시간은 종료 시간 이전이어야 합니다');
           } else if (
-            Number(this.startTime.substr(0, 2)) ===
-            Number(this.endTime.substr(0, 2))
+            Number(this.startTime.substr(0, 2)) == Number(this.endTime.substr(0, 2))
           ) {
             if (
-              Number(this.startTime.substr(3, 2)) <
-              Number(this.endTime.substr(3, 2))
+              Number(this.startTime.substr(3, 2)) >= Number(this.endTime.substr(3, 2))
             ) {
               alert('시작 시간은 종료 시간 이전이어야 합니다');
+            }
+            else {
+              axios
+                .get('http://3.139.244.188:3000/readTodo', {
+                  params: {
+                    date: this.selectedString,
+                    userID: localStorage.userID,
+                  },
+                })
+                .then((res) => {
+                  console.log(this.endTime, this.endTimeString);
+                  let end =
+                    Number(this.endTimeString.substr(0, 2)) * 60 +
+                    Number(this.endTimeString.substr(3, 2));
+                  let start =
+                    Number(this.startTimeString.substr(0, 2)) * 60 +
+                    Number(this.startTimeString.substr(3, 2));
+                    for(var i=0; i<res.data.length; i++) {
+                      if(this.todoId == res.data[i].id) {
+                        if(res.data.length == 1) {
+                          axios.post('http://3.139.244.188:3000/updateTodo', {
+                            id: this.todoId,
+                            date: this.selectedString,
+                            title: this.title, 
+                            time: this.isTimeline,
+                            startTime: this.startTimeString,
+                            endTime: this.endTimeString,
+                            isDone: this.isDone,
+                            userID: localStorage.userID
+                          }).then((res) => {
+                            if (res.data != 'error') {
+                              console.log("테이블 업데이트4");
+                            } else {
+                              console.log("에러 발생")
+                            }
+                          })
+                          this.modalController.dismiss({
+                            'dismissed': true
+                          });
+                        }
+                        else {
+                          continue;
+                        }
+                      }
+                      else {
+                      if(res.data[i].time == 1) {
+                        let todoEnd = Number(res.data[i].end_time.substr(0,2))*60 + Number(res.data[i].end_time.substr(3,2));
+                        let todoStart = Number(res.data[i].start_time.substr(0,2))*60 + Number(res.data[i].start_time.substr(3,2));
+                        if(end <= todoEnd && end >= todoStart) {
+                          alert("이미 일정이 있는 시간대입니다");
+                          break;
+                        }
+                        else if(start <= todoEnd && start >= todoStart) {
+                          alert("이미 일정이 있는 시간대입니다");
+                          break;
+                        }
+                        else if(start <= todoStart && end >= todoEnd) {
+                          alert("이미 일정이 있는 시간대입니다");
+                          break;
+                        }
+                        else {
+                          axios.post('http://3.139.244.188:3000/updateTodo', {
+                            id: this.todoId,
+                            date: this.selectedString,
+                            title: this.title, 
+                            time: this.isTimeline,
+                            startTime: this.startTimeString,
+                            endTime: this.endTimeString,
+                            isDone: this.isDone,
+                            userID: localStorage.userID
+                          }).then((res) => {
+                            if (res.data != 'error') {
+                              console.log("테이블 업데이트5");
+                            } else {
+                              console.log("에러 발생")
+                            }
+                          })
+                          this.modalController.dismiss({
+                            'dismissed': true
+                          });
+                        }
+                      }
+                        else {
+                          axios.post('http://3.139.244.188:3000/updateTodo', {
+                            id: this.todoId,
+                            date: this.selectedString,
+                            title: this.title, 
+                            time: this.isTimeline,
+                            startTime: this.startTimeString,
+                            endTime: this.endTimeString,
+                            isDone: this.isDone,
+                            userID: localStorage.userID
+                          }).then((res) => {
+                            if (res.data != 'error') {
+                              console.log("테이블 업데이트6");
+                            } else {
+                              console.log("에러 발생")
+                            }
+                          })
+                          this.modalController.dismiss({
+                            'dismissed': true
+                          });
+                        }
+                      }
+                    }
+                  if (res.data.length == 0) {
+                    console.log("datalength")
+                    axios.post('http://3.139.244.188:3000/updateTodo', {
+                      id: this.todoId,
+                      date: this.selectedString,
+                      title: this.title, 
+                      time: this.isTimeline,
+                      startTime: this.startTimeString,
+                      endTime: this.endTimeString,
+                      isDone: this.isDone,
+                      userID: localStorage.userID
+                    }).then((res) => {
+                      if (res.data != 'error') {
+                        console.log("테이블 업데이트7");
+                      } else {
+                        console.log("에러 발생")
+                      }
+                    })
+                    this.modalController.dismiss({
+                      'dismissed': true
+                    });
+                  }
+                });
             }
           } else {
             axios
@@ -124,7 +249,7 @@ export class TodoEditFormPage implements OnInit {
                           userID: localStorage.userID
                         }).then((res) => {
                           if (res.data != 'error') {
-                            console.log("테이블 업데이트");
+                            console.log("테이블 업데이트8");
                           } else {
                             console.log("에러 발생")
                           }
@@ -139,21 +264,21 @@ export class TodoEditFormPage implements OnInit {
                     }
                     else {
                     console.log("dadada")
-                    if(res.data[i].time == 1) {
-                      let todoEnd = Number(res.data[i].end_time.substr(0,2))*60 + Number(res.data[i].end_time.substr(3,2));
-                      let todoStart = Number(res.data[i].start_time.substr(0,2))*60 + Number(res.data[i].start_time.substr(3,2));
-                      if(end <= todoEnd && end >= todoStart) {
-                        alert("이미 일정이 있는 시간대입니다");
-                        break;
-                      }
-                      else if(start <= todoEnd && start >= todoStart) {
-                        alert("이미 일정이 있는 시간대입니다");
-                        break;
-                      }
-                      else if(start <= todoStart && end >= todoEnd) {
-                        alert("이미 일정이 있는 시간대입니다");
-                        break;
-                      }
+                      if(res.data[i].time == 1) {
+                        let todoEnd = Number(res.data[i].end_time.substr(0,2))*60 + Number(res.data[i].end_time.substr(3,2));
+                        let todoStart = Number(res.data[i].start_time.substr(0,2))*60 + Number(res.data[i].start_time.substr(3,2));
+                        if(end <= todoEnd && end >= todoStart) {
+                          alert("이미 일정이 있는 시간대입니다");
+                          break;
+                        }
+                        else if(start <= todoEnd && start >= todoStart) {
+                          alert("이미 일정이 있는 시간대입니다");
+                          break;
+                        }
+                        else if(start <= todoStart && end >= todoEnd) {
+                          alert("이미 일정이 있는 시간대입니다");
+                          break;
+                        }
                       else {
                         axios.post('http://3.139.244.188:3000/updateTodo', {
                           id: this.todoId,
@@ -166,7 +291,7 @@ export class TodoEditFormPage implements OnInit {
                           userID: localStorage.userID
                         }).then((res) => {
                           if (res.data != 'error') {
-                            console.log("테이블 업데이트");
+                            console.log("테이블 업데이트9");
                           } else {
                             console.log("에러 발생")
                           }
@@ -176,26 +301,30 @@ export class TodoEditFormPage implements OnInit {
                         });
                       }
                     }
-                      else {
-                        axios.post('http://3.139.244.188:3000/updateTodo', {
-                          id: this.todoId,
+                    else {
+                      if(i == res.data.length-1){
+                        axios.post('http://3.139.244.188:3000/createTodo', {
                           date: this.selectedString,
-                          title: this.title, 
+                          title: this.title,
                           time: this.isTimeline,
                           startTime: this.startTimeString,
                           endTime: this.endTimeString,
-                          isDone: this.isDone,
                           userID: localStorage.userID
                         }).then((res) => {
+                          console.log(1111111111)
                           if (res.data != 'error') {
-                            console.log("테이블 업데이트");
+                            console.log("테이블 생성");
                           } else {
-                            console.log("에러 발생")
+                            console.log(res.data)
                           }
                         })
-                        this.modalController.dismiss({
-                          'dismissed': true
-                        });
+                      // location.href="/calendar-tab/todo?date=" + this.selectedString;
+                      this.modalController.dismiss({
+                        'dismissed': true
+                      });
+                        break;
+                      }
+                      continue;
                       }
                     }
                   }
@@ -269,7 +398,7 @@ export class TodoEditFormPage implements OnInit {
                       userID: localStorage.userID
                     }).then((res) => {
                       if (res.data != 'error') {
-                        console.log("테이블 업데이트");
+                        console.log("테이블 업데이트1");
                       } else {
                         console.log("에러 발생")
                       }
@@ -313,7 +442,7 @@ export class TodoEditFormPage implements OnInit {
                     userID: localStorage.userID
                   }).then((res) => {
                     if (res.data != 'error') {
-                      console.log("테이블 업데이트");
+                      console.log("테이블 업데이트2");
                     } else {
                       console.log("에러 발생")
                     }
@@ -341,7 +470,7 @@ export class TodoEditFormPage implements OnInit {
           })
           .then((res) => {
             if (res.data != 'error') {
-              console.log('테이블 업데이트');
+              console.log('테이블 업데이트3');
             } else {
               console.log('에러 발생');
             }
