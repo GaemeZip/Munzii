@@ -111,6 +111,7 @@ export class TodoFormPage implements OnInit {
                   endTime: this.endTimeString,
                   userID: localStorage.userID
                 }).then((res) => {
+                  console.log(444444444)
                   if (res.data != 'error') {
                     console.log("테이블 생성");
                   } else {
@@ -121,6 +122,7 @@ export class TodoFormPage implements OnInit {
               this.modalController.dismiss({
                 'dismissed': true
               });
+              break;
               }
             }
               else {
@@ -132,6 +134,7 @@ export class TodoFormPage implements OnInit {
                   endTime: this.endTimeString,
                   userID: localStorage.userID
                 }).then((res) => {
+                  console.log(1111111111)
                   if (res.data != 'error') {
                     console.log("테이블 생성");
                   } else {
@@ -154,6 +157,7 @@ export class TodoFormPage implements OnInit {
               endTime: this.endTimeString,
               userID: localStorage.userID
             }).then((res) => {
+              console.log(22222222)
               if (res.data != 'error') {
                 console.log("테이블 생성");
               } else {
@@ -181,6 +185,7 @@ export class TodoFormPage implements OnInit {
           endTime: this.endTimeString,
           userID: localStorage.userID
         }).then((res) => {
+          console.log(33333333333)
           if (res.data != 'error') {
             console.log("테이블 생성");
           } else {
