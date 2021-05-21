@@ -281,7 +281,9 @@ export class TodoEditFormPage implements OnInit {
                           break loop;
                         }
                       else {
-                        if(i == res.data.length - 2){
+                        console.log("요기")
+                        if(i < res.data.length - 2) {}
+                        else{
                           axios.post('http://3.139.244.188:3000/updateTodo', {
                           id: this.todoId,
                           date: this.selectedString,
@@ -307,7 +309,8 @@ export class TodoEditFormPage implements OnInit {
                       }
                     }
                     else {
-                      if(i == res.data.length-2){
+                      if(i < res.data.length - 2) {}
+                      else{
                         axios.post('http://3.139.244.188:3000/createTodo', {
                           date: this.selectedString,
                           title: this.title,
