@@ -145,6 +145,7 @@ export class TodoFormPage implements OnInit {
               this.modalController.dismiss({
                 'dismissed': true
               });
+                break;
               }
 
           }
