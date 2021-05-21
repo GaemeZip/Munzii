@@ -126,6 +126,7 @@ export class TimelinePage implements OnInit {
   }
 
   async createTodo() {
+    console.log("모달 눌림")
     const modal = await this.modalController.create({
       component: TodoFormPage,
       animated: true,

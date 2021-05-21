@@ -86,25 +86,71 @@ export class TodoEditFormPage implements OnInit {
             }
           }
           else {
-            axios.post('http://3.139.244.188:3000/updateTodo', {
-              id: this.todoId,
-              date: this.selectedString,
-              title: this.title, 
-              time: this.isTimeline,
-              startTime: this.startTimeString,
-              endTime: this.endTimeString,
-              isDone: this.isDone,
-              userID: localStorage.userID
-            }).then((res) => {
-              if (res.data != 'error') {
-                console.log("테이블 업데이트");
-              } else {
-                console.log("에러 발생")
+            // axios.post('http://3.139.244.188:3000/updateTodo', {
+            //   id: this.todoId,
+            //   date: this.selectedString,
+            //   title: this.title, 
+            //   time: this.isTimeline,
+            //   startTime: this.startTimeString,
+            //   endTime: this.endTimeString,
+            //   isDone: this.isDone,
+            //   userID: localStorage.userID
+            // }).then((res) => {
+            //   if (res.data != 'error') {
+            //     console.log("테이블 업데이트");
+            //   } else {
+            //     console.log("에러 발생")
+            //   }
+            // })
+            // this.modalController.dismiss({
+            //   'dismissed': true
+            // });
+            axios.get('http://3.139.244.188:3000/readTodo',{
+              params:{
+                date: this.selectedString,
+                userID: localStorage.userID
               }
             })
-            this.modalController.dismiss({
-              'dismissed': true
-            });
+            .then(res => {
+              let end = Number(this.endTimeString.substr(0,2))*60 + Number(this.endTimeString.substr(3,2));
+              let start = Number(this.startTimeString.substr(0,2))*60 + Number(this.startTimeString.substr(3,2));
+              for(var i=0; i<res.data.length; i++) {
+                let todoEnd = Number(res.data[0].end_time.substr(0,2))*60 + Number(res.data[0].end_time.substr(3,2));
+                let todoStart = Number(res.data[0].start_time.substr(0,2))*60 + Number(res.data[0].start_time.substr(3,2));
+                if(end <= todoEnd && end >= todoStart) {
+                  alert("이미 일정이 있는 시간대입니다");
+                  break;
+                }
+                else if(start <= todoEnd && start >= todoStart) {
+                  alert("이미 일정이 있는 시간대입니다");
+                  break;
+                }
+                else if(start <= todoStart && end >= todoEnd) {
+                  alert("이미 일정이 있는 시간대입니다");
+                  break;
+                }
+                else {
+                  axios.post('http://3.139.244.188:3000/createTodo', {
+                    date: this.selectedString,
+                    title: this.title,
+                    time: this.isTimeline,
+                    startTime: this.startTimeString,
+                    endTime: this.endTimeString,
+                    userID: localStorage.userID
+                  }).then((res) => {
+                    if (res.data != 'error') {
+                      console.log("테이블 생성");
+                    } else {
+                      console.log(res.data)
+                    }
+                  })
+                // location.href="/calendar-tab/todo?date=" + this.selectedString;
+                this.modalController.dismiss({
+                  'dismissed': true
+                });
+                }
+              }
+            })
           }
         }
         else if(new Date(this.startTime).getHours() > new Date(this.endTime).getHours()) {
@@ -116,25 +162,52 @@ export class TodoEditFormPage implements OnInit {
           }
         }
         else {
-          axios.post('http://3.139.244.188:3000/updateTodo', {
-            id: this.todoId,
-            date: this.selectedString,
-            title: this.title, 
-            time: this.isTimeline,
-            startTime: this.startTimeString,
-            endTime: this.endTimeString,
-            isDone: this.isDone,
-            userID: localStorage.userID
-          }).then((res) => {
-            if (res.data != 'error') {
-              console.log("테이블 업데이트");
-            } else {
-              console.log("에러 발생")
+          axios.get('http://3.139.244.188:3000/readTodo',{
+            params:{
+              date: this.selectedString,
+              userID: localStorage.userID
             }
           })
-          this.modalController.dismiss({
-            'dismissed': true
-          });
+          .then(res => {
+            let end = Number(this.endTimeString.substr(0,2))*60 + Number(this.endTimeString.substr(3,2));
+            let start = Number(this.startTimeString.substr(0,2))*60 + Number(this.startTimeString.substr(3,2));
+            for(var i=0; i<res.data.length; i++) {
+              let todoEnd = Number(res.data[0].end_time.substr(0,2))*60 + Number(res.data[0].end_time.substr(3,2));
+              let todoStart = Number(res.data[0].start_time.substr(0,2))*60 + Number(res.data[0].start_time.substr(3,2));
+              if(end <= todoEnd && end >= todoStart) {
+                alert("이미 일정이 있는 시간대입니다");
+                break;
+              }
+              else if(start <= todoEnd && start >= todoStart) {
+                alert("이미 일정이 있는 시간대입니다");
+                break;
+              }
+              else if(start <= todoStart && end >= todoEnd) {
+                alert("이미 일정이 있는 시간대입니다");
+                break;
+              }
+              else {
+                axios.post('http://3.139.244.188:3000/createTodo', {
+                  date: this.selectedString,
+                  title: this.title,
+                  time: this.isTimeline,
+                  startTime: this.startTimeString,
+                  endTime: this.endTimeString,
+                  userID: localStorage.userID
+                }).then((res) => {
+                  if (res.data != 'error') {
+                    console.log("테이블 생성");
+                  } else {
+                    console.log(res.data)
+                  }
+                })
+              // location.href="/calendar-tab/todo?date=" + this.selectedString;
+              this.modalController.dismiss({
+                'dismissed': true
+              });
+              }
+            }
+          })
         }
       }
       else {
