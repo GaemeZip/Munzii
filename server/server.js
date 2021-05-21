@@ -1,10 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const cors = require('cors');
 
 // npm install body-parser 후 사용
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
+
+app.options('*', cors());
 
 const joinRouter = require('./router/users/join');
 const loginRouter = require('./router/users/login');
