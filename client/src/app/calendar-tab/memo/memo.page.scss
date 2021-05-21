@@ -15,6 +15,9 @@
         outline: none;
     }
     button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
         right: 15px;
         bottom: 0;
@@ -23,8 +26,9 @@
         border-radius: 100%;
         background: var(--ion-color-primary);
         z-index: 2;
-        #trash {
+        ion-icon {
             font-size: 27px;
+            color:white;
         }
     }
 }
