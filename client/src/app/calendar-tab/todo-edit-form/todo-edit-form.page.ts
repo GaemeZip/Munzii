@@ -112,11 +112,75 @@ export class TodoEditFormPage implements OnInit {
               }
             })
             .then(res => {
+              console.log(this.endTime, this.endTimeString)
               let end = Number(this.endTimeString.substr(0,2))*60 + Number(this.endTimeString.substr(3,2));
               let start = Number(this.startTimeString.substr(0,2))*60 + Number(this.startTimeString.substr(3,2));
               for(var i=0; i<res.data.length; i++) {
-                let todoEnd = Number(res.data[0].end_time.substr(0,2))*60 + Number(res.data[0].end_time.substr(3,2));
-                let todoStart = Number(res.data[0].start_time.substr(0,2))*60 + Number(res.data[0].start_time.substr(3,2));
+                if(res.data[i].time == 1) {
+                  let todoEnd = Number(res.data[i].end_time.substr(0,2))*60 + Number(res.data[i].end_time.substr(3,2));
+                  let todoStart = Number(res.data[i].start_time.substr(0,2))*60 + Number(res.data[i].start_time.substr(3,2));
+                  if(end <= todoEnd && end >= todoStart) {
+                    alert("이미 일정이 있는 시간대입니다");
+                    break;
+                  }
+                  else if(start <= todoEnd && start >= todoStart) {
+                    alert("이미 일정이 있는 시간대입니다");
+                    break;
+                  }
+                  else if(start <= todoStart && end >= todoEnd) {
+                    alert("이미 일정이 있는 시간대입니다");
+                    break;
+                  }
+                }
+                  else {
+                    axios.post('http://3.139.244.188:3000/createTodo', {
+                      date: this.selectedString,
+                      title: this.title,
+                      time: this.isTimeline,
+                      startTime: this.startTimeString,
+                      endTime: this.endTimeString,
+                      userID: localStorage.userID
+                    }).then((res) => {
+                      if (res.data != 'error') {
+                        console.log("테이블 생성");
+                      } else {
+                        console.log(res.data)
+                      }
+                    })
+                  // location.href="/calendar-tab/todo?date=" + this.selectedString;
+                  this.modalController.dismiss({
+                    'dismissed': true
+                  });
+                  }
+    
+              }
+    
+            })
+          }
+        }
+        else if(new Date(this.startTime).getHours() > new Date(this.endTime).getHours()) {
+          alert("시작 시간은 종료 시간 이전이어야 합니다");
+        }
+        else if (new Date(this.startTime).getHours() === new Date(this.endTime).getHours()) {
+          if(new Date(this.startTime).getMinutes() > new Date(this.endTime).getMinutes()) {
+            alert("시작 시간은 종료 시간 이전이어야 합니다");
+          }
+        }
+        else {
+          axios.get('http://3.139.244.188:3000/readTodo',{
+            params:{
+              date: this.selectedString,
+              userID: localStorage.userID
+            }
+          })
+          .then(res => {
+            console.log(this.endTime, this.endTimeString)
+            let end = Number(this.endTimeString.substr(0,2))*60 + Number(this.endTimeString.substr(3,2));
+            let start = Number(this.startTimeString.substr(0,2))*60 + Number(this.startTimeString.substr(3,2));
+            for(var i=0; i<res.data.length; i++) {
+              if(res.data[i].time == 1) {
+                let todoEnd = Number(res.data[i].end_time.substr(0,2))*60 + Number(res.data[i].end_time.substr(3,2));
+                let todoStart = Number(res.data[i].start_time.substr(0,2))*60 + Number(res.data[i].start_time.substr(3,2));
                 if(end <= todoEnd && end >= todoStart) {
                   alert("이미 일정이 있는 시간대입니다");
                   break;
@@ -129,6 +193,7 @@ export class TodoEditFormPage implements OnInit {
                   alert("이미 일정이 있는 시간대입니다");
                   break;
                 }
+              }
                 else {
                   axios.post('http://3.139.244.188:3000/createTodo', {
                     date: this.selectedString,
@@ -149,64 +214,9 @@ export class TodoEditFormPage implements OnInit {
                   'dismissed': true
                 });
                 }
-              }
-            })
-          }
-        }
-        else if(new Date(this.startTime).getHours() > new Date(this.endTime).getHours()) {
-          alert("시작 시간은 종료 시간 이전이어야 합니다");
-        }
-        else if (new Date(this.startTime).getHours() === new Date(this.endTime).getHours()) {
-          if(new Date(this.startTime).getMinutes() > new Date(this.endTime).getMinutes()) {
-            alert("시작 시간은 종료 시간 이전이어야 합니다");
-          }
-        }
-        else {
-          axios.get('http://3.139.244.188:3000/readTodo',{
-            params:{
-              date: this.selectedString,
-              userID: localStorage.userID
+  
             }
-          })
-          .then(res => {
-            let end = Number(this.endTimeString.substr(0,2))*60 + Number(this.endTimeString.substr(3,2));
-            let start = Number(this.startTimeString.substr(0,2))*60 + Number(this.startTimeString.substr(3,2));
-            for(var i=0; i<res.data.length; i++) {
-              let todoEnd = Number(res.data[0].end_time.substr(0,2))*60 + Number(res.data[0].end_time.substr(3,2));
-              let todoStart = Number(res.data[0].start_time.substr(0,2))*60 + Number(res.data[0].start_time.substr(3,2));
-              if(end <= todoEnd && end >= todoStart) {
-                alert("이미 일정이 있는 시간대입니다");
-                break;
-              }
-              else if(start <= todoEnd && start >= todoStart) {
-                alert("이미 일정이 있는 시간대입니다");
-                break;
-              }
-              else if(start <= todoStart && end >= todoEnd) {
-                alert("이미 일정이 있는 시간대입니다");
-                break;
-              }
-              else {
-                axios.post('http://3.139.244.188:3000/createTodo', {
-                  date: this.selectedString,
-                  title: this.title,
-                  time: this.isTimeline,
-                  startTime: this.startTimeString,
-                  endTime: this.endTimeString,
-                  userID: localStorage.userID
-                }).then((res) => {
-                  if (res.data != 'error') {
-                    console.log("테이블 생성");
-                  } else {
-                    console.log(res.data)
-                  }
-                })
-              // location.href="/calendar-tab/todo?date=" + this.selectedString;
-              this.modalController.dismiss({
-                'dismissed': true
-              });
-              }
-            }
+  
           })
         }
       }
