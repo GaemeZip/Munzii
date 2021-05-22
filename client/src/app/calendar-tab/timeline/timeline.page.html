@@ -20,19 +20,29 @@
               
             <ion-item lines="none">
             <div class="todo" [style.height.px]="height[timelineList.indexOf(todo)]" (click)="calculateDone(todo)">
-              <div class="todo__title todo-done" *ngIf="todo.is_done == 1" > {{ todo.title }}</div>
+              <!-- <div class="todo__title todo-done" *ngIf="todo.is_done == 1" > {{ todo.title }}</div>
               <div class="todo__title" *ngIf="todo.is_done == 0"> {{ todo.title }}</div>
-              <div class="todo__time"> {{ todo.start_time.substr(0,5) }} ~ {{ todo.end_time.substr(0,5) }} </div>
+              <div class="todo__time"> {{ todo.start_time.substr(0,5) }} ~ {{ todo.end_time.substr(0,5) }} </div> -->
+
+              <div class="todo__title todo-done mini" *ngIf="todo.is_done == 1 && height[timelineList.indexOf(todo)] < 50"> {{ todo.title }}</div>
+              <div class="todo__title mini" *ngIf="todo.is_done == 0 && height[timelineList.indexOf(todo)] < 50"> {{ todo.title }}</div>
+              <div class="todo__time mini" *ngIf="height[timelineList.indexOf(todo)] < 50"> {{ todo.start_time.substr(0,5) }} ~ {{ todo.end_time.substr(0,5) }} </div>
+
+              <div class="todo__title todo-done" *ngIf="todo.is_done == 1 && height[timelineList.indexOf(todo)] >= 50" > {{ todo.title }}</div>
+              <div class="todo__title" *ngIf="todo.is_done == 0 && height[timelineList.indexOf(todo)] >= 50"> {{ todo.title }}</div>
+              <div class="todo__time" *ngIf="height[timelineList.indexOf(todo)] >= 50"> {{ todo.start_time.substr(0,5) }} ~ {{ todo.end_time.substr(0,5) }} </div>
             </div>
             </ion-item>
 
           <ion-item-options side="end" lines="none" class="option"
             [style.height.px]="height[timelineList.indexOf(todo)]">
             <ion-item-option class="btn-edit" (click)="editTodo(todo)">
-              <ion-icon class="icon" name="create-outline"></ion-icon>
+              <ion-icon class="icon mini" name="create-outline" *ngIf="height[timelineList.indexOf(todo)] < 50"></ion-icon>
+              <ion-icon class="icon" name="create-outline" *ngIf="height[timelineList.indexOf(todo)] >= 50"></ion-icon>
             </ion-item-option>
             <ion-item-option class="btn-delete" (click)="deleteTodo(todo)">
-              <ion-icon class="icon" name="trash-outline"></ion-icon>
+              <ion-icon class="icon mini" name="trash-outline" *ngIf="height[timelineList.indexOf(todo)] < 50"></ion-icon>
+              <ion-icon class="icon" name="trash-outline" *ngIf="height[timelineList.indexOf(todo)] >= 50"></ion-icon>
             </ion-item-option>
           </ion-item-options>
         </ion-item-sliding>

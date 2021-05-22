@@ -80,6 +80,9 @@
                     font-family: var(--ion-font-munzii);
                     color: var(--ion-color-light-gray);
                 }
+                .mini {
+                    font-size: 5px !important;
+                }
             }
 
             .option {
@@ -96,6 +99,9 @@
 
                 .icon {
                     font-size: 24px;
+                }
+                .mini {
+                    font-size: 10px;
                 }
             }
         }
