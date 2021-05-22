@@ -53,7 +53,6 @@
             .space {
                 width: 100%;
             }
-
             .todo {
                 display: flex;
                 justify-content: space-between;
@@ -62,6 +61,7 @@
                 padding-left: 10px;
                 border-top: 1px solid var(--ion-color-very-light-gray);
                 border-bottom: 1px solid var(--ion-color-very-light-gray);
+                overflow-y: hidden;
 
                 .todo__title {
                     font-size: 16px;
@@ -84,6 +84,7 @@
 
             .option {
                 border: none !important;
+                overflow-y: hidden;
 
                 .btn-edit {
                     --background: var(--ion-color-dark-yellow);
@@ -113,4 +114,7 @@
     background: var(--ion-color-primary);
     color: var(--ion-color-white);
     z-index: 10;
+}
+ion-item {
+    --min-height: 0;
 }
