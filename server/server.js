@@ -10,14 +10,23 @@ app.use(cors());
 
 app.options('*', cors());
 
-const joinRouter = require('./router/users/join');
-const loginRouter = require('./router/users/login');
-const checkUserRouter = require('./router/users/checkUser');
+//const joinRouter = require('./router/users/join');
+//onst loginRouter = require('./router/users/login');
+//const checkUserRouter = require('./router/users/checkUser');
 
-const readMemoRouter = require('./router/memos/readMemo');
-const createMemoRouter = require('./router/memos/createMemo');
-const updateMemoRouter = require('./router/memos/updateMemo');
-const deleteMemoRouter = require('./router/memos/deleteMemo');
+const userRouter = require('./router/user.router');
+const memoRotuer = require('./router/memo.router');
+
+// /users/join
+// /users/login
+// /users/checkUser
+app.use('/user',userRouter);
+
+// const readMemoRouter = require('./router/memos/readMemo');
+// const createMemoRouter = require('./router/memos/createMemo');
+// const updateMemoRouter = require('./router/memos/updateMemo');
+// const deleteMemoRouter = require('./router/memos/deleteMemo');
+app.use('/memo',memoRouter);
 
 const readTodoRouter = require('./router/todos/readTodo');
 const createTodoRouter = require('./router/todos/createTodo');
