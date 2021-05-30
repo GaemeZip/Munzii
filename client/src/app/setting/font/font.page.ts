@@ -27,7 +27,7 @@ export class FontPage implements OnInit {
   }
 
   ngOnInit() {
-    axios.get('http://3.139.244.188:3000/readFont')
+    axios.get('http://localhost:3000/settings')
       .then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.font.f_id = res.data[i].f_id;
