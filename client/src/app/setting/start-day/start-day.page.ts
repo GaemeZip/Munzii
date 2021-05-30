@@ -23,7 +23,7 @@ export class StartDayPage implements OnInit {
   }
 
   ngOnInit() {
-    axios.get('http://3.139.244.188:3000/readStartDay')
+    axios.get('http://localhost:3000/settings/startDay/readStartDay')
       .then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.day.s_id = res.data[i].s_id;
@@ -35,7 +35,7 @@ export class StartDayPage implements OnInit {
   }
 
   initDay() {
-    axios.get('http://3.139.244.188:3000/currentStartDay',{
+    axios.get('http://localhost:3000/settings/startDay/currentStartDay',{
       params:{
         userID: localStorage.userID
       }

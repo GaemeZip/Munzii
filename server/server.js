@@ -40,16 +40,8 @@ app.use('/settings', settingsRouter);
 // const checkProgressRouter = require('./router/todos/checkProgress');
 
 // const updateFontRouter = require('./router/settings/updateFont');
-// const readFontRouter = require('./router/settings/readFont');
-// const currentFontRouter = require('./router/settings/currentFont');
-
 // const updateThemeRouter = require('./router/settings/updateTheme');
-// const readThemeRouter = require('./router/settings/readTheme');
-// const currentThemeRouter = require('./router/settings/currentTheme');
-
 // const updateStartDayRouter = require('./router/settings/updateStartDay');
-// const readStartDayRouter = require('./router/settings/readStartDay');
-// const currentStartDayRouter = require('./router/settings/currentStartDay');
 
 // app.use('/join', joinRouter);
 // app.use('/login', loginRouter);
@@ -71,16 +63,8 @@ app.use('/settings', settingsRouter);
 // app.use('/checkProgress', checkProgressRouter);
 
 // app.use('/updateFont', updateFontRouter);
-// app.use('/readFont', readFontRouter);
-// app.use('/currentFont', currentFontRouter);
-
 // app.use('/updateTheme', updateThemeRouter);
-// app.use('/readTheme', readThemeRouter);
-// app.use('/currentTheme', currentThemeRouter);
-
 // app.use('/updateStartDay', updateStartDayRouter);
-// app.use('/readStartDay', readStartDayRouter);
-// app.use('/currentStartDay', currentStartDayRouter);
 
 
 app.set('port', process.env.PORT || 3000);
