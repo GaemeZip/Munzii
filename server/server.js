@@ -22,7 +22,6 @@ const settingsRouter = require('./router/settings.router')
 // /users/checkUser
 app.use('/users', userRouter);
 
-
 // const readMemoRouter = require('./router/memos/readMemo');
 // const createMemoRouter = require('./router/memos/createMemo');
 // const updateMemoRouter = require('./router/memos/updateMemo');
@@ -38,10 +37,6 @@ app.use('/settings', settingsRouter);
 // const createProgressRouter = require('./router/todos/createProgress');
 // const updateProgressRouter = require('./router/todos/updateProgress');
 // const checkProgressRouter = require('./router/todos/checkProgress');
-
-// const updateFontRouter = require('./router/settings/updateFont');
-// const updateThemeRouter = require('./router/settings/updateTheme');
-// const updateStartDayRouter = require('./router/settings/updateStartDay');
 
 // app.use('/join', joinRouter);
 // app.use('/login', loginRouter);
@@ -61,11 +56,6 @@ app.use('/settings', settingsRouter);
 // app.use('/createProgress', createProgressRouter);
 // app.use('/updateProgress', updateProgressRouter);
 // app.use('/checkProgress', checkProgressRouter);
-
-// app.use('/updateFont', updateFontRouter);
-// app.use('/updateTheme', updateThemeRouter);
-// app.use('/updateStartDay', updateStartDayRouter);
-
 
 app.set('port', process.env.PORT || 3000);
 
