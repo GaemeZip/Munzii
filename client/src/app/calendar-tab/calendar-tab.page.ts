@@ -82,7 +82,7 @@ export class CalendarTabPage implements OnInit {
     this.selected.setDate(this.selected.getDate());
     console.log(this.selected)
 
-    axios.get('http://3.139.244.188:3000/currentStartDay',{
+    axios.get('http://localhost:3000/settings/startDay/currentStartDay',{
       params:{
         userID: localStorage.userID
       }

@@ -55,7 +55,7 @@ export class TimelinePage implements OnInit {
   getTimeLineList() {
     console.log(this.date)
     this.timelineList = new Array;
-    axios.get('http://3.139.244.188:3000/readTodo',{
+    axios.get('http://localhost:3000/todos',{
       params:{
         date: this.date,
         userID: localStorage.userID
@@ -167,9 +167,11 @@ export class TimelinePage implements OnInit {
   deleteTodo(todo) {
     let index = this.timelineList.indexOf(todo);
     let id = this.timelineList[index].id;
-    axios.post('http://3.139.244.188:3000/deleteTodo', {
-      id: id,
-      userID: localStorage.userID
+    axios.delete('http://localhost:3000/todos', {
+      params:{
+        id: id,
+        userID: localStorage.userID 
+      }
     }).then((res) => {
       if (res.data != 'error') {
         console.log("테이블 삭제");
@@ -192,7 +194,7 @@ export class TimelinePage implements OnInit {
       tempProgress += this.timelineList[i].is_done;
     }
     this.progress = tempProgress / this.timelineList.length * 100;
-    axios.post('http://3.139.244.188:3000/updateTodo', {
+    axios.put('http://localhost:3000/todos', {
       id: todo.id,
       date: this.date,
       title: todo.title,

@@ -40,7 +40,7 @@ export class TodoPage implements OnInit {
     this.selected = new Date(this.date);
     this.selectMonth = this.monthNames[this.selected.getMonth()]
 
-    axios.get('http://3.139.244.188:3000/currentTheme',{
+    axios.get('http://localhost:3000/settings/theme/currentTheme',{
       params:{
         userID: localStorage.userID
       }
@@ -52,7 +52,7 @@ export class TodoPage implements OnInit {
     }
     getTodoList() {
       console.log(this.date)
-      axios.get('http://3.139.244.188:3000/readTodo',{
+      axios.get('http://localhost:3000/todos',{
         params:{
           date: this.date,
       userID: localStorage.userID
@@ -62,13 +62,13 @@ export class TodoPage implements OnInit {
         for(var i = 0; i < res.data.length; i++) {
           this.selectDayTodoList[i] = res.data[i];
         }
-        axios.post('http://3.139.244.188:3000/checkProgress', {
+        axios.post('http://localhost:3000/todos/checkProgress', {
           date: this.date,
           userID: localStorage.userID
         }).then(res => {
           // console.log()
           if(res.data.length === 0) {
-            axios.post('http://3.139.244.188:3000/createProgress', {
+            axios.post('http://localhost:3000/todos/progress', {
               date: this.date,      
               userID: localStorage.userID
             }).then((res) => {
@@ -76,7 +76,7 @@ export class TodoPage implements OnInit {
               console.log(this.selected, today);
               if(today.getFullYear() == this.selected.getFullYear() && today.getMonth() == this.selected.getMonth() && today.getDate() >= this.selected.getDate()) {
                 console.log("여기 들엉옴")
-                axios.post('http://3.139.244.188:3000/updateProgress', {
+                axios.put('http://localhost:3000/todos/progress', {
                   date: this.date,
                   progress: 0,
                   userID: localStorage.userID
@@ -85,7 +85,7 @@ export class TodoPage implements OnInit {
                 })
               }
               else if(today.getFullYear() == this.selected.getFullYear() && today.getMonth() > this.selected.getMonth()) {
-                axios.post('http://3.139.244.188:3000/updateProgress', {
+                axios.put('http://localhost:3000/todos/progress', {
                   date: this.date,
                   progress: 0,
                   userID: localStorage.userID
@@ -93,7 +93,7 @@ export class TodoPage implements OnInit {
                 })
               }
               else if(today.getFullYear() > this.selected.getFullYear()) {
-                axios.post('http://3.139.244.188:3000/updateProgress', {
+                axios.put('http://localhost:3000/todos/progress', {
                   date: this.date,
                   progress: 0,
                   userID: localStorage.userID
@@ -161,10 +161,12 @@ export class TodoPage implements OnInit {
   deleteTodo(todo) {
     let index = this.selectDayTodoList.indexOf(todo);
     let id = this.selectDayTodoList[index].id;
-    axios.post('http://3.139.244.188:3000/deleteTodo', {
+    axios.delete('http://localhost:3000/todos', {
+    params:{
       id: id,
        
       userID: localStorage.userID
+    }  
     }).then((res) => {
       if (res.data != 'error') {
         // console.log("테이블 삭제");
@@ -192,7 +194,7 @@ export class TodoPage implements OnInit {
       else {
         this.progress = tempProgress / this.selectDayTodoList.length * 100;
       }
-      axios.post('http://3.139.244.188:3000/updateProgress', {
+      axios.put('http://localhost:3000/todos/progress', {
         date: this.date,
         progress: this.progress,
          
@@ -210,7 +212,7 @@ export class TodoPage implements OnInit {
       todo.is_done = 0;
     }
     this.calculateProgress();
-    axios.post('http://3.139.244.188:3000/updateTodo', {
+    axios.put('http://localhost:3000/todos', {
       id: todo.id,
       date: this.date,
       title: todo.title,

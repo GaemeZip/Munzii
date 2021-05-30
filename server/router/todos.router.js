@@ -6,7 +6,7 @@ const router = express.Router();
 router
 .route('/')
 .post(todoController.createTodo)
-.get(todoController.readProgress)
+.get(todoController.readTodo)
 .put(todoController.updateTodo)
 .delete(todoController.deleteTodo)
 

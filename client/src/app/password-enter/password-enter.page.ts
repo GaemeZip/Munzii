@@ -20,7 +20,7 @@ export class PasswordEnterPage implements OnInit {
   }
 
   ngOnInit() {
-    axios.get('http://3.139.244.188:3000/currentTheme',{
+    axios.get('http://localhost:3000/settings/theme/currentTheme',{
       params:{
         userID: localStorage.userID
       }

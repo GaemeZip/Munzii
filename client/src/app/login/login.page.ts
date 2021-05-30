@@ -59,7 +59,7 @@ export class LoginPage implements OnInit {
 
   getFont(){
     console.log('getfont')
-    axios.get('http://3.139.244.188:3000/currentFont', {
+    axios.get('http://localhost:3000/settings/font/currentFont', {
       params: {
         userID: localStorage.userID
       }
@@ -72,7 +72,7 @@ export class LoginPage implements OnInit {
   }
   getTheme(){
     console.log('gettheme')
-    axios.get('http://3.139.244.188:3000/currentTheme', {
+    axios.get('http://localhost:3000/settings/theme/currentTheme', {
       params: {
         userID: localStorage.userID
       }
