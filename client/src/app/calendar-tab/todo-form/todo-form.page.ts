@@ -74,7 +74,7 @@ export class TodoFormPage implements OnInit {
             alert("시작 시간은 종료 시간 이전이어야 합니다");
           }
           else {
-            axios.get('http://3.139.244.188:3000/readTodo',{
+            axios.get('http://localhost:3000/todos',{
             params:{
               date: this.selectedString,
               userID: localStorage.userID
@@ -103,7 +103,7 @@ export class TodoFormPage implements OnInit {
                   break;
                 }
                 else {
-                  axios.post('http://3.139.244.188:3000/createTodo', {
+                  axios.post('http://localhost:3000/todos', {
                     date: this.selectedString,
                     title: this.title,
                     time: this.isTimeline,
@@ -127,7 +127,7 @@ export class TodoFormPage implements OnInit {
               }
                 else {
                 if(i == res.data.length-1){
-                  axios.post('http://3.139.244.188:3000/createTodo', {
+                  axios.post('http://localhost:3000/todos', {
                     date: this.selectedString,
                     title: this.title,
                     time: this.isTimeline,
@@ -153,7 +153,7 @@ export class TodoFormPage implements OnInit {
   
             }
             if(res.data.length == 0) {
-              axios.post('http://3.139.244.188:3000/createTodo', {
+              axios.post('http://localhost:3000/todos', {
                 date: this.selectedString,
                 title: this.title,
                 time: this.isTimeline,
@@ -181,7 +181,7 @@ export class TodoFormPage implements OnInit {
         }
         else {
           console.log("왜 안대지")
-          axios.get('http://3.139.244.188:3000/readTodo',{
+          axios.get('http://localhost:3000/todos',{
           params:{
             date: this.selectedString,
             userID: localStorage.userID
@@ -209,7 +209,7 @@ export class TodoFormPage implements OnInit {
                 break;
               }
               else {
-                axios.post('http://3.139.244.188:3000/createTodo', {
+                axios.post('http://localhost:3000/todos', {
                   date: this.selectedString,
                   title: this.title,
                   time: this.isTimeline,
@@ -257,7 +257,7 @@ export class TodoFormPage implements OnInit {
 
           }
           if(res.data.length == 0) {
-            axios.post('http://3.139.244.188:3000/createTodo', {
+            axios.post('http://localhost:3000/todos', {
               date: this.selectedString,
               title: this.title,
               time: this.isTimeline,
@@ -285,7 +285,7 @@ export class TodoFormPage implements OnInit {
       }
       else {
         console.log(this.selectedString, this.title, this.isTimeline, this.startTimeString, this.endTimeString)
-        axios.post('http://3.139.244.188:3000/createTodo', {
+        axios.post('http://localhost:3000/todos', {
           date: this.selectedString,
           title: this.title,
           time: this.isTimeline,

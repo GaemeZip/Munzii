@@ -44,7 +44,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
 
     this.today = new Date();
-    axios.get('http://3.139.244.188:3000/currentTheme',{
+    axios.get('http://localhost:3000/settings/theme/currentTheme',{
       params:{
         userID: localStorage.userID
       }
@@ -54,7 +54,7 @@ export class HomePage implements OnInit {
       localStorage.themeId = res.data[0].theme_id;
     });
 
-    axios.get('http://3.139.244.188:3000/currentStartDay',{
+    axios.get('http://localhost:3000/settings/startDay/currentStartDay',{
       params:{
         userID: localStorage.userID
       }
@@ -161,7 +161,7 @@ export class HomePage implements OnInit {
         this.dayProgress[i] = 0;
       }
     }
-    await axios.get('http://3.139.244.188:3000/readProgress', {
+    await axios.get('http://localhost:3000/todos/progress', {
       params: {
       year: this.currentYear,
       month: this.currentMonth,
