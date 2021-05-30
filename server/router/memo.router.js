@@ -5,7 +5,7 @@ const router = express.Router();
 
 router
 .route('/')
-.post(memoController.createMemo)
+// .post(memoController.createMemo)
 .get(memoController.getMemo)
 .put(memoController.updateMemo)
 .delete(memoController.deleteMemo)
