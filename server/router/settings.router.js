@@ -28,11 +28,11 @@ router
 
 router
 .route('/startDay/readStartDay')
-.get(settingsController.readTheme)
+.get(settingsController.readStartDay)
 
 router
 .route('/startDay/currentStartDay')
-.get(settingsController.currentTheme)
+.get(settingsController.currentStartDay)
 
 router
 .route('/startDay/updateStartDay')
