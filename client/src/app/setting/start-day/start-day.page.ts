@@ -68,7 +68,7 @@ export class StartDayPage implements OnInit {
   }
 
   updateStartDay(s_id) {
-    axios.post('http://3.139.244.188:3000/updateStartDay', {
+    axios.put('http://localhost:3000/settings/startDay/updateStartDay', {
       start_day_id: s_id,
       userID: localStorage.userID
     }).then((res) => {

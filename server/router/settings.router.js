@@ -1,6 +1,5 @@
 const express = require('express');
 const settingsController = require('../controllers/settings.controller');
-
 const router = express.Router();
 
 router
@@ -12,6 +11,10 @@ router
 .get(settingsController.currentFont)
 
 router
+.route('/font/updateFont')
+.put(settingsController.updateFont)
+
+router
 .route('/theme/readTheme')
 .get(settingsController.readTheme)
 
@@ -20,11 +23,19 @@ router
 .get(settingsController.currentTheme)
 
 router
+.route('/theme/updateTheme')
+.put(settingsController.updateTheme)
+
+router
 .route('/startDay/readStartDay')
 .get(settingsController.readTheme)
 
 router
 .route('/startDay/currentStartDay')
 .get(settingsController.currentTheme)
+
+router
+.route('/startDay/updateStartDay')
+.put(settingsController.updateStartDay)
 
 module.exports = router;
