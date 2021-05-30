@@ -15,12 +15,13 @@ app.options('*', cors());
 //const checkUserRouter = require('./router/users/checkUser');
 
 const userRouter = require('./router/user.router');
-const memoRotuer = require('./router/memo.router');
-
+const memoRouter = require('./router/memo.router');
+const settingsRouter = require('./router/settings.router')
 // /users/join
 // /users/login
 // /users/checkUser
-app.use('/user',userRouter);
+app.use('/users', userRouter);
+
 
 // const readMemoRouter = require('./router/memos/readMemo');
 // const createMemoRouter = require('./router/memos/createMemo');
