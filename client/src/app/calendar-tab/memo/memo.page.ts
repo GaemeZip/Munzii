@@ -32,7 +32,10 @@ export class MemoPage implements OnInit {
   }
 
   readMemo() {
-    axios.get('http://3.139.244.188:3000/readMemo', {
+    console.log(this.date);
+    console.log(localStorage.userID);
+
+    axios.get('http://localhost:3000/memos', {
       params: {
         date: this.date,
         userID: localStorage.userID
@@ -54,7 +57,7 @@ export class MemoPage implements OnInit {
   }
 
   createMemo() {
-    axios.post('http://3.139.244.188:3000/createMemo', {
+    axios.post('http://localhost:3000/memos', {
       date: this.date,
       content: this.input,
       userID: localStorage.userID
@@ -69,7 +72,7 @@ export class MemoPage implements OnInit {
   }
 
   updateMemo() {
-    axios.post('http://3.139.244.188:3000/updateMemo', {
+    axios.put('http://localhost:3000/memos', {
       date: this.date,
       content: this.input,
       userID: localStorage.userID
@@ -84,12 +87,14 @@ export class MemoPage implements OnInit {
   }
 
   deleteMemo() {
-    axios.post('http://3.139.244.188:3000/deleteMemo', {
-      date: this.date,
-      userID: localStorage.userID
+    axios.delete('http://localhost:3000/memos', {
+      params:{
+        date: this.date,
+        userID: localStorage.userID        
+      }
     }).then((res) => {
       if (res.data != 'error') {
-        console.log("메모 삭제");
+        console.log("메모 삭제했음");
         this.input = null;
         this.tempInput = null;
       } else {

@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   }
   async login() {
     const checkLogin = document.getElementById('checkLogin');
-    axios.post('http://3.139.244.188:3000/login', {
+    axios.post('http://localhost:3000/users/login', {
       username: this.username,
       password: this.password
     })
