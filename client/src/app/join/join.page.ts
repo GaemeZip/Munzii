@@ -41,7 +41,7 @@ export class JoinPage implements OnInit {
     }
 
 
-    axios.post('http://3.139.244.188:3000/join', {
+    axios.post('http://localhost:3000/users/join', {
       username: this.username,
       password: this.password
     })
@@ -71,7 +71,7 @@ export class JoinPage implements OnInit {
   }
 
   checkUser(inputname) {
-    axios.post('http://3.139.244.188:3000/checkUser', {
+    axios.post('http://localhost:3000/users/checkUser', {
       username: inputname
     })
       .then((res) => {
