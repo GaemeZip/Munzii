@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
-import { $ } from 'protractor';
 
 @Component({
   selector: 'app-join',
@@ -23,7 +22,6 @@ export class JoinPage implements OnInit {
   //   $("beforeJoin".load(window.location.href + "beforeJoin"));
   // }
   join() {
-    console.log(this.username);
     const beforeJoin = document.getElementById('beforeJoin');
     if (this.idCheck == false && this.username != null && this.password != null && this.passwordConfirmation != null) {
       beforeJoin.innerHTML="아이디 중복 체크를 해주세요";
@@ -41,22 +39,22 @@ export class JoinPage implements OnInit {
     }
 
 
-    axios.post('http://localhost:3000/users/join', {
+    axios.post('http://localhost:3000/auth/join', {
       username: this.username,
       password: this.password
     })
       .then((res) => {
         
         console.log(res.data);
-        if (res.data == "회원가입 성공") {
-          alert("회원가입 성공! 로그인 후 이용해주세요");
-          this.router.navigate(['/login']);
-        }
-        else if (res.data == "양식을 모두 채워주세요") {
+        if (res.data == "err") {
           beforeJoin.innerHTML="양식을 모두 채워주세요";
           beforeJoin.style.visibility = "visible"
           beforeJoin.style.color = "#db1414";
           this.router.navigate(['/join']);
+        }
+        else {
+          alert("회원가입 성공! 로그인 후 이용해주세요");
+          this.router.navigate(['/login']);
         }
         console.log(res);
       })
@@ -71,7 +69,7 @@ export class JoinPage implements OnInit {
   }
 
   checkUser(inputname) {
-    axios.post('http://localhost:3000/users/checkUser', {
+    axios.post('http://localhost:3000/auth/checkUser', {
       username: inputname
     })
       .then((res) => {

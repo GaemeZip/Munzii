@@ -93,7 +93,7 @@ export class TodoEditFormPage implements OnInit {
             }
             else {
               axios
-                .get('http://localhost:3000/todos', {
+                .get('http://localhost:3000/todo', {
                   params: {
                     date: this.selectedString,
                     userID: localStorage.userID,
@@ -110,7 +110,7 @@ export class TodoEditFormPage implements OnInit {
                     for(var i=0; i<res.data.length; i++) {
                       if(this.todoId == res.data[i].id) {
                         if(res.data.length == 1) {
-                          axios.put('http://localhost:3000/todos', {
+                          axios.put('http://localhost:3000/todo', {
                             id: this.todoId,
                             date: this.selectedString,
                             title: this.title, 
@@ -151,7 +151,7 @@ export class TodoEditFormPage implements OnInit {
                           break;
                         }
                         else {
-                          axios.put('http://localhost:3000/todos', {
+                          axios.put('http://localhost:3000/todo', {
                             id: this.todoId,
                             date: this.selectedString,
                             title: this.title, 
@@ -173,7 +173,7 @@ export class TodoEditFormPage implements OnInit {
                         }
                       }
                         else {
-                          axios.put('http://localhost:3000/todos', {
+                          axios.put('http://localhost:3000/todo', {
                             id: this.todoId,
                             date: this.selectedString,
                             title: this.title, 
@@ -197,7 +197,7 @@ export class TodoEditFormPage implements OnInit {
                     }
                   if (res.data.length == 0) {
                     console.log("datalength")
-                    axios.put('http://localhost:3000/todos', {
+                    axios.put('http://localhost:3000/todo', {
                       id: this.todoId,
                       date: this.selectedString,
                       title: this.title, 
@@ -221,7 +221,7 @@ export class TodoEditFormPage implements OnInit {
             }
           } else {
             axios
-              .get('http://localhost:3000/todos', {
+              .get('http://localhost:3000/todo', {
                 params: {
                   date: this.selectedString,
                   userID: localStorage.userID,
@@ -239,7 +239,7 @@ export class TodoEditFormPage implements OnInit {
                   for(var i=0; i<res.data.length; i++) {
                     if(this.todoId == res.data[i].id) {
                       if(res.data.length == 1) {
-                        axios.put('http://localhost:3000/todos', {
+                        axios.put('http://localhost:3000/todo', {
                           id: this.todoId,
                           date: this.selectedString,
                           title: this.title, 
@@ -284,7 +284,7 @@ export class TodoEditFormPage implements OnInit {
                         console.log("요기")
                         if(i < res.data.length - 2) {}
                         else{
-                          axios.put('http://localhost:3000/todos', {
+                          axios.put('http://localhost:3000/todo', {
                           id: this.todoId,
                           date: this.selectedString,
                           title: this.title, 
@@ -311,7 +311,7 @@ export class TodoEditFormPage implements OnInit {
                     else {
                       if(i < res.data.length - 2) {}
                       else{
-                        axios.post('http://localhost:3000/todos', {
+                        axios.post('http://localhost:3000/todo', {
                           date: this.selectedString,
                           title: this.title,
                           time: this.isTimeline,
@@ -338,7 +338,7 @@ export class TodoEditFormPage implements OnInit {
                   }
                 if (res.data.length == 0) {
                   console.log("datalength")
-                  axios.put('http://localhost:3000/todos', {
+                  axios.put('http://localhost:3000/todo', {
                     id: this.todoId,
                     date: this.selectedString,
                     title: this.title, 
@@ -377,7 +377,7 @@ export class TodoEditFormPage implements OnInit {
           }
         } else {
           axios
-            .get('http://localhost:3000/todos', {
+            .get('http://localhost:3000/todo', {
               params: {
                 date: this.selectedString,
                 userID: localStorage.userID,
@@ -395,7 +395,7 @@ export class TodoEditFormPage implements OnInit {
 
                 if(this.todoId == res.data[i].id) {
                   if(res.data.length == 1) {
-                    axios.put('http://localhost:3000/todos', {
+                    axios.put('http://localhost:3000/todo', {
                       id: this.todoId,
                       date: this.selectedString,
                       title: this.title, 
@@ -441,7 +441,7 @@ export class TodoEditFormPage implements OnInit {
                       break;
                     }
                 } else {
-                  axios.put('http://localhost:3000/todos', {
+                  axios.put('http://localhost:3000/todo', {
                     id: this.todoId,
                     date: this.selectedString,
                     title: this.title, 
@@ -467,7 +467,7 @@ export class TodoEditFormPage implements OnInit {
             });
         }
       } else {
-        axios.put('http://localhost:3000/todos', {
+        axios.put('http://localhost:3000/todo', {
             id: this.todoId,
             date: this.selectedString,
             title: this.title,

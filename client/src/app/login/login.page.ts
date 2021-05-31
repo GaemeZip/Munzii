@@ -19,12 +19,12 @@ export class LoginPage implements OnInit {
   }
   async login() {
     const checkLogin = document.getElementById('checkLogin');
-    axios.post('http://localhost:3000/users/login', {
+    axios.post('http://localhost:3000/auth/login', {
       username: this.username,
       password: this.password
     })
       .then((res) => {
-        if (res.data == "에러 발생") {
+        if (res.data == "err") {
           console.log("에러 발생");
         } else if (res.data == "아이디와 비밀번호 불일치") {
           checkLogin.innerHTML = "아이디 또는 비밀번호가 일치하지 않습니다."

@@ -161,7 +161,7 @@ export class HomePage implements OnInit {
         this.dayProgress[i] = 0;
       }
     }
-    await axios.get('http://localhost:3000/todos/progress', {
+    await axios.get('http://localhost:3000/progress', {
       params: {
       year: this.currentYear,
       month: this.currentMonth,

@@ -40,10 +40,7 @@ export class PasswordInputPage implements OnInit {
     this.n = 0;
     
     if (localStorage.password == 'null') {
-      console.log(localStorage.password,"패스워드", localStorage.passwordState);
       localStorage.passwordState = false;
-      console.log(localStorage.password,"패스워드", localStorage.passwordState);
-
     }
     location.href = "/password";
   }

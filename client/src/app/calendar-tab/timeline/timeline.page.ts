@@ -55,7 +55,7 @@ export class TimelinePage implements OnInit {
   getTimeLineList() {
     console.log(this.date)
     this.timelineList = new Array;
-    axios.get('http://localhost:3000/todos',{
+    axios.get('http://localhost:3000/todo',{
       params:{
         date: this.date,
         userID: localStorage.userID
@@ -167,7 +167,7 @@ export class TimelinePage implements OnInit {
   deleteTodo(todo) {
     let index = this.timelineList.indexOf(todo);
     let id = this.timelineList[index].id;
-    axios.delete('http://localhost:3000/todos', {
+    axios.delete('http://localhost:3000/todo', {
       params:{
         id: id,
         userID: localStorage.userID 
@@ -194,7 +194,7 @@ export class TimelinePage implements OnInit {
       tempProgress += this.timelineList[i].is_done;
     }
     this.progress = tempProgress / this.timelineList.length * 100;
-    axios.put('http://localhost:3000/todos', {
+    axios.put('http://localhost:3000/todo', {
       id: todo.id,
       date: this.date,
       title: todo.title,
