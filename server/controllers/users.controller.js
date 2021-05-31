@@ -1,25 +1,25 @@
-const mysql = require('mysql');
-const dbconfig = require('../router/db');
-const connection = mysql.createConnection(dbconfig);
+const { userService } = require('../services')
 
-const join = (req, res) => {
+const join = async (req, res,next) => {
+    try {
+        const username = req.body.username;
+        const password = req.body.password;
 
-    const username = req.body.username;
-    const password = req.body.password;
-
-    const createQuery = 'INSERT INTO users (u_id, username, password, theme_id, font_id, start_day_id) VALUES(NULL,?,?,1,1,1)';
-    let params = [username, password];
-    connection.query(createQuery, params, function (error, rows, fields) {
-
-        console.log(rows);
-        //if 아이디 중복일 경우 처리
-        if (error) {
-            res.send('양식을 모두 채워주세요');
-        } else {
-            res.send('회원가입 성공');
+        if (!username) {
+            res.send('username is requried');
         }
-        console.log(rows);
-    });
+
+        if (!password) {
+            res.send('password is requried');
+        }
+
+        const user = await userService.join(username, password);
+
+        res.send(user);
+
+    } catch (err) {
+        next(err);
+    }
 }
 
 const login = (req, res) => {
