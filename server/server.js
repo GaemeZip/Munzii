@@ -27,6 +27,8 @@ app.get('/', (req, res) => {
   res.send('Root');
 });
 
+// db connection
+
 app.listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
 });

@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const dbconfig = require('../router/db');
+const dbconfig = require('../config/db');
 const connection = mysql.createConnection(dbconfig);
 
 const createTodo = (req, res) => {
