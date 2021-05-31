@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const dbconfig  ={
     host: 'localhost',
     user: 'root',
@@ -6,7 +6,7 @@ const dbconfig  ={
     database: 'munzii'
 };
 
-const dbConnection = mysql.createConnection(dbconfig);
+const pool = mysql.createPool(dbconfig);
 
 
-module.exports = dbConnection;
+module.exports = pool;

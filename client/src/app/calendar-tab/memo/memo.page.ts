@@ -32,10 +32,7 @@ export class MemoPage implements OnInit {
   }
 
   readMemo() {
-    console.log(this.date);
-    console.log(localStorage.userID);
-
-    axios.get('http://localhost:3000/memos', {
+    axios.get('http://localhost:3000/memo', {
       params: {
         date: this.date,
         userID: localStorage.userID
@@ -57,7 +54,7 @@ export class MemoPage implements OnInit {
   }
 
   createMemo() {
-    axios.post('http://localhost:3000/memos', {
+    axios.post('http://localhost:3000/memo', {
       date: this.date,
       content: this.input,
       userID: localStorage.userID
@@ -72,7 +69,7 @@ export class MemoPage implements OnInit {
   }
 
   updateMemo() {
-    axios.put('http://localhost:3000/memos', {
+    axios.put('http://localhost:3000/memo', {
       date: this.date,
       content: this.input,
       userID: localStorage.userID
@@ -87,7 +84,7 @@ export class MemoPage implements OnInit {
   }
 
   deleteMemo() {
-    axios.delete('http://localhost:3000/memos', {
+    axios.delete('http://localhost:3000/memo', {
       params:{
         date: this.date,
         userID: localStorage.userID        
