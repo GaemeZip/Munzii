@@ -68,7 +68,7 @@ export class StartDayPage implements OnInit {
   }
 
   updateStartDay(s_id) {
-    axios.put('http://localhost:3000/settings/startDay/updateStartDay', {
+    axios.put('http://localhost:3000/settings/startDay/:userID', {
       start_day_id: s_id,
       userID: localStorage.userID
     }).then((res) => {
@@ -88,7 +88,6 @@ export class StartDayPage implements OnInit {
     this.updateStartDay(id); // update db
     this.selectIcon(id); // display munzii
     this.selectedDay = id;
-    //this.initFont();
   }
 
   prev() {

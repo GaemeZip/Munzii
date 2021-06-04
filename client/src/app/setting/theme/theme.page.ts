@@ -103,7 +103,7 @@ export class ThemePage implements OnInit {
   }
 
   updateTheme(t_id) {
-    axios.put('http://localhost:3000/settings/theme/updateTheme', {
+    axios.put('http://localhost:3000/settings/theme/:userID', {
       theme_id: t_id,
       userID: localStorage.userID
     }).then((res) => {
