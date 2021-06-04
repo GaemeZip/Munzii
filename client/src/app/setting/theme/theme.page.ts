@@ -36,7 +36,7 @@ export class ThemePage implements OnInit {
   }
 
   ngOnInit() {
-    axios.get('http://localhost:3000/settings/theme/readTheme')
+    axios.get('http://localhost:3000/settings/theme')
       .then(res => {        
         for (var i = 0; i < res.data.length ; i++) {
           this.theme.t_id = res.data[i].t_id;
@@ -57,7 +57,7 @@ export class ThemePage implements OnInit {
   }
 
   initTheme(){
-    axios.get('http://localhost:3000/settings/theme/currentTheme',{
+    axios.get('http://localhost:3000/settings/theme/:userID',{
       params:{
         userID: localStorage.userID
       }

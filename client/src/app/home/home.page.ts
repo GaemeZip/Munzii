@@ -44,7 +44,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
 
     this.today = new Date();
-    axios.get('http://localhost:3000/settings/theme/currentTheme',{
+    axios.get('http://localhost:3000/settings/theme/:userID',{
       params:{
         userID: localStorage.userID
       }
@@ -54,7 +54,7 @@ export class HomePage implements OnInit {
       localStorage.themeId = res.data[0].theme_id;
     });
 
-    axios.get('http://localhost:3000/settings/startDay/currentStartDay',{
+    axios.get('http://localhost:3000/settings/startDay/:userID',{
       params:{
         userID: localStorage.userID
       }

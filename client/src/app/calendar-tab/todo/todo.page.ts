@@ -40,7 +40,7 @@ export class TodoPage implements OnInit {
     this.selected = new Date(this.date);
     this.selectMonth = this.monthNames[this.selected.getMonth()]
 
-    axios.get('http://localhost:3000/settings/theme/currentTheme',{
+    axios.get('http://localhost:3000/settings/theme/:userID',{
       params:{
         userID: localStorage.userID
       }

@@ -27,7 +27,7 @@ export class FontPage implements OnInit {
   }
 
   ngOnInit() {
-    axios.get('http://localhost:3000/settings/font/readFont')
+    axios.get('http://localhost:3000/settings/font')
       .then(res => { 
         for (var i = 0; i < res.data.length; i++) {
           this.font.f_id = res.data[i].f_id;
@@ -41,7 +41,7 @@ export class FontPage implements OnInit {
   }
 
   initFont() {
-    axios.get('http://localhost:3000/settings/font/currentFont',{
+    axios.get('http://localhost:3000/settings/font/:userID',{
       params:{
         userID: localStorage.userID
       }
