@@ -1,152 +1,107 @@
 const mysql = require('mysql');
 const dbconfig = require('../config/db');
 const connection = mysql.createConnection(dbconfig);
+const { settingService } = require('../services')
 
-const readFont = (req, res) => {
-    const readQuery = 'SELECT * FROM fonts';
-    connection.query(readQuery, function (err, rows, data) {
-        if (err) {
-            res.send('error');
-        } else {
-            res.send(rows);
-        }
-    })
-}
-const currentFont = (req, res) => {
-    var u_id = req.query.userID;
-
-    var selectQuery = 'SELECT font_id FROM users WHERE u_id=?';
-    var params = [u_id];
-
-    connection.query(selectQuery, params, (error, rows, data) => {
-        if (error) {
-            res.send('error');
-        }
-        else {
-            res.send(rows);
-        }
-        console.log(rows);
-    });
-}
-const updateFont = (req, res) => {
-    var font_id = req.body.font_id;
-    var u_id = req.body.userID;
-
-    var updateQuery = 'UPDATE users SET font_id=? WHERE u_id=?';
-    var params = [font_id, u_id];
-
-    connection.query(updateQuery, params, (error, rows, data) => {
-        if (error) {
-            res.send('error');
-        }
-        else {
-            res.send(rows);
-        }
-    });
-}
-const readTheme = (req, res) => {
-    const t_id = req.body.t_id;
-    const t_name = req.body.t_name;
-    const t_primary = req.body.t_primary;
-
-    let params = [t_id, t_name, t_primary];
-    const readQuery = 'SELECT * FROM themes';
-    
-    connection.query(readQuery, params, function(err, rows, data){
-      if(err){
-        res.send('error');
-      }else{
-        res.send(rows);
-      }
-      console.log(rows);
-    })
+const readFont = async (req, res, next) => {
+    try {
+        const fontList = await settingService.readFont();
+        res.send(fontList);
+    } catch (err) {
+        next(err);
+    }
 }
 
-const currentTheme = (req, res) => {
-    var u_id = req.query.userID;
+const currentFont = async (req, res, next) => {
+    try {
+        const u_id = req.query.userID;
 
-    var selectQuery = 'SELECT theme_id FROM users WHERE u_id=?';
-    var params = [u_id];
-
-    connection.query(selectQuery, params, (error, rows, data) => {
-        if (error) {
-            res.send('error');
-        }
-        else {
-            res.send(rows);
-        }
-        console.log(rows);
-    });
+        const currentFont = await settingService.currentFont(u_id);
+        res.send(currentFont);
+    } catch (err) {
+        next(err);
+    }
 }
-const updateTheme = (req, res) => {
-    const theme_id = req.body.theme_id;
-    const u_id = req.body.userID;
 
-    const updateQuery = 'UPDATE users SET theme_id=? WHERE u_id=?';
-    let params = [theme_id, u_id];
+const updateFont = async (req, res, next) => {
+    try {
+        const font_id = req.body.font_id;
+        const u_id = req.body.userID;
 
-    connection.query(updateQuery, params, (error, rows, data) => {
-        if (error) {
-            res.send('error');
-        } else {
-            res.send(rows);
-        }
-        console.log(rows);
-    });
+        const updateFont = await settingService.updateFont(font_id, u_id);
+        res.send(updateFont);
+    } catch (err) {
+        next(err);
+    }
 }
-const readStartDay = (req, res) => {
-    const s_id = req.body.s_id;
-    const s_name = req.body.s_name;
 
-    let params = [s_id, s_name];
-
-    const readQuery = 'SELECT * FROM start_days';
-    
-
-    connection.query(readQuery, params, function(err, rows, data){
-      if(err){
-        res.send('error');
-      }else{
-        res.send(rows);
-      }
-    })
+const readTheme = async (req, res, next) => {
+    try {
+        const themeList = await settingService.readTheme();
+        res.send(themeList);
+    } catch (err) {
+        next(err);
+    }
 }
-const currentStartDay = (req, res) => {
-    var u_id = req.query.userID;
 
-    var selectQuery = 'SELECT start_day_id FROM users WHERE u_id=?';
-    var params = [u_id];
+const currentTheme = async (req, res, next) => {
+    try {
+        const u_id = req.query.userID;
 
-    connection.query(selectQuery, params, (error, rows, data) => {
-        if (error) {
-            res.send('error');
-        }
-        else {
-            res.send(rows);
-        }
-        console.log(rows);
-    });
+        const currentTheme = await settingService.currentTheme(u_id);
+        res.send(currentTheme);
+    } catch (err) {
+        next(err);
+    }
 }
-const updateStartDay = (req, res) => {
-    const start_day_id = req.body.start_day_id;
-    const u_id = req.body.userID;
 
-    let params = [start_day_id, u_id];
+const updateTheme = async (req, res, next) => {
+    try {
+        const theme_id = req.body.theme_id;
+        const u_id = req.body.userID;
 
-    const updateQuery = 'UPDATE users SET start_day_id=? WHERE u_id=?';
-    connection.query(updateQuery, params, (error, rows, data) => {
-        if (error) {
-            res.send('error');
-        } else {
-            res.send(rows);
-        }
-        console.log(rows);
-    });
+        const updateTheme = await settingService.updateTheme(theme_id, u_id);
+        res.send(updateTheme);
+    } catch (err) {
+        next(err);
+    }
+}
+
+const readStartDay = async (req, res, next) => {
+    try {
+        const startDayList = await settingService.readStartDay();
+        res.send(startDayList);
+    } catch (err) {
+        next(err);
+    }
+}
+
+const currentStartDay = async (req, res, next) => {
+    try {
+        const u_id = req.query.userID;
+
+        const currentStartDay = await settingService.currentStartDay(u_id);
+        res.send(currentStartDay);
+    } catch (err) {
+        next(err);
+    }
+}
+
+const updateStartDay = async (req, res, next) => {
+    try {
+        const start_day_id = req.body.start_day_id;
+        const u_id = req.body.userID;
+
+        const updateStartDay = await settingService.updateStartDay(start_day_id, u_id);
+        res.send(updateStartDay);
+    } catch (err) {
+        next(err);
+    }
 }
 
 
 
-module.exports ={
+module.exports = {
     readFont,
     currentFont,
     updateFont,
