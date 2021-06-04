@@ -20,7 +20,7 @@ router
 .get(settingsController.getFontByUserId)
 
 router
-.route('/font/updateFont')
+.route('/font/:userID')
 .put(settingsController.updateFont)
 
 router
@@ -32,7 +32,7 @@ router
 .get(settingsController.getThemeByUserId)
 
 router
-.route('/theme/updateTheme')
+.route('/theme/:userID')
 .put(settingsController.updateTheme)
 
 router
@@ -44,7 +44,7 @@ router
 .get(settingsController.getStartDayByUserId)
 
 router
-.route('/startDay/updateStartDay')
+.route('/startDay/:userID')
 .put(settingsController.updateStartDay)
 
 module.exports = router;
