@@ -1,6 +1,6 @@
 const db = require('../config/db').promise();
 
-const readFont = async function () {
+const getFont = async function () {
     const readQuery = 'SELECT * FROM fonts';
 
     const [rows] = await db.query(readQuery);
@@ -8,7 +8,7 @@ const readFont = async function () {
     return rows;
 }
 
-const currentFont = async function (u_id) {
+const getFontByUserId = async function (u_id) {
     const readQuery = 'SELECT font_id FROM users WHERE u_id=?';
     let params = [u_id];
 
@@ -25,7 +25,7 @@ const updateFont = async function(font_id, u_id){
     return rows;
 }
 
-const readTheme = async function () {
+const getTheme = async function () {
     const readQuery = 'SELECT * FROM themes';
 
     const [rows] = await db.query(readQuery);
@@ -33,7 +33,7 @@ const readTheme = async function () {
     return rows;
 }
 
-const currentTheme = async function (u_id) {
+const getThemeByUserId = async function (u_id) {
     const readQuery = 'SELECT theme_id FROM users WHERE u_id=?';
     let params = [u_id];
 
@@ -48,14 +48,14 @@ const updateTheme = async function(theme_id, u_id){
     const [rows] = await db.query(updateQuery, params);
     return rows;
 }
-const readStartDay = async function () {
+const getStartDay = async function () {
     const readQuery = 'SELECT * FROM start_days';
 
     const [rows] = await db.query(readQuery);
     
     return rows;
 }
-const currentStartDay = async function (u_id) {
+const getStartDayByUserId = async function (u_id) {
     var readQuery = 'SELECT start_day_id FROM users WHERE u_id=?';
     let params = [u_id];
 
@@ -72,13 +72,13 @@ const updateStartDay = async function(start_day_id, u_id){
 }
 
 module.exports = {
-    readFont,
-    currentFont,
+    getFont,
+    getFontByUserId,
     updateFont,
-    readTheme,
-    currentTheme,
+    getTheme,
+    getThemeByUserId,
     updateTheme,
-    readStartDay,
-    currentStartDay,
+    getStartDay,
+    getStartDayByUserId,
     updateStartDay
 }

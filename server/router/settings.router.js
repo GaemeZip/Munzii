@@ -12,36 +12,36 @@ const router = express.Router();
 // .put()
 
 router
-.route('/font/readFont')
-.get(settingsController.readFont)
+.route('/font')
+.get(settingsController.getFont)
 
 router
-.route('/font/currentFont')
-.get(settingsController.currentFont)
+.route('/font/:userID')
+.get(settingsController.getFontByUserId)
 
 router
 .route('/font/updateFont')
 .put(settingsController.updateFont)
 
 router
-.route('/theme/readTheme')
-.get(settingsController.readTheme)
+.route('/theme')
+.get(settingsController.getTheme)
 
 router
-.route('/theme/currentTheme')
-.get(settingsController.currentTheme)
+.route('/theme/:userID')
+.get(settingsController.getThemeByUserId)
 
 router
 .route('/theme/updateTheme')
 .put(settingsController.updateTheme)
 
 router
-.route('/startDay/readStartDay')
-.get(settingsController.readStartDay)
+.route('/startDay')
+.get(settingsController.getStartDay)
 
 router
-.route('/startDay/currentStartDay')
-.get(settingsController.currentStartDay)
+.route('/startDay/:userID')
+.get(settingsController.getStartDayByUserId)
 
 router
 .route('/startDay/updateStartDay')

@@ -3,21 +3,21 @@ const dbconfig = require('../config/db');
 const connection = mysql.createConnection(dbconfig);
 const { settingService } = require('../services')
 
-const readFont = async (req, res, next) => {
+const getFont = async (req, res, next) => {
     try {
-        const fontList = await settingService.readFont();
+        const fontList = await settingService.getFont();
         res.send(fontList);
     } catch (err) {
         next(err);
     }
 }
 
-const currentFont = async (req, res, next) => {
+const getFontByUserId = async (req, res, next) => {
     try {
         const u_id = req.query.userID;
 
-        const currentFont = await settingService.currentFont(u_id);
-        res.send(currentFont);
+        const getFontByUserId = await settingService.getFontByUserId(u_id);
+        res.send(getFontByUserId);
     } catch (err) {
         next(err);
     }
@@ -35,21 +35,21 @@ const updateFont = async (req, res, next) => {
     }
 }
 
-const readTheme = async (req, res, next) => {
+const getTheme = async (req, res, next) => {
     try {
-        const themeList = await settingService.readTheme();
+        const themeList = await settingService.getTheme();
         res.send(themeList);
     } catch (err) {
         next(err);
     }
 }
 
-const currentTheme = async (req, res, next) => {
+const getThemeByUserId = async (req, res, next) => {
     try {
         const u_id = req.query.userID;
 
-        const currentTheme = await settingService.currentTheme(u_id);
-        res.send(currentTheme);
+        const getThemeByUserId = await settingService.getThemeByUserId(u_id);
+        res.send(getThemeByUserId);
     } catch (err) {
         next(err);
     }
@@ -67,21 +67,21 @@ const updateTheme = async (req, res, next) => {
     }
 }
 
-const readStartDay = async (req, res, next) => {
+const getStartDay = async (req, res, next) => {
     try {
-        const startDayList = await settingService.readStartDay();
+        const startDayList = await settingService.getStartDay();
         res.send(startDayList);
     } catch (err) {
         next(err);
     }
 }
 
-const currentStartDay = async (req, res, next) => {
+const getStartDayByUserId = async (req, res, next) => {
     try {
         const u_id = req.query.userID;
 
-        const currentStartDay = await settingService.currentStartDay(u_id);
-        res.send(currentStartDay);
+        const getStartDayByUserId = await settingService.getStartDayByUserId(u_id);
+        res.send(getStartDayByUserId);
     } catch (err) {
         next(err);
     }
@@ -102,13 +102,13 @@ const updateStartDay = async (req, res, next) => {
 
 
 module.exports = {
-    readFont,
-    currentFont,
+    getFont,
+    getFontByUserId,
     updateFont,
-    readTheme,
-    currentTheme,
+    getTheme,
+    getThemeByUserId,
     updateTheme,
-    readStartDay,
-    currentStartDay,
+    getStartDay,
+    getStartDayByUserId,
     updateStartDay
 }

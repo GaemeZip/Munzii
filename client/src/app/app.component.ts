@@ -27,36 +27,8 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    // this.getFont();
-    // this.getTheme();
-
     this.initSetting();
-
   }
-
-  // getFont(){
-  //   axios.get('http://3.139.244.188:3000/currentFont', {
-  //     params: {
-  //       userID: localStorage.userID
-  //     }
-  //   })
-  //     .then(res => {
-  //       console.log("받아온 font id 값 : " + res.data[0].font_id);
-  //       localStorage.fontId = res.data[0].font_id;
-  //     });
-
-  // }
-  // getTheme(){
-  //   axios.get('http://3.139.244.188:3000/currentTheme', {
-  //     params: {
-  //       userID: localStorage.userID
-  //     }
-  //   })
-  //     .then(res => {
-  //       localStorage.themeId = res.data[0].theme_id;
-  //       console.log("theme id 값 : " + localStorage.themeId);
-  //     });
-  // }
 
   initSetting() {
 
