@@ -9,8 +9,8 @@ router
 .put(progressController.updateProgress)
 
 router
-.route('/:date&:userID')
-.get(progressController.checkProgress)
+.route('/:date&userID')
+.get(progressController.getProgressByUserId)
 
 
 module.exports = router;

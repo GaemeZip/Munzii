@@ -12,8 +12,8 @@ router
 .post(authController.login)
 
 router
-.route('/checkUser')
-.post(authController.checkUser)
+.route('/getUserId')
+.post(authController.getUserId)
 
 
 module.exports = router;

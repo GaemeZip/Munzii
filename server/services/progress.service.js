@@ -14,6 +14,7 @@ const getProgress = async function (year, month, userID) {
     let params = [year, month, userID];
 
     const [rows] = await db.query(readQuery, params);
+    console.log("밍밍");
     
     return rows;
 
@@ -28,11 +29,12 @@ const updateProgress = async function (progress, date, userID) {
 
 }
 
-const checkProgress = async function (date, userID) {
+const getProgressByUserId = async function (date, userID) {
     const selectQuery = 'SELECT * FROM progresses WHERE date = ? AND user_id=?';
     let params = [date, userID];
 
     const [rows] = await db.query(selectQuery, params);
+    console.log("왜 여ㅣㄱ는 안들오");
     return rows;
 
 }
@@ -41,5 +43,5 @@ module.exports = {
     createProgress,
     getProgress,
     updateProgress,
-    checkProgress
+    getProgressByUserId
 }

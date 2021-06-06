@@ -55,7 +55,7 @@ const login = async (req, res, next) => {
     }
 }
 
-const checkUser = async (req, res, next) => {
+const getUserId = async (req, res, next) => {
     try {
         const username = req.body.username;
 
@@ -63,7 +63,7 @@ const checkUser = async (req, res, next) => {
             res.send('username is requried');
         }
 
-        const user = await authService.checkUser(username);
+        const user = await authService.getUserId(username);
         res.send(user);
 
     } catch (err) {
@@ -75,5 +75,5 @@ const checkUser = async (req, res, next) => {
 module.exports = {
     join,
     login,
-    checkUser
+    getUserId
 }

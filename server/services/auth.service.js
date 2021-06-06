@@ -5,7 +5,7 @@ const join = async function (username, password) {
     let params = [username, password];
 
     const [rows] = await db.query(createQuery, params);
-    return rows
+    return rows;
 }
 
 const login = async function (username, password) {
@@ -17,7 +17,7 @@ const login = async function (username, password) {
     return rows;
 }
 
-const checkUser = async function (username) {
+const getUserId = async function (username) {
     const selectQuery = 'SELECT * FROM users WHERE username = ?';
     let params = [username];
 
@@ -31,6 +31,6 @@ const checkUser = async function (username) {
 module.exports = {
     join,
     login,
-    checkUser
+    getUserId
 
 }
