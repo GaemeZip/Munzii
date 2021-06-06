@@ -20,6 +20,7 @@ const getProgress = async (req, res, next) => {
         const userID = req.query.userID;
 
         const pg = await progressService.getProgress(year, month, userID);
+        console.log("getProgress");
         res.send(pg);
 
     } catch (err) {
@@ -41,12 +42,15 @@ const updateProgress = async (req, res, next) => {
     }
 }
 
-const checkProgress = async (req, res, next) => {
+const getProgressByUserId = async (req, res, next) => {
+    let { date, userID} = req.params;
     try {
-        const date = req.query.date;
-        const userID = req.query.userID;
+        // const date = req.query.date;
+        // const userID = req.query.userID;
 
-        const pg = await progressService.checkProgress(date, userID);
+        const pg = await progressService.getProgressByUserId(date, userID);
+        console.log("getProgressByuserID");
+
         res.send(pg);
 
     } catch (err) {
@@ -58,5 +62,5 @@ module.exports = {
     createProgress,
     getProgress,
     updateProgress,
-    checkProgress,
+    getProgressByUserId,
 }

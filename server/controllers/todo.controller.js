@@ -21,8 +21,8 @@ const getTodo = async (req, res, next) => {
     try {
         const selectedDate = req.query.date;
         const userID = req.query.userID;
+        const todo = await todoService.getTodo(selectedDate, userID);
 
-        const todo = await todoService.updateTodo(selectedDate, userID);
         res.send(todo);
 
     } catch (err) {

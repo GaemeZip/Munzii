@@ -69,7 +69,7 @@ export class JoinPage implements OnInit {
   }
 
   checkUser(inputname) {
-    axios.post('http://localhost:3000/auth/checkUser', {
+    axios.post('http://localhost:3000/auth/getUserId', {
       username: inputname
     })
       .then((res) => {
