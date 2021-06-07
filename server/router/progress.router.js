@@ -9,7 +9,7 @@ router
 .put(progressController.updateProgress)
 
 router
-.route('/:date&userID')
+.route('/:userId')
 .get(progressController.getProgressByUserId)
 
 
