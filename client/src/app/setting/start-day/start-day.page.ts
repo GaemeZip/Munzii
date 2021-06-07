@@ -35,15 +35,12 @@ export class StartDayPage implements OnInit {
   }
 
   initDay() {
-    axios.get('http://localhost:3000/settings/startDay/:userID',{
-      params:{
-        userID: localStorage.userID
-      }
+    axios.get('http://localhost:3000/settings/startDay/'+localStorage.userID,{
+      
     })
       .then(async res => {
         console.log("받아온 start-day id 값 : " + res.data[0].start_day_id);
         this.selectedDay = res.data[0].start_day_id;
-        //await this.selectIcon(this.selectedDay);
         var elementSelected = document.getElementById(this.selectedDay);
          console.log(elementSelected);
          if(elementSelected == null){
@@ -63,20 +60,15 @@ export class StartDayPage implements OnInit {
     }
     var elementSelected = document.getElementById(id);
     elementSelected.classList.add("selected");
-    //const changeFont = document.querySelector('body');
-    //changeFont.style.setProperty('--ion-font-family', this.dayList[id - 1][1]);
   }
 
   updateStartDay(s_id) {
-    axios.put('http://localhost:3000/settings/startDay/:userID', {
-      start_day_id: s_id,
-      userID: localStorage.userID
+    axios.put('http://localhost:3000/settings/startDay/'+localStorage.userID, {
+      start_day_id: s_id
     }).then((res) => {
       console.log(res)
       if (res.data != 'error') {
         console.log("폰트 업데이트");
-        console.log(res)
-        console.log(s_id + this.dayList[s_id - 1][1]);
       } else {
         console.log("에러 발생")
       }
@@ -84,7 +76,6 @@ export class StartDayPage implements OnInit {
   }
 
   select(id) {
-    console.log("클릭되었습니다 : " + id);
     this.updateStartDay(id); // update db
     this.selectIcon(id); // display munzii
     this.selectedDay = id;

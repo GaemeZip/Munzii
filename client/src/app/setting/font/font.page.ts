@@ -41,10 +41,8 @@ export class FontPage implements OnInit {
   }
 
   initFont() {
-    axios.get('http://localhost:3000/settings/font/:userID',{
-      params:{
-        userID: localStorage.userID
-      }
+    axios.get('http://localhost:3000/settings/font/'+localStorage.userID,{
+      
     })
       .then(async res => {
         console.log("받아온 font id 값 : " + res.data[0].font_id);
@@ -75,16 +73,13 @@ export class FontPage implements OnInit {
   }
 
   updateFont(f_id) {
-    axios.put('http://localhost:3000/settings/font/:userID', {
-      font_id: f_id,
-      userID: localStorage.userID
+    axios.put('http://localhost:3000/settings/font/'+localStorage.userID, {
+      font_id: f_id
     }).then((res) => {
       if (res.data != 'error') {
         localStorage.fontId = f_id;
         this.initFont();
         console.log("폰트 업데이트");
-        console.log(res)
-        console.log(f_id + this.fontList[f_id - 1][2]);
       } else {
         console.log("에러 발생")
       }
@@ -92,11 +87,9 @@ export class FontPage implements OnInit {
   }
 
   select(id) {
-    console.log("클릭되었습니다 : " + id);
     this.selectIcon(id); // display munzii
     this.updateFont(id); // update db
     this.selectedFont = id;
-    
   }
 
   prev() {

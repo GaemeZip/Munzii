@@ -50,17 +50,14 @@ export class ThemePage implements OnInit {
 
           this.themeList.push([this.theme.t_id, this.theme.t_name, this.theme.t_primary, this.theme.t_check,this.theme.t_complete, this.theme.t_button, this.theme.t_modify, this.theme.t_background]);
         }
-        console.log(this.themeList);
         this.initTheme();
       });
       
   }
 
   initTheme(){
-    axios.get('http://localhost:3000/settings/theme/:userID',{
-      params:{
-        userID: localStorage.userID
-      }
+    axios.get('http://localhost:3000/settings/theme/'+localStorage.userID,{
+
     })
       .then(async res => {        
         console.log("받아온 theme id 값 : "+res.data[0].theme_id);
@@ -73,9 +70,7 @@ export class ThemePage implements OnInit {
          localStorage.t_button = this.themeList[localStorage.themeId-1][5]
          localStorage.t_darkYellow = this.themeList[localStorage.themeId-1][6]
          localStorage.t_background = this.themeList[localStorage.themeId-1][7]
-         //await this.selectIcon(this.selectedTheme);
          var elementSelected = document.getElementById(this.selectedTheme);
-         console.log(elementSelected);
          elementSelected.classList.add("selected");
       });
   }
@@ -103,17 +98,14 @@ export class ThemePage implements OnInit {
   }
 
   updateTheme(t_id) {
-    axios.put('http://localhost:3000/settings/theme/:userID', {
+    axios.put('http://localhost:3000/settings/theme/'+localStorage.userID, {
       theme_id: t_id,
-      userID: localStorage.userID
     }).then((res) => {
       localStorage.themeId = t_id;
       this.initTheme();
       console.log(res)
       if (res.data != 'error') {
         console.log("테마 업데이트");
-        console.log(res)
-        console.log(t_id+this.themeList[t_id-1][2]);
       } else {
         console.log("에러 발생")
       }
@@ -125,11 +117,9 @@ export class ThemePage implements OnInit {
     this.updateTheme(id); // update db
     this.selectIcon(id); // display munzii
     this.selectedTheme = id;
-    //this.initFont();
   }
 
   prev(){
-    //this.router.navigate(['/settings']);
     location.href = "/settings";
   }
 
