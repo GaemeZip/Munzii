@@ -62,7 +62,7 @@ export class TodoPage implements OnInit {
         for(var i = 0; i < res.data.length; i++) {
           this.selectDayTodoList[i] = res.data[i];
         }
-        axios.get('http://localhost:3000/progress/'+localStorage.userId , {
+        axios.get('http://localhost:3000/progress/'+localStorage.userID , {
           params:{
             date: this.date,
           }
