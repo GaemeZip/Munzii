@@ -14,7 +14,6 @@ const getProgress = async function (year, month, userID) {
     let params = [year, month, userID];
 
     const [rows] = await db.query(readQuery, params);
-    console.log("밍밍");
     
     return rows;
 
@@ -34,7 +33,6 @@ const getProgressByUserId = async function (date, userID) {
     let params = [date, userID];
 
     const [rows] = await db.query(selectQuery, params);
-    console.log("왜 여ㅣㄱ는 안들오");
     return rows;
 
 }
