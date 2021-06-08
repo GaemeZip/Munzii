@@ -23,7 +23,6 @@ const getMemo = async (req, res, next) => {
         const selectedDate = req.query.date;
         const userID = req.query.userID;
 
-        console.log(selectedDate+" fsfhsdlkgh");
         if (!selectedDate || !userID) {
             res.send('selectedDate / userID is required');
         }

@@ -36,7 +36,6 @@ const login = async (req, res, next) => {
         }
 
         const user = await authService.login(username, password);
-        console.log(user);
         if (user.length > 0) {
             if (password == user[0].password) {
                 res.send(user);

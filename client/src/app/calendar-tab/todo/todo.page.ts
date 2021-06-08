@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
-import { CalendarTabPage} from '../calendar-tab.page';
+import { CalendarTabPage } from '../calendar-tab.page';
 import { TodoFormPage } from '../todo-form/todo-form.page';
 import { TodoEditFormPage } from '../todo-edit-form/todo-edit-form.page';
 
@@ -13,7 +13,7 @@ import axios from 'axios';
 export class TodoPage implements OnInit {
   selected: Date;
   selectMonth: string;
-  selectDayTodoList: any [] = [];
+  selectDayTodoList: any[] = [];
 
   todoTitle: string;
   todoIsTimeline: number;
@@ -29,9 +29,9 @@ export class TodoPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public modalController: ModalController,
-    private CalendarTabPage: CalendarTabPage) { 
-      this.monthNames = ["01","02","03","04","05","06","07","08","09","10","11","12"];
-    }
+    private CalendarTabPage: CalendarTabPage) {
+    this.monthNames = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+  }
 
   ngOnInit() {
     let temp = location.href.split("?");
@@ -40,51 +40,39 @@ export class TodoPage implements OnInit {
     this.selected = new Date(this.date);
     this.selectMonth = this.monthNames[this.selected.getMonth()]
 
-    axios.get('http://localhost:3000/settings/theme/:userID',{
-      params:{
+    axios.get('http://localhost:3000/settings/theme/:userID', {
+      params: {
         userID: localStorage.userID
       }
     })
-      .then(res => {        
+      .then(res => {
         this.themeId = res.data[0].theme_id;
       });
     this.getTodoList();
-    }
-    getTodoList() {
-      console.log(this.date)
-      axios.get('http://localhost:3000/todo',{
-        params:{
-          date: this.date,
-      userID: localStorage.userID
-        }
-      })
+  }
+  getTodoList() {
+    axios.get('http://localhost:3000/todo', {
+      params: {
+        date: this.date,
+        userID: localStorage.userID
+      }
+    })
       .then(res => {
-        for(var i = 0; i < res.data.length; i++) {
+        for (var i = 0; i < res.data.length; i++) {
           this.selectDayTodoList[i] = res.data[i];
         }
-        axios.get('http://localhost:3000/progress/'+localStorage.userID , {
-          params:{
+        axios.get('http://localhost:3000/progress/' + localStorage.userID, {
+          params: {
             date: this.date,
           }
         }).then(res => {
-          if(res.data.length === 0) {
+          if (res.data.length === 0) {
             axios.post('http://localhost:3000/progress', {
-              date: this.date,      
+              date: this.date,
               userID: localStorage.userID
             }).then((res) => {
               let today = new Date();
-              console.log(this.selected, today);
-              if(today.getFullYear() == this.selected.getFullYear() && today.getMonth() == this.selected.getMonth() && today.getDate() >= this.selected.getDate()) {
-                console.log("여기 들엉옴")
-                axios.put('http://localhost:3000/progress', {
-                  date: this.date,
-                  progress: 0,
-                  userID: localStorage.userID
-                }).then((res) => {
-                  console.log(237462487152)
-                })
-              }
-              else if(today.getFullYear() == this.selected.getFullYear() && today.getMonth() > this.selected.getMonth()) {
+              if (today.getFullYear() == this.selected.getFullYear() && today.getMonth() == this.selected.getMonth() && today.getDate() >= this.selected.getDate()) {
                 axios.put('http://localhost:3000/progress', {
                   date: this.date,
                   progress: 0,
@@ -92,7 +80,15 @@ export class TodoPage implements OnInit {
                 }).then((res) => {
                 })
               }
-              else if(today.getFullYear() > this.selected.getFullYear()) {
+              else if (today.getFullYear() == this.selected.getFullYear() && today.getMonth() > this.selected.getMonth()) {
+                axios.put('http://localhost:3000/progress', {
+                  date: this.date,
+                  progress: 0,
+                  userID: localStorage.userID
+                }).then((res) => {
+                })
+              }
+              else if (today.getFullYear() > this.selected.getFullYear()) {
                 axios.put('http://localhost:3000/progress', {
                   date: this.date,
                   progress: 0,
@@ -107,37 +103,33 @@ export class TodoPage implements OnInit {
           }
         })
       })
-    }
-    async createTodo() {
-      console.log(this.selectMonth)
-      const modal = await this.modalController.create({
-        component: TodoFormPage,
-        animated: true,
-        componentProps: { 
-          time: 0,
-          selected: this.selected,
-          selectMonth: this.selectMonth,
-        },
-        cssClass: 'modal-custom'
-      });
-      modal.onDidDismiss().then((dataReturned) => {
-        if (dataReturned !== null) {
-          location.href="/calendar-tab/todo?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
-        }
-      });
-      // const modalClose = await this.modalController.onDidDismiss({})
-      return await modal.present();
-    }
+  }
+  async createTodo() {
+    const modal = await this.modalController.create({
+      component: TodoFormPage,
+      animated: true,
+      componentProps: {
+        time: 0,
+        selected: this.selected,
+        selectMonth: this.selectMonth,
+      },
+      cssClass: 'modal-custom'
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        location.href = "/calendar-tab/todo?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
+      }
+    });
+    return await modal.present();
+  }
 
-    // await ModalController.onDidDismiss() {}
-    async editTodo(todo) {
+  async editTodo(todo) {
     let index = this.selectDayTodoList.indexOf(todo);
     let id = this.selectDayTodoList[index].id;
-    console.log(index);
     const modal = await this.modalController.create({
       component: TodoEditFormPage,
       animated: true,
-      componentProps: { 
+      componentProps: {
         id: id,
         selected: this.selected,
         selectMonth: this.selectMonth,
@@ -147,12 +139,12 @@ export class TodoPage implements OnInit {
         todoStartTime: this.selectDayTodoList[index].start_time,
         todoEndTime: this.selectDayTodoList[index].end_time,
       },
-      
+
       cssClass: 'modal-custom'
     });
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null) {
-        location.href="/calendar-tab/todo?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
+        location.href = "/calendar-tab/todo?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
       }
     });
 
@@ -162,33 +154,30 @@ export class TodoPage implements OnInit {
     let index = this.selectDayTodoList.indexOf(todo);
     let id = this.selectDayTodoList[index].id;
     axios.delete('http://localhost:3000/todo', {
-    params:{
-      id: id,
-       
-      userID: localStorage.userID
-    }  
+      params: {
+        id: id,
+
+        userID: localStorage.userID
+      }
     }).then((res) => {
       if (res.data != 'error') {
-        // console.log("테이블 삭제");
+        console.log("테이블 삭제");
       } else {
-        // console.log("에러 발생")
+        console.log("에러 발생")
       }
-      location.href="/calendar-tab/todo?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
+      location.href = "/calendar-tab/todo?date=" + this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
 
-      // this.navCtrl.setRoot(this.navCtrl.getActive().component);
-      // this.navCtrl.push(ProductDetailPage, {'product' : product});
-      // this.navCtrl.navigateRoot('Todo');
     })
   }
   calculateProgress() {
     let today = new Date();
-    if(this.selectDayTodoList.length !== 0 || (this.selected <= today)) {
+    if (this.selectDayTodoList.length !== 0 || (this.selected <= today)) {
 
       var tempProgress = 0;
-      for (var i=0; i < this.selectDayTodoList.length; i ++) {
+      for (var i = 0; i < this.selectDayTodoList.length; i++) {
         tempProgress += this.selectDayTodoList[i].is_done;
       }
-      if(tempProgress === 0) {
+      if (tempProgress === 0) {
         this.progress = 0;
       }
       else {
@@ -197,10 +186,9 @@ export class TodoPage implements OnInit {
       axios.put('http://localhost:3000/progress', {
         date: this.date,
         progress: this.progress,
-         
+
         userID: localStorage.userID
       }).then((res) => {
-        console.log("@@@@@@@@@@@@")
       })
     }
   }
@@ -220,7 +208,7 @@ export class TodoPage implements OnInit {
       startTime: todo.start_time,
       endTime: todo.end_time,
       isDone: todo.is_done,
-       
+
       userID: localStorage.userID
     }).then((res) => {
       if (res.data != 'error') {

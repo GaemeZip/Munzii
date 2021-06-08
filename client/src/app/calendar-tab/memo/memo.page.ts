@@ -43,7 +43,6 @@ export class MemoPage implements OnInit {
           if (res.data[0]) {
             this.input = res.data[0].content;
             this.tempInput = res.data[0].content;
-            console.log("메모 읽어오기");
           } else {
             console.log('읽어올 데이터가 없습니다.');
           }
@@ -61,7 +60,6 @@ export class MemoPage implements OnInit {
     }).then((res) => {
       if (res.data != 'error') {
         this.tempInput = this.input;
-        console.log("메모 생성");
       } else {
         console.log("에러 발생")
       }
@@ -76,7 +74,6 @@ export class MemoPage implements OnInit {
     }).then((res) => {
       if (res.data != 'error') {
         this.tempInput = this.input;
-        console.log("메모 업데이트");
       } else {
         console.log("에러 발생")
       }
@@ -91,7 +88,6 @@ export class MemoPage implements OnInit {
       }
     }).then((res) => {
       if (res.data != 'error') {
-        console.log("메모 삭제했음");
         this.input = null;
         this.tempInput = null;
       } else {

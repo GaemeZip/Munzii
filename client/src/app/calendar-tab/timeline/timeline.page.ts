@@ -43,7 +43,6 @@ export class TimelinePage implements OnInit {
     this.date = temp[1];
     this.selected = new Date(this.date);
     this.selectMonth = this.monthNames[this.selected.getMonth()]
-    console.log(this.selected)
 
     this.initialToday = "00:00:00";
     this.finalToday = "23:59:00";
@@ -53,7 +52,6 @@ export class TimelinePage implements OnInit {
   }
 
   getTimeLineList() {
-    console.log(this.date)
     this.timelineList = new Array;
     axios.get('http://localhost:3000/todo',{
       params:{
@@ -85,12 +83,10 @@ export class TimelinePage implements OnInit {
     this.timelineList.sort((a: any, b: any): number => {
       return ( Number(a.start_time.substr(0,2)) * 60 + Number(a.start_time.substr(3,2)) ) - ( Number(b.start_time.substr(0,2)) * 60 + Number(b.start_time.substr(3,2)) );
     });
-    console.log(this.timelineList)
   }
   getHeight() {
     if(this.timelineList.length !== 0) {
       this.spaceHeight = new Array;
-      console.log(this.timelineList.length)
       for(var i = 0; i < this.timelineList.length; i ++) {
         if(i == 0){
           this.spaceHeight.push(this.calculateSpaceHeight(this.timelineList[i].start_time, this.initialToday));
@@ -103,7 +99,6 @@ export class TimelinePage implements OnInit {
       }
       this.spaceHeight.push(this.calculateSpaceHeight(this.finalToday, this.timelineList[this.timelineList.length-1].end_time));
 
-      console.log(this.spaceHeight, this.height)
       this.locationTime = (1439-this.spaceHeight[this.spaceHeight.length-1]);
     }
   }
@@ -113,14 +108,12 @@ export class TimelinePage implements OnInit {
     return (start - previous);
   }
   calculateHeight(startTime, endTime) {
-    // console.log(startTime, endTime)
     let start = Number(startTime.substr(0,2)) * 60 + Number(startTime.substr(3,2));
     let end = Number(endTime.substr(0,2)) * 60 + Number(endTime.substr(3,2));
     return (end - start);
   }
 
   async createTodo() {
-    console.log("모달 눌림")
     const modal = await this.modalController.create({
       component: TodoFormPage,
       animated: true,
@@ -141,7 +134,6 @@ export class TimelinePage implements OnInit {
   async editTodo(todo) {
     let index = this.timelineList.indexOf(todo);
     let id = this.timelineList[index].id;
-    console.log(index);
     const modal = await this.modalController.create({
       component: TodoEditFormPage,
       animated: true,

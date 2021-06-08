@@ -2,15 +2,6 @@ const express = require('express');
 const settingsController = require('../controllers/settings.controller');
 const router = express.Router();
 
-// router
-// .route('/fonts')
-// .get(settingsController.getFonts)
-
-// router
-// .route('/fonts/:userId')
-// .get(settingsController.getFontByUserId)
-// .put()
-
 router
 .route('/font')
 .get(settingsController.getFont)

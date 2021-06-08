@@ -39,12 +39,10 @@ export class TodoFormPage implements OnInit {
 
   ngOnInit() {
     this.isTimeline = this.isTime;
-    console.log(this.isTime, this.isTimeline)
     this.title = null;
     this.startTime=null;
     this.endTime=null;
     this.selectedString = this.selected.getFullYear() + "-" + this.selectMonth + "-" + this.selected.getDate();
-    console.log(this.selectedString)
   }
   refresh() {
     this.modalController.dismiss({
@@ -54,10 +52,6 @@ export class TodoFormPage implements OnInit {
   }
 
   createTodo() {
-    // console.log(typeof this.startTimeString, this.startTimeString)
-    // this.selectedString='2021-04-17';
-    // console.log(this.selectedString)
-    // console.log(this.startTime, this.endTime)
     if(this.title==null) {
       alert("일정을 입력하세요")
     }
@@ -81,13 +75,10 @@ export class TodoFormPage implements OnInit {
             }
           })
           .then(res => {
-            console.log(res.data.length)
             let end = Number(this.endTimeString.substr(0,2))*60 + Number(this.endTimeString.substr(3,2));
             let start = Number(this.startTimeString.substr(0,2))*60 + Number(this.startTimeString.substr(3,2));
             for(var i=0; i<res.data.length; i++) {
-              console.log("aaaa")
               if(res.data[i].time == 1) {
-                console.log("bbbb")
                 let todoEnd = Number(res.data[i].end_time.substr(0,2))*60 + Number(res.data[i].end_time.substr(3,2));
                 let todoStart = Number(res.data[i].start_time.substr(0,2))*60 + Number(res.data[i].start_time.substr(3,2));
                 if(end <= todoEnd && end > todoStart) {
@@ -111,14 +102,12 @@ export class TodoFormPage implements OnInit {
                     endTime: this.endTimeString,
                     userID: localStorage.userID
                   }).then((res) => {
-                    console.log(444444444)
                     if (res.data != 'error') {
                       console.log("테이블 생성");
                     } else {
                       console.log(res.data)
                     }
                   })
-                // location.href="/calendar-tab/todo?date=" + this.selectedString;
                 this.modalController.dismiss({
                   'dismissed': true
                 });
@@ -135,14 +124,12 @@ export class TodoFormPage implements OnInit {
                     endTime: this.endTimeString,
                     userID: localStorage.userID
                   }).then((res) => {
-                    console.log(1111111111)
                     if (res.data != 'error') {
                       console.log("테이블 생성");
                     } else {
                       console.log(res.data)
                     }
                   })
-                // location.href="/calendar-tab/todo?date=" + this.selectedString;
                 this.modalController.dismiss({
                   'dismissed': true
                 });
@@ -161,26 +148,21 @@ export class TodoFormPage implements OnInit {
                 endTime: this.endTimeString,
                 userID: localStorage.userID
               }).then((res) => {
-                console.log(22222222)
                 if (res.data != 'error') {
                   console.log("테이블 생성");
                 } else {
                   console.log(res.data)
                 }
               })
-            // location.href="/calendar-tab/todo?date=" + this.selectedString;
             this.modalController.dismiss({
               'dismissed': true
             });
             }
-  
-  
           })
   
           }
         }
         else {
-          console.log("왜 안대지")
           axios.get('http://localhost:3000/todo',{
           params:{
             date: this.selectedString,
@@ -188,11 +170,9 @@ export class TodoFormPage implements OnInit {
           }
         })
         .then(res => {
-          console.log(res.data.length)
           let end = Number(this.endTimeString.substr(0,2))*60 + Number(this.endTimeString.substr(3,2));
           let start = Number(this.startTimeString.substr(0,2))*60 + Number(this.startTimeString.substr(3,2));
           for(var i=0; i<res.data.length; i++) {
-            console.log("dadada")
             if(res.data[i].time == 1) {
               let todoEnd = Number(res.data[i].end_time.substr(0,2))*60 + Number(res.data[i].end_time.substr(3,2));
               let todoStart = Number(res.data[i].start_time.substr(0,2))*60 + Number(res.data[i].start_time.substr(3,2));
@@ -217,14 +197,12 @@ export class TodoFormPage implements OnInit {
                   endTime: this.endTimeString,
                   userID: localStorage.userID
                 }).then((res) => {
-                  console.log(444444444)
                   if (res.data != 'error') {
                     console.log("테이블 생성");
                   } else {
                     console.log(res.data)
                   }
                 })
-              // location.href="/calendar-tab/todo?date=" + this.selectedString;
               this.modalController.dismiss({
                 'dismissed': true
               });
@@ -232,26 +210,7 @@ export class TodoFormPage implements OnInit {
               }
             }
               else {
-              //   axios.post('http://3.139.244.188:3000/createTodo', {
-              //     date: this.selectedString,
-              //     title: this.title,
-              //     time: this.isTimeline,
-              //     startTime: this.startTimeString,
-              //     endTime: this.endTimeString,
-              //     userID: localStorage.userID
-              //   }).then((res) => {
-              //     console.log(1111111111)
-              //     if (res.data != 'error') {
-              //       console.log("테이블 생성");
-              //     } else {
-              //       console.log(res.data)
-              //     }
-              //   })
-              // // location.href="/calendar-tab/todo?date=" + this.selectedString;
-              // this.modalController.dismiss({
-              //   'dismissed': true
-              // });
-              //   break;
+              
               continue;
               }
 
@@ -265,14 +224,12 @@ export class TodoFormPage implements OnInit {
               endTime: this.endTimeString,
               userID: localStorage.userID
             }).then((res) => {
-              console.log(22222222)
               if (res.data != 'error') {
                 console.log("테이블 생성");
               } else {
                 console.log(res.data)
               }
             })
-          // location.href="/calendar-tab/todo?date=" + this.selectedString;
           this.modalController.dismiss({
             'dismissed': true
           });
@@ -284,7 +241,6 @@ export class TodoFormPage implements OnInit {
         }
       }
       else {
-        console.log(this.selectedString, this.title, this.isTimeline, this.startTimeString, this.endTimeString)
         axios.post('http://localhost:3000/todo', {
           date: this.selectedString,
           title: this.title,
@@ -293,7 +249,6 @@ export class TodoFormPage implements OnInit {
           endTime: this.endTimeString,
           userID: localStorage.userID
         }).then((res) => {
-          console.log(33333333333)
           if (res.data != 'error') {
             console.log("테이블 생성");
           } else {
@@ -301,7 +256,6 @@ export class TodoFormPage implements OnInit {
           }
         })
 
-        // location.href="/calendar-tab/todo?date=" + this.selectedString;
         this.modalController.dismiss({
           'dismissed': true
         });
