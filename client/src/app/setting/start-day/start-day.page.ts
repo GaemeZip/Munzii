@@ -39,10 +39,8 @@ export class StartDayPage implements OnInit {
       
     })
       .then(async res => {
-        console.log("받아온 start-day id 값 : " + res.data[0].start_day_id);
         this.selectedDay = res.data[0].start_day_id;
         var elementSelected = document.getElementById(this.selectedDay);
-         console.log(elementSelected);
          if(elementSelected == null){
            this.initDay();
            return
@@ -52,7 +50,6 @@ export class StartDayPage implements OnInit {
   }
 
   selectIcon(id) {
-    console.log(id + "가 선택되었습니다")
     for (let index = 1; index <= this.dayList.length; index++) {
       var numToString = index.toString();
       var elementSelected = document.getElementById(numToString);
@@ -66,7 +63,6 @@ export class StartDayPage implements OnInit {
     axios.put('http://localhost:3000/settings/startDay/'+localStorage.userID, {
       start_day_id: s_id
     }).then((res) => {
-      console.log(res)
       if (res.data != 'error') {
         console.log("폰트 업데이트");
       } else {

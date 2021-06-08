@@ -60,10 +60,8 @@ export class ThemePage implements OnInit {
 
     })
       .then(async res => {        
-        console.log("받아온 theme id 값 : "+res.data[0].theme_id);
          this.selectedTheme = res.data[0].theme_id;
          localStorage.themeId = res.data[0].theme_id;
-         console.log(this.themeList[0][2]);
          localStorage.t_primary = this.themeList[localStorage.themeId-1][2]
          localStorage.t_check = this.themeList[localStorage.themeId-1][3]
          localStorage.t_complete = this.themeList[localStorage.themeId-1][4]
@@ -76,7 +74,6 @@ export class ThemePage implements OnInit {
   }
 
   selectIcon(id){
-    console.log(id+"가 선택되었습니다")
     for (let index = 1; index <= this.themeList.length; index++) {
       var numToString = index.toString();
       var elementSelected = document.getElementById(numToString);
@@ -103,7 +100,6 @@ export class ThemePage implements OnInit {
     }).then((res) => {
       localStorage.themeId = t_id;
       this.initTheme();
-      console.log(res)
       if (res.data != 'error') {
         console.log("테마 업데이트");
       } else {
@@ -113,7 +109,6 @@ export class ThemePage implements OnInit {
   }
 
   select(id){
-    console.log("클릭되었습니다 : " + id);
     this.updateTheme(id); // update db
     this.selectIcon(id); // display munzii
     this.selectedTheme = id;

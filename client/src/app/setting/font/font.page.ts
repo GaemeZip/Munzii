@@ -45,7 +45,6 @@ export class FontPage implements OnInit {
       
     })
       .then(async res => {
-        console.log("받아온 font id 값 : " + res.data[0].font_id);
         this.selectedFont = res.data[0].font_id;
         localStorage.fontId = res.data[0].font_id;
         localStorage.f_family = this.fontList[res.data[0].font_id - 1][2]
@@ -55,7 +54,6 @@ export class FontPage implements OnInit {
   }
 
   selectIcon(id) {
-    console.log(id + "가 선택되었습니다")
     for (let index = 1; index <= this.fontList.length; index++) {
       var numToString = index.toString();
       var elementSelected = document.getElementById(numToString);
